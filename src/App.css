@@ -1,32 +1,403 @@
+:root {
+  --gold: rgba(218, 165, 32, 0.651);
+  --goldlite: rgba(250, 250, 210, 1);
+  --belite: rgb(197, 203, 233);
+  --crimberry: rgba(184, 18, 51, 0.7);
+  --crimberryfull: rgba(184, 18, 51, 1);
+  --slateg: rgba(0, 15, 15, 0.731);
+  --slategfull: rgba(0, 15, 15, 1);
+  --slateb: rgba(9, 33, 70, 0.575);
+  --roarange: rgb(255, 115, 0);
+  --slatep: rgba(37, 10, 49, 0.419);
+  --lightish: rgb(240, 247, 247);
+  --dorchid: rgba(153, 50, 204, 0.8);
+  --dorchidfull: rgb(8, 0, 12);
+  /* so glad this is the name of a color i don't hate */
+  --ba: #bada55bb;
+
+}
+
 .App {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  margin: auto;
+  padding: auto;
+  box-sizing: border-box;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-size: 12px;
+  height: 100vh;
+  display: grid;
+  grid-gap: 11px;
+  grid-template-columns: repeat(13, 1fr);
+  grid-template-rows: repeat(11, 1fr);
+  color: var(--lightish);
+  background-color: black;
+  background-image: radial-gradient(lightcyan, rgba(255, 255, 255, .09) 2px, transparent 30px),
+    radial-gradient(lightpink, rgba(255, 255, 255, .07) 1px, transparent 20px),
+    radial-gradient(lightyellow, rgba(255, 255, 255, .13) 2px, transparent 30px),
+    radial-gradient(rgba(255, 255, 255, .4), rgba(255, 255, 255, .1) 2px, transparent 30px);
+  background-size: 550px 550px,
+    350px 300px,
+    200px 200px,
+    150px 150px;
+  background-position: 0 0,
+    40px 60px,
+    130px 270px,
+    70px 100px;
+}
+
+hr.left {
+  background: url("./assets/hr-left-red-600x20.png") no-repeat left !important;
+  height: 20px !important;
+  border: none !important;
+  opacity: 0.9;
+  margin: 0;
+  padding: 0;
+}
+
+hr.left-sm {
+  background: url("./assets/hr-left-red-360x13.png") no-repeat left !important;
+  height: 13px !important;
+  border: none !important;
+  opacity: 0.9;
+  margin: 4px 0 4px 0;
+  padding: 0;
+}
+
+hr.right {
+  background: url("./assets/hr-right-red-600x20.png") no-repeat right !important;
+  height: 20px !important;
+  border: none !important;
+  opacity: 0.9;
+  margin: 0;
+  padding: 0;
+}
+
+hr.right-sm {
+  background: url("./assets/hr-right-red-360x13.png") no-repeat right !important;
+  height: 13px !important;
+  border: none !important;
+  opacity: 0.9;
+  margin: 4px 0 4px 0;
+  padding: 0;
+}
+
+hr.skinny {
+  background: url("./assets/hr-double-red-720x12.png") no-repeat center !important;
+  height: 12px !important;
+  border: none !important;
+  opacity: 0.9;
+  margin: 4px;
+  padding: 0;
+}
+
+h1 {
+  font-family: 'Fira Mono Regular';
+  padding-left: 8px;
+  text-shadow: -1px -1px 14px var(--dorchid);
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  hyphens: none;
+  white-space: none;
+}
+
+h1 span {
+  min-width: 300px;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  hyphens: none;
+  white-space: none;
+  word-break: keep-all;
+  word-wrap: none;
+}
+
+b {
+  font-family: 'Fira Mono Regular';
+  color: var(--belite);
+}
+
+.pactions {
+  text-shadow: 0 0 8px rgb(123, 81, 163);
+  font-size: 1.2em;
+  color: var(--crimberryfull);
+  margin-bottom: 0;
+  margin-top: 15px;
+}
+
+.ability-scores b {
+  color: var(--belite);
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.ability-scores {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 5px;
+}
+
+.hotem {
+  border: 2px solid var(--crimberry);
+}
+
+.roar {
+  border: 2px solid var(--roarange);
+}
+
+.too-hot {
+  border: 2px solid var(--ba);
+}
+
+.derk {
+  color: var(--goldlite);
+  text-shadow: 0 0 16px var(--roarange);
+  font-weight: 500;
+  font-size: 1.3em;
+}
+
+.top-bar {
+  grid-column: 1 / span 4;
+  grid-row: 1 / span 1;
+  color: var(--crimberryfull);
+  min-width: 300px;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  hyphens: none;
+  text-align: left;
+}
+
+.search-box {
+  grid-column: 10 / -1;
+  grid-row: 1 / span 1;
+  height: 100%;
+  margin-top: 16px;
+  margin-right: 4px;
+}
+
+input#search {
+  width: 96%;
+}
+
+.surch {
+  background-color: var(--slateb);
+}
+
+.select {
+  color: rgb(208, 236, 236);
+  grid-row: 1 / 1;
+  grid-column: span 1;
+  width: 100%;
+  height: 100%;
+  background-color: var(--slateb);
+  border: 2px solid var(--ba);
+}
+
+.ccard {
+  grid-column: 5 / span 5;
+  grid-row: 2 / -1;
+  background-color: var(--slateg);
+  border: 2px solid var(--crimberryfull);
+}
+
+.ccard p {
+  margin-left: 5px;
+  opacity: 1;
+}
+
+.creature-list {
+  grid-column: 10 / -1;
+  grid-row: 2 / -1;
+  margin-right: 5px;
+}
+
+.spell-list {
+  grid-row: 2 / -1;
+  grid-column: 1 / span 4;
+  margin-right: 5px;
+}
+
+.fira {
+  font-family: 'Fira Mono Regular';
+}
+
+.creature-item {
+  background: var(--slateg);
+  border: 2px solid var(--ba);
+}
+
+/* Collapsible Item (Panel) */
+.spell-item {
+  background: var(--slatep);
+  border: 2px solid var(--belite);
+  margin-right: 5px;
+}
+
+.item-body p,
+.item-body li {
+  margin: 8px;
+}
+
+.name-initial,
+.name-expanded {
+  vertical-align: middle;
+  font-size: 1.2em;
+  margin: 4px 8px;
+}
+
+.name-initial span,
+.name-expanded span {
+  width: 94%;
+  height: 100%;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.15s;
+}
+
+/* 
+? use for favorites feature ? 
+* black four pointed star: '\002726' 
+* white four pointed star: '\002727' 
+*/
+.name-initial span:after {
+  content: '\0025BE';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -10px;
+  transition: 0.15s;
+}
+
+.name-expanded span:after {
+  content: '\0025B4';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -10px;
+  transition: 0.15s;
+}
+
+.name-initial:hover span,
+.name-expanded:hover span {
+  padding-right: 25px;
+}
+
+.name-initial:hover span:after,
+.name-expanded:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.filter-toggle {
+  color: var(--lightish);
+  background-color: var(--slatep);
+  height: 30px;
+  width: 100%;
   text-align: center;
+  cursor: pointer;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.filter-toggle:hover {
+  background-color: var(--dorchidfull);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.filter-toggle:active {
+  background-color: var(--slatep);
+  transform: translateY(1px);
+  /* todo: maybe make this click animation look, i dunno, not terrible? */
 }
 
-.App-link {
-  color: #61dafb;
+.select {
+  border: 2px solid var(--ba);
+  background-color: var(--slateg)
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.deselect {
+  border: 2px solid var(--gold);
+  background-color: rgb(20, 1, 3);
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  opacity: 0.85;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 90px;
+  background-color: #fff;
+  color: #000;
+  text-align: center;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 100;
+  top: 100%;
+  left: 67%;
+  margin-left: -60px;
+  opacity: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.bg-opac {
+  opacity: 1;
+  background: var(--dorchidfull);
+}
+
+.item-collapse {
+  overflow: hidden;
+  transition: height 0.5s ease-out;
+}
+
+.spell-item .item-body {
+  border: none !important;
+}
+
+.item-collapse .item-body hr {
+  margin: 4px 8px;
+  opacity: 0.7;
+  border-color: var(--belite);
+}
+
+/* Customized Tachyons grow class */
+.groww {
+  cursor: pointer;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.05s ease-out;
+}
+
+.groww:hover,
+.groww:focus {
+  transform: scale(1.01);
+}
+
+.groww:active {
+  transform: scale(.98);
+}
+
+/* bootstrap 3 nostalgia  */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Dope font */
+@font-face {
+  font-family: 'Fira Mono Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Fira Mono Regular'), url('FiraMono-Regular.woff') format('woff');
 }
