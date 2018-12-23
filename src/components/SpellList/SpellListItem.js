@@ -7,14 +7,14 @@ class SpellListItem extends React.Component {
       isExpanded: false,
       isApplied: false
     };
-    this.spellBodyRef = React.createRef();
+    this.spellDetailRef = React.createRef();
   }
 
   onToggle(e) {
     e.preventDefault();
     this.setState({
       isExpanded: !(this.state.isExpanded),
-      height: this.spellBodyRef.clientHeight
+      height: this.spellDetailRef.clientHeight
     });
   }
   onApplyToggle(e) {
@@ -36,12 +36,12 @@ class SpellListItem extends React.Component {
     const buttonText = isApplied ? 'Deselect this Spell' : "Select this Spell";
     const lvl = this.formatLevel(spell.level);
     return (
-      <div className="pa1 ma1 spell-item">
-        <div className={`mt1 mb1 fira derk ${isExpanded ? 'name-expanded' : 'name-initial tc groww'}`} onClick={(e) => this.onToggle(e)}>
-          <span>{spell.name}</span>
+      <div className={`pa1 ma1 spell-item ${isExpanded ? 'inset spell-ex' : 'outset'}`}>
+        <div className={`mt1 mb1 fira derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => this.onToggle(e)}>
+          <span className="name">{spell.name}</span>
         </div>
         <div className={`item-collapse ${isExpanded ? 'is-expanded bg-opac' : ''}`} style={{ height: currentHeight }} >
-          <div className="item-body" ref={this.spellBodyRef}>
+          <div className="item-body" ref={this.spellDetailRef}>
             {
               spell.ritual
                 ? <p style={{ marginTop: '0' }}><i>{spell.level}{lvl}-level {spell.school.name.toLowerCase()} (ritual)</i></p>

@@ -2,10 +2,10 @@ import React from 'react';
 
 const Select = ({ options, onSelectChange, value, isDisabled }) => {
   return (
-    <div className={`mt3 ${isDisabled ? 'tooltip' : 'groww'}`}>
+    <div className={`slct ${isDisabled ? 'tooltip' : 'groww inp-hvr'}`}>
       <span className="tooltiptext" style={{ opacity: '1' }}>Filters are disabled while a spell is selected.</span>
       <select
-        className="select hotem pl1"
+        className={`select-input hotem pl1 ${isDisabled ? 'o-50' : ''}`}
         name={options[0].name}
         id={options[0].name}
         onChange={onSelectChange}

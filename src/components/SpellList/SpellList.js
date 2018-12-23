@@ -10,7 +10,6 @@ const SpellList = (props) => {
             <SpellListItem
               key={props.spells[i].index}
               spell={props.spells[i]}
-              spellObject={props.spellObject}
               onSpellSelect={props.onSpellSelect}
             />
           );

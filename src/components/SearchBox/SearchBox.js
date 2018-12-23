@@ -5,9 +5,8 @@ const SearchBox = ({ searchfield, searchChange }) => {
     <div className="search-box">
       <label htmlFor="search" className="sr-only">search creatures</label>
       <input
-        style={{ fontSize: '26px' }}
         id="search"
-        className="pa1 pl2 pt4 surch too-hot derk"
+        className="mt1 surch too-hot derk"
         type="search"
         placeholder="search by name"
         onChange={searchChange}
