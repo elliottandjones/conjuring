@@ -245,85 +245,11 @@ class App extends Component {
 }
 
 export default App;
-// value = { this.state.creatureObject }
-// value = { this.state.spellObject }
-// <CreatureListItem
-  // creature={this.state.creatureObject}
-  // modifier={this.calculateModifier}
-  // isDisplaying={this.state.isCreatureSelected}
-// />
-// creatureObject: {},
-  // onCreatureSelect = (creature) => {
-  //   if (creature.name) {
-  //     this.setState({ isCreatureSelected: true });
-  //   }
-  //   this.setState({ creatureObject: creature });
-  // }
-  // onCreatureSelect = { this.onCreatureSelect }
-//  -----------------------------------------------------
-// this.loadCreatures();
-//     this.loadSpells();
-// loadCreatures() {
-//     fetch('https://conjuring-2b5a2.firebaseio.com/creatures')
-//       .then(response => response.json())
-//       .then(creatures => this.setState({ Creatures: creatures }));
-//   }
-//   loadSpells() {
-//     fetch('https://conjuring-2b5a2.firebaseio.com/spells')
-//       .then(response => response.json())
-//       .then(spells => this.setState({ Spells: spells }));
-//   }
-// -------------------------------------------------------
-// const creaturesRef = fire.database().ref('creatures');
-// creaturesRef.on('value', (snapshot) => {
-//   let critters = snapshot.val();
-//   let newState = [];
-//   Object.keys(critters).map(creature => {
-//     return newState.push({
-//       index: creature.index,
-//       name: creature.name,
-//       size: creature.size,
-//       type: creature.type,
-//       subtype: creature.subtype,
-//       alignment: creature.alignment,
-//       armor_class: creature.armor_class,
-//       hit_points: creature.hit_points,
-//       hit_dice: creature.hit_dice,
-//       speed: creature.speed,
-//       strength: creature.strength,
-//       dexterity: creature.dexterity,
-//       constitution: creature.constitution,
-//       intelligence: creature.intelligence,
-//       wisdom: creature.wisdom,
-//       charisma: creature.charisma,
-//       // deception: creatures[creature].deception,
-//       // creatures[creature].insight,
-//       damage_vulnerabilities: creature.damage_vulnerabilities,
-//       damage_resistances: creature.damage_resistances,
-//       damage_immunities: creature.damage_immunities,
-//       condition_immunities: creature.condition_immunities,
-//       senses: creature.senses,
-//       languages: creature.languages,
-//       challenge_rating: creature.challenge_rating,
-//       special_abilities: creature.special_abilities,
-//       actions: creature.actions,
-//       legendary_actions: creature.legendary_actions
-//     });
-//   })
-
-
-//   this.setState({
-//     Creatures: newState
-//   });
-// });
-    // const spellsRef = fire.database().ref('Spells');
-    // spellsRef.on('value', (snapshot) => {
-    //   let spells = snapshot.val();
-    //   let newState = [];
-    //   for (let spell in spells) {
-    //     newState.push({ spell });
-    //   }
-    //   this.setState({
-    //     Spells: newState
-    //   });
-    // });
+// ---------------------------
+// Get page scroll percentage.
+// function getScrollPercent() {
+//   return (
+//     (document.documentElement.scrollTop || document.body.scrollTop)
+//     / ((document.documentElement.scrollHeight || document.body.scrollHeight)
+//       - document.documentElement.clientHeight) * 100);
+// }
