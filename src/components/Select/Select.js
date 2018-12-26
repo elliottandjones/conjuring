@@ -22,32 +22,3 @@ const Select = ({ options, onSelectChange, value, isDisabled }) => {
 }
 
 export default Select;
-
-// onClick = {() => { displaySpellDetails() }}
-// return options[0].name === 'Spell'
-//   ? (
-//     <select
-//       className="spell-select hotem pl2"
-//       id={options[0].name}
-//       onChange={onSelectChange}
-//       value={value}
-//     >
-//       {options.map((option) => (
-//         <option key={option.name} value={option.name}>
-//           {option.name}
-//         </option>
-//       ))}
-//     </select>
-//   )
-//   : (
-//     <select
-//       className="select hotem pl2 mt1"
-//       id={options[0].name}
-//       onChange={onSelectChange}
-//       value={value}
-//     >
-//       {options.map(option => (
-//         <option key={option.name} value={option.name}>{option.name}</option>
-//       ))}
-//     </select>
-//   );

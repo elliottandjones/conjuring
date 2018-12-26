@@ -3,7 +3,7 @@ import SpellListItem from './SpellListItem';
 
 const SpellList = (props) => {
   return (
-    <div className="spell-list" style={{ overflowY: 'scroll', width: '100%' }}>
+    <div className="spell-list">
       {
         Object.keys(props.spells).map((obj, i) => {
           return (
@@ -22,6 +22,3 @@ const SpellList = (props) => {
 }
 
 export default SpellList;
-// this.onToggle = this.onToggle.bind(this);
-// { spells, onSpellPick, value, action }
-// onClick = {() => { props.onSpellPick(spells[i]) }}

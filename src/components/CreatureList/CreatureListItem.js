@@ -138,7 +138,7 @@ export default CreatureListItem;
 //     onClick={(e) => { this.onFavToggle(e); onCreatureIsFav({}); }}
 //   >{buttonText}
 //   </button>
-//----------------------------------------------------
+//------------------LOL----------------------------------
 // return isDisplaying !== false
 // ? (...)
 // : (

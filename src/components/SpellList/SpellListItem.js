@@ -96,5 +96,3 @@ class SpellListItem extends React.Component {
 }
 
 export default SpellListItem;
-
-// <button className="unfilter-btn" type="submit" onClick={() => { }} ></button>
