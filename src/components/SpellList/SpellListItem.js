@@ -38,7 +38,11 @@ class SpellListItem extends React.Component {
     return (
       <div className={`pa1 ma1 spell-item ${isExpanded ? 'inset spell-ex' : 'outset'}`}>
         <div className={`mt1 mb1 fira derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => this.onToggle(e)}>
-          <span className="name">{spell.name}</span>
+          {
+            !(spell.is_homebrew)
+              ? <span className="name">{spell.name}</span>
+              : <span className="name">{spell.name}  <i>(Homebrew)</i></span>
+          }
         </div>
         <div className={`item-collapse ${isExpanded ? 'is-expanded bg-opac' : ''}`} style={{ height: currentHeight }} >
           <div className="item-body" ref={this.spellDetailRef}>
