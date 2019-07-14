@@ -36,18 +36,24 @@
   grid-template-rows: repeat(11, 1fr);
   color: var(--lightish);
   background-color: black;
-  background-image: radial-gradient(lightcyan, rgba(255, 255, 255, .09) 2px, transparent 30px),
-    radial-gradient(lightpink, rgba(255, 255, 255, .07) 1px, transparent 20px),
-    radial-gradient(lightyellow, rgba(255, 255, 255, .13) 2px, transparent 30px),
-    radial-gradient(rgba(255, 255, 255, .4), rgba(255, 255, 255, .1) 2px, transparent 30px);
-  background-size: 550px 550px,
-    350px 300px,
-    200px 200px,
-    150px 150px;
-  background-position: 0 0,
-    40px 60px,
-    130px 270px,
-    70px 100px;
+  background-image: radial-gradient(
+      lightcyan,
+      rgba(255, 255, 255, 0.09) 2px,
+      transparent 30px
+    ),
+    radial-gradient(lightpink, rgba(255, 255, 255, 0.07) 1px, transparent 20px),
+    radial-gradient(
+      lightyellow,
+      rgba(255, 255, 255, 0.13) 2px,
+      transparent 30px
+    ),
+    radial-gradient(
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.1) 2px,
+      transparent 30px
+    );
+  background-size: 550px 550px, 350px 300px, 200px 200px, 150px 150px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 }
 
 hr.left {
@@ -96,7 +102,7 @@ hr.skinny {
 }
 
 h1 {
-  font-family: 'Fira Mono Regular';
+  font-family: "Fira Mono Regular";
   padding-left: 8px;
   text-shadow: -1px -1px 14px var(--dorchid);
   -webkit-hyphens: none;
@@ -116,12 +122,12 @@ h1 span {
 }
 
 b {
-  font-family: 'Fira Mono Regular';
+  font-family: "Fira Mono Regular";
   color: var(--belite);
 }
 
 .fira {
-  font-family: 'Fira Mono Regular';
+  font-family: "Fira Mono Regular";
 }
 
 .hotem {
@@ -328,7 +334,7 @@ input#search {
   height: 100%;
   display: inline-block;
   position: relative;
-  transition: 0.15s;
+  /* transition: 0.15s; */
 }
 
 /* 
@@ -336,7 +342,7 @@ input#search {
 * black four pointed star: '\002726' 
 * white four pointed star: '\002727' 
 */
-.name-initial .name:after {
+/* .name-initial .name:after {
   content: '\002BC6';
   position: absolute;
   opacity: 0;
@@ -363,7 +369,7 @@ input#search {
 .name-expanded:hover .name:after {
   opacity: 1;
   right: 0;
-}
+} */
 
 .filter-toggle {
   color: var(--lightish);
@@ -375,7 +381,7 @@ input#search {
 
 .select {
   border: 2px outset var(--ba);
-  background-color: var(--slateg)
+  background-color: var(--slateg);
 }
 
 .deselect {
@@ -446,10 +452,10 @@ input#search {
 }
 
 .groww:active {
-  transform: scale(.98);
+  transform: scale(0.98);
 }
 
-/* bootstrap 3 nostalgia  */
+/* bootstrap 3 nostalgia, for accessibility/screen readers */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -463,8 +469,8 @@ input#search {
 
 /* Dope font */
 @font-face {
-  font-family: 'Fira Mono Regular';
+  font-family: "Fira Mono Regular";
   font-style: normal;
   font-weight: normal;
-  src: local('Fira Mono Regular'), url('FiraMono-Regular.woff') format('woff');
+  src: local("Fira Mono Regular"), url("FiraMono-Regular.woff") format("woff");
 }
