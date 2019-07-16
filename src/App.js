@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import CreatureList from './components/CreatureList/CreatureList';
 import SearchBox from './components/SearchBox/SearchBox';
 import Select from './components/Select/Select';
-import SpellList from './components/SpellList/SpellList';
+// import SpellList from './components/SpellList/SpellList';
+import Tabs from './components/Tabs/Tabs';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
@@ -238,18 +239,13 @@ class App extends Component {
           </div>
         </div>
         <CreatureList creatures={filteredCreatures} />
-        <SpellList spells={spells} onSpellSelect={this.onSpellSelect} />
+        <Tabs spells={spells} onSpellSelect={this.onSpellSelect}>
+
+        </Tabs>
       </div>
     );
   }
 }
 
 export default App;
-// ---------------------------
-// Get page scroll percentage.
-// function getScrollPercent() {
-//   return (
-//     (document.documentElement.scrollTop || document.body.scrollTop)
-//     / ((document.documentElement.scrollHeight || document.body.scrollHeight)
-//       - document.documentElement.clientHeight) * 100);
-// }
+//<SpellList spells={spells} onSpellSelect={this.onSpellSelect} />

@@ -3,9 +3,7 @@ import React from 'react';
 class CreatureListItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isExpanded: false
-    };
+    this.state = { isExpanded: false };
     this.creatureDetailRef = React.createRef();
   }
 
@@ -55,7 +53,7 @@ class CreatureListItem extends React.Component {
     return (
       <div className={`ma1 pa1 creature-item ${isExpanded ? 'inset creature-ex' : 'outset'}`}>
         <div className={`fira derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => this.onToggle(e)}>
-          <span className="name">{creature.name} - {creature.challenge_rating}</span>
+          <span className="name">{creature.name} {creature.challenge_rating}</span>
         </div>
         <div className={`item-collapse ${isExpanded ? 'is-expanded' : ''}`} style={{ height: currentHeight }} >
           <div className="item-body dib pa2 ccard hotem" ref={this.creatureDetailRef}>

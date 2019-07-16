@@ -1,11 +1,13 @@
-import React from 'react';
+import React from "react";
 
 const Select = ({ options, onSelectChange, value, isDisabled }) => {
   return (
-    <div className={`slct ${isDisabled ? 'tooltip' : 'groww inp-hvr'}`}>
-      <span className="tooltiptext" style={{ opacity: '1' }}>Filters are disabled while a spell is selected.</span>
+    <div className={`slct ${isDisabled ? "tooltip" : "inp-hvr"}`}>
+      <span className="tooltiptext" style={{ opacity: "1" }}>
+        Filters are disabled while a spell is selected.
+      </span>
       <select
-        className={`select-input hotem pl1 ${isDisabled ? 'o-50' : ''}`}
+        className={`select-input hotem pl1 ${isDisabled ? "o-50" : ""}`}
         name={options[0].name}
         id={options[0].name}
         onChange={onSelectChange}
@@ -13,12 +15,16 @@ const Select = ({ options, onSelectChange, value, isDisabled }) => {
         disabled={isDisabled}
       >
         {options.map(option => (
-          <option label={option.name} key={option.name} value={option.name}>{option.name}</option>
+          <option label={option.name} key={option.name} value={option.name}>
+            {option.name}
+          </option>
         ))}
       </select>
-      <label htmlFor={options[0].name} className="sr-only">{options[0].name}</label>
+      <label htmlFor={options[0].name} className="sr-only">
+        {options[0].name}
+      </label>
     </div>
   );
-}
+};
 
 export default Select;

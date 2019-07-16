@@ -54,6 +54,7 @@
     );
   background-size: 550px 550px, 350px 300px, 200px 200px, 150px 150px;
   background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+  /* overflow-y: hidden !important;  */
 }
 
 hr.left {
@@ -275,10 +276,16 @@ input#search {
   grid-gap: 5px;
 }
 
-.spell-list {
+/* Tabs/Filters */
+
+.tabs {
   grid-row: 2 / -1;
   grid-column: 1 / span 4;
   margin: 5px;
+  width: 100%;
+}
+
+.spell-list {
   overflow-y: scroll;
   width: 100%;
 }
