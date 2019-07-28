@@ -31,9 +31,9 @@
   font-size: 12px;
   height: 100vh;
   display: grid;
-  grid-gap: 5px;
+  gap: 10px;
   grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(11, 1fr);
+  grid-template-rows: 50px repeat(10, 1fr);
   color: var(--lightish);
   background-color: black;
   background-image: radial-gradient(
@@ -162,7 +162,7 @@ b {
   grid-row-gap: 12px;
   grid-auto-flow: column;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 50px 36px;
+  grid-template-rows: 50px;
 }
 
 .app-title {
@@ -184,9 +184,9 @@ b {
 .select-input {
   color: rgb(208, 236, 236);
   width: 100%;
-  height: 100%;
+  height: 33px;
   background-color: var(--slateb);
-  border: 2px solid var(--verdantlite);
+  /* border: 2px solid var(--verdantlite); */
 }
 
 .search-box {
@@ -278,13 +278,73 @@ input#search {
 
 /* Tabs/Filters */
 
-.tabs {
+.tabs, .spell-list {
   grid-row: 2 / -1;
   grid-column: 1 / span 4;
-  margin: 5px;
+  margin: 4px;
   width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.tablinks {
+  color: var(--lightish);
+  background: var(--slatep);
+  border: 2px outset var(--belite);
+  display: inline-flex;
+  align-content: center;
+  justify-content: center;
+  width: calc(45% - 8px);
+  margin: 10px 3%;
+  padding: 8px 0;
+  cursor: pointer;
+}
+.tablinks:hover {
+  transform: scale(1.06);
+  opacity: 1;
 }
 
+legend {
+  color: var(--goldlite) !important;
+  font-weight: 500;
+  font-family: "Fira Mono Regular";
+  font-size: 1.2em;
+  padding-inline-start: 10px;
+  padding-inline-end: 10px;
+}
+legend::before,
+legend::after {
+  margin: 4px;
+}
+/* filters-panel */
+.filters-panel {
+  width: 100%;
+  background: var(--slatep);
+  gap: 10px;
+  display: grid;
+  grid-template-areas: 
+    "cr   cr"
+    "type speed"
+    "type size"
+  ;
+}
+.cr{grid-area:cr;}
+.speed{grid-area:speed;}
+.size{grid-area:size;}
+.type{grid-area:type;}
+.filters-panel fieldset {
+  border: var(--belite) 2px solid;
+}
+.filters-panel label {
+  color: var(--lightish);
+  text-shadow: none;
+}
+.filters-panel label:hover {
+  background-color: var(--slateb);
+}
+/* .filters-panel > * {
+  margin: 30px 10px;
+} */
+/* Spell List */
 .spell-list {
   overflow-y: scroll;
   width: 100%;
@@ -381,22 +441,27 @@ input#search {
 .filter-toggle {
   color: var(--lightish);
   height: 30px;
-  width: 100%;
+  width: 98%;
+  margin: 0 1%;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
   text-align: center;
   cursor: pointer;
 }
-
+.db { display: block;}
+.dn { display: none;}
 .select {
-  border: 2px outset var(--ba);
+  border: 2px solid var(--ba);
   background-color: var(--slateg);
 }
 
 .deselect {
-  border: 2px inset var(--gold);
+  border: 2px solid var(--gold);
   background-color: rgb(20, 1, 3);
 }
 
-.tooltip {
+/* .tooltip {
   position: relative;
   display: inline-block;
   opacity: 1;
@@ -416,12 +481,12 @@ input#search {
   left: 67%;
   margin-left: -60px;
   opacity: 1;
-}
+} */
 
-.tooltip:hover .tooltiptext {
+/* .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
-}
+} */
 
 .bg-opac {
   opacity: 1;

@@ -6,7 +6,7 @@ const SearchBox = ({ searchfield, searchChange }) => {
       <label htmlFor="search" className="sr-only">search creatures</label>
       <input
         id="search"
-        className="mt1 surch too-hot derk"
+        className="mt1 surch hotem derk"
         type="search"
         placeholder="search by name"
         onChange={searchChange}

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import CreatureList from './components/CreatureList/CreatureList';
 import SearchBox from './components/SearchBox/SearchBox';
 import Select from './components/Select/Select';
-// import SpellList from './components/SpellList/SpellList';
-import Tabs from './components/Tabs/Tabs';
+import SpellList from './components/SpellList/SpellList';
+import Checkboxes from './components/Checkboxes/Checkboxes';
+import RadioButtons from './components/RadioButtons/RadioButtons';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
@@ -21,23 +22,22 @@ class App extends Component {
       spells: [],
       searchfield: '',
       typeOptions: [
-        { value: 'Type', name: 'Type' },
-        { value: 'aberration', name: 'Aberration' },
-        { value: 'beast', name: 'Beast' },
-        { value: 'celestial', name: 'Celestial' },
-        { value: 'construct', name: 'Construct' },
-        { value: 'dragon', name: 'Dragon' },
-        { value: 'elemental', name: 'Elemental' },
-        { value: 'fey', name: 'Fey' },
-        { value: 'fiend', name: 'Fiend' },
-        { value: 'demon', name: 'Demon' },
-        { value: 'devil', name: 'Devil' },
-        { value: 'giant', name: 'Giant' },
-        { value: 'humanoid', name: 'Humanoid' },
-        { value: 'monstrosity', name: 'Monstrosity' },
-        { value: 'ooze', name: 'Ooze' },
-        { value: 'plant', name: 'Plant' },
-        { value: 'undead', name: 'Undead' }
+        { key: 'aberration', name: 'aberration' },
+        { key: 'beast', name: 'beast' },
+        { key: 'celestial', name: 'celestial' },
+        { key: 'construct', name: 'construct' },
+        { key: 'dragon', name: 'dragon' },
+        { key: 'elemental', name: 'elemental' },
+        { key: 'fey', name: 'fey' },
+        { key: 'fiend', name: 'fiend' },
+        { key: 'demon', name: 'demon' },
+        { key: 'devil', name: 'devil' },
+        { key: 'giant', name: 'giant' },
+        { key: 'humanoid', name: 'humanoid' },
+        { key: 'monstrosity', name: 'monstrosity' },
+        { key: 'ooze', name: 'ooze' },
+        { key: 'plant', name: 'plant' },
+        { key: 'undead', name: 'undead' }
       ],
       crOptions: [
         { value: 'CR', name: 'CR' },
@@ -72,30 +72,51 @@ class App extends Component {
         { value: '30', name: '30' }
       ],
       speedOptions: [
-        { value: 'Speed', name: 'Speed' },
-        { value: 'burrow', name: 'Burrow' },
-        { value: 'climb', name: 'Climb' },
-        { value: 'swim', name: 'Swim' },
-        { value: 'fly', name: 'Fly' },
-        { value: 'no swim/fly', name: 'No Swim/Fly' },
-        { value: 'no fly', name: 'No Fly' }
+        { value: 'burrow', name: 'speed' },
+        { value: 'climb', name: 'speed' },
+        { value: 'swim', name: 'speed' },
+        { value: 'fly', name: 'speed' },
+        { value: 'no swim/fly', name: 'speed' },
+        { value: 'no fly', name: 'speed' }
       ],
       sizeOptions: [
-        { value: 'Size', name: 'Size' },
-        { value: 'Tiny', name: 'Tiny' },
-        { value: 'Small', name: 'Small' },
-        { value: 'Medium', name: 'Medium' },
-        { value: 'Large', name: 'Large' },
-        { value: 'Huge', name: 'Huge' },
-        { value: 'Gargantuan', name: 'Gargantuan' }
+        { value: 'Tiny', name: 'size' },
+        { value: 'Small', name: 'size' },
+        { value: 'Medium', name: 'size' },
+        { value: 'Large', name: 'size' },
+        { value: 'Huge', name: 'size' },
+        { value: 'Gargantuan', name: 'size' }
       ],
       spellSelected: false,
-      typeValue: '',
+      // typeValue: '',
+      typeValues: {
+        aberration: false,
+        beast: false,
+        celestial: false,
+        construct: false,
+        dragon: false,
+        elemental: false,
+        fey: false,
+        fiend: false,
+        demon: false,
+        devil: false,
+        giant: false,
+        humanoid: false,
+        monstrosity: false,
+        ooze: false,
+        plant: false,
+        undead: false
+      },
       crValue: '',
       speedValue: '',
       sizeValue: '',
-      spellObject: {}
-    }
+      spellObject: {},
+      spellFilter: false,
+      speedLegend: 'Speed',
+      sizeLegend: 'Size',
+      typePicked: true
+    };
+    this.onTypeChange = this.onTypeChange.bind(this);
   }
 
   componentDidMount() {
@@ -110,16 +131,41 @@ class App extends Component {
       });
     });
   }
+  onFilterByOther(e) {
+    e.preventDefault();
+    if (this.state.spellFilter === true) {
+      this.setState({
+        spellFilter: false
+      });
+    }
+  }
+  onFilterBySpell(e) {
+    e.preventDefault();
+    if (this.state.spellFilter === false) {
+      this.setState({
+        spellFilter: true
+      });
+    }
+  }
 
+  onTypeChange = (event) => {
+    this.setState({
+      typeValues: {
+        ...this.state.typeValues,
+        [event.target.name]: event.target.checked
+      }
+    });
+  }
+  // onTypeSelect = (event) => {
+  //   this.setState({ typeValues: event.target.value });
+  // }
+  
   onSearchChange = (event) => {
     this.setState({ searchfield: event.target.value });
   }
   onSpellSelect = (spell) => {
     spell.name ? this.setState({ spellSelected: true }) : this.setState({ spellSelected: false });
     this.setState({ spellObject: spell });
-  }
-  onTypeSelect = (event) => {
-    this.setState({ typeValue: event.target.value });
   }
   onCRSelect = (event) => {
     this.setState({ crValue: event.target.value });
@@ -172,24 +218,29 @@ class App extends Component {
 
   render() {
     const {
-      creatures, spells, spellObject, spellSelected, searchfield,
-      typeOptions, crOptions, speedOptions, sizeOptions,
-      typeValue, crValue, speedValue, sizeValue
+      creatures, spells, spellFilter, spellObject, spellSelected, searchfield,
+      crOptions, speedOptions, sizeOptions,
+      typeOptions, typeValues, crValue, speedValue, sizeValue,
+      speedLegend, sizeLegend
     } = this.state;
 
     let filteredCreatures = creatures.filter(creature => {
       return creature.name.toLowerCase().includes(searchfield.toLowerCase());
     });
 
-    if (typeValue && typeValue !== 'Type') {
-      (typeValue.toLowerCase() === 'demon' || typeValue.toLowerCase() === 'devil')
-        ? filteredCreatures = filteredCreatures.filter(creature => {
-          return creature.subtype.toLowerCase().includes(typeValue.toLowerCase());
-        })
-        : filteredCreatures = filteredCreatures.filter(creature => {
-          return creature.type.toLowerCase().includes(typeValue.toLowerCase());
-        });
+    if (Object.values(typeValues).some(i => i === true)) {
+      // console.log(Object.values(typeValues).some(i => i === true));
+      // * this works!!!
     }
+    // if (typeValues && typeValues !== 'Type') {
+    //   (typeValues.key.toLowerCase() === 'demon' || typeValues.key.toLowerCase() === 'devil')
+    //     ? filteredCreatures = filteredCreatures.filter(creature => {
+    //       return creature.subtype.toLowerCase().includes(typeValues.key.toLowerCase());
+    //     })
+    //     : filteredCreatures = filteredCreatures.filter(creature => {
+    //       return creature.type.toLowerCase().includes(typeValues.key.toLowerCase());
+    //     });
+    // }
     if (speedValue && speedValue !== 'Speed') {
       speedValue.toLowerCase().includes('no')
         ? (speedValue.toLowerCase().includes('swim')
@@ -232,16 +283,27 @@ class App extends Component {
               </h1>
             </div>
             <SearchBox searchfield={searchfield} searchChange={this.onSearchChange} />
-            <Select value={typeValue} options={typeOptions} onSelectChange={this.onTypeSelect} isDisabled={spellSelected} />
-            <Select value={crValue} options={crOptions} onSelectChange={this.onCRSelect} isDisabled={spellSelected} />
-            <Select value={speedValue} options={speedOptions} onSelectChange={this.onSpeedSelect} isDisabled={spellSelected} />
-            <Select value={sizeValue} options={sizeOptions} onSelectChange={this.onSizeSelect} isDisabled={spellSelected} />
           </div>
         </div>
         <CreatureList creatures={filteredCreatures} />
-        <Tabs spells={spells} onSpellSelect={this.onSpellSelect}>
-
-        </Tabs>
+        <div className="tabs fira mb1 mt1">
+          <button onClick={(e) => {this.onFilterByOther(e);}} className={`${!spellFilter ? 'tablinks' : 'o-50 tablinks'}`}>
+            Filter by...
+          </button>
+          <button onClick={(e) => {this.onFilterBySpell(e);}} className={`${spellFilter ? 'tablinks' : 'o-50 tablinks'}`}>
+            Filter by Spell
+          </button>
+          {
+            spellFilter === false ?
+              <div className="filters-panel">
+                <Select className="cr" value={crValue} options={crOptions} onChange={this.onCRSelect} />
+                <Checkboxes className="type" options={typeOptions} values={typeValues} onChange={this.onTypeChange} />
+                <RadioButtons className="speed" text={speedLegend} options={speedOptions} onChange={this.onSpeedSelect} />
+                <RadioButtons className="size" text={sizeLegend} options={sizeOptions} onChange={this.onSizeSelect} />
+              </div>
+              : <SpellList spells={spells} onSpellSelect={this.onSpellSelect} />
+          }
+        </div>
       </div>
     );
   }
@@ -249,3 +311,7 @@ class App extends Component {
 
 export default App;
 //<SpellList spells={spells} onSpellSelect={this.onSpellSelect} />
+//<Select value={typeValues} options={typeOptions} onSelectChange={this.onTypeSelect} isDisabled={spellSelected} />
+//<Select value={crValue} options={crOptions} onSelectChange={this.onCRSelect} isDisabled={spellSelected} />
+//<Select value={speedValue} options={speedOptions} onSelectChange={this.onSpeedSelect} isDisabled={spellSelected} />
+//<Select value={sizeValue} options={sizeOptions} onSelectChange={this.onSizeSelect} isDisabled={spellSelected} />
