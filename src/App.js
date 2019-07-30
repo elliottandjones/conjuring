@@ -304,6 +304,7 @@ class App extends Component {
               : <SpellList spells={spells} onSpellSelect={this.onSpellSelect} />
           }
         </div>
+        <footer id="footer">created by Elliott Andrew Jones</footer>
       </div>
     );
   }

@@ -404,11 +404,12 @@ legend::after {
   /* transition: 0.15s; */
 }
 
-/* 
-? use for favorites feature ? 
-* black four pointed star: '\002726' 
-* white four pointed star: '\002727' 
-*/
+#footer {
+  text-align: center;
+  color: var(--belite);
+  font-size: 0.7em;
+}
+
 /* .name-initial .name:after {
   content: '\002BC6';
   position: absolute;
