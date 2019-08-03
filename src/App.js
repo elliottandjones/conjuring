@@ -114,7 +114,8 @@ class App extends Component {
       spellFilter: false,
       speedLegend: 'Speed',
       sizeLegend: 'Size',
-      typePicked: true
+      typePicked: true,
+      showFavorites: false
     };
     this.onTypeChange = this.onTypeChange.bind(this);
   }
@@ -227,10 +228,15 @@ class App extends Component {
     let filteredCreatures = creatures.filter(creature => {
       return creature.name.toLowerCase().includes(searchfield.toLowerCase());
     });
-
-    if (Object.values(typeValues).some(i => i === true)) {
-      // console.log(Object.values(typeValues).some(i => i === true));
       // * this works!!!
+    if (Object.values(typeValues).some(i => {
+      console.log(i);
+      return i === true;
+    })) {
+      console.log(typeValues.filter((v, j) => {
+        console.log("it is ", v, " that ", j, " is checked");
+        return v === true;
+      }));
     }
     // if (typeValues && typeValues !== 'Type') {
     //   (typeValues.key.toLowerCase() === 'demon' || typeValues.key.toLowerCase() === 'devil')

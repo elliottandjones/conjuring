@@ -110,7 +110,6 @@ class CreatureListItem extends React.Component {
                       return (<p key={i + 6616161}><b><i>{action.name}.</i></b> {action.desc}</p>);
                     })}
                   </div>
-
                 ) : ''
             }
           </div>
@@ -136,17 +135,3 @@ export default CreatureListItem;
 //     onClick={(e) => { this.onFavToggle(e); onCreatureIsFav({}); }}
 //   >{buttonText}
 //   </button>
-//------------------LOL----------------------------------
-// return isDisplaying !== false
-// ? (...)
-// : (
-//   <div className="ccard hotem">
-//     <h3 className="derk tc fira" style={{ fontSize: '1.1em' }}>Select a Creature!</h3>
-//     <hr className="left" />
-//     <p className="i tc pa1 ma1 fira">"Zounds--I say! You, there! This! Summon this creature at once! C'mon, you--yes, YOU! Go--now--do it! Summon it--Summon. it. Summon it, summon it, summonitsummonitSUMMONITSUMMONIIIIIIIIIT!"</p>
-//     <hr className="left-sm" />
-//     <hr className="right-sm" />
-//     <p className="pa2 ma3">-- Mephistopheles to a startled conjuration research conclave, impatiently waving a scrap of paper on which appeared a hastily drawn image of a long-eared, yellow creature with red circles on its cheeks, as well as one line of text at the bottom reading '-chuuuuu'</p>
-//     <hr className="right" />
-//   </div>
-// )
