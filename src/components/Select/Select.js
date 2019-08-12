@@ -1,4 +1,5 @@
 import React from "react";
+import "./Select.css"
 
 const Select = ({ options, onChange, value, className}) => {
   return (
@@ -6,7 +7,7 @@ const Select = ({ options, onChange, value, className}) => {
       <fieldset>
         <legend>Challenge Rating</legend>
         <select
-          className="select-input inp-hvr hotem"
+          className="select-input hotem"
           name={options[0].name}
           id={options[0].name}
           onChange={onChange}

@@ -1,0 +1,10 @@
+.select-input {
+  color: rgb(208, 236, 236);
+  width: 100%;
+  height: 33px;
+  background-color: var(--slateb);
+}
+.select-input:hover,
+.select-input:focus {
+  border: 2px inset var(--crimberrybold);
+}

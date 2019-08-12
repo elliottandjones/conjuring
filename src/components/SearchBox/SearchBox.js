@@ -1,18 +1,23 @@
-import React from 'react';
+import React from "react";
+import "./SearchBox.css";
 
 const SearchBox = ({ searchfield, searchChange }) => {
   return (
     <div className="search-box">
-      <label htmlFor="search" className="sr-only">search creatures</label>
+      
       <input
         id="search"
-        className="mt1 surch hotem derk"
+        className="inp-hvr mt2 mr2 derk"
         type="search"
         placeholder="search by name"
         onChange={searchChange}
+        autoComplete="off"
       />
+      <label htmlFor="search" className="sr-only">
+        search for monsters by name
+      </label>
     </div>
   );
-}
+};
 
 export default SearchBox;

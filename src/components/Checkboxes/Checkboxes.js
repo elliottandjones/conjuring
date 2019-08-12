@@ -1,6 +1,5 @@
 import React from "react";
-import Checkbox from "./Checkbox";
-import './Checkboxes.css';
+import CheckboxItem from "./CheckboxItem";
 
 const Checkboxes = ({ onChange, options, className }) => {
   return (
@@ -8,8 +7,9 @@ const Checkboxes = ({ onChange, options, className }) => {
       <fieldset>
         <legend>Type</legend>
         {options.map((item, i) => (
-          <Checkbox
+          <CheckboxItem
             key={i}
+            id={i}
             name={item.name}
             onChange={onChange}
           />

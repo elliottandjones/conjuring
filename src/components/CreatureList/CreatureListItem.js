@@ -43,7 +43,7 @@ class CreatureListItem extends React.Component {
     if (mod % 2 !== 0)
       mod -= 1;
     mod /= 2;
-    return (mod >= 0 ? ` (+${mod})` : ` (${mod})`);
+    return (mod >= 0 ? ` (+${mod})` : ` (${mod})`); // Only need to add '+' prefix, not '-'
   }
 
   render() {
@@ -52,8 +52,8 @@ class CreatureListItem extends React.Component {
     const currentHeight = isExpanded ? height : 0;
     return (
       <div className={`ma1 pa1 creature-item ${isExpanded ? 'inset creature-ex' : 'outset'}`}>
-        <div className={`fira derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => this.onToggle(e)}>
-          <span className="name">{creature.name} {creature.challenge_rating}</span>
+        <div className={`derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => this.onToggle(e)}>
+          <span className="name">{creature.name}</span> <span className="name-cr">{creature.challenge_rating}</span>
         </div>
         <div className={`item-collapse ${isExpanded ? 'is-expanded' : ''}`} style={{ height: currentHeight }} >
           <div className="item-body dib pa2 ccard hotem" ref={this.creatureDetailRef}>

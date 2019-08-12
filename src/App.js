@@ -88,7 +88,6 @@ class App extends Component {
         { value: 'Gargantuan', name: 'size' }
       ],
       spellSelected: false,
-      // typeValue: '',
       typeValues: {
         aberration: false,
         beast: false,
@@ -157,9 +156,6 @@ class App extends Component {
       }
     });
   }
-  // onTypeSelect = (event) => {
-  //   this.setState({ typeValues: event.target.value });
-  // }
   
   onSearchChange = (event) => {
     this.setState({ searchfield: event.target.value });
@@ -229,14 +225,13 @@ class App extends Component {
       return creature.name.toLowerCase().includes(searchfield.toLowerCase());
     });
       // * this works!!!
-    if (Object.values(typeValues).some(i => {
-      console.log(i);
-      return i === true;
-    })) {
-      console.log(typeValues.filter((v, j) => {
-        console.log("it is ", v, " that ", j, " is checked");
-        return v === true;
-      }));
+    if (Object.values(typeValues).some(i => i === true)) {
+      let test = Object.entries(typeValues).filter(([key, value]) => {
+        // it is ooze that 13 is unchecked
+        console.log("it is ", value, " that ", key, " is checked");
+        return value === true;
+      });
+      console.log(test);
     }
     // if (typeValues && typeValues !== 'Type') {
     //   (typeValues.key.toLowerCase() === 'demon' || typeValues.key.toLowerCase() === 'devil')
@@ -292,7 +287,7 @@ class App extends Component {
           </div>
         </div>
         <CreatureList creatures={filteredCreatures} />
-        <div className="tabs fira mb1 mt1">
+        <div className="tabs mb1 mt1">
           <button onClick={(e) => {this.onFilterByOther(e);}} className={`${!spellFilter ? 'tablinks' : 'o-50 tablinks'}`}>
             Filter by...
           </button>
@@ -306,19 +301,19 @@ class App extends Component {
                 <Checkboxes className="type" options={typeOptions} values={typeValues} onChange={this.onTypeChange} />
                 <RadioButtons className="speed" text={speedLegend} options={speedOptions} onChange={this.onSpeedSelect} />
                 <RadioButtons className="size" text={sizeLegend} options={sizeOptions} onChange={this.onSizeSelect} />
-              </div>
+                <footer className="tc mt4">&copy; 2019 Elliott Jones</footer>
+              </div> // ! figure this footer shit out
               : <SpellList spells={spells} onSpellSelect={this.onSpellSelect} />
           }
         </div>
-        <footer id="footer">created by Elliott Andrew Jones</footer>
       </div>
     );
   }
 }
 
 export default App;
-//<SpellList spells={spells} onSpellSelect={this.onSpellSelect} />
-//<Select value={typeValues} options={typeOptions} onSelectChange={this.onTypeSelect} isDisabled={spellSelected} />
-//<Select value={crValue} options={crOptions} onSelectChange={this.onCRSelect} isDisabled={spellSelected} />
-//<Select value={speedValue} options={speedOptions} onSelectChange={this.onSpeedSelect} isDisabled={spellSelected} />
-//<Select value={sizeValue} options={sizeOptions} onSelectChange={this.onSizeSelect} isDisabled={spellSelected} />
+////<SpellList spells={spells} onSpellSelect={this.onSpellSelect} />
+////<Select value={typeValues} options={typeOptions} onSelectChange={this.onTypeSelect} isDisabled={spellSelected} />
+////<Select value={crValue} options={crOptions} onSelectChange={this.onCRSelect} isDisabled={spellSelected} />
+////<Select value={speedValue} options={speedOptions} onSelectChange={this.onSpeedSelect} isDisabled={spellSelected} />
+////<Select value={sizeValue} options={sizeOptions} onSelectChange={this.onSizeSelect} isDisabled={spellSelected} />

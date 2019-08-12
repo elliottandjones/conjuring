@@ -37,7 +37,7 @@ class SpellListItem extends Component {
     const lvl = this.formatLevel(spell.level);
     return (
       <div className={`pa1 ma1 spell-item ${isExpanded ? 'inset spell-ex' : 'outset'}`}>
-        <div className={`mt1 mb1 fira derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => this.onToggle(e)}>
+        <div className={`mt1 mb1 derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => this.onToggle(e)}>
           {
             !(spell.is_homebrew)
               ? <span className="name">{spell.name}</span>
