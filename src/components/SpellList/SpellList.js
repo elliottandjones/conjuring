@@ -13,7 +13,7 @@ const SpellList = props => {
           />
         );
       })}
-      <footer className="tc mt4">&copy; 2019 Elliott Jones</footer>
+      <footer id="footer">&copy; 2019 Elliott Jones</footer>
     </div>
   );
 };
