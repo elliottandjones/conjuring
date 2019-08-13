@@ -21,26 +21,8 @@ class App extends Component {
       creatures: [],
       spells: [],
       searchfield: '',
-      typeOptions: [
-        { key: 'aberration', name: 'aberration' },
-        { key: 'beast', name: 'beast' },
-        { key: 'celestial', name: 'celestial' },
-        { key: 'construct', name: 'construct' },
-        { key: 'dragon', name: 'dragon' },
-        { key: 'elemental', name: 'elemental' },
-        { key: 'fey', name: 'fey' },
-        { key: 'fiend', name: 'fiend' },
-        { key: 'demon', name: 'demon' },
-        { key: 'devil', name: 'devil' },
-        { key: 'giant', name: 'giant' },
-        { key: 'humanoid', name: 'humanoid' },
-        { key: 'monstrosity', name: 'monstrosity' },
-        { key: 'ooze', name: 'ooze' },
-        { key: 'plant', name: 'plant' },
-        { key: 'undead', name: 'undead' }
-      ],
       crOptions: [
-        { value: 'CR', name: 'CR' },
+        { value: 'CR', name: 'Any CR' },
         { value: '0', name: '0' },
         { value: '1/8', name: '1/8' },
         { value: '1/4', name: '1/4' },
@@ -97,8 +79,6 @@ class App extends Component {
         elemental: false,
         fey: false,
         fiend: false,
-        demon: false,
-        devil: false,
         giant: false,
         humanoid: false,
         monstrosity: false,
@@ -217,45 +197,37 @@ class App extends Component {
     const {
       creatures, spells, spellFilter, spellObject, spellSelected, searchfield,
       crOptions, speedOptions, sizeOptions,
-      typeOptions, typeValues, crValue, speedValue, sizeValue,
+      typeValues, crValue, speedValue, sizeValue,
       speedLegend, sizeLegend
     } = this.state;
-
+    // filter by name
     let filteredCreatures = creatures.filter(creature => {
       return creature.name.toLowerCase().includes(searchfield.toLowerCase());
     });
-
+    // filter by types
     if (Object.values(typeValues).some(i => i === true)) {
       let typePicks = Object.entries(typeValues).filter(([key, value]) => {
-        console.log("it is ", value, " that ", key, " is checked");
         return value === true;
       });
       let picks = typePicks.map(types => types[0]);
-      let typeFiltered = [];
-      for(let pick of picks) {
-        let tempArr = [];
-        if (pick === 'demon' || pick === 'devil') {
-          tempArr = filteredCreatures.filter(creature => {
-            return creature.subtype.toLowerCase() === pick;
-          })
-        } else {
+      let typeArr = [];
+      if (picks.lenth <= 0) { return;}
+      else if (picks.length === 1) {
+        typeArr = filteredCreatures.filter(creature => {
+          return creature.type.toLowerCase() === picks[0];
+        });
+      } else {
+        for(let pick of picks) {
+          let tempArr = [];
           tempArr = filteredCreatures.filter(creature => {
             return creature.type.toLowerCase() === pick;
           });
+          typeArr = typeArr.concat(tempArr);
         }
-        picks.length > 1 ? typeFiltered = typeFiltered.concat(tempArr) : typeFiltered = tempArr;
       }
-      filteredCreatures = typeFiltered;
+      filteredCreatures = typeArr;
     }
-    // if (typeValues && typeValues !== 'Type') {
-    //   (typeValues.key.toLowerCase() === 'demon' || typeValues.key.toLowerCase() === 'devil')
-    //     ? filteredCreatures = filteredCreatures.filter(creature => {
-    //       return creature.subtype.toLowerCase().includes(typeValues.key.toLowerCase());
-    //     })
-    //     : filteredCreatures = filteredCreatures.filter(creature => {
-    //       return creature.type.toLowerCase().includes(typeValues.key.toLowerCase());
-    //     });
-    // }
+    // filter by speed
     if (speedValue && speedValue !== 'Speed') {
       speedValue.toLowerCase().includes('no')
         ? (speedValue.toLowerCase().includes('swim')
@@ -272,16 +244,19 @@ class App extends Component {
           return creature.speed.toLowerCase().includes(speedValue.toLowerCase());
         }))
     }
+    // filter by size
     if (sizeValue && sizeValue !== 'Size') {
       filteredCreatures = filteredCreatures.filter(creature => {
         return creature.size.toLowerCase() === sizeValue.toLowerCase();
       });
     }
-    if (crValue && crValue !== 'CR') {
+    // folter by challenge rating
+    if (crValue && crValue !== 'CR' && crValue !== 'Any CR') {
       filteredCreatures = filteredCreatures.filter(creature => {
         return creature.challenge_rating === crValue;
       });
     }
+    // filter by spell
     if (spellSelected) {
       filteredCreatures = this.filterBySpell(filteredCreatures, spellObject);
     }
@@ -306,16 +281,16 @@ class App extends Component {
             Filter by...
           </button>
           <button onClick={(e) => {this.onFilterBySpell(e);}} className={`${spellFilter ? 'tablinks' : 'o-50 tablinks'}`}>
-            Filter by Spell
+            ...Spell
           </button>
           {
             spellFilter === false ?
               <div className="filters-panel">
                 <Select className="cr" value={crValue} options={crOptions} onChange={this.onCRSelect} />
-                <Checkboxes className="type" options={typeOptions} values={typeValues} onChange={this.onTypeChange} />
+                <Checkboxes className="type" options={typeValues} onChange={this.onTypeChange} />
                 <RadioButtons className="speed" text={speedLegend} options={speedOptions} onChange={this.onSpeedSelect} />
                 <RadioButtons className="size" text={sizeLegend} options={sizeOptions} onChange={this.onSizeSelect} />
-                <footer className="tc mt4">&copy; 2019 Elliott Jones</footer>
+                <footer id="footer">&copy; 2019 Elliott Jones</footer>
               </div> // ! figure this footer shit out
               : <SpellList spells={spells} onSpellSelect={this.onSpellSelect} />
           }

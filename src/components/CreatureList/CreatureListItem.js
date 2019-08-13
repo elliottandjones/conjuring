@@ -53,7 +53,8 @@ class CreatureListItem extends React.Component {
     return (
       <div className={`ma1 pa1 creature-item ${isExpanded ? 'inset creature-ex' : 'outset'}`}>
         <div className={`derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => this.onToggle(e)}>
-          <span className="name">{creature.name}</span> <span className="name-cr">{creature.challenge_rating}</span>
+          <span className="name">{creature.name}</span>   <span>{creature.challenge_rating}</span> 
+          {(creature.subtype === 'devil' || creature.subtype === 'demon') && <span className="subtype"> <i> ({creature.subtype})</i></span>}
         </div>
         <div className={`item-collapse ${isExpanded ? 'is-expanded' : ''}`} style={{ height: currentHeight }} >
           <div className="item-body dib pa2 ccard hotem" ref={this.creatureDetailRef}>

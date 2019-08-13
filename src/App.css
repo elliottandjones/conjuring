@@ -21,9 +21,7 @@
   --verdant: #02ceac;
   --verdantlite: #82f5e2;
 }
-*:focus {
-  outline:none;
-}
+*:focus {outline:none;}
 .App {
   font-family: 'Candara','Segoe UI',-apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin: auto;
@@ -60,7 +58,6 @@
   background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
   /* overflow-y: hidden !important;  */
 }
-
 hr.left {
   background: url("./assets/hr-left-red-600x20.png") no-repeat left !important;
   height: 20px !important;
@@ -69,7 +66,6 @@ hr.left {
   margin: 0;
   padding: 0;
 }
-
 hr.left-sm {
   background: url("./assets/hr-left-red-360x13.png") no-repeat left !important;
   height: 13px !important;
@@ -78,7 +74,6 @@ hr.left-sm {
   margin: 4px 0 4px 0;
   padding: 0;
 }
-
 hr.right {
   background: url("./assets/hr-right-red-600x20.png") no-repeat right !important;
   height: 20px !important;
@@ -87,7 +82,6 @@ hr.right {
   margin: 0;
   padding: 0;
 }
-
 hr.right-sm {
   background: url("./assets/hr-right-red-360x13.png") no-repeat right !important;
   height: 13px !important;
@@ -96,7 +90,6 @@ hr.right-sm {
   margin: 4px 0 4px 0;
   padding: 0;
 }
-
 hr.skinny {
   background: url("./assets/hr-double-red-720x12.png") no-repeat center !important;
   height: 12px !important;
@@ -105,7 +98,6 @@ hr.skinny {
   margin: 4px;
   padding: 0;
 }
-
 h1 {
   padding-left: 8px;
   text-shadow: -1px -1px 14px var(--dorchid);
@@ -114,7 +106,6 @@ h1 {
   hyphens: none;
   white-space: none;
 }
-
 h1 span {
   min-width: 300px;
   -webkit-hyphens: none;
@@ -124,20 +115,17 @@ h1 span {
   word-break: keep-all;
   word-wrap: none;
 }
-
-b { color: var(--belite); }
+b {color: var(--belite);}
 label { text-transform: capitalize; }
 .hotem { border: 2px solid var(--crimberry); }
 .roar { border: 2px solid var(--roarange); }
 .too-hot { border: 2px solid var(--verdantlite); }
 .inp-hvr { border: 2px inset var(--crimberrybold); }
-
 .derk {
   color: var(--goldlite);
   text-shadow: 0 0 16px var(--roarange);
   font-weight: 500;
 }
-
 /* top app/nav/action bar */
 .top-bar {
   /* grid-column: 1 / span 4; */
@@ -145,7 +133,6 @@ label { text-transform: capitalize; }
   grid-row: 1 / span 1;
   gap: 12px;
 }
-
 .bar-container {
   display: grid;
   gap: 20px;
@@ -153,7 +140,6 @@ label { text-transform: capitalize; }
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 60px;
 }
-
 .app-title {
   color: var(--crimberrybold);
   -webkit-hyphens: none;
@@ -163,26 +149,20 @@ label { text-transform: capitalize; }
   hyphens: none;
   text-align: left;
 }
-
-/* @media (min-width:) {} */
-
 /* scrollbar stuff */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 7px;
   opacity: 0.5;
 }
-
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
-
 ::-webkit-scrollbar-thumb {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
   background: lightgrey;
 }
-
 /* Collapsible Creature Item */
 .creature-list {
   grid-column: 5 / -1;
@@ -192,24 +172,20 @@ label { text-transform: capitalize; }
   overflow-y: scroll;
   width: 100%;
 }
-
 .creature-item {
   background: var(--slateg);
   width: 98%;
   text-align: left;
   border: 2px outset var(--verdant);
 }
-
 .ccard {
   background-color: var(--slateg);
   border: 2px solid var(--crimberryfull);
 }
-
 .ccard p {
   margin-left: 5px;
   opacity: 1;
 }
-
 .pactions {
   text-shadow: 0 0 8px rgb(123, 81, 163);
   font-size: 1.2em;
@@ -217,20 +193,14 @@ label { text-transform: capitalize; }
   margin-bottom: 0;
   margin-top: 15px;
 }
-
-.ability-scores b {
-  color: var(--belite);
-}
-
+.ability-scores b {color: var(--belite);}
 .ability-scores {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 1fr 1fr;
   gap: 5px;
 }
-
 /* Tabs/Filters */
-
 .tabs, .spell-list {
   grid-row: 2 / -1;
   grid-column: 1 / span 4;
@@ -241,8 +211,9 @@ label { text-transform: capitalize; }
 }
 .tablinks {
   color: var(--lightish);
+  text-shadow: 0 0 5px var(--roarangelite);
   background: var(--slatep);
-  border: 2px ridge var(--belite);
+  border: 2px solid var(--belite);
   display: inline-flex;
   align-content: center;
   justify-content: center;
@@ -252,21 +223,20 @@ label { text-transform: capitalize; }
   cursor: pointer;
 }
 .tablinks:hover {
-  transform: scale(1.04);
+  transform: scale(1.02);
   opacity: 1;
 }
 /* filters-panel */
 .filters-panel {
   width: 100%;
-  background: var(--slatep);
-  gap: 10px;
+  gap: 12px;
   display: grid;
   grid-template-areas: 
-    "cr   speed"
-    "type speed"
-    "type size"
-    "type size"
-    "type foot"
+    "speed   cr"
+    "speed type"
+    "size  type"
+    "size  type"
+    "foot  type"
   ;
 }
 .cr{grid-area:cr;}
@@ -275,8 +245,10 @@ label { text-transform: capitalize; }
 .type{grid-area:type;}
 
 .filters-panel fieldset {
-  border: var(--belite) 2px groove;
+  background: var(--slatep);
+  border: var(--belite) 2px ridge;
   padding: 8px 16px;
+  margin-right: 5px;
 }
 legend {
   color: var(--goldlite) !important;
@@ -285,66 +257,47 @@ legend {
   padding-inline-start: 3px !important;
   padding-inline-end: 4px !important;
 }
-
 .filters-panel label {
   color: var(--lightish);
   text-shadow: none;
   cursor:pointer;
+  z-index:10;
 }
 .filters-panel label:hover,
+.filters-panel select:hover,
 .filters-panel input[type=checkbox]:checked,
 .filters-panel input[type=radio]:checked + label,
 .filters-panel input[type=checkbox]:checked + label,
 .filters-panel label:active {
   background-color: var(--slateb);
-  text-shadow: 0 0 16px var(--roarange);
+  text-shadow: 0 0 5px var(--roarangelite);
   opacity: 1;
 }
-
 /* Spell List */
 .spell-list {
   overflow-y: scroll;
   width: 100%;
 }
-
 /* Collapsible Spell Item */
 .spell-item {
   background: var(--slatep);
   border: 2px outset var(--belite);
   margin-right: 5px;
 }
-
-.inset {
-  border-style: inset;
-}
-
-.outset {
-  border-style: outset;
-}
-
-.creature-item:hover {
-  border-color: var(--crimberrybold);
-}
-
+.inset {border-style: inset;}
+.outset {border-style: outset;}
+.creature-item:hover {border-color: var(--crimberrybold);}
 .creature-ex {
   border-color: var(--crimberrybold);
   border-width: 3px;
 }
-
-.spell-item:hover {
-  border-color: var(--roarangelite);
-}
-
+.spell-item:hover {border-color: var(--roarangelite);}
 .spell-ex {
   border-color: var(--roarangelite);
   border-width: 3px;
 }
-
 .item-body p,
-.item-body li {
-  margin: 8px;
-}
-
+.item-body li {margin: 8px;}
 .name-initial,
 .name-expanded {
   cursor: pointer;
@@ -356,7 +309,7 @@ legend {
   display: flex;
   justify-content: space-between;
 }
-
+.name-expanded .subtype {display: none;}
 /* .name-initial .name,
 .name-expanded .name,
 .name-initial .name-cr {
@@ -370,16 +323,13 @@ legend {
   display: block;
   float: right;
 } */
-
-#footer {
-  text-align: center;
+footer#footer {
+  opacity: .6;
   color: var(--belite);
-  text-align: center;
-  /* width: 100%; */
   position: absolute;
-  /* left: 50%; */
   bottom: 0;
   grid-area: foot;
+  z-index: 1;
 }
 .filter-toggle {
   color: var(--lightish);
@@ -398,7 +348,6 @@ legend {
   border: 2px ridge var(--ba);
   background-color: var(--slateg);
 }
-
 .deselect {
   border: 2px ridge var(--gold);
   background-color: rgb(20, 1, 3);
@@ -407,23 +356,17 @@ legend {
   opacity: 1;
   background: var(--dorchidfull);
 }
-
 .item-collapse {
   overflow: hidden;
   transition: height 0.5s ease-out;
 }
-
 .spell-item .item-body,
-.creature-item .item-body {
-  border: none !important;
-}
-
+.creature-item .item-body {border: none !important;}
 .item-collapse .item-body hr {
   margin: 4px 8px;
   opacity: 0.7;
   border-color: var(--belite);
 }
-
 /* Customized Tachyons grow class */
 .groww {
   cursor: pointer;
@@ -432,16 +375,9 @@ legend {
   transform: translateZ(0);
   transition: transform 0.05s ease-out;
 }
-
 .groww:hover,
-.groww:focus {
-  transform: scale(1.01);
-}
-
-.groww:active {
-  transform: scale(0.98);
-}
-
+.groww:focus {transform: scale(1.01);}
+.groww:active {transform: scale(0.98);}
 /* bootstrap 3 nostalgia, for accessibility/screen readers */
 .sr-only {
   position: absolute;
@@ -453,6 +389,7 @@ legend {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
 
 /* .tooltip {
   position: relative;

@@ -6,11 +6,11 @@ const Checkboxes = ({ onChange, options, className }) => {
     <div id="types-filter" className={className}>
       <fieldset>
         <legend>Type</legend>
-        {options.map((item, i) => (
+        {Object.entries(options).map(([key, value]) => (
           <CheckboxItem
-            key={i}
-            id={i}
-            name={item.name}
+            key={key}
+            id={key}
+            name={key}
             onChange={onChange}
           />
         ))}

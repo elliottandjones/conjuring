@@ -7,7 +7,7 @@ const Select = ({ options, onChange, value, className}) => {
       <fieldset>
         <legend>Challenge Rating</legend>
         <select
-          className="select-input hotem"
+          className="select-input"
           name={options[0].name}
           id={options[0].name}
           onChange={onChange}
