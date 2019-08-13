@@ -224,14 +224,28 @@ class App extends Component {
     let filteredCreatures = creatures.filter(creature => {
       return creature.name.toLowerCase().includes(searchfield.toLowerCase());
     });
-      // * this works!!!
+
     if (Object.values(typeValues).some(i => i === true)) {
-      let test = Object.entries(typeValues).filter(([key, value]) => {
-        // it is ooze that 13 is unchecked
+      let typePicks = Object.entries(typeValues).filter(([key, value]) => {
         console.log("it is ", value, " that ", key, " is checked");
         return value === true;
       });
-      console.log(test);
+      let picks = typePicks.map(types => types[0]);
+      let typeFiltered = [];
+      for(let pick of picks) {
+        let tempArr = [];
+        if (pick === 'demon' || pick === 'devil') {
+          tempArr = filteredCreatures.filter(creature => {
+            return creature.subtype.toLowerCase() === pick;
+          })
+        } else {
+          tempArr = filteredCreatures.filter(creature => {
+            return creature.type.toLowerCase() === pick;
+          });
+        }
+        picks.length > 1 ? typeFiltered = typeFiltered.concat(tempArr) : typeFiltered = tempArr;
+      }
+      filteredCreatures = typeFiltered;
     }
     // if (typeValues && typeValues !== 'Type') {
     //   (typeValues.key.toLowerCase() === 'demon' || typeValues.key.toLowerCase() === 'devil')
