@@ -211,7 +211,7 @@ class App extends Component {
       });
       let picks = typePicks.map(types => types[0]);
       let typeArr = [];
-      if (picks.lenth <= 0) { return;}
+      if (picks && picks.lenth <= 0) { return;}
       else if (picks.length === 1) {
         typeArr = filteredCreatures.filter(creature => {
           return creature.type.toLowerCase() === picks[0];
