@@ -8,8 +8,7 @@ const RadioButtonItem = ({ value, name, onChange, id }) => {
         id={id}
         className="radio-input"
         type="radio"
-        defaultChecked={false}
-        //value={value}
+        value={value}
         name={name}
         onChange={onChange}
       />

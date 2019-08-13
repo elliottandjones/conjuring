@@ -227,8 +227,14 @@ class App extends Component {
       }
       filteredCreatures = typeArr;
     }
-    // filter by speed
-    if (speedValue && speedValue !== 'Speed') {
+    /* filter by speed,
+    * 'on' is the event.target.value of radiobutton when 
+    * (1) an input of type='radio' isn't given a value explicitly or from props
+    * && 
+    * (2) event.target.checked=true 
+    ? This will be the case when the 'All' option is checked, which is the default case
+    */
+    if (speedValue && speedValue !== 'on') {
       speedValue.toLowerCase().includes('no')
         ? (speedValue.toLowerCase().includes('swim')
           ? filteredCreatures = filteredCreatures.filter(creature => {
@@ -242,10 +248,10 @@ class App extends Component {
           }))
         : (filteredCreatures = filteredCreatures.filter(creature => {
           return creature.speed.toLowerCase().includes(speedValue.toLowerCase());
-        }))
+        }));
     }
-    // filter by size
-    if (sizeValue && sizeValue !== 'Size') {
+    // filter by size, see previous comment for explanation of testing againt 'on'
+    if (sizeValue && sizeValue !== 'on') {
       filteredCreatures = filteredCreatures.filter(creature => {
         return creature.size.toLowerCase() === sizeValue.toLowerCase();
       });
@@ -277,7 +283,7 @@ class App extends Component {
         </div>
         <CreatureList creatures={filteredCreatures} />
         <div className="tabs mb1 mt1">
-          <button onClick={(e) => {this.onFilterByOther(e);}} className={`${!spellFilter ? 'tablinks' : 'o-50 tablinks'}`}>
+          <button onClick={(e) => {this.onFilterByOther(e); this.onSpellSelect({});}} className={`${!spellFilter ? 'tablinks' : 'o-50 tablinks'}`}>
             Filter by...
           </button>
           <button onClick={(e) => {this.onFilterBySpell(e);}} className={`${spellFilter ? 'tablinks' : 'o-50 tablinks'}`}>
@@ -301,8 +307,3 @@ class App extends Component {
 }
 
 export default App;
-////<SpellList spells={spells} onSpellSelect={this.onSpellSelect} />
-////<Select value={typeValues} options={typeOptions} onSelectChange={this.onTypeSelect} isDisabled={spellSelected} />
-////<Select value={crValue} options={crOptions} onSelectChange={this.onCRSelect} isDisabled={spellSelected} />
-////<Select value={speedValue} options={speedOptions} onSelectChange={this.onSpeedSelect} isDisabled={spellSelected} />
-////<Select value={sizeValue} options={sizeOptions} onSelectChange={this.onSizeSelect} isDisabled={spellSelected} />

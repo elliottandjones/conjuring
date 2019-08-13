@@ -17,6 +17,7 @@
   --dorchid: rgba(153, 50, 204, 0.8);
   --dorchidfull: rgb(8, 0, 12);
   /* so glad this is the name of a color i don't hate */
+  --BA: #bada55;
   --ba: #bada55bb;
   --verdant: #02ceac;
   --verdantlite: #82f5e2;
@@ -30,7 +31,7 @@
   word-spacing: 1px;
   letter-spacing: 1px;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 14px;
   height: 100vh;
   display: grid;
   gap: 14px;
@@ -229,7 +230,7 @@ label { text-transform: capitalize; }
 /* filters-panel */
 .filters-panel {
   width: 100%;
-  gap: 12px;
+  gap: 11px;
   display: grid;
   grid-template-areas: 
     "speed   cr"
@@ -247,15 +248,15 @@ label { text-transform: capitalize; }
 .filters-panel fieldset {
   background: var(--slatep);
   border: var(--belite) 2px ridge;
-  padding: 8px 16px;
-  margin-right: 5px;
+  padding: 8px 12px;
+  /* margin-right: 5px; */
 }
 legend {
   color: var(--goldlite) !important;
   font-weight: 500;
   font-size: 1.2em;
   padding-inline-start: 3px !important;
-  padding-inline-end: 4px !important;
+  padding-inline-end: 3px !important;
 }
 .filters-panel label {
   color: var(--lightish);
