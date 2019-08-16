@@ -5,7 +5,7 @@ import Select from './components/Select/Select';
 import SpellList from './components/SpellList/SpellList';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
-import firebase from 'firebase/app';
+import * as firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
 import { DB_CONFIG } from './config';
@@ -186,7 +186,7 @@ class App extends Component {
   }
 
   formatCR(string) {
-    if (string.length < 3) {
+    if (string !== undefined && string.length < 3) {
       return parseInt(string);
     }
     const split = string.split('/');
@@ -211,18 +211,20 @@ class App extends Component {
       });
       let picks = typePicks.map(types => types[0]);
       let typeArr = [];
-      if (picks && picks.lenth <= 0) { return;}
-      else if (picks.length === 1) {
+      // if (picks && picks.lenth <= 0) { return;}
+      if (picks !== undefined && picks.length === 1) {
         typeArr = filteredCreatures.filter(creature => {
           return creature.type.toLowerCase() === picks[0];
         });
       } else {
-        for(let pick of picks) {
-          let tempArr = [];
-          tempArr = filteredCreatures.filter(creature => {
-            return creature.type.toLowerCase() === pick;
-          });
-          typeArr = typeArr.concat(tempArr);
+        if (picks !== undefined) {
+          for(let pick of picks) {
+            let tempArr = [];
+            tempArr = filteredCreatures.filter(creature => {
+              return creature.type.toLowerCase() === pick;
+            });
+            typeArr = typeArr.concat(tempArr);
+          }
         }
       }
       filteredCreatures = typeArr;

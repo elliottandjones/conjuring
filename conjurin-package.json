@@ -2,13 +2,12 @@
   "name": "conjurin-app-react",
   "version": "0.1.0",
   "private": true,
-  "author": "Elliott Jones",
+  "author": "Elliott A. Jones",
   "dependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1",
-    "tachyons": "^4.11.1",
-    "firebase": "^5.7.0"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1",
+    "tachyons": "^4.11.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,5 +26,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {}
+  "devDependencies": {
+    "firebase": "^5.7.0"
+  }
 }
