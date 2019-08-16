@@ -1,5 +1,4 @@
 import React from 'react';
-// ({ creature, isDisplaying, modifier }) =>
 class CreatureListItem extends React.Component {
   constructor(props) {
     super(props);

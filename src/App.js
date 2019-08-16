@@ -11,6 +11,22 @@ import 'firebase/database';
 import { DB_CONFIG } from './config';
 import './App.css';
 
+const initialTypeValues = {
+  aberration: false,
+  beast: false,
+  celestial: false,
+  construct: false,
+  dragon: false,
+  elemental: false,
+  fey: false,
+  fiend: false,
+  giant: false,
+  humanoid: false,
+  monstrosity: false,
+  ooze: false,
+  plant: false,
+  undead: false
+};
 class App extends Component {
   constructor() {
     super();
@@ -70,22 +86,23 @@ class App extends Component {
         { value: 'Gargantuan', name: 'size' }
       ],
       spellSelected: false,
-      typeValues: {
-        aberration: false,
-        beast: false,
-        celestial: false,
-        construct: false,
-        dragon: false,
-        elemental: false,
-        fey: false,
-        fiend: false,
-        giant: false,
-        humanoid: false,
-        monstrosity: false,
-        ooze: false,
-        plant: false,
-        undead: false
-      },
+      typeValues: initialTypeValues,
+      // typeValues: {
+      //   aberration: false,
+      //   beast: false,
+      //   celestial: false,
+      //   construct: false,
+      //   dragon: false,
+      //   elemental: false,
+      //   fey: false,
+      //   fiend: false,
+      //   giant: false,
+      //   humanoid: false,
+      //   monstrosity: false,
+      //   ooze: false,
+      //   plant: false,
+      //   undead: false
+      // },
       crValue: '',
       speedValue: '',
       sizeValue: '',
@@ -94,7 +111,7 @@ class App extends Component {
       speedLegend: 'Speed',
       sizeLegend: 'Size',
       typePicked: true,
-      showFavorites: false
+      // showFavorites: false
     };
     this.onTypeChange = this.onTypeChange.bind(this);
   }
@@ -124,6 +141,11 @@ class App extends Component {
     if (this.state.spellFilter === false) {
       this.setState({
         spellFilter: true
+      });
+    }
+    if (Object.values(this.state.typeValues).some(i => i === true)) {
+      this.setState({
+        typeValues: initialTypeValues
       });
     }
   }
@@ -212,8 +234,7 @@ class App extends Component {
         return value === true;
       });
       let picks = typePicks.map(types => types[0]);
-      
-      if (picks) {
+      if (picks && picks.length > 1) {
         for(let pick of picks) {
           let tempArr = [];
           tempArr = filteredCreatures.filter(creature => {
@@ -221,6 +242,10 @@ class App extends Component {
           });
           typeArr = typeArr.concat(tempArr);
         }
+      } else {
+        typeArr = filteredCreatures.filter(creature => {
+          return creature.type.toLowerCase() === picks[0];
+        });
       }
       filteredCreatures = typeArr;
     }
