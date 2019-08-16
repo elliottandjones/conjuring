@@ -15,7 +15,7 @@ class CreatureListItem extends React.Component {
     });
   }
 
-  whatSkills = (creature) => {
+  whatSkills(creature) {
     let skills = "";
     if (creature.acrobatics) { skills += `Perception +${creature.acrobatics} `; }
     if (creature.animal_handling) { skills += `Animael Handling +${creature.animal_handling} `; }
@@ -78,7 +78,7 @@ class CreatureListItem extends React.Component {
               <div>{creature.charisma} {this.calculateModifier(creature.charisma)}</div>
             </div>
             <hr className="left-sm" style={{ marginBottom: '-10px' }} /><hr className="right-sm" />
-            {this.whatSkills(creature).length > 0 ? <p><b>Skills</b> {this.whatSkills(creature)}</p> : ''}
+            {this.whatSkills(creature) !== "" ? <p><b>Skills</b> {this.whatSkills(creature)}</p> : ''}
             <p><b>Senses</b> {creature.senses}</p>
             {creature.languages ? <p><b>Languages</b> {creature.languages}</p> : ''}
             <p><b>Challenge</b> {creature.challenge_rating}</p>

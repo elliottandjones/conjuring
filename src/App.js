@@ -185,11 +185,11 @@ class App extends Component {
     return critters;
   }
 
-  formatCR(string) {
-    if (string !== undefined && string.length < 3) {
-      return parseInt(string);
+  formatCR(str) {
+    if (str && !str.includes('/')) {
+      return parseInt(str);
     }
-    const split = string.split('/');
+    const split = str.split('/');
     return (parseInt(split[0]) / parseInt(split[1]));
   }
 
@@ -206,25 +206,20 @@ class App extends Component {
     });
     // filter by types
     if (Object.values(typeValues).some(i => i === true)) {
-      let typePicks = Object.entries(typeValues).filter(([key, value]) => {
+      let typePicks = [];
+      let typeArr = [];
+      typePicks = Object.entries(typeValues).filter(([key, value]) => {
         return value === true;
       });
       let picks = typePicks.map(types => types[0]);
-      let typeArr = [];
-      // if (picks && picks.lenth <= 0) { return;}
-      if (picks !== undefined && picks.length === 1) {
-        typeArr = filteredCreatures.filter(creature => {
-          return creature.type.toLowerCase() === picks[0];
-        });
-      } else {
-        if (picks !== undefined) {
-          for(let pick of picks) {
-            let tempArr = [];
-            tempArr = filteredCreatures.filter(creature => {
-              return creature.type.toLowerCase() === pick;
-            });
-            typeArr = typeArr.concat(tempArr);
-          }
+      
+      if (picks) {
+        for(let pick of picks) {
+          let tempArr = [];
+          tempArr = filteredCreatures.filter(creature => {
+            return creature.type.toLowerCase() === pick;
+          });
+          typeArr = typeArr.concat(tempArr);
         }
       }
       filteredCreatures = typeArr;

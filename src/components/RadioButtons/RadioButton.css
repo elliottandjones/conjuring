@@ -44,11 +44,11 @@
 .radio-input:checked + .radio-label {
   font-weight: 700;
 }
-.radio-input:checked + .radio-label:before,
-.radio-input:checked + .radio-label:after {
+.radio-input:checked + .radio-label:before {
   opacity: 1;
-  background: linear-gradient(to var(--dir, left), var(--crimberrybold), transparent);
+  background: linear-gradient(to left, var(--crimberrybold), transparent);
 }
 .radio-input:checked + .radio-label:after {
-  --dir: right; 
+  opacity: 1;
+  background: linear-gradient(to right, var(--crimberrybold), transparent);
 }

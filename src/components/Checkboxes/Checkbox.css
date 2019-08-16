@@ -43,11 +43,11 @@
 .checkbox-input:checked + .checkbox-label {
   font-weight: 700;
 }
-.checkbox-input:checked + .checkbox-label:before,
-.checkbox-input:checked + .checkbox-label:after {
+.checkbox-input:checked + .checkbox-label:before {
   opacity: 1;
-  background: linear-gradient(to var(--dir, left), var(--roarange), transparent);
+  background: linear-gradient(to left, var(--roarange), transparent);
 }
 .checkbox-input:checked + .checkbox-label:after {
-  --dir: right; 
+  opacity: 1;
+  background: linear-gradient(to right, var(--roarange), transparent);
 }
