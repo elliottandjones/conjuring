@@ -1,4 +1,5 @@
 import React from 'react';
+import './CreatureListItem.css';
 class CreatureListItem extends React.Component {
   constructor(props) {
     super(props);
@@ -62,11 +63,11 @@ class CreatureListItem extends React.Component {
                 ? <p className="i ma1">{creature.size} {creature.type} ({creature.subtype}), {creature.alignment}</p>
                 : <p className="i ma1">{creature.size} {creature.type}, {creature.alignment}</p>
             }
-            <hr className="left" />
+            <i className="to-right mb1 mt1"></i>
             <p><b className="mr2">Armor Class</b> {creature.armor_class}</p>
             <p><b className="mr2">Hit Points</b> {creature.hit_points} ({creature.hit_dice})</p>
             <p><b className="mr2">Speed</b> {creature.speed}</p>
-            <hr className="left-sm" style={{ marginBottom: '-10px' }} /><hr className="right-sm" />
+            <div className="from-center"><i>.</i></div>
             <div className="tc ability-scores">
               <div><b>STR</b></div><div><b>DEX</b></div><div><b>CON</b></div><div><b>INT</b></div><div><b>WIS</b></div><div><b>CHA</b></div>
               <div>{creature.strength} {this.calculateModifier(creature.strength)}</div>
@@ -76,12 +77,12 @@ class CreatureListItem extends React.Component {
               <div>{creature.wisdom} {this.calculateModifier(creature.wisdom)}</div>
               <div>{creature.charisma} {this.calculateModifier(creature.charisma)}</div>
             </div>
-            <hr className="left-sm" style={{ marginBottom: '-10px' }} /><hr className="right-sm" />
+            <div className="from-center"><i>.</i></div>
             {this.whatSkills(creature) !== "" ? <p><b>Skills</b> {this.whatSkills(creature)}</p> : ''}
             <p><b>Senses</b> {creature.senses}</p>
             {creature.languages ? <p><b>Languages</b> {creature.languages}</p> : ''}
             <p><b>Challenge</b> {creature.challenge_rating}</p>
-            <hr className="left" />
+            <i className="to-right mt1 mb1"></i>
             {
               creature.special_abilities
                 ? (
@@ -91,7 +92,8 @@ class CreatureListItem extends React.Component {
                 ) : ''
             }
             <p className="pactions">Actions</p>
-            <hr className="skinny" />
+            <div className="from-center"><i>.</i></div>
+            {/* <hr className="skinny" /> */}
             {
               creature.actions
                 ? (
@@ -105,7 +107,8 @@ class CreatureListItem extends React.Component {
                 ? (
                   <div>
                     <p className="pactions">Legendary Actions</p>
-                    <hr className="skinny" />
+                    <div className="from-center"><i>.</i></div>
+                    {/* <hr className="skinny" /> */}
                     {creature.legendary_actions.map((action, i) => {
                       return (<p key={i + 6616161}><b><i>{action.name}.</i></b> {action.desc}</p>);
                     })}

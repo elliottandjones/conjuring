@@ -57,46 +57,6 @@
   background-size: 550px 550px, 350px 300px, 200px 200px, 150px 150px;
   background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 }
-hr.left {
-  background: url("./assets/hr-left-red-600x20.png") no-repeat left !important;
-  height: 20px !important;
-  border: none !important;
-  opacity: 0.9;
-  margin: 0;
-  padding: 0;
-}
-hr.left-sm {
-  background: url("./assets/hr-left-red-360x13.png") no-repeat left !important;
-  height: 13px !important;
-  border: none !important;
-  opacity: 0.9;
-  margin: 4px 0 4px 0;
-  padding: 0;
-}
-hr.right {
-  background: url("./assets/hr-right-red-600x20.png") no-repeat right !important;
-  height: 20px !important;
-  border: none !important;
-  opacity: 0.9;
-  margin: 0;
-  padding: 0;
-}
-hr.right-sm {
-  background: url("./assets/hr-right-red-360x13.png") no-repeat right !important;
-  height: 13px !important;
-  border: none !important;
-  opacity: 0.9;
-  margin: 4px 0 4px 0;
-  padding: 0;
-}
-hr.skinny {
-  background: url("./assets/hr-double-red-720x12.png") no-repeat center !important;
-  height: 12px !important;
-  border: none !important;
-  opacity: 0.9;
-  margin: 4px;
-  padding: 0;
-}
 h1 {
   font-family: 'Candara';
   padding-left: 8px;
