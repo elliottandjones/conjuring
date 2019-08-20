@@ -292,11 +292,11 @@ class App extends Component {
       <div className="App">
         <div className="top-bar">
           <div className="bar-container">
-            <div className="app-title pl1 ma1">
+            <div className="app-title pl1 ma1" title="a Reference App for Dungeons & Dragons (5e SRD)">
               <h1 className="mt1 mb1" style={{ fontSize: '2.2em' }}>
-                <span style={{ whiteSpace: 'none' }}>
+                <span id="app-title-span" style={{ whiteSpace: 'none' }}>
                   Conju<img className="icon" alt="icon" src="/favicon.ico" />ing
-                </span>
+                </span> <a href="https://github.com/Elliohknow/conjuring" id="source-link">source</a>
               </h1>
             </div>
             <SearchBox searchfield={searchfield} searchChange={this.onSearchChange} />
@@ -317,8 +317,10 @@ class App extends Component {
                 <Checkboxes className="type" options={typeValues} onChange={this.onTypeChange} />
                 <RadioButtons className="speed" text={speedLegend} options={speedOptions} onChange={this.onSpeedSelect} />
                 <RadioButtons className="size" text={sizeLegend} options={sizeOptions} onChange={this.onSizeSelect} />
-                <footer id="footer">&copy; 2019 Elliott Jones</footer>
-              </div> // ! figure this footer shit out
+                <footer id="footer">
+                  &copy; 2019 <a href="http://elliottandjones.com/" style={{ textDecoration: "none" }}>Elliott Jones</a>
+                </footer>
+              </div>
               : <SpellList spells={spells} onSpellSelect={this.onSpellSelect} />
           }
         </div>

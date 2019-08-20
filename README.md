@@ -5,7 +5,3 @@ It's far from done, but if you'd like, you can check it out right now, [here](ht
 Built with React, Firebase, Wizards of the Coast's wonderful game, and love.
 Future thangs:
 I'm seriously considering rebuilding this with React Native and generally prioritizing mobile support and experience.
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts

@@ -13,7 +13,9 @@ const SpellList = props => {
           />
         );
       })}
-      <footer id="footer">&copy; 2019 Elliott Jones</footer>
+      <footer id="footer">
+        &copy; 2019 <a href="http://elliottandjones.com/" style={{textDecoration: "none"}}>Elliott Jones</a>
+      </footer>
     </div>
   );
 };
