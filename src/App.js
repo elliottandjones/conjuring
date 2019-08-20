@@ -5,7 +5,7 @@ import Select from './components/Select/Select';
 import SpellList from './components/SpellList/SpellList';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import { DB_CONFIG } from './config';
@@ -87,22 +87,6 @@ class App extends Component {
       ],
       spellSelected: false,
       typeValues: initialTypeValues,
-      // typeValues: {
-      //   aberration: false,
-      //   beast: false,
-      //   celestial: false,
-      //   construct: false,
-      //   dragon: false,
-      //   elemental: false,
-      //   fey: false,
-      //   fiend: false,
-      //   giant: false,
-      //   humanoid: false,
-      //   monstrosity: false,
-      //   ooze: false,
-      //   plant: false,
-      //   undead: false
-      // },
       crValue: '',
       speedValue: '',
       sizeValue: '',
@@ -146,6 +130,21 @@ class App extends Component {
     if (Object.values(this.state.typeValues).some(i => i === true)) {
       this.setState({
         typeValues: initialTypeValues
+      });
+    }
+    if (this.state.crValue) {
+      this.setState({
+        crValue: ''
+      });
+    }
+    if (this.state.sizeValue) {
+      this.setState({
+        sizeValue: ''
+      });
+    }
+    if (this.state.speedValue) {
+      this.setState({
+        speedValue: ''
       });
     }
   }

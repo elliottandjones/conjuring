@@ -2,7 +2,7 @@
   grid-column: 3 / -1;
   height: 100%;
   width: 100%;
-  row-gap: 20px;
+  row-gap: 18px;
 }
 #search {
   background-color: var(--slateb);

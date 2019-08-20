@@ -183,7 +183,6 @@ label { text-transform: capitalize; }
   cursor: pointer;
 }
 .tablinks:hover {
-  transform: scale(1.02);
   opacity: 1;
 }
 /* filters-panel */
@@ -199,7 +198,18 @@ label { text-transform: capitalize; }
     "foot  type"
   ;
 }
-
+/* Some necessary media queries for mobile devices */
+@media screen and (max-width: 700px) {
+  .fliters-panel {
+    grid-template-areas: 
+      "cr ."
+      "type ."
+      "speed ."
+      "size ."
+      "foot ."
+    ;
+  }
+}
 .cr{grid-area:cr;}
 .speed{grid-area:speed;}
 .size{grid-area:size;}
@@ -287,8 +297,8 @@ legend {
 footer#footer {
   opacity: .6;
   color: var(--belite);
-  position: absolute;
-  bottom: 0;
+  display: block;
+  
   grid-area: foot;
   z-index: 1;
 }
@@ -349,18 +359,6 @@ footer#footer {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-}
-/* Some necessary media queries for mobile devices */
-@media only screen and (max-width: 700px) {
-  .fliters-panel {
-    grid-template-areas: 
-      "cr"
-      "type"
-      "speed"
-      "size"
-      "foot"
-    ;
-  }
 }
 /* .tooltip {
   position: relative;
