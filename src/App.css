@@ -312,7 +312,6 @@ footer#footer {
   z-index: 1;
 }
 footer#footer a {
-  opacity: 0.6;
   text-decoration: none;
   color: var(--lightish);
 }
