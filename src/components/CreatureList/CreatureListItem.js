@@ -53,7 +53,7 @@ class CreatureListItem extends React.Component {
     return (
       <div className={`ma1 pa1 creature-item ${isExpanded ? 'inset creature-ex' : 'outset'}`}>
         <div className={`derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => this.onToggle(e)}>
-          <span className="name">{creature.name}</span>   <span>{creature.challenge_rating}</span> 
+          <span className="name">{creature.name}</span> - <span>{creature.challenge_rating}</span> 
           {(creature.subtype === 'devil' || creature.subtype === 'demon') && <span className="subtype"> <i> ({creature.subtype})</i></span>}
         </div>
         <div className={`item-collapse ${isExpanded ? 'is-expanded' : ''}`} style={{ height: currentHeight }} >
@@ -79,6 +79,10 @@ class CreatureListItem extends React.Component {
             </div>
             <div className="from-center"><i>.</i></div>
             {this.whatSkills(creature) !== "" ? <p><b>Skills</b> {this.whatSkills(creature)}</p> : ''}
+            {creature.damage_vulnerabilities && <p><b>Damage Vulnerabilities</b> {creature.damage_vulnerabilities}</p>}
+            {creature.damage_resistances && <p><b>Damage Resistances</b> {creature.damage_resistances}</p>}
+            {creature.damage_immunities && <p><b>Damage Immunities</b> {creature.damage_immunities}</p>}
+            {creature.condition_immunities && <p><b>Condition Immunities</b> {creature.condition_immunities}</p>}
             <p><b>Senses</b> {creature.senses}</p>
             {creature.languages ? <p><b>Languages</b> {creature.languages}</p> : ''}
             <p><b>Challenge</b> {creature.challenge_rating}</p>
