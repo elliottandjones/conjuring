@@ -57,6 +57,12 @@
   background-size: 550px 550px, 350px 300px, 200px 200px, 150px 150px;
   background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 }
+/* get rid of this wretched full vh scrollbar from showing up unnecessarily on any screen big enough to type using more than just thumbs */
+@media screen and (min-width: 600px) {
+  .App {
+    overflow: hidden;
+  }
+}
 h1 {
   font-family: 'Candara';
   padding-left: 8px;
@@ -171,13 +177,11 @@ label { text-transform: capitalize; }
   gap: 5px;
 }
 /* Tabs/Filters */
-.tabs, .spell-list {
-  grid-row: 2 / -1;
+.tabs {
+  grid-row: 2 / span 1;
   grid-column: 1 / span 4;
   margin: 4px;
   width: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 .tablinks {
   color: var(--lightish);
@@ -197,6 +201,9 @@ label { text-transform: capitalize; }
 }
 /* filters-panel */
 .filters-panel {
+  overflow-y:scroll;
+  grid-row: 3 / -1;
+  grid-column: 1 / span 4;
   width: 100%;
   gap: 11px;
   display: grid;
@@ -210,13 +217,14 @@ label { text-transform: capitalize; }
 }
 /* Some necessary media queries for mobile devices */
 @media screen and (max-width: 700px) {
-  .fliters-panel {
+  .filters-panel {
+    display: grid;
     grid-template-areas: 
-      "cr ."
-      "type ."
-      "speed ."
-      "size ."
-      "foot ."
+      "cr"
+      "type"
+      "speed"
+      "size"
+      "foot"
     ;
   }
 }
@@ -255,9 +263,13 @@ legend {
   opacity: 1;
 }
 /* Spell List */
-.spell-list {
-  overflow-y: scroll;
+.spell-list{
+  grid-row: 3 / -1;
+  grid-column: 1 / span 4;
+  margin: 5px;
   width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 /* Collapsible Spell Item */
 .spell-item {

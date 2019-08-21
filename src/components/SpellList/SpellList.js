@@ -22,3 +22,9 @@ const SpellList = props => {
 
 export default SpellList;
 /*<p className="tc ma1 pa1">Make sure to *Deselect* (at the bottom) the previously selected spells before trying to *Select* another spell or use the filters in the top bar!</p>*/
+// const styles = {
+  
+//   foot: {
+
+//   }
+// };

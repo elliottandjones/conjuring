@@ -310,6 +310,7 @@ class App extends Component {
           <button onClick={(e) => {this.onFilterBySpell(e);}} className={`${spellFilter ? 'tablinks' : 'o-50 tablinks'}`}>
             ...Spell
           </button>
+        </div>
           {
             spellFilter === false ?
               <div className="filters-panel">
@@ -323,7 +324,6 @@ class App extends Component {
               </div>
               : <SpellList spells={spells} onSpellSelect={this.onSpellSelect} />
           }
-        </div>
       </div>
     );
   }
