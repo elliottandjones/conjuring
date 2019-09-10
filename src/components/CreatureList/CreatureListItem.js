@@ -11,7 +11,7 @@ class CreatureListItem extends React.Component {
     e.preventDefault();
     this.setState({
       isExpanded: !(this.state.isExpanded),
-      height: this.creatureDetailRef.clientHeight
+      height: this.creatureDetailRef.offsetHeight
     });
   }
 

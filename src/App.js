@@ -314,10 +314,14 @@ class App extends Component {
           {
             spellFilter === false ?
               <div className="filters-panel">
-                <Select className="cr" value={crValue} options={crOptions} onChange={this.onCRSelect} />
-                <Checkboxes className="type" options={typeValues} onChange={this.onTypeChange} />
-                <RadioButtons className="speed" text={speedLegend} options={speedOptions} onChange={this.onSpeedSelect} />
-                <RadioButtons className="size" text={sizeLegend} options={sizeOptions} onChange={this.onSizeSelect} />
+                <div className="">
+                  <Select className="cr" value={crValue} options={crOptions} onChange={this.onCRSelect} />
+                  <Checkboxes className="type" options={typeValues} onChange={this.onTypeChange} />
+                </div>
+                <div className="">
+                  <RadioButtons className="speed" text={speedLegend} options={speedOptions} onChange={this.onSpeedSelect} />
+                  <RadioButtons className="size" text={sizeLegend} options={sizeOptions} onChange={this.onSizeSelect} />
+                </div>
                 <footer id="footer">
                   &copy; 2019 <a href="http://elliottandjones.com/" style={{ textDecoration: "none" }}>Elliott Jones</a>
                 </footer>
