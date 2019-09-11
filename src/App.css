@@ -230,39 +230,25 @@ label {
 	grid-row: 3 / -1;
 	grid-column: 1 / span 4;
 	width: 100%;
-	gap: 11px;
+  gap: 11px;
 	display: grid;
-	grid-template-areas:
-		"speed   cr"
-		"speed type"
-		"size  type"
-		"size  type"
-		"foot  type";
+  grid-template-areas: "speed-and-size cr-and-type";
 }
 /* Some necessary media queries for mobile devices */
 @media screen and (max-width: 700px) {
 	.filters-panel {
 		display: grid;
 		grid-template-areas:
-			"cr"
-			"type"
-			"speed"
-			"size"
-			"foot";
+			"cr-and-type"
+			"speed-and-size";
 	}
 }
-.cr {
-	grid-area: cr;
-}
-.speed {
-	grid-area: speed;
-}
-.size {
-	grid-area: size;
-}
-.type {
-	grid-area: type;
-}
+.cr-and-type {grid-area: cr-and-type;}
+.speed-and-size {grid-area: speed-and-size;}
+.cr {grid-area: cr;}
+.speed {grid-area: speed;}
+.size {grid-area: size;}
+.type {grid-area: type;}
 
 .filters-panel fieldset {
 	background: var(--slatep);

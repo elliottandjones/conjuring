@@ -6,7 +6,7 @@
 .pnp.js
 
 # misc things to ignore
-/thehaters
+/theHaters
 /src/config.js
 /.firebase
 /.firebaserc
