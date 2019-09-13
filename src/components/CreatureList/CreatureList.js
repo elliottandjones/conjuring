@@ -1,5 +1,5 @@
 import React from 'react';
-import CreatureListItem from './CreatureListItem';
+import CreatureItem from './CreatureItem';
 
 const CreatureList = (props) => {
   const creatures = props.creatures;
@@ -8,7 +8,7 @@ const CreatureList = (props) => {
       {
         Object.keys(creatures).map((obj, i) => {
           return (
-            <CreatureListItem key={creatures[i].index} creature={creatures[i]} />
+            <CreatureItem key={creatures[i].index} creature={creatures[i]} />
           );
         })}
     </div>
