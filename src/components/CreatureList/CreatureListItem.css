@@ -43,8 +43,8 @@ i.to-left:after {
   display: block;
   margin: 4px;
   height: 4px;
-  border-top-right-radius: 50%;
-  border-bottom-right-radius: 50%;
+  /* border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%; */
   background: linear-gradient(to left, transparent, var(--crimberry));
 }
 .from-center i:after {
@@ -52,7 +52,14 @@ i.to-left:after {
   display: block;
   margin: 4px;
   height: 4px;
-  border-top-left-radius: 50%;
-  border-bottom-left-radius: 50%;
+  /* border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%; */
   background: linear-gradient(to right, transparent, var(--crimberry));
+}
+.pactions {
+	text-shadow: 0 0 8px rgb(123, 81, 163);
+  font-size: 1.3em;
+	color: var(--crimberryfull);
+	margin-bottom: 0;
+	margin-top: 15px;
 }

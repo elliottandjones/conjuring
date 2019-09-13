@@ -57,7 +57,7 @@ class CreatureListItem extends React.Component {
           <span>{creature.challenge_rating}</span> 
           {(creature.subtype === 'devil' || creature.subtype === 'demon') && <span className="subtype"> <i> ({creature.subtype})</i></span>}
         </div>
-        <div className={`item-collapse ${isExpanded ? 'is-expanded' : ''}`} style={{ height: currentHeight }} >
+        <div className={`item-collapse ${isExpanded && 'is-expanded'}`} style={{ height: currentHeight }} >
           <div className="item-body dib pa2 ccard hotem" ref={this.creatureDetailRef}>
             {
               creature.subtype
