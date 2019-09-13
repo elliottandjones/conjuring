@@ -1,6 +1,5 @@
 import React from 'react';
-// import CreatureListItem from './CreatureListItem';
-import CreatureListItem from './CreatureItem';
+import CreatureListItem from './CreatureListItem';
 
 const CreatureList = (props) => {
   const creatures = props.creatures;

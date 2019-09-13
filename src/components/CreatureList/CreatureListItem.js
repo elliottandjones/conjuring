@@ -1,21 +1,12 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import './CreatureListItem.css';
-class CreatureListItem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isExpanded: false };
-    this.creatureDetailRef = React.createRef();
-  }
 
-  onToggle(e) {
-    e.preventDefault();
-    this.setState({
-      isExpanded: !(this.state.isExpanded),
-      height: this.creatureDetailRef.offsetHeight
-    });
-  }
+const CreatureListItem = ({creature}) => {
+  const heightRef = useRef(null);
+  const [isExpanded, height, toggleExpanded] = useToggle([false, heightRef]);
+  // const { height } = useComponentHeight(heightRef);
 
-  whatSkills(creature) {
+  const whatSkills = (creature) => {
     let skills = "";
     if (creature.acrobatics) { skills += `Perception +${creature.acrobatics} `; }
     if (creature.animal_handling) { skills += `Animael Handling +${creature.animal_handling} `; }
@@ -38,108 +29,101 @@ class CreatureListItem extends React.Component {
     return skills;
   }
 
-  calculateModifier(score) {
+  const calculateModifier = (score) => {
     let mod = score - 10;
     if (mod % 2 !== 0)
       mod -= 1;
     mod /= 2;
-    return (mod >= 0 ? ` (+${mod})` : ` (${mod})`); // Only need to add '+' prefix, not '-'
+    return (mod >= 0 ? ` (+${mod})` : ` (${mod})`);
   }
+  // const { creature } = props;
+  // const { isExpanded, height } = this.state;
+  const currentHeight = isExpanded ? height : 0;
 
-  render() {
-    const { creature } = this.props;
-    const { isExpanded, height } = this.state;
-    const currentHeight = isExpanded ? height : 0;
-    return (
-      <div className={`ma1 pa1 creature-item ${isExpanded ? 'inset creature-ex' : 'outset'}`}>
-        <div className={`derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => this.onToggle(e)}>
-          <span className="name">{creature.name}</span> <span style={isExpanded ? { display: 'none'} : {}}> - </span>
-          <span>{creature.challenge_rating}</span> 
-          {(creature.subtype === 'devil' || creature.subtype === 'demon') && <span className="subtype"> <i> ({creature.subtype})</i></span>}
-        </div>
-        <div className={`item-collapse ${isExpanded && 'is-expanded'}`} style={{ height: currentHeight }} >
-          <div className="item-body dib pa2 ccard hotem" ref={this.creatureDetailRef}>
-            {
-              creature.subtype
-                ? <p className="i ma1">{creature.size} {creature.type} ({creature.subtype}), {creature.alignment}</p>
-                : <p className="i ma1">{creature.size} {creature.type}, {creature.alignment}</p>
-            }
-            <i className="to-right mb1 mt1"></i>
-            <p><b className="mr2">Armor Class</b> {creature.armor_class}</p>
-            <p><b className="mr2">Hit Points</b> {creature.hit_points} ({creature.hit_dice})</p>
-            <p><b className="mr2">Speed</b> {creature.speed}</p>
-            <div className="from-center"><i>.</i></div>
-            <div className="tc ability-scores">
-              <div><b>STR</b></div><div><b>DEX</b></div><div><b>CON</b></div><div><b>INT</b></div><div><b>WIS</b></div><div><b>CHA</b></div>
-              <div>{creature.strength} {this.calculateModifier(creature.strength)}</div>
-              <div>{creature.dexterity} {this.calculateModifier(creature.dexterity)}</div>
-              <div>{creature.constitution} {this.calculateModifier(creature.constitution)}</div>
-              <div>{creature.intelligence} {this.calculateModifier(creature.intelligence)}</div>
-              <div>{creature.wisdom} {this.calculateModifier(creature.wisdom)}</div>
-              <div>{creature.charisma} {this.calculateModifier(creature.charisma)}</div>
-            </div>
-            <div className="from-center"><i>.</i></div>
-            {this.whatSkills(creature) !== "" ? <p><b>Skills</b> {this.whatSkills(creature)}</p> : ''}
-            {creature.damage_vulnerabilities && <p><b>Damage Vulnerabilities</b> {creature.damage_vulnerabilities}</p>}
-            {creature.damage_resistances && <p><b>Damage Resistances</b> {creature.damage_resistances}</p>}
-            {creature.damage_immunities && <p><b>Damage Immunities</b> {creature.damage_immunities}</p>}
-            {creature.condition_immunities && <p><b>Condition Immunities</b> {creature.condition_immunities}</p>}
-            <p><b>Senses</b> {creature.senses}</p>
-            {creature.languages ? <p><b>Languages</b> {creature.languages}</p> : ''}
-            <p><b>Challenge</b> {creature.challenge_rating}</p>
-            <i className="to-right mt1 mb1"></i>
-            {
-              creature.special_abilities
-                ? (
-                  creature.special_abilities.map((ability, i) => {
-                    return (<p key={i + 898989}><b><i>{ability.name}.</i></b> {ability.desc}</p>);
-                  })
-                ) : ''
-            }
-            <p className="pactions">Actions</p>
-            <div className="from-center"><i>.</i></div>
-            {/* <hr className="skinny" /> */}
-            {
-              creature.actions
-                ? (
-                  creature.actions.map((action, i) => {
-                    return (<p key={i + 101010}><b><i>{action.name}.</i></b> {action.desc}</p>);
-                  })
-                ) : ''
-            }
-            {
-              creature.legendary_actions
-                ? (
-                  <div>
-                    <p className="pactions">Legendary Actions</p>
-                    <div className="from-center"><i>.</i></div>
-                    {/* <hr className="skinny" /> */}
-                    {creature.legendary_actions.map((action, i) => {
-                      return (<p key={i + 6616161}><b><i>{action.name}.</i></b> {action.desc}</p>);
-                    })}
-                  </div>
-                ) : ''
-            }
+  return (
+    <div className={`ma1 pa1 creature-item ${isExpanded ? 'inset creature-ex' : 'outset'}`}>
+      <div className={`derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => toggleExpanded(e)}>
+        <span className="name">{creature.name}</span> <span style={isExpanded ? { display: 'none'} :{}}> - </span>
+        <span>{creature.challenge_rating}</span> 
+        {(creature.subtype === 'devil' || creature.subtype === 'demon') && <span className="subtype"> <i> ({creature.subtype})</i></span>}
+      </div>
+      <div className={`item-collapse ${isExpanded && 'is-expanded'}`} style={{ height: currentHeight }} >
+        <div className="item-body dib pa2 ccard hotem" ref={heightRef}>
+          {
+            creature.subtype
+              ? <p className="i ma1">{creature.size} {creature.type} ({creature.subtype}), {creature.alignment}</p>
+              : <p className="i ma1">{creature.size} {creature.type}, {creature.alignment}</p>
+          }
+          <i className="to-right mb1 mt1"></i>
+          <p><b className="mr2">Armor Class</b> {creature.armor_class}</p>
+          <p><b className="mr2">Hit Points</b> {creature.hit_points} ({creature.hit_dice})</p>
+          <p><b className="mr2">Speed</b> {creature.speed}</p>
+          <div className="from-center"><i>.</i></div>
+          <div className="tc ability-scores">
+            <div><b>STR</b></div><div><b>DEX</b></div><div><b>CON</b></div><div><b>INT</b></div><div><b>WIS</b></div><div><b>CHA</b></div>
+            <div>{creature.strength} {calculateModifier(creature.strength)}</div>
+            <div>{creature.dexterity} {calculateModifier(creature.dexterity)}</div>
+            <div>{creature.constitution} {calculateModifier(creature.constitution)}</div>
+            <div>{creature.intelligence} {calculateModifier(creature.intelligence)}</div>
+            <div>{creature.wisdom} {calculateModifier(creature.wisdom)}</div>
+            <div>{creature.charisma} {calculateModifier(creature.charisma)}</div>
           </div>
+          <div className="from-center"><i>.</i></div>
+          {whatSkills(creature) !== "" && <p><b>Skills</b> {whatSkills(creature)}</p>}
+          {creature.damage_vulnerabilities && <p><b>Damage Vulnerabilities</b> {creature.damage_vulnerabilities}</p>}
+          {creature.damage_resistances && <p><b>Damage Resistances</b> {creature.damage_resistances}</p>}
+          {creature.damage_immunities && <p><b>Damage Immunities</b> {creature.damage_immunities}</p>}
+          {creature.condition_immunities && <p><b>Condition Immunities</b> {creature.condition_immunities}</p>}
+          <p><b>Senses</b> {creature.senses}</p>
+          {creature.languages && <p><b>Languages</b> {creature.languages}</p>}
+          <p><b>Challenge</b> {creature.challenge_rating}</p>
+          {
+            creature.special_abilities
+              && (
+                <React.Fragment>
+                  <i className="to-right mt1 mb1"></i>
+                  {creature.special_abilities.map((item, i) => (<p key={i + 8989}><b><i>{item.name}.</i></b> {item.desc}</p>))}
+                </React.Fragment>
+              )
+          }
+          <p className="pactions">Actions</p>
+          <i className="to-right mt1 mb1"></i>
+          {
+            creature.actions
+              ? creature.actions.map((action, i) => <p key={i + 119}><b><i>{action.name}.</i></b> {action.desc}</p>)
+              : <p> None, apparently. ¯\_(ツ)_/¯</p>
+          }
+          {
+            creature.legendary_actions
+              && (
+                <React.Fragment>
+                  <p className="pactions" style={{textAlign: "center"}}>Legendary Actions</p>
+                  <div className="from-center"><i>.</i></div>
+                  {creature.legendary_actions.map((action, i) => {
+                    return (<p key={i + 6616161}><b><i>{action.name}.</i></b> {action.desc}</p>);
+                  })}
+                </React.Fragment>
+              )
+          }
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 
 }
 
 export default CreatureListItem;
 
-// * Favorite Button without icon yet
-//  <button
-//   className={`filter-toggle select ${isFav ? 'dn' : 'db '}`}
-//   type="submit"
-//   onClick={(e) => { this.onFavToggle(e); onCreatureIsFav(creature); }}
-// >{buttonText}
-// </button>
-//   <button
-//     className={`filter-toggle deselect ${isFav ? 'db ' : 'dn'}`}
-//     type="submit"
-//     onClick={(e) => { this.onFavToggle(e); onCreatureIsFav({}); }}
-//   >{buttonText}
-//   </button>
+/* Custom toggle hook that also sets and return the height of a ref'd element
+* @params [boolean, ref]
+*/  
+const useToggle = (initialValues) => {
+  const [toggleValue, setValue] = useState(initialValues[0]);
+  const [componentHeight, setHeight] = useState(0);
+	const toggler = (e) => {
+    e.preventDefault();
+    setValue(!toggleValue);
+    setHeight(initialValues[1].current.clientHeight);
+  };
+	return [toggleValue, componentHeight, toggler];
+};

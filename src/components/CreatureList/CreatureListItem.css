@@ -43,8 +43,6 @@ i.to-left:after {
   display: block;
   margin: 4px;
   height: 4px;
-  /* border-top-right-radius: 50%;
-  border-bottom-right-radius: 50%; */
   background: linear-gradient(to left, transparent, var(--crimberry));
 }
 .from-center i:after {
@@ -52,8 +50,6 @@ i.to-left:after {
   display: block;
   margin: 4px;
   height: 4px;
-  /* border-top-left-radius: 50%;
-  border-bottom-left-radius: 50%; */
   background: linear-gradient(to right, transparent, var(--crimberry));
 }
 .pactions {
