@@ -67,9 +67,8 @@
 	background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 }
 /* get rid of this wretched full vh scrollbar from showing up unnecessarily on any screen big enough to type using more than just thumbs */
-@media screen and (min-width: 600px) {
-	.App {overflow: hidden;}
-}
+@media screen and (min-width: 600px) {.App {overflow: hidden;}}
+
 h1 {
 	font-family: "Candara";
 	padding-left: 8px;
@@ -85,9 +84,13 @@ h1 {
 	color: var(--crimberrybold);
 	opacity: 0.7;
 }
-#source-link:hover {
+#source-link:hover, 
+#source-link:focus {
 	opacity: 1;
-	color: var(--gold);
+  color: var(--gold);
+  box-shadow: 0 0 14px var(--dorchid);
+  -webkit-box-shadow: 0 0 14px var(--dorchid);
+  -moz-box-shadow: 0 0 14px var(--dorchid);
 }
 h1 span#app-title-span {
 	min-width: 300px;
@@ -111,7 +114,6 @@ label {text-transform: capitalize;}
 }
 /* top app/nav/action bar */
 .top-bar {
-	/* grid-column: 1 / span 4; */
 	grid-column: 1 / -1;
 	grid-row: 1 / span 1;
 	gap: 12px;
@@ -134,7 +136,7 @@ label {text-transform: capitalize;}
 }
 /* scrollbar stuff */
 ::-webkit-scrollbar {
-	width: 7px;
+	width: 9px;
 	opacity: 0.5;
 }
 ::-webkit-scrollbar-track {
@@ -227,7 +229,6 @@ label {text-transform: capitalize;}
 	background: var(--slatep);
 	border: var(--belite) 2px ridge;
 	padding: 8px 12px;
-	/* margin-right: 5px; */
 }
 legend {
 	color: var(--goldlite) !important;
@@ -344,7 +345,7 @@ footer#footer a {
 }
 .item-collapse {
 	overflow: hidden;
-	transition: all 0.2s ease-in-out;
+	transition: all 0.27s ease-in-out;
 }
 .spell-item .item-body,
 .creature-item .item-body {border: none !important;}

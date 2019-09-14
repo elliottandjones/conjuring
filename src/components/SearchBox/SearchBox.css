@@ -15,9 +15,6 @@
 #search:hover {
   border-color: var(--crimberrybold);
   border-width: 4px;
-  /* box-shadow: 0 0 10px var(--roarange);
-  -webkit-box-shadow: 0 0 10px var(--roarange);
-  -moz-box-shadow: 0 0 10px var(--roarange); */
   box-shadow: 0 0 15px var(--dorchid);
   -webkit-box-shadow: 0 0 15px var(--dorchid);
   -moz-box-shadow: 0 0 15px var(--dorchid);
