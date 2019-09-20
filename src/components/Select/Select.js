@@ -1,7 +1,7 @@
 import React from "react";
-import "./Select.css"
+import "./Select.css";
 
-function Select({ options, onChange, value, className}) {
+export default function Select({ options, onChange, value, className}) {
   return (
     <div className={className}>
       <fieldset>
@@ -27,7 +27,6 @@ function Select({ options, onChange, value, className}) {
   );
 }
 
-export default Select;
 // return (
 //   <div className={`slct ${isDisabled ? "tooltip" : "inp-hvr"}`}>
 //     <span className="tooltiptext" style={{ opacity: "1" }}>

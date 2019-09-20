@@ -25,20 +25,7 @@ const useToggle = initialValue => {
   return [value, toggler];
 };
 
-const useModal = () => {
-  const [isShowing, setIsShowing] = useState(false);
-  const toggle = e => {
-    e.preventDefault();
-    setIsShowing(!isShowing);
-  };
-  return {
-    isShowing,
-    toggle
-  };
-};
-
 export {
   useToggle,
-  useToggleHeight,
-  useModal
+  useToggleHeight
 };
