@@ -11,7 +11,8 @@
 /.firebase
 /.firebaserc
 database.rules.json
-
+src/config.js
+./src/config.js
 # testing
 /coverage
 

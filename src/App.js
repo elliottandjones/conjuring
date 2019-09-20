@@ -10,8 +10,8 @@ import 'firebase/auth';
 import 'firebase/database';
 import { DB_CONFIG } from './config';
 import './App.css';
-import { useToggle } from './hooks/useToggle';
-import Modal from './components/RealTime/Modal';
+// import { useToggle } from './hooks/useToggle';
+// import Modal from './components/RealTime/Modal';
 
 const initialTypeValues = {
   aberration: false,
@@ -104,22 +104,16 @@ class App extends Component {
 
   componentDidMount() {
     this.creaturesDB.on('value', snapshot => {
-      this.setState({
-        creatures: snapshot.val()
-      });
+      this.setState({ creatures: snapshot.val() });
     });
     this.spellsDB.on('value', snapshot => {
-      this.setState({
-        spells: snapshot.val()
-      });
+      this.setState({ spells: snapshot.val() });
     });
   }
   onFilterByOther(e) {
     e.preventDefault();
     if (this.state.spellFilter === true) {
-      this.setState({
-        spellFilter: false
-      });
+      this.setState({ spellFilter: false });
     }
   }
   onFilterBySpell(e) {
@@ -207,7 +201,7 @@ class App extends Component {
   }
 
   render() {
-    const [value, toggler] = useToggle(false);
+    // const [value, toggler] = useToggle(false);
     const {
       creatures, spells, spellFilter, spellObject, spellSelected, searchfield,
       crOptions, speedOptions, sizeOptions,
@@ -227,6 +221,7 @@ class App extends Component {
       });
       let picks = typePicks.map(types => types[0]);
       if (picks && picks.length > 1) {
+        // eslint-disable-next-line
         for(let pick of picks) {
           let tempArr = [];
           tempArr = filteredCreatures.filter(creature => {
@@ -321,8 +316,8 @@ class App extends Component {
             </div>
             : <SpellList spells={spells} onSpellSelect={this.onSpellSelect} />
         }
-        <button className="button-default" onClick={toggler}>Show Modal</button>
-        <Modal isShowing={value} hide={toggler} />
+        {/* <button className="button-default" onClick={toggler}>Show Modal</button>
+        <Modal isShowing={value} hide={toggler} /> */}
       </div>
     );
   }
