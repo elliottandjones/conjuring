@@ -1,11 +1,11 @@
 import React from "react";
-import "./Select.css"
+import "./Select.css";
 
-const Select = ({ options, onChange, value, className}) => {
+export default function Select({ options, onChange, value, className}) {
   return (
     <div className={className}>
       <fieldset>
-        <legend>Challenge Rating</legend>
+        <legend>CR</legend>
         <select
           className="select-input"
           name={options[0].name}
@@ -25,9 +25,8 @@ const Select = ({ options, onChange, value, className}) => {
       </fieldset>
     </div>
   );
-};
+}
 
-export default Select;
 // return (
 //   <div className={`slct ${isDisabled ? "tooltip" : "inp-hvr"}`}>
 //     <span className="tooltiptext" style={{ opacity: "1" }}>

@@ -6,12 +6,13 @@
 .pnp.js
 
 # misc things to ignore
-/thehaters
+/theHaters
 /src/config.js
 /.firebase
 /.firebaserc
 database.rules.json
-
+src/config.js
+./src/config.js
 # testing
 /coverage
 
