@@ -87,9 +87,10 @@ h1 {
 #source-link:focus {
 	opacity: 1;
   color: var(--gold);
-  box-shadow: 0 0 14px var(--dorchid);
-  -webkit-box-shadow: 0 0 14px var(--dorchid);
-  -moz-box-shadow: 0 0 14px var(--dorchid);
+	text-shadow: 0 0 20px var(--dorchid);
+  box-shadow: 0 0 14px var(--dorchid) inset;
+  -webkit-box-shadow: 0 0 14px var(--dorchid) inset;
+  -moz-box-shadow: 0 0 14px var(--dorchid) inset;
 }
 h1 span#app-title-span {
 	min-width: 300px;

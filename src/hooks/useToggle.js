@@ -1,7 +1,9 @@
 import { useState } from 'react'
 
-/* Custom toggle hook that also sets and returns the height of a ref object
- * @params [boolean, ref]
+/**
+ * @description Custom toggle hook that also sets and returns the height of a ref object
+ * @param {array} [0] is boolean toggleValue, [1] is a ref object
+ * @returns {array}
  */
 const useToggleHeight = initialValues => {
 	const [toggleValue, setValue] = useState(initialValues[0]);
@@ -23,7 +25,20 @@ const useToggle = initialValue => {
   return [value, toggler];
 };
 
+const useModal = () => {
+  const [isShowing, setIsShowing] = useState(false);
+  const toggle = e => {
+    e.preventDefault();
+    setIsShowing(!isShowing);
+  };
+  return {
+    isShowing,
+    toggle
+  };
+};
+
 export {
   useToggle,
-  useToggleHeight
+  useToggleHeight,
+  useModal
 };
