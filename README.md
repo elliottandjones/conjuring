@@ -1,4 +1,4 @@
-## Conjuring
+# Conjuring
 
 D&D 5e SRD (and personal homebrew) companion/reference web app for you folks out there who like to use your spell slots to conjure stuff.
 It's far from done, but if you'd like, you can check it out right now, [here](https://conjuring-2b5a2.firebaseapp.com).
