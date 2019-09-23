@@ -5,6 +5,7 @@ import Select from './components/Select/Select';
 import SpellList from './components/SpellList/SpellList';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
+import Drawer from './components/Drawer/Drawer';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
@@ -40,36 +41,36 @@ class App extends Component {
       spells: [],
       searchfield: '',
       crOptions: [
-        { value: 'CR', name: 'Any CR' },
-        { value: '0', name: '0' },
-        { value: '1/8', name: '1/8' },
-        { value: '1/4', name: '1/4' },
-        { value: '1/2', name: '1/2' },
-        { value: '1', name: '1' },
-        { value: '2', name: '2' },
-        { value: '3', name: '3' },
-        { value: '4', name: '4' },
-        { value: '5', name: '5' },
-        { value: '6', name: '6' },
-        { value: '7', name: '7' },
-        { value: '8', name: '8' },
-        { value: '9', name: '9' },
-        { value: '10', name: '10' },
-        { value: '11', name: '11' },
-        { value: '12', name: '12' },
-        { value: '13', name: '13' },
-        { value: '14', name: '14' },
-        { value: '15', name: '15' },
-        { value: '16', name: '16' },
-        { value: '17', name: '17' },
-        { value: '18', name: '18' },
-        { value: '19', name: '19' },
-        { value: '20', name: '20' },
-        { value: '21', name: '21' },
-        { value: '22', name: '22' },
-        { value: '23', name: '23' },
-        { value: '24', name: '24' },
-        { value: '30', name: '30' }
+        { name: 'Any CR' },
+        { name: '0' },
+        { name: '1/8' },
+        { name: '1/4' },
+        { name: '1/2' },
+        { name: '1' },
+        { name: '2' },
+        { name: '3' },
+        { name: '4' },
+        { name: '5' },
+        { name: '6' },
+        { name: '7' },
+        { name: '8' },
+        { name: '9' },
+        { name: '10' },
+        { name: '11' },
+        { name: '12' },
+        { name: '13' },
+        { name: '14' },
+        { name: '15' },
+        { name: '16' },
+        { name: '17' },
+        { name: '18' },
+        { name: '19' },
+        { name: '20' },
+        { name: '21' },
+        { name: '22' },
+        { name: '23' },
+        { name: '24' },
+        { name: '30' }
       ],
       speedOptions: [
         { value: 'burrow', name: 'speed' },
@@ -94,10 +95,10 @@ class App extends Component {
       sizeValue: '',
       spellObject: {},
       spellFilter: false,
+      chatOpen: false,
       speedLegend: 'Speed',
       sizeLegend: 'Size',
       typePicked: true,
-      // showFavorites: false
     };
     this.onTypeChange = this.onTypeChange.bind(this);
   }
@@ -110,16 +111,31 @@ class App extends Component {
       this.setState({ spells: snapshot.val() });
     });
   }
+  onOpenChatPanel(e) {
+    e.preventDefault();
+    if (this.state.chatOpen === false) {
+      this.setState({ chatOpen: true});
+    }
+    if (this.state.spellFilter === true) {
+      this.setState({ spellFilter: false });
+    }
+  }
   onFilterByOther(e) {
     e.preventDefault();
     if (this.state.spellFilter === true) {
       this.setState({ spellFilter: false });
+    }
+    if (this.state.chatOpen === true) {
+      this.setState({ chatOpen: false});
     }
   }
   onFilterBySpell(e) {
     e.preventDefault();
     if (this.state.spellFilter === false) {
       this.setState({ spellFilter: true });
+    }
+    if (this.state.chatOpen === true) {
+      this.setState({ chatOpen: false });
     }
     if (Object.values(this.state.typeValues).some(i => i === true)) {
       this.setState({ typeValues: initialTypeValues });
@@ -159,6 +175,10 @@ class App extends Component {
   }
   onSizeSelect = (event) => {
     this.setState({ sizeValue: event.target.value });
+  }
+  onActionClick = (event) => {
+    event.preventDefault();
+    this.setState({ action: event.target.value });
   }
 
   filterBySpell(critters, spell) {
@@ -203,7 +223,7 @@ class App extends Component {
   render() {
     // const [value, toggler] = useToggle(false);
     const {
-      creatures, spells, spellFilter, spellObject, spellSelected, searchfield,
+      creatures, spells, chatOpen, spellFilter, spellObject, spellSelected, searchfield,
       crOptions, speedOptions, sizeOptions,
       typeValues, crValue, speedValue, sizeValue,
       speedLegend, sizeLegend
@@ -292,15 +312,18 @@ class App extends Component {
         </div>
         <CreatureList creatures={filteredCreatures} />
         <div className="tabs mb1 mt1">
-          <button onClick={(e) => {this.onFilterByOther(e); this.onSpellSelect({});}} className={`${!spellFilter ? 'tablinks' : 'o-50 tablinks'}`}>
-            Filter by...
+          <button onClick={(e) => {this.onFilterByOther(e); this.onSpellSelect({});}} className={`tablinks ${(spellFilter || chatOpen) && 'o-50'}`}>
+            by Attribute
           </button>
-          <button onClick={(e) => {this.onFilterBySpell(e);}} className={`${spellFilter ? 'tablinks' : 'o-50 tablinks'}`}>
-            ...Spell
+          <button onClick={(e) => {this.onFilterBySpell(e);}} className={`tablinks ${(chatOpen || !spellFilter) && 'o-50'}`}>
+            by Spell
+          </button>
+          <button onClick={(e) => {this.onOpenChatPanel(e);}} className={`tablinks ${(spellFilter || !chatOpen) && 'o-50'}`}>
+            Chat Panel
           </button>
         </div>
         {
-          spellFilter === false ?
+          spellFilter === false && chatOpen === false ?
             <div className="filters-panel">
               <div className="cr-and-type">
                 <Select className="cr" value={crValue} options={crOptions} onChange={this.onCRSelect} />
@@ -314,7 +337,9 @@ class App extends Component {
                 </footer>
               </div>
             </div>
-            : <SpellList spells={spells} onSpellSelect={this.onSpellSelect} />
+            : (spellFilter === true ? 
+                <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
+                : (chatOpen === true && <Drawer />))
         }
         {/* <button className="button-default" onClick={toggler}>Show Modal</button>
         <Modal isShowing={value} hide={toggler} /> */}

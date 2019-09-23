@@ -194,7 +194,7 @@ label {text-transform: capitalize;}
 	align-content: center;
 	justify-content: center;
 	width: calc(45% - 8px);
-	margin: 10px 3%;
+	margin: 3px 3%;
 	padding: 8px 0;
 	cursor: pointer;
 }
@@ -261,12 +261,6 @@ legend {
 	width: 100%;
 	overflow-y: auto;
 	overflow-x: hidden;
-}
-/* Collapsible Spell Item */
-.spell-item {
-	background: var(--slatep);
-	border: 2px outset var(--belite);
-	margin-right: 5px;
 }
 .inset {border-style: inset;}
 .outset {border-style: outset;}

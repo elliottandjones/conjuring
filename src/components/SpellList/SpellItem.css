@@ -1,0 +1,6 @@
+/* Collapsible Spell Item */
+.spell-item {
+	background: var(--slatep);
+	border: 2px outset var(--belite);
+	margin-right: 5px;
+}

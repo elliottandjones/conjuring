@@ -30,6 +30,10 @@ export default function CreatureItem({creature}) {
     return skills;
   }
 
+  // const isToggled = () => {
+  //   document.query('')
+  // };
+
   const calculateModifier = (score) => {
     let mod = score - 10;
     if (mod % 2 !== 0)
@@ -41,13 +45,17 @@ export default function CreatureItem({creature}) {
   const currentHeight = isExpanded ? height : 0;
 
   return (
-    <div className={`ma1 pa1 creature-item ${isExpanded ? 'inset creature-ex' : 'outset'}`}>
+    <div className={`ma1 pa1 creature-item ${isExpanded ? 'ridge creature-ex' : 'outset'}`}>
       <div className={`derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => toggleExpand(e)}>
         <span className="name">{creature.name}</span> <span style={isExpanded ? { display: 'none'} :{}}> - </span>
         <span>{creature.challenge_rating}</span> 
         {(creature.subtype === 'devil' || creature.subtype === 'demon') && <span className="subtype"> <i> ({creature.subtype})</i></span>}
       </div>
-      <div className={`item-collapse ${isExpanded && 'is-expanded'}`} style={{ height: currentHeight }} >
+      <div 
+        className={`item-collapse ${isExpanded && 'is-expanded'}`} 
+        style={{ height: currentHeight }} 
+        aria-expanded={isExpanded ? true : false} 
+      >
         <div className="item-body dib pa2 ccard hotem" ref={heightRef}>
           {
             creature.subtype

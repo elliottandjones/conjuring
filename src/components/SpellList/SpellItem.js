@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { useToggle, useToggleHeight } from '../../hooks/useToggle';
+import './SpellItem.css';
 
 export default function SpellItem({ spell, onSpellSelect }) {
   const heightRef = useRef(null);
