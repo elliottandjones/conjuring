@@ -1,12 +1,32 @@
-/* Drawer */
-#drawer {
-	background: var(--slatep);
-	border: 2px ridge var(--belite);
+/* panel */
+#drawer-wrapper {
+  display: grid;
   margin-right: 5px;
   grid-row: 3 / -1;
-	grid-column: 1 / span 4;
+	grid-column: 1 / span 5;
 	margin: 5px;
 	width: 100%;
 	overflow-y: auto;
-	overflow-x: hidden;
+  overflow-x: hidden;
+}
+/* Drawer component */
+#drawer {
+  grid-template-columns: 1fr 3fr;
+  display: grid;
+  width: 100%;
+	overflow-y: auto;
+  overflow-x: hidden;
+  gap: 3px;
+}
+#room {
+  grid-column: 1 / span 1;
+  width: 100%;
+	background: var(--slatep);
+  border: 2px ridge var(--belite);
+}
+#chat {
+  grid-column: 2 / -1;
+  width: 100%;
+	background: var(--slatep);
+  border: 2px ridge var(--belite);
 }

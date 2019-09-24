@@ -5,12 +5,11 @@ import "./Drawer.css";
 
 const Drawer = props => {
 	return (
-		<div id="drawer">
-			<Room />
-			<Chat />
-			<footer id="footer">
-				&copy; 2019 <a href="http://elliottandjones.com/" style={{ textDecoration: "none" }}>Elliott Jones</a>
-			</footer>
+		<div id="drawer-wrapper" className="drawer-wrapper">
+			<div id="drawer" className="drawer">
+				<Room name={props.name} />
+				<Chat creature={props.creature} />
+			</div>
 		</div>
 	);
 };

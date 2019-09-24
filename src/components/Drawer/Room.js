@@ -2,7 +2,9 @@ import React from 'react';
 
 const Room = (props) => {
   return (
-    <div></div>
+    <div id="room">
+
+    </div>
   );
 };
 

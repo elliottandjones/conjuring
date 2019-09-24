@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 
 import { useToggleHeight } from '../../hooks/useToggle';
-import './CreatureListItem.css';
+import './CreatureItem.css';
 
 export default function CreatureItem({creature}) {
   const heightRef = useRef(null);

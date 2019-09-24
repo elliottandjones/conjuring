@@ -4,3 +4,8 @@
 	border: 2px outset var(--belite);
 	margin-right: 5px;
 }
+.spell-item:hover {border-color: var(--roarangelite);}
+.spell-ex {
+	border-color: var(--roarangelite);
+	border-width: 3px;
+}

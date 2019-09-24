@@ -150,7 +150,7 @@ label {text-transform: capitalize;}
 }
 /* Collapsible Creature Item */
 .creature-list {
-	grid-column: 5 / -1;
+	grid-column: 6 / -1;
 	grid-row: 2 / -1;
 	padding-right: 3px;
 	padding-left: 5px;
@@ -181,7 +181,7 @@ label {text-transform: capitalize;}
 /* Tabs/Filters */
 .tabs {
 	grid-row: 2 / span 1;
-	grid-column: 1 / span 4;
+	grid-column: 1 / span 5;
 	margin: 4px;
 	width: 100%;
 }
@@ -193,7 +193,7 @@ label {text-transform: capitalize;}
 	display: inline-flex;
 	align-content: center;
 	justify-content: center;
-	width: calc(45% - 8px);
+	width: calc(28% - 12px);
 	margin: 3px 3%;
 	padding: 8px 0;
 	cursor: pointer;
@@ -203,7 +203,7 @@ label {text-transform: capitalize;}
 .filters-panel {
 	overflow-y: scroll;
 	grid-row: 3 / -1;
-	grid-column: 1 / span 4;
+	grid-column: 1 / span 5;
 	width: 100%;
   gap: 11px;
 	display: grid;
@@ -256,7 +256,7 @@ legend {
 /* Spell List */
 .spell-list {
 	grid-row: 3 / -1;
-	grid-column: 1 / span 4;
+	grid-column: 1 / span 5;
 	margin: 5px;
 	width: 100%;
 	overflow-y: auto;
@@ -267,11 +267,6 @@ legend {
 .creature-item:hover {border-color: var(--crimberrybold);}
 .creature-ex {
 	border-color: var(--crimberrybold);
-	border-width: 3px;
-}
-.spell-item:hover {border-color: var(--roarangelite);}
-.spell-ex {
-	border-color: var(--roarangelite);
 	border-width: 3px;
 }
 .item-body p,
@@ -395,33 +390,4 @@ footer#footer a {
 /* .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
-} */
-
-/* .name-initial .name:after {
-  content: '\002BC6';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -10px;
-  transition: 0.2s;
-}
-
-.name-expanded .name:after {
-  content: '\002BC5';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -10px;
-  transition: 0.2s;
-}
-
-.name-initial:hover .name,
-.name-expanded:hover .name {
-  padding-right: 25px;
-}
-
-.name-initial:hover .name:after,
-.name-expanded:hover .name:after {
-  opacity: 1;
-  right: 0;
 } */
