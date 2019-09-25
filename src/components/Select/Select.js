@@ -5,7 +5,7 @@ export default function Select({ options, onChange, value, className}) {
   return (
     <div className={className}>
       <fieldset>
-        <legend>CR</legend>
+        <legend title="Challenge Rating">CR</legend>
         <select
           className="select-input"
           name={options[0].name}

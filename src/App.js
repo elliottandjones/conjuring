@@ -312,10 +312,10 @@ class App extends Component {
         </div>
         <CreatureList creatures={filteredCreatures} />
         <div className="tabs mb1 mt1">
-          <button onClick={(e) => {this.onFilterByOther(e); this.onSpellSelect({});}} className={`tablinks hvr${(spellFilter || chatOpen) && 'o-50'}`}>
+          <button onClick={(e) => {this.onFilterByOther(e); this.onSpellSelect({});}} className={`tablinks hvr ${(spellFilter || chatOpen) && 'o-50'}`}>
             by Attribute
           </button>
-          <button onClick={(e) => {this.onFilterBySpell(e);}} className={`tablinks hvr ${(chatOpen || !spellFilter) && 'o-50'}`}>
+          <button onClick={(e) => {this.onFilterBySpell(e);}} className={`tablinks hvr ${!spellFilter && 'o-50'}`}>
             by Spell
           </button>
           {/* <button disabled onClick={(e) => {this.onOpenChatPanel(e);}} className={`${(spellFilter || !chatOpen) && 'o-50'}`}> */}
