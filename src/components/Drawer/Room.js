@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Room = (props) => {
+const Room = ({ name }) => {
   return (
     <div id="room">
-
+      {name}
     </div>
   );
 };

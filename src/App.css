@@ -198,7 +198,7 @@ label {text-transform: capitalize;}
 	padding: 8px 0;
 	cursor: pointer;
 }
-.tablinks.hvr:hover {opacity: 1;}
+.tablinks:hover {opacity: 1;}
 /* filters-panel */
 .filters-panel {
 	overflow-y: scroll;
