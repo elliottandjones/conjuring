@@ -99,6 +99,11 @@ class App extends Component {
       speedLegend: 'Speed',
       sizeLegend: 'Size',
       typePicked: true,
+      // actionTaken: false,
+      connected: false,
+      room: '',
+      player: '',
+      action: {}
     };
     this.onTypeChange = this.onTypeChange.bind(this);
   }
@@ -118,6 +123,12 @@ class App extends Component {
     }
     if (this.state.spellFilter === true) {
       this.setState({ spellFilter: false });
+    }
+    if (!this.state.connected) {
+      this.setState({
+        room: 'local',
+        player: 'you'
+      });
     }
   }
   onFilterByOther(e) {
@@ -176,9 +187,15 @@ class App extends Component {
   onSizeSelect = (event) => {
     this.setState({ sizeValue: event.target.value });
   }
-  onActionClick = (event) => {
+  onActionTaken = (event) => {
     event.preventDefault();
     this.setState({ action: event.target.value });
+  }
+  displayAction = (action) => {
+    if (action) {
+      // eslint-disable-next-line
+      console.log(action);
+    }
   }
 
   filterBySpell(critters, spell) {
@@ -226,7 +243,7 @@ class App extends Component {
       creatures, spells, chatOpen, spellFilter, spellObject, spellSelected, searchfield,
       crOptions, speedOptions, sizeOptions,
       typeValues, crValue, speedValue, sizeValue,
-      speedLegend, sizeLegend
+      speedLegend, sizeLegend, room, player, action
     } = this.state;
     // filter by name
     let filteredCreatures = creatures.filter(creature => {
@@ -295,7 +312,7 @@ class App extends Component {
     if (spellSelected) {
       filteredCreatures = this.filterBySpell(filteredCreatures, spellObject);
     }
-
+    
     return (
       <div className="App">
         <div className="top-bar">
@@ -310,7 +327,7 @@ class App extends Component {
             <SearchBox searchfield={searchfield} searchChange={this.onSearchChange} />
           </div>
         </div>
-        <CreatureList creatures={filteredCreatures} />
+        <CreatureList creatures={filteredCreatures} onActionTaken={this.onActionTaken} />
         <div className="tabs mb1 mt1">
           <button onClick={(e) => {this.onFilterByOther(e); this.onSpellSelect({});}} className={`tablinks ${(spellFilter || chatOpen) && 'o-50'}`}>
             by Attribute
@@ -318,7 +335,7 @@ class App extends Component {
           <button onClick={(e) => {this.onFilterBySpell(e);}} className={`tablinks ${!spellFilter && 'o-50'}`}>
             by Spell
           </button>
-          <button disabled onClick={(e) => {this.onOpenChatPanel(e);}} className={`tablinks ${!chatOpen && 'o-50'}`}>
+          <button onClick={(e) => {this.onOpenChatPanel(e);}} className={`tablinks ${!chatOpen && 'o-50'}`}>
             Chat Panel
           </button>
         </div>
@@ -339,10 +356,8 @@ class App extends Component {
             </div>
             : (spellFilter === true ? 
                 <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
-                : (chatOpen === true && <Drawer />))
+                : (chatOpen === true && <Drawer room={room} player={player} displayAction={this.displayAction} action={action} />))
         }
-        {/* <button className="button-default" onClick={toggler}>Show Modal</button>
-        <Modal isShowing={value} hide={toggler} /> */}
       </div>
     );
   }

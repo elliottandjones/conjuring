@@ -23,6 +23,9 @@
   width: 100%;
 	background: var(--slatep);
   border: 2px ridge var(--belite);
+  color: var(--lightish);
+  text-shadow: 0 0 5px var(--roarangelite);
+  text-align: center;
 }
 #chat {
   grid-column: 2 / -1;

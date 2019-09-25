@@ -3,12 +3,12 @@ import Room from "./Room";
 import Chat from "./Chat";
 import "./Drawer.css";
 
-const Drawer = props => {
+const Drawer = ({ room, player, action, displayAction }) => {
 	return (
 		<div id="drawer-wrapper" className="drawer-wrapper">
 			<div id="drawer" className="drawer">
-				<Room name={props.name} />
-				<Chat creature={props.creature} />
+				<Room room={room} player={player}/>
+				<Chat creature={player.creature} action={action} displayAction={displayAction} />
 			</div>
 		</div>
 	);
