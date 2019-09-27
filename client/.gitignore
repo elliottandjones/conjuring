@@ -10,6 +10,7 @@
 /src/config.js
 /.firebase
 /.firebaserc
+.firebaserc
 database.rules.json
 src/config.js
 ./src/config.js
