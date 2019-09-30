@@ -5,6 +5,7 @@ import Select from './components/Select/Select';
 import SpellList from './components/SpellList/SpellList';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
+import Drawer from './components/Drawer/Drawer';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
@@ -96,7 +97,11 @@ class App extends Component {
 			spellFilter: false,
 			speedLegend: "Speed",
 			sizeLegend: "Size",
-			typePicked: true,
+      typePicked: true,
+      connected: false,
+      room: '',
+      player: '',
+      action: {},
 			response: "",
 			post: "",
 			responseToPost: ""
@@ -111,6 +116,21 @@ class App extends Component {
     this.spellsDB.on('value', snapshot => {
       this.setState({ spells: snapshot.val() });
     });
+  }
+  onOpenChatPanel(e) {
+    e.preventDefault();
+    if (this.state.chatOpen === false) {
+      this.setState({ chatOpen: true});
+    }
+    if (this.state.spellFilter === true) {
+      this.setState({ spellFilter: false });
+    }
+    if (!this.state.connected) {
+      this.setState({
+        room: 'local',
+        player: 'you'
+      });
+    }
   }
   onFilterByOther(e) {
     e.preventDefault();
@@ -162,6 +182,16 @@ class App extends Component {
   onSizeSelect = (event) => {
     this.setState({ sizeValue: event.target.value });
   }
+  onActionTaken = (event) => {
+    event.preventDefault();
+    this.setState({ action: event.target.value });
+  }
+  displayAction = (action) => {
+    if (action) {
+      // eslint-disable-next-line
+      console.log(action);
+    }
+  }
 
   filterBySpell(critters, spell) {
     if (spell.particular_creatures) {
@@ -208,7 +238,7 @@ class App extends Component {
       creatures, spells, spellFilter, spellObject, spellSelected, searchfield,
       crOptions, speedOptions, sizeOptions,
       typeValues, crValue, speedValue, sizeValue,
-      speedLegend, sizeLegend
+      speedLegend, sizeLegend, room, player, action
     } = this.state;
     // filter by name
     let filteredCreatures = creatures.filter(creature => {
@@ -267,7 +297,7 @@ class App extends Component {
         return creature.size.toLowerCase() === sizeValue.toLowerCase();
       });
     }
-    // folter by challenge rating
+    // filter by challenge rating
     if (crValue && crValue !== 'CR' && crValue !== 'Any CR') {
       filteredCreatures = filteredCreatures.filter(creature => {
         return creature.challenge_rating === crValue;
@@ -294,15 +324,18 @@ class App extends Component {
         </div>
         <CreatureList creatures={filteredCreatures} />
         <div className="tabs mb1 mt1">
-          <button onClick={(e) => {this.onFilterByOther(e); this.onSpellSelect({});}} className={`${!spellFilter ? 'tablinks' : 'o-50 tablinks'}`}>
-            Filter by...
+          <button onClick={(e) => {this.onFilterByOther(e); this.onSpellSelect({});}} className={`tablinks ${(spellFilter || chatOpen) && 'o-50'}`}>
+            by Attribute
           </button>
-          <button onClick={(e) => {this.onFilterBySpell(e);}} className={`${spellFilter ? 'tablinks' : 'o-50 tablinks'}`}>
-            ...Spell
+          <button onClick={(e) => {this.onFilterBySpell(e);}} className={`tablinks ${!spellFilter && 'o-50'}`}>
+            by Spell
+          </button>
+          <button onClick={(e) => {this.onOpenChatPanel(e);}} className={`tablinks ${!chatOpen && 'o-50'}`}>
+            Chat Panel
           </button>
         </div>
         {
-          spellFilter === false ?
+          spellFilter === false && chatOpen === false ?
             <div className="filters-panel">
               <div className="cr-and-type">
                 <Select className="cr" value={crValue} options={crOptions} onChange={this.onCRSelect} />
@@ -316,10 +349,10 @@ class App extends Component {
                 </footer>
               </div>
             </div>
-            : <SpellList spells={spells} onSpellSelect={this.onSpellSelect} />
+            : (spellFilter === true ? 
+                <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
+                : (chatOpen === true && <Drawer room={room} player={player} displayAction={this.displayAction} action={action} />))
         }
-        {/* <button className="button-default" onClick={toggler}>Show Modal</button>
-        <Modal isShowing={value} hide={toggler} /> */}
       </div>
     );
   }

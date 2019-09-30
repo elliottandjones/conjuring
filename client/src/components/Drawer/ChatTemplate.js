@@ -6,8 +6,28 @@ export default function ChatContainer(props) {
       <MessageTemplate {...props.messageTemplate} />
       <LocationMessage {...props.locationMessage} />
       <Sidebar {...props.sidebar} />
+			<ComposeMessage {...props.ComposeMessage} />
     </React.Fragment>
   );
+}
+
+function ComposeMessage(props) {
+	return (
+		<div class="chat">
+      <div id="sidebar" class="chat__sidebar"></div>
+      <div class="chat__main">
+        <div id="messages" class="chat__messages"></div>
+
+        <div class="compose">
+          <form id="message-form">
+            <input name="message" placeholder="Message" required autocomplete="off" />
+            <button>Send</button>
+          </form>
+          <button id="send-location">Send location</button>
+        </div>
+      </div>
+    </div>
+	);
 }
 
 function Sidebar(props) {
