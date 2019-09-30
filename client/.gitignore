@@ -1,6 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 /.vscode
+.vscode
 # dependencies
+node_modules
 /node_modules
 /.pnp
 .pnp.js
@@ -9,6 +11,7 @@
 /theHaters
 /src/config.js
 /.firebase
+.firebase
 /.firebaserc
 .firebaserc
 database.rules.json

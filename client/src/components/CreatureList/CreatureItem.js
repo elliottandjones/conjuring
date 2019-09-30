@@ -47,7 +47,7 @@ export default function CreatureItem({creature}) {
         <span>{creature.challenge_rating}</span> 
         {(creature.subtype === 'devil' || creature.subtype === 'demon') && <span className="subtype"> <i> ({creature.subtype})</i></span>}
       </div>
-      <div className={`item-collapse ${isExpanded && 'is-expanded'}`} style={{ height: currentHeight }} >
+      <div className={`item-collapse ${isExpanded && 'is-expanded'}`} style={{ height: currentHeight }} aria-expanded={isExpanded}>
         <div className="item-body dib pa2 ccard hotem" ref={heightRef}>
           {
             creature.subtype

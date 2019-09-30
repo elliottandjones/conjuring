@@ -22,7 +22,7 @@ export default function SpellItem({ spell, onSpellSelect }) {
       <div className={`mt1 mb1 derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => toggleExpand(e)}>
         <span className="name">{spell.name}  {spell.is_homebrew && <i>(Homebrew)</i>}</span>
       </div>
-      <div className={`item-collapse ${isExpanded && 'is-expanded bg-opac'}`} style={{ height: currentHeight }} >
+      <div className={`item-collapse ${isExpanded && 'is-expanded bg-opac'}`} style={{ height: currentHeight }} aria-expanded={isExpanded}>
         <div className="item-body" ref={heightRef}>
           <p style={{ marginTop: '0' }}><i>{spell.level}{lvl}-level {spell.school.name} {spell.ritual && <span> (ritual)</span>}</i></p>
           <hr />
