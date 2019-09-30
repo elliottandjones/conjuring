@@ -6,6 +6,11 @@
 .pnp.js
 
 # misc things to ignore
+/server
+server
+server/
+./server
+server/package.json
 /theHaters
 /src/config.js
 /.firebase
