@@ -32,4 +32,8 @@
   width: 100%;
 	background: var(--slatep);
   border: 2px ridge var(--belite);
+
+}
+#chat-in, #chat-out {
+  text-align: left;
 }

@@ -157,27 +157,6 @@ label {text-transform: capitalize;}
 	overflow-y: scroll;
 	width: 100%;
 }
-.creature-item {
-	background: var(--slateg);
-	width: 98%;
-	text-align: left;
-	border: 2px outset var(--verdant);
-}
-.ccard {
-	background-color: var(--slateg);
-	border: 2px solid var(--crimberryfull);
-}
-.ccard p {
-	margin-left: 5px;
-	opacity: 1;
-}
-.ability-scores b {color: var(--belite);}
-.ability-scores {
-	display: grid;
-	grid-template-columns: repeat(6, 1fr);
-	grid-template-rows: 1fr 1fr;
-	gap: 5px;
-}
 /* Tabs/Filters */
 .tabs {
 	grid-row: 2 / span 1;
@@ -301,7 +280,8 @@ footer#footer {
 	color: var(--lightish);
 	display: block;
 	grid-area: foot;
-	z-index: 1;
+  z-index: 1;
+  margin-top: 1em;
 }
 footer#footer a {
 	text-decoration: none;

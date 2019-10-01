@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-
+import CreatureAction from './CreatureAction';
 import { useToggleHeight } from '../../hooks/useToggle';
 import './CreatureItem.css';
 
-export default function CreatureItem({creature}) {
+export default function CreatureItem({creature, displayAction}) {
   const heightRef = useRef(null);
   const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef]);
 
@@ -90,7 +90,7 @@ export default function CreatureItem({creature}) {
           <i className="to-right mt1 mb1"></i>
           {
             creature.actions
-              ? creature.actions.map((action, i) => <p key={i + 119}><b><i>{action.name}.</i></b> {action.desc}</p>)
+              ? creature.actions.map((action, i) => <CreatureAction key={`action_${i}`} action={action} name={creature.name} displayAction={displayAction} />)
               : <p> None, apparently. ¯\_(ツ)_/¯</p>
           }
           {

@@ -98,6 +98,7 @@ class App extends Component {
 			speedLegend: "Speed",
 			sizeLegend: "Size",
       typePicked: true,
+      chatOpen: false,
       connected: false,
       room: '',
       player: '',
@@ -116,31 +117,31 @@ class App extends Component {
     this.spellsDB.on('value', snapshot => {
       this.setState({ spells: snapshot.val() });
     });
-    this.callApi()
-      .then(res => this.setState({ response: res.express }))
-      .catch(err => console.log(err));
+    // this.callApi()
+    //   .then(res => this.setState({ response: res.express }))
+    //   .catch(err => console.log(err));
   }
-  callApi = async () => {
-    const response = await fetch('/api/hello');
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
+  // callApi = async () => {
+  //   const response = await fetch('/api/hello');
+  //   const body = await response.json();
+  //   if (response.status !== 200) throw Error(body.message);
     
-    return body;
-  };
+  //   return body;
+  // };
   
-  handleSubmit = async e => {
-    e.preventDefault();
-    const response = await fetch('/api/world', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ post: this.state.post }),
-    });
-    const body = await response.text();
+  // handleSubmit = async e => {
+  //   e.preventDefault();
+  //   const response = await fetch('/api/world', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ post: this.state.post }),
+  //   });
+  //   const body = await response.text();
     
-    this.setState({ responseToPost: body });
-  };
+  //   this.setState({ responseToPost: body });
+  // };
   
   onOpenChatPanel(e) {
     e.preventDefault();
@@ -211,10 +212,15 @@ class App extends Component {
     event.preventDefault();
     this.setState({ action: event.target.value });
   }
-  displayAction = (action) => {
+  displayAction = (event, action, creatureName) => {
+    event.preventDefault();
     if (action) {
       // eslint-disable-next-line
-      console.log(action);
+      console.log('NAME: ', creatureName);
+      // eslint-disable-next-line
+      console.log('ACTION.NAME: ', action.name);
+      // eslint-disable-next-line
+      console.log('ACTION.DESC: ', action.desc);
     }
   }
 
@@ -263,7 +269,7 @@ class App extends Component {
       creatures, spells, spellFilter, spellObject, spellSelected, searchfield,
       crOptions, speedOptions, sizeOptions,
       typeValues, crValue, speedValue, sizeValue,
-      speedLegend, sizeLegend, room, player, action
+      speedLegend, sizeLegend, room, player, action, chatOpen
     } = this.state;
     // filter by name
     let filteredCreatures = creatures.filter(creature => {
@@ -347,7 +353,7 @@ class App extends Component {
             <SearchBox searchfield={searchfield} searchChange={this.onSearchChange} />
           </div>
         </div>
-        <CreatureList creatures={filteredCreatures} />
+        <CreatureList creatures={filteredCreatures} displayAction={this.displayAction} />
         <div className="tabs mb1 mt1">
           <button onClick={(e) => {this.onFilterByOther(e); this.onSpellSelect({});}} className={`tablinks ${(spellFilter || chatOpen) && 'o-50'}`}>
             by Attribute
