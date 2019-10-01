@@ -47,8 +47,8 @@ export default function CreatureItem({creature, displayAction}) {
         <span>{creature.challenge_rating}</span> 
         {(creature.subtype === 'devil' || creature.subtype === 'demon') && <span className="subtype"> <i> ({creature.subtype})</i></span>}
       </div>
-      <div className={`item-collapse ${isExpanded && 'is-expanded'}`} style={{ height: currentHeight }} aria-expanded={isExpanded}>
-        <div className="item-body dib pa2 ccard hotem" ref={heightRef}>
+      <div className={`item-collapse ${isExpanded && 'is-expanded'}`} style={{ height: currentHeight }} aria-expanded={isExpanded} aria-hidden={!isExpanded}>
+        <div className="item-body dib pa2 ccard hotem" ref={heightRef} aria-expanded={isExpanded} aria-hidden={!isExpanded}>
           {
             creature.subtype
               ? <p className="i ma1">{creature.size} {creature.type} ({creature.subtype}), {creature.alignment}</p>
@@ -90,7 +90,9 @@ export default function CreatureItem({creature, displayAction}) {
           <i className="to-right mt1 mb1"></i>
           {
             creature.actions
-              ? creature.actions.map((action, i) => <CreatureAction key={`action_${i}`} action={action} name={creature.name} displayAction={displayAction} />)
+              ? creature.actions.map((action, i) => {
+                  return <CreatureAction key={`action_${i}`} action={action} name={creature.name} displayAction={displayAction} isExpanded={isExpanded} />;
+                })
               : <p> None, apparently. ¯\_(ツ)_/¯</p>
           }
           {

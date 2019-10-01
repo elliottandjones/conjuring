@@ -143,31 +143,37 @@ class App extends Component {
   //   this.setState({ responseToPost: body });
   // };
   
-  onOpenChatPanel(e) {
+  onOpenChatPanel = (e) => {
     e.preventDefault();
-    if (this.state.chatOpen === false) {
+    if (!this.state.chatOpen) {
       this.setState({ chatOpen: true});
     }
-    if (this.state.spellFilter === true) {
+    if (this.state.spellFilter) {
       this.setState({ spellFilter: false });
     }
     if (!this.state.connected) {
       this.setState({
-        room: 'local',
+        room: 'local tavern',
         player: 'you'
       });
     }
   }
-  onFilterByOther(e) {
+  onFilterByAttribute = (e) => {
     e.preventDefault();
-    if (this.state.spellFilter === true) {
+    if (this.state.spellFilter) {
       this.setState({ spellFilter: false });
     }
+    if (this.state.chatOpen) {
+      this.setState({ chatOpen: false });
+    }
   }
-  onFilterBySpell(e) {
+  onFilterBySpell = (e) => {
     e.preventDefault();
-    if (this.state.spellFilter === false) {
+    if (!this.state.spellFilter) {
       this.setState({ spellFilter: true });
+    }
+    if (this.state.chatOpen) {
+      this.setState({ chatOpen: false });
     }
     if (Object.values(this.state.typeValues).some(i => i === true)) {
       this.setState({ typeValues: initialTypeValues });
@@ -224,7 +230,7 @@ class App extends Component {
     }
   }
 
-  filterBySpell(critters, spell) {
+  filterBySpell = (critters, spell) => {
     if (spell.particular_creatures) {
       critters = critters.filter(creature => {
         return spell.particular_creatures.indexOf(creature.name) > -1;
@@ -255,7 +261,7 @@ class App extends Component {
     return critters;
   }
 
-  formatCR(str) {
+  formatCR = (str) => {
     if (str && !str.includes('/')) {
       return parseInt(str);
     }
@@ -264,13 +270,13 @@ class App extends Component {
   }
 
   render() {
-    // const [value, toggler] = useToggle(false);
     const {
       creatures, spells, spellFilter, spellObject, spellSelected, searchfield,
       crOptions, speedOptions, sizeOptions,
       typeValues, crValue, speedValue, sizeValue,
       speedLegend, sizeLegend, room, player, action, chatOpen
     } = this.state;
+
     // filter by name
     let filteredCreatures = creatures.filter(creature => {
       return creature.name.toLowerCase().includes(searchfield.toLowerCase());
@@ -355,13 +361,13 @@ class App extends Component {
         </div>
         <CreatureList creatures={filteredCreatures} displayAction={this.displayAction} />
         <div className="tabs mb1 mt1">
-          <button onClick={(e) => {this.onFilterByOther(e); this.onSpellSelect({});}} className={`tablinks ${(spellFilter || chatOpen) && 'o-50'}`}>
+          <button onClick={(e) => {this.onFilterByAttribute(e); this.onSpellSelect({});}} className={`tablinks ${(spellFilter || chatOpen) && 'o-50'}`}>
             by Attribute
           </button>
-          <button onClick={(e) => {this.onFilterBySpell(e);}} className={`tablinks ${!spellFilter && 'o-50'}`}>
+          <button onClick={(e) => {this.onFilterBySpell(e);}} className={`tablinks ${(!spellFilter || chatOpen) && 'o-50'}`}>
             by Spell
           </button>
-          <button onClick={(e) => {this.onOpenChatPanel(e);}} className={`tablinks ${!chatOpen && 'o-50'}`}>
+          <button onClick={(e) => {this.onOpenChatPanel(e);}} className={`tablinks ${(!chatOpen || spellFilter) && 'o-50'}`}>
             Chat Panel
           </button>
         </div>
