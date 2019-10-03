@@ -115,10 +115,11 @@ class App extends Component {
     this.spellsDB.on('value', snapshot => {
       this.setState({ spells: snapshot.val() });
     });
+  }
+  //Below should be added to componentDidMount
     // this.callApi()
     //   .then(res => this.setState({ response: res.express }))
     //   .catch(err => console.log(err));
-  }
   // callApi = async () => {
   //   const response = await fetch('/api/hello');
   //   const body = await response.json();
@@ -167,6 +168,9 @@ class App extends Component {
   }
   onFilterBySpell = (e) => {
     e.preventDefault();
+    console.log("crValue: ", this.state.crValue);
+		console.log("sizeValue: ", this.state.sizeValue);
+		console.log("speedValue: ", this.state.speedValue);
     if (!this.state.spellFilter) {
       this.setState({ spellFilter: true });
     }
@@ -185,9 +189,6 @@ class App extends Component {
     if (this.state.speedValue) {
       this.setState({ speedValue: '' });
     }
-    console.log("crValue: ", this.state.crValue);
-    console.log("sizeValue: ", this.state.sizeValue);
-    console.log("speedValue: ", this.state.speedValue);
   }
   onTypeChange = (event) => {
     this.setState({
@@ -359,16 +360,23 @@ class App extends Component {
             <SearchBox searchfield={searchfield} searchChange={this.onSearchChange} />
           </div>
         </div>
-        <CreatureList creatures={filteredCreatures} displayAction={this.displayAction} />
         <div className="tabs mb1 mt1">
-          <button onClick={(e) => {this.onFilterByAttribute(e); this.onSpellSelect({});}} className={`tablinks ${(spellFilter || chatOpen) && 'o-50'}`}>
-            by Attribute
+          <button
+            className={`tab ${(spellFilter || chatOpen) && 'o-50'}`}
+            onClick={(e) => {this.onFilterByAttribute(e); this.onSpellSelect({});}} 
+            tabIndex="0"><span>By Attribute</span>
           </button>
-          <button onClick={(e) => {this.onFilterBySpell(e);}} className={`tablinks ${(!spellFilter || chatOpen) && 'o-50'}`}>
-            by Spell
+          <button 
+            className={`tab ${(!spellFilter || chatOpen) && 'o-50'}`}
+            onClick={(e) => {this.onFilterBySpell(e);}}
+            tabIndex="0"
+          ><span>By Spell</span>
           </button>
-          <button onClick={(e) => {this.onOpenChatPanel(e);}} className={`tablinks ${(!chatOpen || spellFilter) && 'o-50'}`}>
-            Chat Panel
+          <button 
+            className={`tab ${(!chatOpen || spellFilter) && 'o-50'}`}
+            onClick={(e) => {this.onOpenChatPanel(e);}}
+            tabIndex="0"
+          ><span>Chat Panel</span>
           </button>
         </div>
         {
@@ -389,6 +397,7 @@ class App extends Component {
             : (spellFilter ? <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
               : (chatOpen && <ChatPanel room={room} player={player} displayAction={this.displayAction} action={action} />))
         }
+        <CreatureList creatures={filteredCreatures} displayAction={this.displayAction} />
       </div>
     );
   }

@@ -12,6 +12,7 @@ const SearchBox = ({ searchfield, searchChange }) => {
         placeholder="search by name"
         onChange={searchChange}
         autoComplete="off"
+        autoFocus
       />
       <label htmlFor="search" className="sr-only">
         search for monsters by name
