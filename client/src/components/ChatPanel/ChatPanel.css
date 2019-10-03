@@ -1,16 +1,15 @@
 /* panel */
-#drawer-wrapper {
+#panel-wrapper {
   display: grid;
-  margin-right: 5px;
   grid-row: 3 / -1;
 	grid-column: 1 / span 5;
-	margin: 5px;
+	margin: 0 9px;
 	width: 100%;
 	overflow-y: auto;
   overflow-x: hidden;
 }
-/* Drawer component */
-#drawer {
+/* panel component */
+#panel {
   grid-template-columns: 1fr 3fr;
   display: grid;
   width: 100%;

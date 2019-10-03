@@ -50,11 +50,11 @@ const getTotalDamage = (array) => {
 //   return output;
 // };
 
-    // ? SORT by name
+    // * SORT by name
     // let filteredCreatures = creatures.sort((a,b) => (a.name > b.name) ? 1 : -1);
-    // ? SORT by Challenge Rating (CR)
+    // todo SORT by Challenge Rating (CR)
     // let filteredCreatures = creatures.sort((a,b) => (a.challenge_rating > b.challenge_rating) ? 1 : -1);
-    // ? SORT by movement speed (number of ft, not type of speed)
+    // todo: SORT by movement speed (number of ft, not type of speed)
     // ! will probably need to make a regex for this
     // let filteredCreatures = creatures.sort((a,b) => (a.name > b.name) ? 1 : -1);
 export {

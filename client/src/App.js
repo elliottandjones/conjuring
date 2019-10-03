@@ -5,14 +5,12 @@ import Select from './components/Select/Select';
 import SpellList from './components/SpellList/SpellList';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
-import Drawer from './components/Drawer/Drawer';
+import ChatPanel from './components/ChatPanel/ChatPanel';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import { DB_CONFIG } from './config';
 import './App.css';
-// import { useToggle } from './hooks/useToggle';
-// import Modal from './components/RealTime/Modal';
 
 const initialTypeValues = {
   aberration: false,
@@ -187,8 +185,10 @@ class App extends Component {
     if (this.state.speedValue) {
       this.setState({ speedValue: '' });
     }
+    console.log("crValue: ", this.state.crValue);
+    console.log("sizeValue: ", this.state.sizeValue);
+    console.log("speedValue: ", this.state.speedValue);
   }
-
   onTypeChange = (event) => {
     this.setState({
       typeValues: {
@@ -372,8 +372,8 @@ class App extends Component {
           </button>
         </div>
         {
-          spellFilter === false && chatOpen === false ?
-            <div className="filters-panel">
+          !spellFilter && !chatOpen ?
+            <div className="filters-wrapper">
               <div className="cr-and-type">
                 <Select className="cr" value={crValue} options={crOptions} onChange={this.onCRSelect} />
                 <Checkboxes className="type" options={typeValues} onChange={this.onTypeChange} />
@@ -386,9 +386,8 @@ class App extends Component {
                 </footer>
               </div>
             </div>
-            : (spellFilter === true ? 
-                <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
-                : (chatOpen === true && <Drawer room={room} player={player} displayAction={this.displayAction} action={action} />))
+            : (spellFilter ? <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
+              : (chatOpen && <ChatPanel room={room} player={player} displayAction={this.displayAction} action={action} />))
         }
       </div>
     );

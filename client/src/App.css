@@ -171,6 +171,7 @@ label {text-transform: capitalize;}
 }
 .tablinks {
   grid-column: span 1;
+  max-height: 50px;
 	color: var(--lightish);
 	text-shadow: 0 0 5px var(--roarangelite);
 	background: var(--slatep);
@@ -185,8 +186,8 @@ label {text-transform: capitalize;}
   vertical-align: middle;
 }
 .tablinks:hover {opacity: 1;}
-/* filters-panel */
-.filters-panel {
+/* filters-wrapper */
+.filters-wrapper {
 	overflow-y: scroll;
 	grid-row: 3 / -1;
 	grid-column: 1 / span 5;
@@ -197,7 +198,7 @@ label {text-transform: capitalize;}
 }
 /* Some necessary media queries for mobile devices */
 @media screen and (max-width: 700px) {
-	.filters-panel {
+	.filters-wrapper {
 		display: grid;
 		grid-template-areas:
 			"cr-and-type"
@@ -211,7 +212,7 @@ label {text-transform: capitalize;}
 .size {grid-area: size;}
 .type {grid-area: type;}
 
-.filters-panel fieldset {
+.filters-wrapper fieldset {
 	background: var(--slatep);
 	border: var(--belite) 2px ridge;
 	padding: 8px 12px;
@@ -223,18 +224,18 @@ legend {
 	padding-inline-start: 3px !important;
 	padding-inline-end: 3px !important;
 }
-.filters-panel label {
+.filters-wrapper label {
 	color: var(--lightish);
 	text-shadow: none;
 	cursor: pointer;
 	z-index: 10;
 }
-.filters-panel label:hover,
-.filters-panel select:hover,
-.filters-panel input[type="checkbox"]:checked,
-.filters-panel input[type="radio"]:checked + label,
-.filters-panel input[type="checkbox"]:checked + label,
-.filters-panel label:active {
+.filters-wrapper label:hover,
+.filters-wrapper select:hover,
+.filters-wrapper input[type="checkbox"]:checked,
+.filters-wrapper input[type="radio"]:checked + label,
+.filters-wrapper input[type="checkbox"]:checked + label,
+.filters-wrapper label:active {
 	background-color: var(--slateb);
 	text-shadow: 0 0 5px var(--roarangelite);
 	opacity: 1;

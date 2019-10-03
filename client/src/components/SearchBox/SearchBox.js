@@ -2,9 +2,9 @@ import React from "react";
 import "./SearchBox.css";
 
 const SearchBox = ({ searchfield, searchChange }) => {
+// const SearchBox = ({ searchfield, searchChange }) => {
   return (
     <div className="search-box">
-      
       <input
         id="search"
         className="inp-hvr mt2 mr2 derk"
