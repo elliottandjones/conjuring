@@ -221,7 +221,9 @@ class App extends Component {
   }
   displayAction = (event, action, creatureName) => {
     event.preventDefault();
+    this.setState({chatOpen: true});
     if (action) {
+      
       // eslint-disable-next-line
       console.log('NAME: ', creatureName);
       // eslint-disable-next-line

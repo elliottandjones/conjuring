@@ -94,7 +94,7 @@ button.action-btn:hover {
   transform: scaleZ(1.5);
 }
 button.action-btn:focus {
-  border-left: dotted 2px var(--belite);
+  border-left: solid 2px var(--belite);
   background-color: var(--slateglite);
 }
 button.action-btn:active {
