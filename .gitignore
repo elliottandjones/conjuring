@@ -8,16 +8,15 @@ node_modules
 .pnp.js
 
 # misc things to ignore
-theHaters
-/thehaters
 /theHaters
+/src/config.js
 /.firebase
 .firebase
 /.firebaserc
+.firebaserc
 database.rules.json
 src/config.js
 ./src/config.js
-/src/config.js
 # testing
 /coverage
 
