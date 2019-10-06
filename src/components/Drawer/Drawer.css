@@ -1,0 +1,12 @@
+/* Drawer */
+#drawer {
+	background: var(--slatep);
+	border: 2px ridge var(--belite);
+  margin-right: 5px;
+  grid-row: 3 / -1;
+	grid-column: 1 / span 4;
+	margin: 5px;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
