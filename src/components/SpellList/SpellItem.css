@@ -4,3 +4,27 @@
 	border: 2px outset var(--belite);
 	margin-right: 5px;
 }
+.spell-item:hover {border-color: var(--roarangelite);}
+.spell-ex {
+	border-color: var(--roarangelite);
+	border-width: 3px;
+}
+.filter-toggle {
+	color: var(--lightish);
+	height: 30px;
+	width: 98%;
+	margin: 0 1%;
+	justify-content: center;
+	align-content: center;
+	align-self: center;
+	text-align: center;
+	cursor: pointer;
+}
+.select {
+	border: 2px ridge var(--ba);
+	background-color: var(--slateg);
+}
+.deselect {
+	border: 2px ridge var(--gold);
+	background-color: rgb(20, 1, 3);
+}

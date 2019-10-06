@@ -5,14 +5,12 @@ import Select from './components/Select/Select';
 import SpellList from './components/SpellList/SpellList';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
-import Drawer from './components/Drawer/Drawer';
+import ChatPanel from './components/ChatPanel/ChatPanel';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import { DB_CONFIG } from './config';
 import './App.css';
-// import { useToggle } from './hooks/useToggle';
-// import Modal from './components/RealTime/Modal';
 
 const initialTypeValues = {
   aberration: false,
@@ -37,69 +35,76 @@ class App extends Component {
     this.creaturesDB = this.app.database().ref().child('creatures');
     this.spellsDB = this.app.database().ref().child('spells');
     this.state = {
-      creatures: [],
-      spells: [],
-      searchfield: '',
-      crOptions: [
-        { name: 'Any CR' },
-        { name: '0' },
-        { name: '1/8' },
-        { name: '1/4' },
-        { name: '1/2' },
-        { name: '1' },
-        { name: '2' },
-        { name: '3' },
-        { name: '4' },
-        { name: '5' },
-        { name: '6' },
-        { name: '7' },
-        { name: '8' },
-        { name: '9' },
-        { name: '10' },
-        { name: '11' },
-        { name: '12' },
-        { name: '13' },
-        { name: '14' },
-        { name: '15' },
-        { name: '16' },
-        { name: '17' },
-        { name: '18' },
-        { name: '19' },
-        { name: '20' },
-        { name: '21' },
-        { name: '22' },
-        { name: '23' },
-        { name: '24' },
-        { name: '30' }
-      ],
-      speedOptions: [
-        { value: 'burrow', name: 'speed' },
-        { value: 'climb', name: 'speed' },
-        { value: 'swim', name: 'speed' },
-        { value: 'fly', name: 'speed' },
-        { value: 'no swim/fly', name: 'speed' },
-        { value: 'no fly', name: 'speed' }
-      ],
-      sizeOptions: [
-        { value: 'Tiny', name: 'size' },
-        { value: 'Small', name: 'size' },
-        { value: 'Medium', name: 'size' },
-        { value: 'Large', name: 'size' },
-        { value: 'Huge', name: 'size' },
-        { value: 'Gargantuan', name: 'size' }
-      ],
-      spellSelected: false,
-      typeValues: initialTypeValues,
-      crValue: '',
-      speedValue: '',
-      sizeValue: '',
-      spellObject: {},
-      spellFilter: false,
-      chatOpen: false,
-      speedLegend: 'Speed',
-      sizeLegend: 'Size',
+			creatures: [],
+			spells: [],
+			searchfield: "",
+			crOptions: [
+				{ name: "Any CR" },
+				{ name: "0" },
+				{ name: "1/8" },
+				{ name: "1/4" },
+				{ name: "1/2" },
+				{ name: "1" },
+				{ name: "2" },
+				{ name: "3" },
+				{ name: "4" },
+				{ name: "5" },
+				{ name: "6" },
+				{ name: "7" },
+				{ name: "8" },
+				{ name: "9" },
+				{ name: "10" },
+				{ name: "11" },
+				{ name: "12" },
+				{ name: "13" },
+				{ name: "14" },
+				{ name: "15" },
+				{ name: "16" },
+				{ name: "17" },
+				{ name: "18" },
+				{ name: "19" },
+				{ name: "20" },
+				{ name: "21" },
+				{ name: "22" },
+				{ name: "23" },
+				{ name: "24" },
+				{ name: "30" }
+			],
+			speedOptions: [
+				{ value: "burrow", name: "speed" },
+				{ value: "climb", name: "speed" },
+				{ value: "swim", name: "speed" },
+				{ value: "fly", name: "speed" },
+				{ value: "no swim/fly", name: "speed" },
+				{ value: "no fly", name: "speed" }
+			],
+			sizeOptions: [
+				{ value: "Tiny", name: "size" },
+				{ value: "Small", name: "size" },
+				{ value: "Medium", name: "size" },
+				{ value: "Large", name: "size" },
+				{ value: "Huge", name: "size" },
+				{ value: "Gargantuan", name: "size" }
+			],
+			spellSelected: false,
+			typeValues: initialTypeValues,
+			crValue: "",
+			speedValue: "",
+			sizeValue: "",
+			spellObject: {},
+			spellFilter: false,
+			speedLegend: "Speed",
+			sizeLegend: "Size",
       typePicked: true,
-    };
+      chatOpen: false,
+      connected: false,
+      room: '',
+      player: '',
+      action: {},
+			response: "",
+			post: "",
+			responseToPost: ""
+		};
     this.onTypeChange = this.onTypeChange.bind(this);
   }
 
@@ -111,30 +116,65 @@ class App extends Component {
       this.setState({ spells: snapshot.val() });
     });
   }
-  onOpenChatPanel(e) {
+  //Below should be added to componentDidMount
+    // this.callApi()
+    //   .then(res => this.setState({ response: res.express }))
+    //   .catch(err => console.log(err));
+  // callApi = async () => {
+  //   const response = await fetch('/api/hello');
+  //   const body = await response.json();
+  //   if (response.status !== 200) throw Error(body.message);
+    
+  //   return body;
+  // };
+  
+  // handleSubmit = async e => {
+  //   e.preventDefault();
+  //   const response = await fetch('/api/world', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ post: this.state.post }),
+  //   });
+  //   const body = await response.text();
+    
+  //   this.setState({ responseToPost: body });
+  // };
+  
+  onOpenChatPanel = (e) => {
     e.preventDefault();
-    if (this.state.chatOpen === false) {
+    if (!this.state.chatOpen) {
       this.setState({ chatOpen: true});
     }
-    if (this.state.spellFilter === true) {
+    if (this.state.spellFilter) {
       this.setState({ spellFilter: false });
     }
+    if (!this.state.connected) {
+      this.setState({
+        room: 'local tavern',
+        player: 'you'
+      });
+    }
   }
-  onFilterByOther(e) {
+  onFilterByAttribute = (e) => {
     e.preventDefault();
-    if (this.state.spellFilter === true) {
+    if (this.state.spellFilter) {
       this.setState({ spellFilter: false });
     }
-    if (this.state.chatOpen === true) {
-      this.setState({ chatOpen: false});
+    if (this.state.chatOpen) {
+      this.setState({ chatOpen: false });
     }
   }
-  onFilterBySpell(e) {
+  onFilterBySpell = (e) => {
     e.preventDefault();
-    if (this.state.spellFilter === false) {
+    console.log("crValue: ", this.state.crValue);
+		console.log("sizeValue: ", this.state.sizeValue);
+		console.log("speedValue: ", this.state.speedValue);
+    if (!this.state.spellFilter) {
       this.setState({ spellFilter: true });
     }
-    if (this.state.chatOpen === true) {
+    if (this.state.chatOpen) {
       this.setState({ chatOpen: false });
     }
     if (Object.values(this.state.typeValues).some(i => i === true)) {
@@ -150,7 +190,6 @@ class App extends Component {
       this.setState({ speedValue: '' });
     }
   }
-
   onTypeChange = (event) => {
     this.setState({
       typeValues: {
@@ -176,12 +215,25 @@ class App extends Component {
   onSizeSelect = (event) => {
     this.setState({ sizeValue: event.target.value });
   }
-  onActionClick = (event) => {
+  onActionTaken = (event) => {
     event.preventDefault();
     this.setState({ action: event.target.value });
   }
+  displayAction = (event, action, creatureName) => {
+    event.preventDefault();
+    this.setState({chatOpen: true});
+    if (action) {
+      
+      // eslint-disable-next-line
+      console.log('NAME: ', creatureName);
+      // eslint-disable-next-line
+      console.log('ACTION.NAME: ', action.name);
+      // eslint-disable-next-line
+      console.log('ACTION.DESC: ', action.desc);
+    }
+  }
 
-  filterBySpell(critters, spell) {
+  filterBySpell = (critters, spell) => {
     if (spell.particular_creatures) {
       critters = critters.filter(creature => {
         return spell.particular_creatures.indexOf(creature.name) > -1;
@@ -212,7 +264,7 @@ class App extends Component {
     return critters;
   }
 
-  formatCR(str) {
+  formatCR = (str) => {
     if (str && !str.includes('/')) {
       return parseInt(str);
     }
@@ -221,13 +273,13 @@ class App extends Component {
   }
 
   render() {
-    // const [value, toggler] = useToggle(false);
     const {
-      creatures, spells, chatOpen, spellFilter, spellObject, spellSelected, searchfield,
+      creatures, spells, spellFilter, spellObject, spellSelected, searchfield,
       crOptions, speedOptions, sizeOptions,
       typeValues, crValue, speedValue, sizeValue,
-      speedLegend, sizeLegend
+      speedLegend, sizeLegend, room, player, action, chatOpen
     } = this.state;
+
     // filter by name
     let filteredCreatures = creatures.filter(creature => {
       return creature.name.toLowerCase().includes(searchfield.toLowerCase());
@@ -285,7 +337,7 @@ class App extends Component {
         return creature.size.toLowerCase() === sizeValue.toLowerCase();
       });
     }
-    // folter by challenge rating
+    // filter by challenge rating
     if (crValue && crValue !== 'CR' && crValue !== 'Any CR') {
       filteredCreatures = filteredCreatures.filter(creature => {
         return creature.challenge_rating === crValue;
@@ -310,21 +362,28 @@ class App extends Component {
             <SearchBox searchfield={searchfield} searchChange={this.onSearchChange} />
           </div>
         </div>
-        <CreatureList creatures={filteredCreatures} />
         <div className="tabs mb1 mt1">
-          <button onClick={(e) => {this.onFilterByOther(e); this.onSpellSelect({});}} className={`tablinks ${(spellFilter || chatOpen) && 'o-50'}`}>
-            by Attribute
+          <button
+            className={`tab ${(spellFilter || chatOpen) && 'o-50'}`}
+            onClick={(e) => {this.onFilterByAttribute(e); this.onSpellSelect({});}} 
+            tabIndex="0"><span>By Attribute</span>
           </button>
-          <button onClick={(e) => {this.onFilterBySpell(e);}} className={`tablinks ${(chatOpen || !spellFilter) && 'o-50'}`}>
-            by Spell
+          <button 
+            className={`tab ${(!spellFilter || chatOpen) && 'o-50'}`}
+            onClick={(e) => {this.onFilterBySpell(e);}}
+            tabIndex="0"
+          ><span>By Spell</span>
           </button>
-          <button onClick={(e) => {this.onOpenChatPanel(e);}} className={`tablinks ${(spellFilter || !chatOpen) && 'o-50'}`}>
-            Chat Panel
+          <button 
+            className={`tab ${(!chatOpen || spellFilter) && 'o-50'}`}
+            onClick={(e) => {this.onOpenChatPanel(e);}}
+            tabIndex="0"
+          ><span>Chat Panel</span>
           </button>
         </div>
         {
-          spellFilter === false && chatOpen === false ?
-            <div className="filters-panel">
+          !spellFilter && !chatOpen ?
+            <div className="filters-wrapper">
               <div className="cr-and-type">
                 <Select className="cr" value={crValue} options={crOptions} onChange={this.onCRSelect} />
                 <Checkboxes className="type" options={typeValues} onChange={this.onTypeChange} />
@@ -337,12 +396,10 @@ class App extends Component {
                 </footer>
               </div>
             </div>
-            : (spellFilter === true ? 
-                <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
-                : (chatOpen === true && <Drawer />))
+            : (spellFilter ? <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
+              : (chatOpen && <ChatPanel room={room} player={player} displayAction={this.displayAction} action={action} />))
         }
-        {/* <button className="button-default" onClick={toggler}>Show Modal</button>
-        <Modal isShowing={value} hide={toggler} /> */}
+        <CreatureList creatures={filteredCreatures} displayAction={this.displayAction} />
       </div>
     );
   }

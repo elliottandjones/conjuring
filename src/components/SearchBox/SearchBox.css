@@ -18,7 +18,6 @@
   box-shadow: 0 0 15px var(--dorchid);
   -webkit-box-shadow: 0 0 15px var(--dorchid);
   -moz-box-shadow: 0 0 15px var(--dorchid);
-
 }
 #search:focus {
   border-color: var(--crimberrybold);
@@ -28,5 +27,5 @@
   box-shadow: 0 0 10px var(--dorchid) inset;
   -webkit-box-shadow: 0 0 10px var(--dorchid) inset;
   -moz-box-shadow: 0 0 10px var(--dorchid) inset;
-  cursor:auto;
+  cursor: auto;
 }

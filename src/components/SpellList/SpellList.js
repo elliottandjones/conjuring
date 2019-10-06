@@ -1,5 +1,4 @@
 import React from "react";
-// import SpellListItem from "./SpellListItem";
 import SpellItem from "./SpellItem";
 
 const SpellList = props => {

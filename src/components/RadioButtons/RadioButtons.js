@@ -1,7 +1,7 @@
 import React from "react";
 import RadioButtonItem from "./RadioButtonItem";
 
-const RadioButtons = ({ onChange, options, text, className }) => {
+const RadioButtons = ({ onChange, options, text, className }) => {  
   return (
     <div className={className}>
       <fieldset>

@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-
+import CreatureAction from './CreatureAction';
 import { useToggleHeight } from '../../hooks/useToggle';
-import './CreatureListItem.css';
+import './CreatureItem.css';
 
-export default function CreatureItem({creature}) {
+export default function CreatureItem({creature, displayAction}) {
   const heightRef = useRef(null);
   const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef]);
 
@@ -30,10 +30,6 @@ export default function CreatureItem({creature}) {
     return skills;
   }
 
-  // const isToggled = () => {
-  //   document.query('')
-  // };
-
   const calculateModifier = (score) => {
     let mod = score - 10;
     if (mod % 2 !== 0)
@@ -45,18 +41,14 @@ export default function CreatureItem({creature}) {
   const currentHeight = isExpanded ? height : 0;
 
   return (
-    <div className={`ma1 pa1 creature-item ${isExpanded ? 'ridge creature-ex' : 'outset'}`}>
+    <div className={`ma1 pa1 creature-item ${isExpanded ? 'inset creature-ex' : 'outset'}`}>
       <div className={`derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => toggleExpand(e)}>
         <span className="name">{creature.name}</span> <span style={isExpanded ? { display: 'none'} :{}}> - </span>
         <span>{creature.challenge_rating}</span> 
         {(creature.subtype === 'devil' || creature.subtype === 'demon') && <span className="subtype"> <i> ({creature.subtype})</i></span>}
       </div>
-      <div 
-        className={`item-collapse ${isExpanded && 'is-expanded'}`} 
-        style={{ height: currentHeight }} 
-        aria-expanded={isExpanded ? true : false} 
-      >
-        <div className="item-body dib pa2 ccard hotem" ref={heightRef}>
+      <div className={`item-collapse ${isExpanded && 'is-expanded'}`} style={{ height: currentHeight }} aria-expanded={isExpanded} aria-hidden={!isExpanded}>
+        <div className="item-body dib pa2 ccard hotem" ref={heightRef} aria-expanded={isExpanded} aria-hidden={!isExpanded}>
           {
             creature.subtype
               ? <p className="i ma1">{creature.size} {creature.type} ({creature.subtype}), {creature.alignment}</p>
@@ -98,7 +90,9 @@ export default function CreatureItem({creature}) {
           <i className="to-right mt1 mb1"></i>
           {
             creature.actions
-              ? creature.actions.map((action, i) => <p key={i + 119}><b><i>{action.name}.</i></b> {action.desc}</p>)
+              ? creature.actions.map((action, i) => {
+                  return <CreatureAction key={`action_${i}`} action={action} name={creature.name} displayAction={displayAction} isExpanded={isExpanded} />;
+                })
               : <p> None, apparently. ¯\_(ツ)_/¯</p>
           }
           {
