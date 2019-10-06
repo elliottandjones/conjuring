@@ -8,6 +8,7 @@
 .spell-ex {
 	border-color: var(--roarangelite);
 	border-width: 3px;
+<<<<<<< HEAD
 }
 .filter-toggle {
 	color: var(--lightish);
@@ -27,4 +28,6 @@
 .deselect {
 	border: 2px ridge var(--gold);
 	background-color: rgb(20, 1, 3);
+=======
+>>>>>>> da2b9d4247e34f1f1de65a292bed7c8246138947
 }
