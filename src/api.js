@@ -1,0 +1,7 @@
+function subscribeToTimer() {
+  
+}
+
+export { 
+  subscribeToTimer
+};
