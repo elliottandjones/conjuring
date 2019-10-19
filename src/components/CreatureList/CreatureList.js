@@ -6,10 +6,9 @@ const CreatureList = ({creatures, displayAction}) => {
     <div className="creature-list">
       {
         Object.keys(creatures).map((obj, i) => {
-          return (
-            <CreatureItem key={creatures[i].index} creature={creatures[i]} displayAction={displayAction} />
-          );
-        })}
+          return <CreatureItem key={creatures[i].index} creature={creatures[i]} displayAction={displayAction} />;
+        })
+      }
     </div>
   );
 

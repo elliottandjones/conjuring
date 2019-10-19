@@ -366,7 +366,8 @@ class App extends Component {
           <button
             className={`tab ${(spellFilter || chatOpen) && 'o-50'}`}
             onClick={(e) => {this.onFilterByAttribute(e); this.onSpellSelect({});}} 
-            tabIndex="0"><span>By Attribute</span>
+            tabIndex="0"
+          ><span>By Attribute</span>
           </button>
           <button 
             className={`tab ${(!spellFilter || chatOpen) && 'o-50'}`}
@@ -375,7 +376,7 @@ class App extends Component {
           ><span>By Spell</span>
           </button>
           <button 
-            className={`tab ${(!chatOpen || spellFilter) && 'o-50'}`}
+            className={`tab ${(spellFilter || !chatOpen) && 'o-50'}`}
             onClick={(e) => {this.onOpenChatPanel(e);}}
             tabIndex="0"
           ><span>Chat Panel</span>
