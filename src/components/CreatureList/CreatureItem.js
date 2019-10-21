@@ -78,34 +78,29 @@ export default function CreatureItem({creature, displayAction}) {
           {creature.languages && <p><b>Languages</b> {creature.languages}</p>}
           <p><b>Challenge</b> {creature.challenge_rating}</p>
           {
-            creature.special_abilities
-              && (
-                <React.Fragment>
-                  <i className="to-right mt1 mb1"></i>
-                  {creature.special_abilities.map((item, i) => (<p key={i + 8989}><b><i>{item.name}.</i></b> {item.desc}</p>))}
-                </React.Fragment>
-              )
+            creature.special_abilities &&
+              <React.Fragment>
+                <i className="to-right mt1 mb1"></i>
+                {creature.special_abilities.map((item, i) => (<p key={i + 8989}><b><i>{item.name}.</i></b> {item.desc}</p>))}
+              </React.Fragment>
           }
           <p className="pactions">Actions</p>
           <i className="to-right mt1 mb1"></i>
           {
-            creature.actions
-              ? creature.actions.map((action, i) => {
-                  return <CreatureAction key={`action_${i}`} action={action} name={creature.name} displayAction={displayAction} isExpanded={isExpanded} />;
-                })
-              : <p> None, apparently. ¯\_(ツ)_/¯</p>
+            creature.actions ? 
+              creature.actions.map((action, i) => {
+                return <CreatureAction key={`action_${i}`} action={action} name={creature.name} displayAction={displayAction} isExpanded={isExpanded} />;
+              }) : <p> None, apparently. ¯\_(ツ)_/¯</p>
           }
           {
-            creature.legendary_actions
-              && (
-                <React.Fragment>
-                  <p className="pactions" style={{textAlign: "center"}}>Legendary Actions</p>
-                  <div className="from-center"><i>.</i></div>
-                  {creature.legendary_actions.map((action, i) => {
-                    return (<p key={i + 6616161}><b><i>{action.name}.</i></b> {action.desc}</p>);
-                  })}
-                </React.Fragment>
-              )
+            creature.legendary_actions &&
+              <React.Fragment>
+                <p className="pactions" style={{textAlign: "center"}}>Legendary Actions</p>
+                <div className="from-center"><i>.</i></div>
+                {creature.legendary_actions.map((action, i) => {
+                  return <CreatureAction key={`legendary_${i}`} action={action} name={creature.name} displayAction={displayAction} isExpanded={isExpanded} />;
+                })}
+              </React.Fragment>
           }
         </div>
       </div>

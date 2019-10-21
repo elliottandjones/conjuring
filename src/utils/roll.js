@@ -1,8 +1,3 @@
-/**
- * @param {number} dice 
- * @param {number} sides
- * @param {number} modifier
- */
 const rollDamage = (str, damageBonus) => {
 	const results = [];
 	const dd = str.split("d");
@@ -22,7 +17,7 @@ const rollDamage = (str, damageBonus) => {
 const rollAttack = (bonus) => {
 	const d20 = Math.floor(Math.random() * 20 + 1);
 	// eslint-disable-next-line
-	console.log(`${d20} ${bonus >= 0 && '+'}${bonus}`);
+	console.log(`${d20} ${bonus >= 0 && '+'} ${bonus}`);
 	return d20 + bonus;
 };
 
