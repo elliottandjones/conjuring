@@ -7,6 +7,7 @@
 
 # misc things to ignore
 functions/node_modules
+/functions/node_modules
 thehaters
 /thehaters
 /theHaters
