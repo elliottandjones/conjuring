@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useToggle, useToggleHeight } from '../../hooks/useToggle';
 import './SpellItem.css';
 
-export default function SpellItem({ spell, onSpellSelect }) {
+const SpellItem = ({ spell, onSpellSelect }) => {
   const heightRef = useRef(null);
   const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef]);
   const [isApplied, toggleApply] = useToggle(false);
@@ -52,4 +52,7 @@ export default function SpellItem({ spell, onSpellSelect }) {
       </div>
     </div>
   );
-}
+};
+
+export default SpellItem;
+
