@@ -81,7 +81,7 @@ export default function CreatureItem({creature, displayAction}) {
             creature.special_abilities &&
               <React.Fragment>
                 <i className="to-right mt1 mb1"></i>
-                {creature.special_abilities.map((item, i) => (<p key={i + 8989}><b><i>{item.name}.</i></b> {item.desc}</p>))}
+                {creature.special_abilities.map((item, i) => (<p key={`special_${i}`}><b><i>{item.name}.</i></b> {item.desc}</p>))}
               </React.Fragment>
           }
           <p className="pactions">Actions</p>

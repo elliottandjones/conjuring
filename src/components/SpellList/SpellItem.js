@@ -21,7 +21,7 @@ const SpellItem = ({ spell, onSpellSelect }) => {
   return (
     <div className={`pa1 ma1 spell-item ${isExpanded ? 'inset spell-ex' : 'outset'}`}>
       <div className={`mt1 mb1 derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => toggleExpand(e)}>
-        <span className="name">{spell.name}  {spell.is_homebrew && <i>(Homebrew)</i>}</span>
+        <span className="name">{spell.name}  {spell.is_homebrew && <i> (Homebrew) </i>}</span>
       </div>
       <div className={`item-collapse ${isExpanded && 'is-expanded bg-opac'}`} style={{ height: currentHeight }} aria-expanded={isExpanded} aria-hidden={!isExpanded}>
         <div className="item-body" ref={heightRef}>
@@ -29,7 +29,7 @@ const SpellItem = ({ spell, onSpellSelect }) => {
           <hr />
           <p><b>Casting Time:</b> {spell.casting_time}</p>
           <p><b>Range:</b> {spell.range}</p>
-          <p><b>Components:</b> {spell.components} {spell.components.slice(-1) === "M" && <span>({spell.material})</span>}</p>
+          <p><b>Components:</b> {spell.components} {spell.components.slice(-1) === "M" && <span> ({spell.material}) </span>}</p>
           <p><b>Duration:</b> {spell.concentration && <span>Concentration, </span>} {spell.duration}</p>
           <hr />
           {spell.description.map(para => para.startsWith('-') ? <li key={para}>{para.slice(1)}</li> : <p key={para}>{para}</p>)}
