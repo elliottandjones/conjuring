@@ -3,19 +3,29 @@ import Room from "./Room";
 import Chat from "./Chat";
 import "./ChatPanel.css";
 import io from "socket.io-client";
+import { USER_CONNECTED } from "../../Events";
 
 const socketUrl = "http://localhost:3121";
 
-export default function ChatPanel({ room, player, action, displayAction }) {
-	const [messageCount, setMessageCount] = useState(0);
+export default function ChatPanel({ room, action, displayAction }) {
+	// const [messageCount, setMessageCount] = useState(0);
 	const [socket, setSocket] = useState(null);
-	const [inRoom, setInRoom] = useState(false);
+	const [user, setUser] = useState([]);
 
 	useEffect(() => {
+    initSocket();
+    
 		if (inRoom) {
-			console.log();
+			console.log("joining room");
+			socket.emit("room", { room: "test-room" });
 		}
-		initSocket();
+    
+    return () => {
+      if (inRoom) {
+        console.log("leaving room");
+        
+      }
+    }
 	});
 
 	// connects to and initializes the socket
@@ -25,15 +35,17 @@ export default function ChatPanel({ room, player, action, displayAction }) {
 			console.log("CONNECTED!");
 		});
 		setSocket(socket);
-	};
-	const handleInRoom = () => {
-		inRoom ? setInRoom(false) : setInRoom(true);
-	};
+  };
+  const setUser = (user) => {
+    socket.emit(USER_CONNECTED);
+    setUser(user);
+  };
+
 	return (
 		<div id="panel-wrapper" className="panel-wrapper">
 			<div id="panel" className="panel">
-				<Room room={room} player={player} />
-				<Chat creature={player.creature} action={action} displayAction={displayAction} />
+				<Room room={room} user={user} />
+				<Chat creature={user.creature} action={action} displayAction={displayAction} />
 			</div>
 		</div>
 	);

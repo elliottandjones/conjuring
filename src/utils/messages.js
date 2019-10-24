@@ -1,3 +1,5 @@
+const { rollDamage, rollAttack, getTotalDamage } = require("./roll");
+
 const generateMessage = (username, text) => {
 	return {
 		username,
@@ -5,16 +7,17 @@ const generateMessage = (username, text) => {
 		createdAt: new Date().getTime()
 	};
 };
+// ! this is wrong, fix it
+const generateRollMessage = (username, action) => {
 
-const generateLocationMessage = (username, url) => {
 	return {
 		username,
-		url,
+		action,
 		createdAt: new Date().getTime()
 	};
 };
 
 export {
 	generateMessage,
-	generateLocationMessage
+  generateRollMessage,
 };
