@@ -1,6 +1,6 @@
 const io = require('./index').io;
-const { generateMessage, generateRollMessage } = require("../utils/messages");
-const { addUser, removeUser, getUser, getUsersInRoom } = require("../utils/users");
+const { generateMessage, generateRollMessage } = require("../components/ChatPanel/utils/messages");
+const { addUser, removeUser, getUser, getUsersInRoom } = require("../components/ChatPanel/utils/users");
 
 module.exports = function(socket) {
   console.log(`Socket Id: ${socket.id}`);

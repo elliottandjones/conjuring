@@ -1,4 +1,4 @@
-const { rollDamage, rollAttack, getTotalDamage } = require("./roll");
+// const { rollDamage, rollAttack, getTotalDamage } = require("./roll");
 
 const generateMessage = (username, text) => {
 	return {
@@ -17,7 +17,7 @@ const generateRollMessage = (username, action) => {
 	};
 };
 
-export {
+module.exports = {
 	generateMessage,
   generateRollMessage,
 };

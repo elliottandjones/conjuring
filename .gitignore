@@ -6,6 +6,7 @@
 .pnp.js
 
 # misc things to ignore
+.vscode
 functions/node_modules
 /functions/node_modules
 thehaters

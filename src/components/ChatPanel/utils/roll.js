@@ -52,7 +52,7 @@ const getTotalDamage = (array) => {
     // todo: SORT by movement speed (number of ft, not type of speed)
     // ! will probably need to make a regex for this
     // let filteredCreatures = creatures.sort((a,b) => (a.name > b.name) ? 1 : -1);
-export {
+module.exports = {
   // quickSortByName,
 	rollDamage,
 	rollAttack,

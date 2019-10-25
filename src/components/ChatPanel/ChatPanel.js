@@ -1,32 +1,32 @@
 import React, { useState, useEffect } from "react";
-import Room from "./Room";
+import Sidebar from "./Sidebar";
 import Chat from "./Chat";
+import Form from "./Form";
 import "./ChatPanel.css";
 import io from "socket.io-client";
-import { USER_CONNECTED } from "../../Events";
+import { USER_CONNECTED, LOGOUT } from "./utils/events";
 
 const socketUrl = "http://localhost:3121";
 
 export default function ChatPanel({ room, action, displayAction }) {
 	// const [messageCount, setMessageCount] = useState(0);
 	const [socket, setSocket] = useState(null);
-	const [user, setUser] = useState([]);
+	const [user, setUser] = useState({});
 
-	useEffect(() => {
-    initSocket();
+	// useEffect(() => {
+  //   initSocket();
     
-		if (inRoom) {
-			console.log("joining room");
-			socket.emit("room", { room: "test-room" });
-		}
+	// 	if () {
+			
+	// 	}
     
-    return () => {
-      if (inRoom) {
-        console.log("leaving room");
+  //   return () => {
+  //     if (inRoom) {
+  //       console.log("leaving room");
         
-      }
-    }
-	});
+  //     }
+  //   }
+	// });
 
 	// connects to and initializes the socket
 	const initSocket = () => {
@@ -36,16 +36,26 @@ export default function ChatPanel({ room, action, displayAction }) {
 		});
 		setSocket(socket);
   };
-  const setUser = (user) => {
+  const initUser = (user) => {
     socket.emit(USER_CONNECTED);
     setUser(user);
+  };
+  const onLogout = () => {
+    socket.emit(LOGOUT);
+    setUser({});
   };
 
 	return (
 		<div id="panel-wrapper" className="panel-wrapper">
 			<div id="panel" className="panel">
-				<Room room={room} user={user} />
-				<Chat creature={user.creature} action={action} displayAction={displayAction} />
+				{1 ? (
+					<Form />
+				) : (
+					<React.Fragment>
+						<Sidebar room={room} users={[...user]} />
+						<Chat creature={user.creature} action={action} displayAction={displayAction} />
+					</React.Fragment>
+				)}
 			</div>
 		</div>
 	);
