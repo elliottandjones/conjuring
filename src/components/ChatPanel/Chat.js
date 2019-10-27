@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Chat = ({action, displayAction}) => {
+const Chat = ({action, displayAction, allChats}) => {
   return (
 		<div className="chat">
 			<div id="sidebar" className="chat__sidebar"></div>
