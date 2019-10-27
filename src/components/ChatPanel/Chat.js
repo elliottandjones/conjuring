@@ -3,9 +3,8 @@ import React from 'react';
 const Chat = ({action, displayAction, allChats}) => {
   return (
 		<div className="chat">
-			<div id="sidebar" className="chat__sidebar"></div>
-			<div className="chat__main">
-				<div id="messages" className="chat__messages"></div>
+			<div className="chat-main">
+				<div id="messages" className="chat-messages"></div>
 
 				<div className="compose">
 					<form id="message-form">

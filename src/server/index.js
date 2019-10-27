@@ -1,9 +1,17 @@
-const app = require('http').createServer();
-const io = module.exports.io = require('socket.io')(app);
-const SocketManager = require("./socket-manager");
+var app = require("express")();
+var http = require("http").createServer(app);
+var io = require("socket.io")(http);
 
-const port = process.env.PORT || 3121;
+var port = process.env.PORT || 3001;
 
-io.on('connection', SocketManager);
+app.get("/", function(req, res) {
+	res.sendFile(__dirname + "/index.html");
+});
 
-app.listen(port, () => console.log(`listening on port: ${port}`));
+io.on("connection", function(socket) {
+	console.log("a user connected");
+});
+
+http.listen(port, function() {
+	console.log(`listening on port *:${port}`);
+});
