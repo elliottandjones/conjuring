@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import Chat from "./Chat";
-import Form from "./Form";
+import LoginForm from "./LoginForm";
 import "./ChatPanel.css";
 import io from "socket.io-client";
 import { USER_CONNECTED, LOGOUT } from "./utils/events";
@@ -11,22 +11,11 @@ const socketUrl = "http://localhost:3121";
 export default function ChatPanel({ room, action, displayAction }) {
 	// const [messageCount, setMessageCount] = useState(0);
 	const [socket, setSocket] = useState(null);
-	const [user, setUser] = useState({});
+	const [user, setUser] = useState(null);
 
-	// useEffect(() => {
-  //   initSocket();
-    
-	// 	if () {
-			
-	// 	}
-    
-  //   return () => {
-  //     if (inRoom) {
-  //       console.log("leaving room");
-        
-  //     }
-  //   }
-	// });
+	useEffect(() => {
+    initSocket();
+	});
 
 	// connects to and initializes the socket
 	const initSocket = () => {
@@ -42,14 +31,15 @@ export default function ChatPanel({ room, action, displayAction }) {
   };
   const onLogout = () => {
     socket.emit(LOGOUT);
-    setUser({});
+    setUser(null);
+    setSocket(null);
   };
 
 	return (
 		<div id="panel-wrapper" className="panel-wrapper">
 			<div id="panel" className="panel">
-				{1 ? (
-					<Form />
+				{(!user) ? (
+					<LoginForm socket={socket} initUser={initUser} />
 				) : (
 					<React.Fragment>
 						<Sidebar room={room} users={[...user]} />

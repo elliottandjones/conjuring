@@ -116,24 +116,24 @@ class App extends Component {
       this.setState({ spells: snapshot.val() });
     });
   }
-  onTabClick = (e, string) => {
-    e.preventDefault();
+  // onTabClick = (e, string) => {
+  //   e.preventDefault();
 
-    switch (string) {
-      case "attribute":
-        this.onFilterByAttribute(e);
-        break;
-      case "chat":
-        this.onOpenChatPanel(e);
-        break;
-      case "spell":
-        this.onFilterBySpell(e);
-        break;
-      default:
-        console.log("default case? wtf?");
-        break;
-    }
-  }
+  //   switch (string) {
+  //     case "attribute":
+  //       this.onFilterByAttribute(e);
+  //       break;
+  //     case "chat":
+  //       this.onOpenChatPanel(e);
+  //       break;
+  //     case "spell":
+  //       this.onFilterBySpell(e);
+  //       break;
+  //     default:
+  //       console.log("default case? wtf?");
+  //       break;
+  //   }
+  // }
   
   onOpenChatPanel = (e) => {
     e.preventDefault();
@@ -358,19 +358,19 @@ class App extends Component {
         <div className="tabs mb1 mt1">
           <button
             className={`tab ${(spellFilter || chatOpen) && 'o-50'}`}
-            onClick={(e) => {this.onTabClick(e, "attribute"); this.onSpellSelect({});}} 
+            onClick={(e) => {this.onFilterByAttribute(e); this.onSpellSelect({});}} 
             tabIndex="0"
           ><span>By Attribute</span>
           </button>
           <button 
             className={`tab ${(!spellFilter || chatOpen) && 'o-50'}`}
-            onClick={(e) => {this.onTabClick(e, "spell");}}
+            onClick={(e) => {this.onFilterBySpell(e);}}
             tabIndex="0"
           ><span>By Spell</span>
           </button>
           <button 
             className={`tab ${(spellFilter || !chatOpen) && 'o-50'}`}
-            onClick={(e) => {this.onTabClick(e, "chat");}}
+            onClick={(e) => {this.onOpenChatPanel(e);}}
             tabIndex="0"
           ><span>Chat Panel</span>
           </button>
