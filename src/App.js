@@ -98,9 +98,9 @@ class App extends Component {
       typePicked: true,
       chatOpen: false,
       connected: false,
-      room: '',
-      user: '',
-      action: {},
+      // room: '',
+      // user: '',
+      rollAction: {},
 			response: "",
 			post: "",
 			responseToPost: ""
@@ -116,24 +116,6 @@ class App extends Component {
       this.setState({ spells: snapshot.val() });
     });
   }
-  // onTabClick = (e, string) => {
-  //   e.preventDefault();
-
-  //   switch (string) {
-  //     case "attribute":
-  //       this.onFilterByAttribute(e);
-  //       break;
-  //     case "chat":
-  //       this.onOpenChatPanel(e);
-  //       break;
-  //     case "spell":
-  //       this.onFilterBySpell(e);
-  //       break;
-  //     default:
-  //       console.log("default case? wtf?");
-  //       break;
-  //   }
-  // }
   
   onOpenChatPanel = (e) => {
     e.preventDefault();
@@ -143,12 +125,12 @@ class App extends Component {
     if (this.state.spellFilter) {
       this.setState({ spellFilter: false });
     }
-    if (!this.state.connected) {
-      this.setState({
-        room: 'local tavern',
-        user: 'you'
-      });
-    }
+    // if (!this.state.connected) {
+    //   this.setState({
+    //     room: 'local tavern',
+    //     user: 'you'
+    //   });
+    // }
   }
   onFilterByAttribute = (e) => {
     e.preventDefault();
@@ -211,16 +193,11 @@ class App extends Component {
   }
   displayAction = (event, action, creatureName) => {
     event.preventDefault();
-    // this.setState({chatOpen: true});
-    if (action) {
-      
-      // eslint-disable-next-line
-      console.log('NAME: ', creatureName);
-      // eslint-disable-next-line
-      console.log('ACTION.NAME: ', action.name);
-      // eslint-disable-next-line
-      console.log('ACTION.DESC: ', action.desc);
 
+    if (action && creatureName) {
+      console.log('NAME: ', creatureName);
+      console.log('ACTION.NAME: ', action.name);
+      console.log('ACTION.DESC: ', action.desc);
       return [creatureName, action];
     }
 
@@ -270,7 +247,7 @@ class App extends Component {
       creatures, spells, spellFilter, spellObject, spellSelected, searchfield,
       crOptions, speedOptions, sizeOptions,
       typeValues, crValue, speedValue, sizeValue,
-      speedLegend, sizeLegend, room, user, action, chatOpen
+      speedLegend, sizeLegend, rollAction, chatOpen
     } = this.state;
 
     // filter by name
@@ -391,7 +368,7 @@ class App extends Component {
               </div>
             </div>
             : (spellFilter ? <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
-              : (chatOpen && <ChatPanel room={room} user={user} displayAction={this.displayAction} action={action} />))
+              : (chatOpen && <ChatPanel displayAction={this.displayAction} rollAction={rollAction} />))
         }
         <CreatureList creatures={filteredCreatures} displayAction={this.displayAction} />
       </div>

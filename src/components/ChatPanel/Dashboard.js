@@ -1,7 +1,7 @@
 import React from "react";
 import { VERIFY_USER } from "./utils/events";
 
-const LoginForm = ({ socket, initUser }) => {
+const Dashboard = ({ socket, initUser, goProceed }) => {
   const [username, setUsername] = React.useState("");
   const [room, setRoom] = React.useState("");
 
@@ -19,7 +19,7 @@ const LoginForm = ({ socket, initUser }) => {
   return (
 		<div className="login">
 			<h1 id="form-header">Join a Room</h1>
-			<form onSubmit={handleSubmit} id="login-form">
+			<form onSubmit={(e) => {goProceed(e); handleSubmit(e)}} id="login-form">
 				<label htmlFor="username">Display name</label>
 				<input 
           type="text"
@@ -46,4 +46,4 @@ const LoginForm = ({ socket, initUser }) => {
 	);
 };
 
-export default LoginForm;
+export default Dashboard;

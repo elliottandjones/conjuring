@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Sidebar = ({ room, users }) => {
+const Sidebar = ({ rooms, users }) => {
   return (
     <div id="sidebar">
-      <h2>{room}</h2>
+      <h2>{rooms}</h2>
       <hr/>
       <p>{users}</p>
     </div>

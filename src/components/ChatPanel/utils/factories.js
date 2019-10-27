@@ -25,7 +25,7 @@ const conjureChat = ({messages=[], name="The Party", users=[]} = {}) => {
     users,
     typing:[]
   }
-}
+};
 
 const getTime = date => {
 	return `${date.getHours()}:${("0" + date.getMinutes()).slice(-2)}`;
