@@ -11,8 +11,7 @@
 		"react-dom": "^16.9.0",
 		"react-scripts": "3.1.1",
 		"socket.io": "^2.3.0",
-		"tachyons": "^4.11.1",
-		"uuid": "^3.3.3"
+		"tachyons": "^4.11.1"
 	},
 	"scripts": {
 		"start": "concurrently 'npm run client' && 'npm run server'",
