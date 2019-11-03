@@ -1,6 +1,7 @@
 import React from 'react';
 import { MESSAGE_SENT, MESSAGE_RECIEVED, TYPING, PARTY_CHAT } from '../../Events';
 import Messages from './Messages';
+import MessageInput from './MessageInput';
 
 export default class ChatContainer extends React.Component {
   constructor(props) {
@@ -27,11 +28,11 @@ export default class ChatContainer extends React.Component {
     const newChats = reset ? [chat] : [...chats, chat];
     this.setState({chats: newChats});
 
-    const messageEvent = `${MESSAGE_RECIEVED}-${chat-id}`;
-    const typingEvent = `${TYPING}-${chat-id}`;
+    const messageEvent = `${MESSAGE_RECIEVED}-${chat.id}`;
+    const typingEvent = `${TYPING}-${chat.id}`;
 
     socket.on(typingEvent)
-    socket.on(messageEvent, this.addMessageToChat(chatId))
+    socket.on(messageEvent, this.addMessageToChat(chat.id))
   }
 
   addMessageToChat = (chatId) => {
@@ -39,7 +40,7 @@ export default class ChatContainer extends React.Component {
       const {chats} = this.state;
       let newChats = chats.map((chat) => {
         if (chat.id === chatId) {
-          chat.messages.push(messageEvent)
+          chat.messages.push(message);
         }
         return chat;
       });
@@ -65,6 +66,7 @@ export default class ChatContainer extends React.Component {
   }
   
   render() {
+    const {chats, activeChat} = this.state;
     return (
         <React.Fragment>
           <div id="sidebar">
@@ -78,18 +80,14 @@ export default class ChatContainer extends React.Component {
                 activeChat !== null && <Messages chat={props.chat} />
               }
             </div>
-            <div id="chat-in" className="compose">
-              <input 
-                onChange={e => props.onTextValueChange(e)} 
-                type="text" 
-                name="message" 
-                placeholder="Message" 
-                value={props.textValue} 
-                required 
-                autoComplete="off" 
-                />
-              <button type="submit">Send</button>
-            </div>
+            <MessageInput 
+              sendMessage={(message) => {
+                this.sendMessage(activeChat.id, message);
+              }}
+              sendTyping={(isTyping) => {
+                this.sendTyping(activeChat.id, isTyping);
+              }}
+            />
           </div>
         </React.Fragment>
     );
