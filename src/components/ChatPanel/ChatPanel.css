@@ -46,3 +46,7 @@
 #chat-out {
   border: 2px inset var(--belite);
 }
+
+#chat-in {
+  vertical-align: bottom;
+}

@@ -6,7 +6,7 @@ import SpellList from './components/SpellList/SpellList';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
 import ChatPanel from './components/ChatPanel/ChatPanel';
-import Store from './Store';
+// import Store from './Store';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
@@ -315,59 +315,57 @@ class App extends React.Component {
     
     return (
       <div className="App">
-        <Store>
-          <div className="top-bar">
-            <div className="bar-container">
-              <div className="app-title pl1 ma1" title="a Reference App for Dungeons & Dragons (5e SRD)">
-                <h1 className="mt1 mb1" style={{ fontSize: '2.2em' }}>
-                  <span id="app-title-span" style={{ whiteSpace: 'none' }}>
-                    Conju<img className="icon" alt="icon" src="/favicon.ico" />ing
-                  </span> <a href="https://github.com/Elliohknow/conjuring" id="source-link">source</a>
-                </h1>
-              </div>
-              <SearchBox searchfield={searchfield} searchChange={this.onSearchChange} />
+        <div className="top-bar">
+          <div className="bar-container">
+            <div className="app-title pl1 ma1" title="a Reference App for Dungeons & Dragons (5e SRD)">
+              <h1 className="mt1 mb1" style={{ fontSize: '2.2em' }}>
+                <span id="app-title-span" style={{ whiteSpace: 'none' }}>
+                  Conju<img className="icon" alt="icon" src="/favicon.ico" />ing
+                </span> <a href="https://github.com/Elliohknow/conjuring" id="source-link">source</a>
+              </h1>
             </div>
+            <SearchBox searchfield={searchfield} searchChange={this.onSearchChange} />
           </div>
-          <div className="tabs mb1 mt1">
-            <button
-              className={`tab ${(spellFilter || chatOpen) && 'o-50'}`}
-              onClick={(e) => {this.onFilterByAttribute(e); this.onSpellSelect({});}} 
-              tabIndex="0"
-            ><span>By Attribute</span>
-            </button>
-            <button 
-              className={`tab ${(!spellFilter || chatOpen) && 'o-50'}`}
-              onClick={(e) => {this.onFilterBySpell(e);}}
-              tabIndex="0"
-            ><span>By Spell</span>
-            </button>
-            <button 
-              className={`tab ${(spellFilter || !chatOpen) && 'o-50'}`}
-              onClick={(e) => {this.onOpenChatPanel(e);}}
-              tabIndex="0"
-            ><span>Chat Panel</span>
-            </button>
-          </div>
-          {
-            !spellFilter && !chatOpen ?
-              <div className="filters-wrapper">
-                <div className="cr-and-type">
-                  <Select className="cr" value={crValue} options={crOptions} onChange={this.onCRSelect} />
-                  <Checkboxes className="type" options={typeValues} onChange={this.onTypeChange} />
-                </div>
-                <div className="speed-and-size">
-                  <RadioButtons className="speed" text={speedLegend} options={speedOptions} onChange={this.onSpeedSelect} />
-                  <RadioButtons className="size" text={sizeLegend} options={sizeOptions} onChange={this.onSizeSelect} />
-                  <footer id="footer">
-                    &copy; 2019 <a href="http://elliottandjones.com/" style={{ textDecoration: "none" }}>Elliott Jones</a>
-                  </footer>
-                </div>
+        </div>
+        <div className="tabs mb1 mt1">
+          <button
+            className={`tab ${(spellFilter || chatOpen) && 'o-50'}`}
+            onClick={(e) => {this.onFilterByAttribute(e); this.onSpellSelect({});}} 
+            tabIndex="0"
+          ><span>By Attribute</span>
+          </button>
+          <button 
+            className={`tab ${(!spellFilter || chatOpen) && 'o-50'}`}
+            onClick={(e) => {this.onFilterBySpell(e);}}
+            tabIndex="0"
+          ><span>By Spell</span>
+          </button>
+          <button 
+            className={`tab ${(spellFilter || !chatOpen) && 'o-50'}`}
+            onClick={(e) => {this.onOpenChatPanel(e);}}
+            tabIndex="0"
+          ><span>Chat Panel</span>
+          </button>
+        </div>
+        {
+          !spellFilter && !chatOpen ?
+            <div className="filters-wrapper">
+              <div className="cr-and-type">
+                <Select className="cr" value={crValue} options={crOptions} onChange={this.onCRSelect} />
+                <Checkboxes className="type" options={typeValues} onChange={this.onTypeChange} />
               </div>
-              : (spellFilter ? <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
-                : (chatOpen && <ChatPanel displayAction={this.displayAction} rollAction={rollAction} />))
-          }
-          <CreatureList creatures={filteredCreatures} displayAction={this.displayAction} />
-        </Store>
+              <div className="speed-and-size">
+                <RadioButtons className="speed" text={speedLegend} options={speedOptions} onChange={this.onSpeedSelect} />
+                <RadioButtons className="size" text={sizeLegend} options={sizeOptions} onChange={this.onSizeSelect} />
+                <footer id="footer">
+                  &copy; 2019 <a href="http://elliottandjones.com/" style={{ textDecoration: "none" }}>Elliott Jones</a>
+                </footer>
+              </div>
+            </div>
+            : (spellFilter ? <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
+              : (chatOpen && <ChatPanel displayAction={this.displayAction} rollAction={rollAction} />))
+        }
+        <CreatureList creatures={filteredCreatures} displayAction={this.displayAction} />
       </div>
     );
   }

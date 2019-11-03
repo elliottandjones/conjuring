@@ -7,11 +7,13 @@
 		"eslint-utils": "1.4.2",
 		"express": "^4.17.1",
 		"firebase": "^5.7.0",
+		"qs": "^6.9.0",
 		"react": "^16.9.0",
 		"react-dom": "^16.9.0",
 		"react-scripts": "3.1.1",
 		"socket.io": "^2.3.0",
-		"tachyons": "^4.11.1"
+		"tachyons": "^4.11.1",
+		"uuid": "^3.3.3"
 	},
 	"scripts": {
 		"start": "concurrently 'npm run client' && 'npm run server'",

@@ -1,24 +1,9 @@
-const app = require("express")();
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
-
-const SocketManager = require("./socket-manager");
+const app = require('http').createServer();
+const io = module.exports.io = require('socket.io')(app);
+const SocketManager = require("./SocketManager");
 
 const port = process.env.PORT || 3001;
 
-app.get("/", function(req, res) {
-	res.sendFile(__dirname + "/index.html");
-});
+io.on('connection', SocketManager);
 
-io.on("connection", SocketManager);
-// io.on("connection", function(socket) {
-//   console.log("a user connected");
-  
-//   socket.on("message", function(msg) {
-//     console.log("MESSAGE: ", msg);
-//   });
-// });
-
-server.listen(port, function() {
-	console.log(`Listening on port *:${port}`);
-});
+app.listen(port, () => console.log(`listening on port: ${port}`));

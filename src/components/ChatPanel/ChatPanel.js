@@ -1,79 +1,65 @@
 import React from "react";
-import { CTX } from "../../Store";
-
+import io from 'socket.io-client';
+import LoginForm from "./LoginForm";
+import { 
+  USER_CONNECTED,
+  LOGOUT
+} from '../../Events';
 import "./ChatPanel.css";
+import ChatContainer from "./ChatContainer";
 
-export default function ChatPanel(props) {
-  // CTX store
-  const { allChats, sendChatAction, user } = React.useContext(CTX);
-  const rooms = Object.keys(allChats);
-  console.log({allChats});
-  // local state
-  const [proceed, setProceed] = React.useState(false);
-  const [room, setRoom] = React.useState(rooms[0]);
-  const [username, setUsername] = React.useState("");
-  const [textValue, setTextValue] = React.useState("");
+const socketUrl = "http://localhost:3001";
+export default class ChatPanel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      socket: null,
+      user: null,
+      textValue: ""
+    };
+  }
+
+  componentDidMount() {
+    this.initSocket();
+  }
+
+  initSocket = () => {
+    const socket = io(socketUrl);
+    socket.on('connect', () => {
+      console.log("Connected!");
+    });
+    this.setState({socket});
+  }
+
+  setUser = (user, room) => {
+    const { socket } = this.state;
+    socket.emit(USER_CONNECTED, user, room);
+    this.setState({user, room});
+  }
+
+  onTextValueChange = (e) => {
+    this.setState({textValue: e.target.value});
+  }
   
-  const onProceedToRoom = (e) => {
-    e.preventDefault();
-    setUsername(e.target.value)
-    setRoom(rooms[0]);
-    setProceed(true);
-  };
+  logout = (user) => {
+    const { socket } = this.state;
+    socket.emit(LOGOUT, user);
+    this.setState({user:null});
+  }
 
-  const handleSendClick = () => {
-    sendChatAction({from: user, msg: textValue, room: room});
-    setTextValue("");
-  };
-
-	return (
-		<div id="panel-wrapper" className="panel-wrapper">
-			<div id="panel" className="panel">
-				<div id="sidebar">
-					<h2>{room}</h2>
-					<hr />
-					<p>{users}</p>
+  
+  render() {
+    const { socket, user, textValue } = this.state;
+    return (
+			<div id="panel-wrapper" className="panel-wrapper">
+				<div id="panel" className="panel">
+					{
+            !user ? 
+              <LoginForm socket={socket} setUser={this.setUser} /> 
+              : <ChatContainer socket={socket} user={user} onTextValueChange={this.onTextValueChange} logout={this.logout} textValue={textValue} />
+          }
 				</div>
-				{!proceed ? (
-					<div className="login">
-						<h1 id="form-header">Join a Room</h1>
-						<form	onSubmit={e => onProceedToRoom(e)}	id="login-form">
-							<label htmlFor="username">Display name</label>
-							<input
-								type="text"
-								id="username"
-								name="username"
-								placeholder="Display name"
-								required
-								value={username}
-								onChange={e => setUsername(e.target.value)}
-							/>
-							<label htmlFor="room">Room</label>
-							<input 
-                type="text" 
-                id="room" 
-                name="room" 
-                placeholder="Room" 
-                required 
-                value={room} 
-                onChange={e => setRoom(e.target.value)} 
-                
-                />
-							<button type="submit">Join</button>
-						</form>
-					</div>
-				) : (
-					<div className="chat">
-			      <div className="chat-main">
-				      <div id="messages" className="chat-messages"></div>
-				      <div className="compose">
-                <input onChange={e => setTextValue(e.target.value)} type="text" name="message" placeholder="Message" required autocomplete="off" />
-                <button onClick={() => handleSendClick()}>Send</button>
-				      </div>
-			      </div>
-		      </div>
-				)}
 			</div>
-		</div>
-	);
+		);
+  }
 }
