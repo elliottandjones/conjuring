@@ -1,11 +1,16 @@
 const io = require("./index.js").io;
-const { VERIFY_USER, USER_CONNECTED, LOGOUT } = require('../Events');
+const { VERIFY_USER, USER_CONNECTED, USER_DISCONNECTED, LOGOUT, MESSAGE_RECIEVED, MESSAGE_SENT, TYPING } = require('../Events');
 const { conjureUser, conjureMessage, conjureChat } = require('../Factories');
 
 let connectedUsers = {};
+let partyChat = conjureChat();
 
 module.exports = function(socket) {
+
+  // console.log('\x1bc'); // clears the console
   console.log(`Socket Id: ${socket.id}`);
+  let sendMessageToChatFromUser;
+  let sendTypingFromUser;
 
   // Verify Username
   socket.on(VERIFY_USER, (username, room, callback) => {
@@ -20,14 +25,61 @@ module.exports = function(socket) {
     connectedUsers = addUser(connectedUsers, user);
     socket.user = user;
 
+    sendMessageToChatFromUser = sendMessageToChat(user.name);
+    sendTypingFromUser = sendTypingToChat(user.name);
+    
     io.emit(USER_CONNECTED, connectedUsers);
-    console.log(connectedUsers);
+    console.log(`CONNECTED: ${connectedUsers}`);
   });
 
   // User Disconnects
-
+  socket.on('disconnect', () => {
+    if ("user" in socket) {
+      connectedUsers = removeUser(connectedUsers, socket.user.name);
+      io.emit(USER_DISCONNECTED, connectedUsers);
+      console.log(`DISCONNECTED: ${connectedUsers}`);
+    }
+  });
 
   // User logs out
+  socket.on(LOGOUT, () => {
+    connectedUsers = removeUser(connectedUsers, socket.user.name);
+    io.emit(USER_DISCONNECTED, connectedUsers);
+    console.log(`DISCONNECTED: ${connectedUsers}`);
+  });
+
+  // Get Party Chat
+  socket.on(PARTY_CHAT, (callback) => {
+    callback(partyChat);
+  });
+
+  // Message Sent
+  socket.on(MESSAGE_SENT, ({chatId, message}) => {
+    sendMessageToChatFromUser(chatId, message);
+  });
+
+  // User is typing
+  socket.on(TYPING, ({chatId, isTyping}) => {
+    console.log(chatId, isTyping);
+    sendTypingFromUser(chatId, isTyping);
+  });
+
+  // Returns a function that takes a chat id and a boolean (isTyping),
+  // then emit a broadcast to the chat id that sender is typing
+  
+  function sendTypingToChat(user) {
+    return (chatId, isTyping) => {
+      io.emit(`${TYPING}-${chatId}:`, {user, isTyping});
+    }
+  }
+
+  // Returns a function that will take a chat id and message,
+  // then emit a broadcast to the chat id
+  function sendMessageToChat(sender) {
+    return (chatId, msg) => {
+      io.emit(`${MESSAGE_RECIEVED}-${chatId}`, conjureMessage({msg, sender}));
+    }
+  }
 
   // Adds user to list passed in
   function addUser(userList, user) {

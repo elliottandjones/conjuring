@@ -1,5 +1,6 @@
 import React from 'react';
 import { MESSAGE_SENT, MESSAGE_RECIEVED, TYPING, PARTY_CHAT } from '../../Events';
+import Sidebar from './Sidebar';
 import Messages from './Messages';
 import MessageInput from './MessageInput';
 
@@ -12,10 +13,10 @@ export default class ChatContainer extends React.Component {
     }
   }
 
-  componentDidMount() {
-    const {socket} = this.props;
-    socket.emit(PARTY_CHAT, this.resetChat);
-  }
+  // componentDidMount() {
+  //   const {socket} = this.props;
+  //   socket.emit(PARTY_CHAT, this.resetChat);
+  // }
 
   resetChat = (chat) => {
     this.addChat(chat, true);
@@ -23,21 +24,23 @@ export default class ChatContainer extends React.Component {
 
   addChat = (chat, reset) => {
     const { socket } = this.props;
-    const {chats} = this.state;
+    const { chats, activeChat } = this.state;
 
     const newChats = reset ? [chat] : [...chats, chat];
-    this.setState({chats: newChats});
+    // const newChats = reset ? room : chat;
+    this.setState({chats: newChats, activeChat: reset ? chat : activeChat});
 
     const messageEvent = `${MESSAGE_RECIEVED}-${chat.id}`;
     const typingEvent = `${TYPING}-${chat.id}`;
 
-    socket.on(typingEvent)
-    socket.on(messageEvent, this.addMessageToChat(chat.id))
+    socket.on(typingEvent, this.updateTypingInChat(chat.id));
+    socket.on(messageEvent, this.addMessageToChat(chat.id));
   }
 
   addMessageToChat = (chatId) => {
     return message => {
       const {chats} = this.state;
+      // const {room} = this.state;
       let newChats = chats.map((chat) => {
         if (chat.id === chatId) {
           chat.messages.push(message);
@@ -48,7 +51,22 @@ export default class ChatContainer extends React.Component {
     }
   }
   updateTypingInChat = (chatId) => {
-
+    return ({isTyping, user}) => {
+      if (user !== this.props.user.name) {
+        const { chats } = this.state;
+        let newChats = chats.map((chat) => {
+          if (chat.id === chatId) {
+            if (isTyping && !chat.typingUsers.includes(user)) {
+              chat.typingUsers.push(user);
+            } else if (!isTyping && chat.typingUsers.includes(user)) {
+              chat.typingUsers = chat.typingUsers.filter(u => u !== user);
+            }
+          }
+          return chat;
+        });
+        this.setState({chats:newChats});
+      }
+    }
   }
 
   sendMessage = (chatId, message) => {
@@ -62,22 +80,31 @@ export default class ChatContainer extends React.Component {
   }
 
   setActiveChat = (activeChat) => {
-    this.setState({activeChat});
+    this.setState({activeChat:activeChat});
   }
   
   render() {
-    const {chats, activeChat} = this.state;
+    const { chats, activeChat } = this.state;
+    const { user, logout } = this.props;
     return (
         <React.Fragment>
-          <div id="sidebar">
-            <h2>{props.user.room}</h2>
-            <hr />
-            <p>{props.user.name}</p>
-          </div>
+          <Sidebar
+            user={user}
+            activeChat={activeChat}
+            setActiveChat={this.setActiveChat}
+            chats={chats}
+            logout={logout}
+            />
           <div id="chat" className="chat">
             <div id="chat-out" className="chat-messages">
               {
-                activeChat !== null && <Messages chat={props.chat} />
+                activeChat !== null &&
+                  <Messages 
+                    messages={activeChat.messages}
+                    chat={activeChat}
+                    user={user} 
+                    typingUser={activeChat.typingUser} 
+                  />
               }
             </div>
             <MessageInput 

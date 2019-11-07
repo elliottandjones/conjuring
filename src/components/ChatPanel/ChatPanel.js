@@ -15,7 +15,7 @@ export default class ChatPanel extends React.Component {
     this.state = {
       socket: null,
       user: null,
-      textValue: ""
+      // textValue: ""
     };
   }
 
@@ -37,9 +37,9 @@ export default class ChatPanel extends React.Component {
     this.setState({user, room});
   }
 
-  onTextValueChange = (e) => {
-    this.setState({textValue: e.target.value});
-  }
+  // onTextValueChange = (e) => {
+  //   this.setState({textValue: e.target.value});
+  // }
   
   logout = (user) => {
     const { socket } = this.state;
@@ -49,14 +49,18 @@ export default class ChatPanel extends React.Component {
 
   
   render() {
-    const { socket, user, textValue } = this.state;
+    const { socket, user } = this.state;
     return (
 			<div id="panel-wrapper" className="panel-wrapper">
 				<div id="panel" className="panel">
 					{
             !user ? 
               <LoginForm socket={socket} setUser={this.setUser} /> 
-              : <ChatContainer socket={socket} user={user} onTextValueChange={this.onTextValueChange} logout={this.logout} textValue={textValue} />
+              : <ChatContainer 
+                  socket={socket} 
+                  user={user}
+                  logout={this.logout}
+                  />
           }
 				</div>
 			</div>
