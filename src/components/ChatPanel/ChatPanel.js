@@ -8,7 +8,7 @@ import {
 import "./ChatPanel.css";
 import ChatContainer from "./ChatContainer";
 
-const socketUrl = "http://localhost:3001";
+const socketUrl = "http://localhost:3061";
 export default class ChatPanel extends React.Component {
   constructor(props) {
     super(props);

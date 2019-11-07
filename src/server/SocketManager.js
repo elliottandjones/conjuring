@@ -2,50 +2,49 @@ const io = require("./index.js").io;
 const { VERIFY_USER, USER_CONNECTED, USER_DISCONNECTED, LOGOUT, MESSAGE_RECIEVED, MESSAGE_SENT, TYPING } = require('../Events');
 const { conjureUser, conjureMessage, conjureChat } = require('../Factories');
 
-let connectedUsers = {};
+let socketedUsers = {};
 let partyChat = conjureChat();
 
 module.exports = function(socket) {
 
-  // console.log('\x1bc'); // clears the console
   console.log(`Socket Id: ${socket.id}`);
   let sendMessageToChatFromUser;
   let sendTypingFromUser;
 
-  // Verify Username
-  socket.on(VERIFY_USER, (username, room, callback) => {
-    if (isUser(connectedUsers, username)) {
+  // Verify user's display name
+  socket.on(VERIFY_USER, (displayName, callback) => {
+    if (isUser(socketedUsers, displayName)) {
       callback({isUser: true, user: null});
     } else {
-      callback({isUser: false, user: conjureUser({name:username, room:room})});
+      callback({isUser: false, user: conjureUser({name:displayName})});
     }
   });
-  // User Connects with username (and room)
+  // User Connects with display name
   socket.on(USER_CONNECTED, (user) => {
-    connectedUsers = addUser(connectedUsers, user);
+    socketedUsers = addUser(socketedUsers, user);
     socket.user = user;
 
     sendMessageToChatFromUser = sendMessageToChat(user.name);
     sendTypingFromUser = sendTypingToChat(user.name);
     
-    io.emit(USER_CONNECTED, connectedUsers);
-    console.log(`CONNECTED: ${connectedUsers}`);
+    io.emit(USER_CONNECTED, socketedUsers);
+    console.log(`CONNECTED: ${socketedUsers}`);
   });
 
   // User Disconnects
   socket.on('disconnect', () => {
     if ("user" in socket) {
-      connectedUsers = removeUser(connectedUsers, socket.user.name);
-      io.emit(USER_DISCONNECTED, connectedUsers);
-      console.log(`DISCONNECTED: ${connectedUsers}`);
+      socketedUsers = removeUser(socketedUsers, socket.user.name);
+      io.emit(USER_DISCONNECTED, socketedUsers);
+      console.log(`DISCONNECTED: ${socketedUsers}`);
     }
   });
 
   // User logs out
   socket.on(LOGOUT, () => {
-    connectedUsers = removeUser(connectedUsers, socket.user.name);
-    io.emit(USER_DISCONNECTED, connectedUsers);
-    console.log(`DISCONNECTED: ${connectedUsers}`);
+    socketedUsers = removeUser(socketedUsers, socket.user.name);
+    io.emit(USER_DISCONNECTED, socketedUsers);
+    console.log(`DISCONNECTED: ${socketedUsers}`);
   });
 
   // Get Party Chat
@@ -89,15 +88,15 @@ module.exports = function(socket) {
   }
 
   // Removes user from the list passed in
-  function removeUser(userList, username) {
+  function removeUser(userList, displayName) {
     let newList = Object.assign({}, userList);
-    delete newList[username];
+    delete newList[displayName];
     return newList;
   }
 
-  // Checks if the user is in list passed in
-  function isUser(userList, username) {
-    return username in userList;
+  // Checks if the user's display name is in list passed in
+  function isUser(userList, displayName) {
+    return displayName in userList;
   }
 
 }

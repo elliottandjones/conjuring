@@ -1,25 +1,24 @@
 const uuidv4 = require('uuid/v4');
 
-const conjureUser = ({name="", room="tavern"} = {}) => {
+const conjureUser = ({name=""} = {}) => {
   return {
     id: uuidv4(),
-    name,
-    room
+    name
   };
 };
 
 const conjureMessage = ({message="", sender=""} = {}) => {
   return {
     id: uuidv4(),
-    time: getTheTime(Date.now()),
+    time: getTime(new Date(Date.now())),
     message,
     sender
   };
 };
 
-const conjureChat = ({messages=[], name="The Party", users=[]} = {}) => {
+const conjureChat = ({messages=[], name, users=[]} = {}) => {
   return {
-    id:uuidv4(),
+    id: uuidv4(),
     name,
     messages,
     users,
@@ -27,7 +26,7 @@ const conjureChat = ({messages=[], name="The Party", users=[]} = {}) => {
   }
 };
 
-const getTheTime = date => {
+const getTime = date => {
 	return `${date.getHours()}:${("0" + date.getMinutes()).slice(-2)}`;
 };
 

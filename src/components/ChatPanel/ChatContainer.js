@@ -13,10 +13,10 @@ export default class ChatContainer extends React.Component {
     }
   }
 
-  // componentDidMount() {
-  //   const {socket} = this.props;
-  //   socket.emit(PARTY_CHAT, this.resetChat);
-  // }
+  componentDidMount() {
+    const {socket} = this.props;
+    socket.emit(PARTY_CHAT, this.resetChat);
+  }
 
   resetChat = (chat) => {
     this.addChat(chat, true);
@@ -102,8 +102,8 @@ export default class ChatContainer extends React.Component {
                   <Messages 
                     messages={activeChat.messages}
                     chat={activeChat}
-                    user={user} 
-                    typingUser={activeChat.typingUser} 
+                    user={user}
+                    typingUser={activeChat.typingUser}
                   />
               }
             </div>

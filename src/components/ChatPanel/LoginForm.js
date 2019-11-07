@@ -9,10 +9,10 @@ export default function LoginForm(props) {
   const setUser = ({ user, isUser }) => {
     console.log(user, isUser);
     if (isUser) {
-      setError("Username already taken, fool!");
+      setError("Fool--that name is already taken.");
     } else {
-      props.setUser(user);
       setError("");
+      props.setUser(user);
     }
   }
   
