@@ -2,16 +2,16 @@ import React from "react";
 
 export default function Messages(props) {
   const { messages, user, typingUsers } = props;
-  const messagesRef = React.useRef(null);
+  let messagesRef = React.createRef();
 
   React.useEffect(() => {
-    messagesRef.current.scrollTop = messagesRef.scrollHeight;
+    messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
   });
 
 	return (
 		<div ref={messagesRef}>
       {
-        messages.messages.map((msg, i) => {
+        messages.map((msg, i) => {
           return (
 						<div key={msg.id} className={`msg ${msg.sender === user.name && 'right'}`}>
 							<p>

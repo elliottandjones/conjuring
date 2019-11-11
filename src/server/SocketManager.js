@@ -1,5 +1,5 @@
 const io = require("./index.js").io;
-const { VERIFY_USER, USER_CONNECTED, USER_DISCONNECTED, LOGOUT, MESSAGE_RECIEVED, MESSAGE_SENT, TYPING } = require('../Events');
+const { VERIFY_USER, USER_CONNECTED, USER_DISCONNECTED, LOGOUT, MESSAGE_RECIEVED, MESSAGE_SENT, TYPING, PARTY_CHAT } = require('../Events');
 const { conjureUser, conjureMessage, conjureChat } = require('../Factories');
 
 let socketedUsers = {};
@@ -8,7 +8,7 @@ let partyChat = conjureChat();
 module.exports = function(socket) {
 
   console.log(`Socket Id: ${socket.id}`);
-  let sendMessageToChatFromUser;
+  let sendMessageFromUser;
   let sendTypingFromUser;
 
   // Verify user's display name
@@ -24,7 +24,7 @@ module.exports = function(socket) {
     socketedUsers = addUser(socketedUsers, user);
     socket.user = user;
 
-    sendMessageToChatFromUser = sendMessageToChat(user.name);
+    sendMessageFromUser = sendMessageToChat(user.name);
     sendTypingFromUser = sendTypingToChat(user.name);
     
     io.emit(USER_CONNECTED, socketedUsers);
@@ -54,12 +54,12 @@ module.exports = function(socket) {
 
   // Message Sent
   socket.on(MESSAGE_SENT, ({chatId, message}) => {
-    sendMessageToChatFromUser(chatId, message);
+    sendMessageFromUser(chatId, message);
   });
 
   // User is typing
   socket.on(TYPING, ({chatId, isTyping}) => {
-    console.log(chatId, isTyping);
+    // console.log(chatId, isTyping);
     sendTypingFromUser(chatId, isTyping);
   });
 

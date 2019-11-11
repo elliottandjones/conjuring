@@ -19,7 +19,7 @@ export default class ChatContainer extends React.Component {
   }
 
   resetChat = (chat) => {
-    this.addChat(chat, true);
+    return this.addChat(chat, true);
   }
 
   addChat = (chat, reset) => {
@@ -27,7 +27,6 @@ export default class ChatContainer extends React.Component {
     const { chats, activeChat } = this.state;
 
     const newChats = reset ? [chat] : [...chats, chat];
-    // const newChats = reset ? room : chat;
     this.setState({chats: newChats, activeChat: reset ? chat : activeChat});
 
     const messageEvent = `${MESSAGE_RECIEVED}-${chat.id}`;
@@ -40,7 +39,6 @@ export default class ChatContainer extends React.Component {
   addMessageToChat = (chatId) => {
     return message => {
       const {chats} = this.state;
-      // const {room} = this.state;
       let newChats = chats.map((chat) => {
         if (chat.id === chatId) {
           chat.messages.push(message);
@@ -62,6 +60,7 @@ export default class ChatContainer extends React.Component {
               chat.typingUsers = chat.typingUsers.filter(u => u !== user);
             }
           }
+          console.log("CHAT: ",chat, chat.users);
           return chat;
         });
         this.setState({chats:newChats});
@@ -75,49 +74,42 @@ export default class ChatContainer extends React.Component {
   }
 
   sendTyping = (chatId, isTyping) => {
-    const socket = this.props;
+    const { socket } = this.props;
     socket.emit(TYPING, {chatId, isTyping});
   }
 
   setActiveChat = (activeChat) => {
-    this.setState({activeChat:activeChat});
+    console.log("ACTIVECHAT: ",activeChat);
+    this.setState({activeChat});
   }
   
   render() {
     const { chats, activeChat } = this.state;
     const { user, logout } = this.props;
     return (
-        <React.Fragment>
-          <Sidebar
-            user={user}
-            activeChat={activeChat}
-            setActiveChat={this.setActiveChat}
-            chats={chats}
-            logout={logout}
-            />
-          <div id="chat" className="chat">
-            <div id="chat-out" className="chat-messages">
-              {
-                activeChat !== null &&
-                  <Messages 
-                    messages={activeChat.messages}
-                    chat={activeChat}
-                    user={user}
-                    typingUser={activeChat.typingUser}
-                  />
-              }
-            </div>
-            <MessageInput 
-              sendMessage={(message) => {
-                this.sendMessage(activeChat.id, message);
-              }}
-              sendTyping={(isTyping) => {
-                this.sendTyping(activeChat.id, isTyping);
-              }}
-            />
+			<div id="panel" className="panel">
+				<Sidebar user={user} activeChat={activeChat} setActiveChat={this.setActiveChat} chats={chats} logout={logout} />
+				{activeChat !== null ? (
+					<div id="chat" className="chat">
+						<div id="chat-out" className="chat-messages">
+							<Messages messages={activeChat.messages} user={user} typingUsers={activeChat.typingUsers} />
+						</div>
+						<MessageInput
+							sendMessage={message => {
+								this.sendMessage(activeChat.id, message);
+							}}
+							sendTyping={isTyping => {
+								this.sendTyping(activeChat.id, isTyping);
+							}}
+						/>
+					</div>
+				) : (
+					<div id="chat" className="chat">
+            <h2>activeChat is null, argh</h2>
           </div>
-        </React.Fragment>
-    );
+				)}
+			</div>
+		);
   }
   
 }

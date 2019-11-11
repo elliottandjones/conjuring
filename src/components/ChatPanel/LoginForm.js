@@ -18,13 +18,13 @@ export default function LoginForm(props) {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.socket.emit(VERIFY_USER, nameText, roomText, setUser);
+    props.socket.emit(VERIFY_USER, nameText, setUser);
   }
 
   return (
     <div className="login">
       <h1 id="form-header">Join a Room</h1>
-      <form onSubmit={e => handleSubmit(e)} id="login-form">
+      <form onSubmit={handleSubmit} id="login-form">
         <label htmlFor="username">Display name</label>
         <input 
           type="text" id="username" 

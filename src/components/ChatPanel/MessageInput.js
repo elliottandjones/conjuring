@@ -54,13 +54,14 @@ export default class MessageInput extends React.Component {
     const { message } = this.state;
     return (
       <div id="chat-in" className="compose">
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={e=>this.handleSubmit(e)}>
           <input
             // onChange={e => props.onTextValueChange(e)}
-            onChange={e => this.setState({message: e.target.value})}
+            onChange={({target}) => { this.setState({message: target.value}) }}
             type="text"
             name="message"
             placeholder="Message"
+            ref={"messageinput"}
             // value={props.textValue}
             value={message}
             required

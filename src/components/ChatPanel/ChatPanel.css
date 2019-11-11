@@ -50,3 +50,23 @@
 #chat-in {
   vertical-align: bottom;
 }
+
+.send,
+.logout,
+button[type="submit"] {
+  /* height: 50px; */
+  /* ! new */
+  max-height: 50px;
+  color: var(--lightish);
+  text-shadow: 0 0 5px var(--roarangelite);
+  background: var(--slatep) !important;
+  border: 2px solid var(--belite);
+  display: inline-block;
+  align-content: center;
+  justify-content: center;
+  width: auto;
+  margin: 3px 3px;
+  padding: 8px 0;
+  cursor: pointer;
+  vertical-align: middle;
+}

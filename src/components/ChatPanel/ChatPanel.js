@@ -1,12 +1,9 @@
 import React from "react";
 import io from 'socket.io-client';
+import { USER_CONNECTED, LOGOUT } from '../../Events';
 import LoginForm from "./LoginForm";
-import { 
-  USER_CONNECTED,
-  LOGOUT
-} from '../../Events';
-import "./ChatPanel.css";
 import ChatContainer from "./ChatContainer";
+import "./ChatPanel.css";
 
 const socketUrl = "http://localhost:3061";
 export default class ChatPanel extends React.Component {
@@ -14,8 +11,7 @@ export default class ChatPanel extends React.Component {
     super(props);
     this.state = {
       socket: null,
-      user: null,
-      // textValue: ""
+      user: null
     };
   }
 
@@ -25,21 +21,15 @@ export default class ChatPanel extends React.Component {
 
   initSocket = () => {
     const socket = io(socketUrl);
-    socket.on('connect', () => {
-      console.log("Connected!");
-    });
+    socket.on('connect', () => console.log("Connected!"));
     this.setState({socket});
   }
 
-  setUser = (user, room) => {
+  setUser = (user) => {
     const { socket } = this.state;
-    socket.emit(USER_CONNECTED, user, room);
-    this.setState({user, room});
+    socket.emit(USER_CONNECTED, user);
+    this.setState({user});
   }
-
-  // onTextValueChange = (e) => {
-  //   this.setState({textValue: e.target.value});
-  // }
   
   logout = (user) => {
     const { socket } = this.state;
@@ -52,17 +42,15 @@ export default class ChatPanel extends React.Component {
     const { socket, user } = this.state;
     return (
 			<div id="panel-wrapper" className="panel-wrapper">
-				<div id="panel" className="panel">
-					{
-            !user ? 
-              <LoginForm socket={socket} setUser={this.setUser} /> 
-              : <ChatContainer 
-                  socket={socket} 
-                  user={user}
-                  logout={this.logout}
-                  />
-          }
-				</div>
+        {
+          !user ? 
+            <LoginForm socket={socket} setUser={this.setUser} /> 
+            : <ChatContainer 
+                socket={socket} 
+                user={user}
+                logout={this.logout}
+                />
+        }
 			</div>
 		);
   }

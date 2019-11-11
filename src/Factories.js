@@ -1,13 +1,13 @@
 const uuidv4 = require('uuid/v4');
 
-const conjureUser = ({name=""} = {}) => {
+const conjureUser = ({name} = {}) => {
   return {
     id: uuidv4(),
     name
   };
 };
 
-const conjureMessage = ({message="", sender=""} = {}) => {
+const conjureMessage = ({message, sender} = {}) => {
   return {
     id: uuidv4(),
     time: getTime(new Date(Date.now())),
@@ -22,7 +22,7 @@ const conjureChat = ({messages=[], name, users=[]} = {}) => {
     name,
     messages,
     users,
-    typing:[]
+    typingUsers:[]
   }
 };
 
@@ -32,6 +32,6 @@ const getTime = date => {
 
 module.exports = {
   conjureUser,
-  conjureChat,
-  conjureMessage
+  conjureMessage,
+  conjureChat
 };
