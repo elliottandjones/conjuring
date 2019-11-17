@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 import Messages from './Messages';
 import MessageInput from './MessageInput';
 
-export default class ChatContainer extends React.Component {
+export default class Chat extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

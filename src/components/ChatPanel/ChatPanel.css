@@ -54,8 +54,8 @@
 .send,
 .logout,
 button[type="submit"] {
-  /* height: 50px; */
   /* ! new */
+  height: auto;
   max-height: 50px;
   color: var(--lightish);
   text-shadow: 0 0 5px var(--roarangelite);

@@ -178,7 +178,7 @@ label {
 div.tabs button {
   grid-column: span 1;
   /* ! new */
-  /* height: 50px; */
+  height: auto;
   max-height: 50px;
   color: var(--lightish);
   text-shadow: 0 0 5px var(--roarangelite);

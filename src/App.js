@@ -315,6 +315,7 @@ class App extends React.Component {
     
     return (
       <div className="App">
+      
         <div className="top-bar">
           <div className="bar-container">
             <div className="app-title pl1 ma1" title="a Reference App for Dungeons & Dragons (5e SRD)">
@@ -344,7 +345,7 @@ class App extends React.Component {
             className={`tab ${(spellFilter || !chatOpen) && 'o-50'}`}
             onClick={(e) => {this.onOpenChatPanel(e);}}
             tabIndex="0"
-          ><span>Chat Panel</span>
+          ><span>Party Chat</span>
           </button>
         </div>
         {
