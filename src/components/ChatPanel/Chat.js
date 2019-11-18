@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import queryString from "query-string";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 
 import MessageList from "./Messages/MessageList";
 import Sidebar from "./Sidebar/Sidebar";
 import ChatHeader from "./ChatHeader/ChatHeader";
 import MessageInput from "./MessageInput/MessageInput";
-
+import { rollAttack, rollDamage, getTotalDamage } from './Roll';
 import "./Chat.css";
 
-let socket;
+// let socket;
 
-const Chat = ({ location }) => {
+const Chat = ({ location, socket, action, displayAction }) => {
 	const [name, setName] = useState("");
 	const [room, setRoom] = useState("");
 	const [users, setUsers] = useState("");
@@ -23,7 +23,7 @@ const Chat = ({ location }) => {
 	useEffect(() => {
 		const { name, room } = queryString.parse(location.search);
 
-		socket = io(ENDPOINT);
+		// socket = io(ENDPOINT);
 
 		setRoom(room);
 		setName(name);
@@ -54,9 +54,14 @@ const Chat = ({ location }) => {
 	const sendMessage = e => {
 		e.preventDefault();
 
+    if (action) {
+			socket.emit("sendRollMessage", displayAction);
+		}
+
 		if (message) {
 			socket.emit("sendMessage", message, () => setMessage(""));
-		}
+    }
+    
 	};
 
 	return (

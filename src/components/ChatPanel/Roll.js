@@ -1,4 +1,4 @@
-const rollDamage = (str, damageBonus) => {
+export const rollDamage = (str, damageBonus) => {
 	const results = [];
 	const dd = str.split("d");
 	const count = parseInt(dd[0]);
@@ -11,21 +11,25 @@ const rollDamage = (str, damageBonus) => {
 	}
 	// eslint-disable-next-line
 	console.log(results);
-	return results;
+	alert(results);
+	return results; // an array of integers/numbers
 };
 
-const rollAttack = (bonus) => {
+export const rollAttack = (bonus) => {
 	const d20 = Math.floor(Math.random() * 20 + 1);
 	// eslint-disable-next-line
-	console.log(`${d20} ${bonus >= 0 && '+'} ${bonus}`);
-	return d20 + bonus;
+  console.log(`${d20} ${bonus >= 0 && '+'} ${bonus}`);
+  alert(d20 + bonus);
+	return d20 + bonus; // integer/number
 };
 
-const getTotalDamage = (array) => {
+export const getTotalDamage = (array) => {
 	const reducer = (accumulator, currentValue) => accumulator + currentValue;
 	// eslint-ignore-next-line
-	console.log(array.reduce(reducer));
-	return array.reduce(reducer);
+  console.log(array.reduce(reducer));
+  alert(array.reduce(reducer));
+
+	return array.reduce(reducer); // integer/number
 };
 
 // const quickSortByName = arrayOfObjects => {
@@ -52,9 +56,9 @@ const getTotalDamage = (array) => {
     // todo: SORT by movement speed (number of ft, not type of speed)
     // ! will probably need to make a regex for this
     // let filteredCreatures = creatures.sort((a,b) => (a.name > b.name) ? 1 : -1);
-module.exports = {
-  // quickSortByName,
-	rollDamage,
-	rollAttack,
-  getTotalDamage
-};
+// module.exports = {
+//   // quickSortByName,
+// 	rollDamage,
+// 	rollAttack,
+//   getTotalDamage
+// };

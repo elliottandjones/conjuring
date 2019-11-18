@@ -17,6 +17,7 @@ export default function LoginForm() {
           type="text"
           name="name"
           placeholder="Name"
+          autoComplete={true}
           required
           onChange={e => setName(e.target.value)}
           />
@@ -26,6 +27,7 @@ export default function LoginForm() {
           type="text"
           name="room"
           placeholder="Room"
+          autoComplete={true}
           required
           onChange={e => setRoom(e.target.value)}
           />

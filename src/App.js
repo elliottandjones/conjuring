@@ -11,8 +11,8 @@ import 'firebase/auth';
 import 'firebase/database';
 import { DB_CONFIG } from './config';
 import './App.css';
-import io from "socket.io-client";
-import { rollAttack, rollDamage, getTotalDamage } from './Roll';
+// import io from "socket.io-client";
+// import { rollAttack, rollDamage, getTotalDamage } from './Roll';
 
 const initialTypeValues = {
   aberration: false,
@@ -100,8 +100,6 @@ class App extends React.Component {
       typePicked: true,
       chatOpen: false,
       connected: false,
-      // room: '',
-      // user: '',
       rollAction: {},
 			response: "",
 			post: "",
@@ -191,6 +189,7 @@ class App extends React.Component {
     event.preventDefault();
 
     if (action && creatureName) {
+      alert(`NAME: ${creatureName}, ACTION.NAME: ${action.name}, ACTION.DESC: ${action.desc}`);
       console.log('NAME: ', creatureName);
       console.log('ACTION.NAME: ', action.name);
       console.log('ACTION.DESC: ', action.desc);
