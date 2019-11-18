@@ -1,116 +1,80 @@
-import React from 'react';
-import { MESSAGE_SENT, MESSAGE_RECIEVED, TYPING, PARTY_CHAT } from '../../Events';
-import Sidebar from './Sidebar';
-import Messages from './Messages';
-import MessageInput from './MessageInput';
+import React, { useState, useEffect } from "react";
+import queryString from "query-string";
+import io from "socket.io-client";
 
-export default class Chat extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      chats: [],
-      activeChat: null
-    }
-  }
+import MessageList from "./Messages/MessageList";
+import Sidebar from "./Sidebar/Sidebar";
+import ChatHeader from "./ChatHeader/ChatHeader";
+import MessageInput from "./MessageInput/MessageInput";
 
-  componentDidMount() {
-    const {socket} = this.props;
-    socket.emit(PARTY_CHAT, this.resetChat);
-  }
+import "./Chat.css";
 
-  resetChat = (chat) => {
-    return this.addChat(chat, true);
-  }
+let socket;
 
-  addChat = (chat, reset) => {
-    const { socket } = this.props;
-    const { chats, activeChat } = this.state;
+const Chat = ({ location }) => {
+	const [name, setName] = useState("");
+	const [room, setRoom] = useState("");
+	const [users, setUsers] = useState("");
+	const [message, setMessage] = useState("");
+	const [messages, setMessages] = useState([]);
+	// const ENDPOINT = "https://project-chat-application.herokuapp.com/";
+	const ENDPOINT = "http://localhost:5061";
 
-    const newChats = reset ? [chat] : [...chats, chat];
-    this.setState({chats: newChats, activeChat: reset ? chat : activeChat});
+	useEffect(() => {
+		const { name, room } = queryString.parse(location.search);
 
-    const messageEvent = `${MESSAGE_RECIEVED}-${chat.id}`;
-    const typingEvent = `${TYPING}-${chat.id}`;
+		socket = io(ENDPOINT);
 
-    socket.on(typingEvent, this.updateTypingInChat(chat.id));
-    socket.on(messageEvent, this.addMessageToChat(chat.id));
-  }
+		setRoom(room);
+		setName(name);
 
-  addMessageToChat = (chatId) => {
-    return message => {
-      const {chats} = this.state;
-      let newChats = chats.map((chat) => {
-        if (chat.id === chatId) {
-          chat.messages.push(message);
-        }
-        return chat;
-      });
-      this.setState({chats:newChats});
-    }
-  }
-  updateTypingInChat = (chatId) => {
-    return ({isTyping, user}) => {
-      if (user !== this.props.user.name) {
-        const { chats } = this.state;
-        let newChats = chats.map((chat) => {
-          if (chat.id === chatId) {
-            if (isTyping && !chat.typingUsers.includes(user)) {
-              chat.typingUsers.push(user);
-            } else if (!isTyping && chat.typingUsers.includes(user)) {
-              chat.typingUsers = chat.typingUsers.filter(u => u !== user);
-            }
-          }
-          console.log("CHAT: ",chat, chat.users);
-          return chat;
-        });
-        this.setState({chats:newChats});
-      }
-    }
-  }
+		socket.emit("join", { name, room }, error => {
+			if (error) {
+				alert(error);
+			}
+		});
+	}, [ENDPOINT, location.search]);
 
-  sendMessage = (chatId, message) => {
-    const { socket } = this.props;
-    socket.emit(MESSAGE_SENT, {chatId, message});
-  }
+	useEffect(() => {
+		socket.on("message", message => {
+			setMessages([...messages, message]);
+		});
 
-  sendTyping = (chatId, isTyping) => {
-    const { socket } = this.props;
-    socket.emit(TYPING, {chatId, isTyping});
-  }
+		socket.on("roomData", ({ users }) => {
+			setUsers(users);
+		});
 
-  setActiveChat = (activeChat) => {
-    console.log("ACTIVECHAT: ",activeChat);
-    this.setState({activeChat});
-  }
-  
-  render() {
-    const { chats, activeChat } = this.state;
-    const { user, logout } = this.props;
-    return (
-			<div id="panel" className="panel">
-				<Sidebar user={user} activeChat={activeChat} setActiveChat={this.setActiveChat} chats={chats} logout={logout} />
-				{activeChat !== null ? (
-					<div id="chat" className="chat">
-						<div id="chat-out" className="chat-messages">
-							<Messages messages={activeChat.messages} user={user} typingUsers={activeChat.typingUsers} />
-						</div>
-						<MessageInput
-							sendMessage={message => {
-								this.sendMessage(activeChat.id, message);
-							}}
-							sendTyping={isTyping => {
-								this.sendTyping(activeChat.id, isTyping);
-							}}
-						/>
+		return () => {
+			socket.emit("disconnect");
+
+			socket.off();
+		};
+	}, [messages]);
+
+	const sendMessage = e => {
+		e.preventDefault();
+
+		if (message) {
+			socket.emit("sendMessage", message, () => setMessage(""));
+		}
+	};
+
+	return (
+		<div id="panel-wrapper" className="outerContainer">
+			<div id="panel" className="container">
+				<Sidebar users={users} />
+				<div id="chat">
+					<ChatHeader room={room} />
+					<div id="chat-out">
+						<MessageList messages={messages} name={name} />
 					</div>
-				) : (
-					<div id="chat" className="chat">
-            <h2>activeChat is null, argh</h2>
+					<div id="chat-in">
+					  <MessageInput message={message} setMessage={setMessage} sendMessage={sendMessage} />
           </div>
-				)}
+				</div>
 			</div>
-		);
-  }
-  
-}
+		</div>
+	);
+};
 
+export default Chat;

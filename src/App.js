@@ -6,12 +6,13 @@ import SpellList from './components/SpellList/SpellList';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
 import ChatPanel from './components/ChatPanel/ChatPanel';
-// import Store from './Store';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import { DB_CONFIG } from './config';
 import './App.css';
+import io from "socket.io-client";
+import { rollAttack, rollDamage, getTotalDamage } from './Roll';
 
 const initialTypeValues = {
   aberration: false,

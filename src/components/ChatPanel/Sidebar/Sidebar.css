@@ -1,0 +1,18 @@
+#sidebar {
+	grid-column: 1 / span 1;
+	width: 100%;
+	background: var(--slatep);
+	border: 2px ridge var(--belite);
+	color: var(--lightish);
+	text-shadow: 0 0 5px var(--roarangelite);
+	text-align: center;
+}
+.name-list-item {
+	display: flex;
+	align-items: center;
+}
+@media (min-width: 320px) and (max-width: 1200px) {
+	#sidebar {
+		display: none;
+	}
+}

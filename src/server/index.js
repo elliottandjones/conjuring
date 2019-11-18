@@ -4,8 +4,9 @@ const socketio = require('socket.io');
 const cors = require('cors');
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
-
 const router = require('./router');
+
+const port = process.env.PORT || 5061;
 
 const app = express();
 const server = http.createServer(app);
@@ -38,14 +39,22 @@ io.on('connect', (socket) => {
     callback();
   });
 
+  socket.on('sendRollMessage', (message, callback) => {
+    const user = getUser(socket.id);
+
+    io.to(user.room).emit('message', { user: user.name, text: message });
+
+    callback();
+  })
+
   socket.on('disconnect', () => {
     const user = removeUser(socket.id);
 
     if(user) {
-      io.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
+      io.to(user.room).emit('message', { user: 'InnKeeper', text: `${user.name} has left the Material Plane. Probably.` });
       io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room)});
     }
   })
 });
 
-server.listen(process.env.PORT || 5000, () => console.log(`Server has started.`));
+server.listen(port, () => console.log(`Server has started on *: ${port}`));
