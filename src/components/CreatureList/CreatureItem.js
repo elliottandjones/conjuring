@@ -89,7 +89,7 @@ export default function CreatureItem({creature, displayAction}) {
           {
             creature.actions ? 
               creature.actions.map((action, i) => {
-                return <CreatureAction key={`action_${i}`} action={action} name={creature.name} displayAction={displayAction} isExpanded={isExpanded} />;
+                return <CreatureAction key={`action_${i}`} action={action} creatureName={creature.name} isExpanded={isExpanded} />;
               }) : <p> None, apparently. ¯\_(ツ)_/¯</p>
           }
           {
@@ -98,7 +98,7 @@ export default function CreatureItem({creature, displayAction}) {
                 <p className="pactions" style={{textAlign: "center"}}>Legendary Actions</p>
                 <div className="from-center"><i>.</i></div>
                 {creature.legendary_actions.map((action, i) => {
-                  return <CreatureAction key={`legendary_${i}`} action={action} name={creature.name} displayAction={displayAction} isExpanded={isExpanded} />;
+                  return <CreatureAction key={`legendary_${i}`} action={action} name={creature.name} isExpanded={isExpanded} />;
                 })}
               </React.Fragment>
           }

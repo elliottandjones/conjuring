@@ -6,14 +6,17 @@ import SpellList from './components/SpellList/SpellList';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
 import ChatPanel from './components/ChatPanel/ChatPanel';
+import { CTX } from './Store';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import { DB_CONFIG } from './config';
 import './App.css';
-// import io from "socket.io-client";
-// import { rollAttack, rollDamage, getTotalDamage } from './Roll';
 
+// import Store from './Store';
+// import io from "socket.io-client";
+
+// const socketUrl = "http://localhost:5061";
 const initialTypeValues = {
   aberration: false,
   beast: false,
@@ -100,10 +103,7 @@ class App extends React.Component {
       typePicked: true,
       chatOpen: false,
       connected: false,
-      rollAction: {},
-			response: "",
-			post: "",
-			responseToPost: ""
+      // socket: null
 		};
     this.onTypeChange = this.onTypeChange.bind(this);
   }
@@ -115,8 +115,16 @@ class App extends React.Component {
     this.spellsDB.on('value', snapshot => {
       this.setState({ spells: snapshot.val() });
     });
+
+    // this.initSocket();
   }
   
+  // initSocket = () => {
+  //   const socket = io(socketUrl);
+  //   socket.on('connect', () => console.log("Connected!"));
+  //   this.setState({socket});
+  // }
+
   onOpenChatPanel = (e) => {
     e.preventDefault();
     if (!this.state.chatOpen) {
@@ -185,18 +193,26 @@ class App extends React.Component {
     event.preventDefault();
     this.setState({ action: event.target.value });
   }
-  displayAction = (event, action, creatureName) => {
-    event.preventDefault();
+  // displayAction = (event, action, creatureName) => {
+  //   event.preventDefault();
+  //   // const socket = React.useContext(CTX);
+  //   // console.log(socket.id);
+    
+  //   if (action && creatureName) {
+      
+  //     // socket.emit('sendRollMessage', {action, creatureName}, name)
+  //     // this.displayInChat(action, creatureName);
+  //     // alert(`NAME: ${creatureName}, ACTION.NAME: ${action.name}, ACTION.DESC: ${action.desc}`);
+  //     console.log('NAME: ', creatureName);
+  //     console.log('ACTION.NAME: ', action.name);
+  //     console.log('ACTION.DESC: ', action.desc);
+  //     return [creatureName, action];
+  //   }
+  // }
 
-    if (action && creatureName) {
-      alert(`NAME: ${creatureName}, ACTION.NAME: ${action.name}, ACTION.DESC: ${action.desc}`);
-      console.log('NAME: ', creatureName);
-      console.log('ACTION.NAME: ', action.name);
-      console.log('ACTION.DESC: ', action.desc);
-      return [creatureName, action];
-    }
+  // displayInChat = (action, creatureName) => {
 
-  }
+  // }
 
   filterBySpell = (critters, spell) => {
     if (spell.particular_creatures) {
@@ -242,7 +258,8 @@ class App extends React.Component {
       creatures, spells, spellFilter, spellObject, spellSelected, searchfield,
       crOptions, speedOptions, sizeOptions,
       typeValues, crValue, speedValue, sizeValue,
-      speedLegend, sizeLegend, rollAction, chatOpen
+      speedLegend, sizeLegend, chatOpen, 
+      // socket
     } = this.state;
 
     // filter by name
@@ -315,7 +332,6 @@ class App extends React.Component {
     
     return (
       <div className="App">
-      
         <div className="top-bar">
           <div className="bar-container">
             <div className="app-title pl1 ma1" title="a Reference App for Dungeons & Dragons (5e SRD)">
@@ -364,9 +380,9 @@ class App extends React.Component {
               </div>
             </div>
             : (spellFilter ? <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
-              : (chatOpen && <ChatPanel displayAction={this.displayAction} rollAction={rollAction} />))
+              : (chatOpen && <ChatPanel />))
         }
-        <CreatureList creatures={filteredCreatures} displayAction={this.displayAction} />
+        <CreatureList creatures={filteredCreatures} />
       </div>
     );
   }

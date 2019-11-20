@@ -1,12 +1,12 @@
 import React from 'react';
 import CreatureItem from './CreatureItem';
 
-const CreatureList = ({creatures, displayAction}) => {
+const CreatureList = ({creatures}) => {
   return (
     <div className="creature-list">
       {
         Object.keys(creatures).map((obj, i) => {
-          return <CreatureItem key={creatures[i].index} creature={creatures[i]} displayAction={displayAction} />;
+          return <CreatureItem key={creatures[i].index} creature={creatures[i]} />;
         })
       }
     </div>

@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from "react";
-import queryString from "query-string";
+import React, { useState, useEffect, useContext } from "react";
+import { CTX } from '../../Store';
+// import queryString from "query-string";
 // import io from "socket.io-client";
 
 import MessageList from "./Messages/MessageList";
 import Sidebar from "./Sidebar/Sidebar";
 import ChatHeader from "./ChatHeader/ChatHeader";
 import MessageInput from "./MessageInput/MessageInput";
-import { rollAttack, rollDamage, getTotalDamage } from './Roll';
+// import { rollAttack, rollDamage, getTotalDamage } from './Roll';
 import "./Chat.css";
-
+import {CTX} from '../../Store';
 // let socket;
 
-const Chat = ({ location, socket, action, displayAction }) => {
+const Chat = (props) => {
 	const [name, setName] = useState("");
 	const [room, setRoom] = useState("");
 	const [users, setUsers] = useState("");
 	const [message, setMessage] = useState("");
-	const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([]);
+  const [chatState, updateState] = useContext(CTX);
 	// const ENDPOINT = "https://project-chat-application.herokuapp.com/";
 	const ENDPOINT = "http://localhost:5061";
 
 	useEffect(() => {
-		const { name, room } = queryString.parse(location.search);
+		// const { name, room } = queryString.parse(location.search);
 
 		// socket = io(ENDPOINT);
 
@@ -33,7 +35,8 @@ const Chat = ({ location, socket, action, displayAction }) => {
 				alert(error);
 			}
 		});
-	}, [ENDPOINT, location.search]);
+	}, []);
+	// }, [ENDPOINT, location.search]);
 
 	useEffect(() => {
 		socket.on("message", message => {
@@ -54,9 +57,9 @@ const Chat = ({ location, socket, action, displayAction }) => {
 	const sendMessage = e => {
 		e.preventDefault();
 
-    if (action) {
-			socket.emit("sendRollMessage", displayAction);
-		}
+    // if (action) {
+		// 	socket.emit("sendRollMessage",  displayAction);
+		// }
 
 		if (message) {
 			socket.emit("sendMessage", message, () => setMessage(""));

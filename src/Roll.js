@@ -1,35 +1,28 @@
-export const rollDamage = (str, damageBonus) => {
-	const results = [];
-	const dd = str.split("d");
-	const count = parseInt(dd[0]);
-	const sides = parseInt(dd[1]);
-	for (let i = 0; i < count; i++) {
-		results.push(Math.floor(Math.random() * sides + 1));
-	}
-	if (damageBonus) {
-		results.push(damageBonus);
-	}
-	// eslint-disable-next-line
-	console.log(results);
-	alert(results);
-	return results; // an array of integers/numbers
+export const rollAttack = () => {
+	return Math.floor(Math.random() * 20 + 1); // number
 };
 
-export const rollAttack = (bonus) => {
-	const d20 = Math.floor(Math.random() * 20 + 1);
-	// eslint-disable-next-line
-  console.log(`${d20} ${bonus >= 0 && '+'} ${bonus}`);
-  alert(d20 + bonus);
-	return d20 + bonus; // integer/number
+export const rollDamage = (damageDice, damageBonus, isCrit) => {
+	const results = [];
+	const dd = damageDice.split("d");
+  let count = parseInt(dd[0]);
+  const sides = parseInt(dd[1]);
+
+  if (isCrit){
+    count *= 2;
+  }
+	for (let i = 0; i < count; i++) {
+		results.push(Math.floor(Math.random() * sides + 1));
+  }
+	results.push(damageBonus);
+	// console.log(results);
+	return results; // array of numbers
 };
 
 export const getTotalDamage = (array) => {
 	const reducer = (accumulator, currentValue) => accumulator + currentValue;
-	// eslint-ignore-next-line
-  console.log(array.reduce(reducer));
-  alert(array.reduce(reducer));
-
-	return array.reduce(reducer); // integer/number
+  // console.log(array.reduce(reducer));
+	return array.reduce(reducer); // number
 };
 
 // const quickSortByName = arrayOfObjects => {

@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Store from './Store';
 import * as serviceWorker from './serviceWorker';
 import 'tachyons';
 
 ReactDOM.render(
-  <App />,
+  <Store>
+    <App />
+  </Store>,
   document.getElementById('root')
 );
 
