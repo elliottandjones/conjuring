@@ -1,24 +1,37 @@
 import React from "react";
-// import { BrowserRouter as Router, Route } from "react-router-dom";
-// import io from 'socket.io-client';
-
 import Chat from "./Chat";
 import LoginForm from "./LoginForm/LoginForm";
+import useChat from "../../hooks/useChat";
 
 
-// const ENDPOINT = "http://localhost:5061";
+const ChatPanel = () => {
+  const { messages, room, name, users, sendMessage, sendRollMessage, joinRoom } = useChat();
+  const [proceed, setProceed] = React.useState(false);
+  
+  
+  const handleSubmit = (e, username, room) => {
+    e.preventDefault();
 
-const ChatPanel = ({ action, displayAction }) => {
-  // const [socket, setSocket] = React.useState(null);
+    joinRoom(username, room)
+    setProceed(true);
+  };
 
-  // React.useEffect(() => {
-  //   const s = io(ENDPOINT);
-  //   setSocket(s);
-  // })
 	return (
     <React.Fragment>
-		  <LoginForm socket={socket} />
-			<Chat action={action} displayAction={displayAction} />
+      {
+        !proceed ?
+          <LoginForm handleSubmit={handleSubmit} />
+          : (
+              <Chat
+                name={name}
+                room={room}
+                users={users}
+                messages={messages}
+                sendMessage={sendMessage}
+                sendRollMessage={sendRollMessage}
+                />
+          )
+      }
     </React.Fragment>
 	);
 };

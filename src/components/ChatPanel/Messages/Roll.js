@@ -47,11 +47,6 @@ export const getTotalDamage = (array) => {
     // todo SORT by Challenge Rating (CR)
     // let filteredCreatures = creatures.sort((a,b) => (a.challenge_rating > b.challenge_rating) ? 1 : -1);
     // todo: SORT by movement speed (number of ft, not type of speed)
-    // ! will probably need to make a regex for this
+    // ? will probably want to make a regex for this ? Maybe? A question for another day
     // let filteredCreatures = creatures.sort((a,b) => (a.name > b.name) ? 1 : -1);
-// module.exports = {
-//   // quickSortByName,
-// 	rollDamage,
-// 	rollAttack,
-//   getTotalDamage
-// };
+

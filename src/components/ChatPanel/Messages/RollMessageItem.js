@@ -1,9 +1,9 @@
 import React from 'react';
 import './MessageItem.css';
-import { rollAttack, rollDamage, getTotalDamage } from "../../../Roll";
+import { rollAttack, rollDamage, getTotalDamage } from "./Roll";
 
 // const MessageItem = ({ message: { text, user }, name }) => {
-const RollMessageItem = ({message: {text: {creatureName, action}, user}, name}) => {
+const RollMessageItem = ({message: {text: {creatureName, action}, user}, name, time}) => {
   let isSentByCurrentUser = false;
   let isCrit = false;
 
@@ -16,8 +16,7 @@ const RollMessageItem = ({message: {text: {creatureName, action}, user}, name}) 
   const getAttackRoll = () => {
     let d20 = rollAttack();
     let bonus = action.attack_bonus;
-    // let string = `${d20} ${bonus >= 0 && "+"} ${bonus} = ${d20 + bonus}`;
-    if(d20 == 20) {
+    if(d20 === 20) {
       isCrit = true;
     }
     return `${d20} ${bonus >= 0 && "+"} ${bonus} = ${d20 + bonus}`;
@@ -27,8 +26,9 @@ const RollMessageItem = ({message: {text: {creatureName, action}, user}, name}) 
     const damageArray = rollDamage(action.damage_dice, action.damage_bonus, isCrit);
     console.log(damageArray);
     let damageString = damageArray[0].toString();
-    for(let el of damageArray) {
-      damageString += ` + ${el}`;
+    for(var i of damageArray) {
+      console.log(i);
+      damageString += ` + ${i}`;
     }
     damageString += ` = ${getTotalDamage(damageArray)}`;
     console.log(damageString);
@@ -37,7 +37,7 @@ const RollMessageItem = ({message: {text: {creatureName, action}, user}, name}) 
 
 	return (
 		<div className={`message-container color-white ${isSentByCurrentUser ? "justify-end" : "justify-start"}`}>
-			<p className={`sent-text ${isSentByCurrentUser ? "pr2" : "pl2"}`}>{isSentByCurrentUser ? trimmedName : user}</p>
+			<p className={`sent-text ${isSentByCurrentUser ? "pr2" : "pl2"}`}>{isSentByCurrentUser ? trimmedName : user} at {time}</p>
 			<div className={`message-box ${isSentByCurrentUser ? "you" : "others"}`}>
 				<p className="message-text">{creatureName}</p>
 				<p className="message-text">

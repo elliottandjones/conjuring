@@ -1,4 +1,9 @@
 import React from 'react';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
+import { DB_CONFIG } from './config';
+
 import CreatureList from './components/CreatureList/CreatureList';
 import SearchBox from './components/SearchBox/SearchBox';
 import Select from './components/Select/Select';
@@ -6,15 +11,9 @@ import SpellList from './components/SpellList/SpellList';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
 import ChatPanel from './components/ChatPanel/ChatPanel';
-import { CTX } from './Store';
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
-import { DB_CONFIG } from './config';
+
 import './App.css';
 
-// import Store from './Store';
-// import io from "socket.io-client";
 
 // const socketUrl = "http://localhost:5061";
 const initialTypeValues = {
@@ -189,10 +188,10 @@ class App extends React.Component {
   onSizeSelect = (event) => {
     this.setState({ sizeValue: event.target.value });
   }
-  onActionTaken = (event) => {
-    event.preventDefault();
-    this.setState({ action: event.target.value });
-  }
+  // onActionTaken = (event) => {
+  //   event.preventDefault();
+  //   this.setState({ action: event.target.value });
+  // }
   // displayAction = (event, action, creatureName) => {
   //   event.preventDefault();
   //   // const socket = React.useContext(CTX);
@@ -382,7 +381,7 @@ class App extends React.Component {
             : (spellFilter ? <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
               : (chatOpen && <ChatPanel />))
         }
-        <CreatureList creatures={filteredCreatures} />
+        <CreatureList creatures={filteredCreatures} chatOpen={chatOpen} onOpenChatPanel={this.onOpenChatPanel} />
       </div>
     );
   }

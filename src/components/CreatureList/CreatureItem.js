@@ -3,7 +3,7 @@ import CreatureAction from './CreatureAction';
 import { useToggleHeight } from '../../hooks/useToggle';
 import './CreatureItem.css';
 
-export default function CreatureItem({creature, displayAction}) {
+export default function CreatureItem({creature, chatOpen, onOpenChatPanel}) {
   const heightRef = useRef(null);
   const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef]);
 
@@ -89,7 +89,16 @@ export default function CreatureItem({creature, displayAction}) {
           {
             creature.actions ? 
               creature.actions.map((action, i) => {
-                return <CreatureAction key={`action_${i}`} action={action} creatureName={creature.name} isExpanded={isExpanded} />;
+                return (
+                  <CreatureAction 
+                    key={`action_${i}`} 
+                    action={action} 
+                    creatureName={creature.name} 
+                    isExpanded={isExpanded} 
+                    chatOpen={chatOpen}
+                    onOpenChatPanel={onOpenChatPanel}
+                    />
+                );
               }) : <p> None, apparently. ¯\_(ツ)_/¯</p>
           }
           {
@@ -98,7 +107,16 @@ export default function CreatureItem({creature, displayAction}) {
                 <p className="pactions" style={{textAlign: "center"}}>Legendary Actions</p>
                 <div className="from-center"><i>.</i></div>
                 {creature.legendary_actions.map((action, i) => {
-                  return <CreatureAction key={`legendary_${i}`} action={action} name={creature.name} isExpanded={isExpanded} />;
+                  return (
+                    <CreatureAction 
+                      key={`legendary_${i}`} 
+                      action={action} 
+                      creatureName={creature.name} 
+                      isExpanded={isExpanded} 
+                      chatOpen={chatOpen}
+                      onOpenChatPanel={onOpenChatPanel}
+                      />
+                  );
                 })}
               </React.Fragment>
           }

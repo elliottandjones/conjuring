@@ -1,15 +1,14 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 
 import './LoginForm.css';
 
-export default function LoginForm() {
+export default function LoginForm({handleSubmit}) {
   const [name, setName] = React.useState("");
   const [room, setRoom] = React.useState("");
 
   return (
     <div className="login-wrapper">
-      <div className="login">
+      <form onSubmit={(e) => handleSubmit(e, name, room)} className="login">
         <h1 className="form-header">Join a Room</h1>
         <label htmlFor="name">Name</label>
         <input
@@ -19,6 +18,7 @@ export default function LoginForm() {
           placeholder="Name"
           autoComplete={true}
           required
+          value={name}
           onChange={e => setName(e.target.value)}
           />
         <label htmlFor="room">Room</label>
@@ -29,12 +29,11 @@ export default function LoginForm() {
           placeholder="Room"
           autoComplete={true}
           required
+          value={room}
           onChange={e => setRoom(e.target.value)}
           />
-        <Link onClick={e => (!name || !room) ? e.preventDefault() : null} to={`/chat?name=${name}&room=${room}`}>
           <button className="button" type="submit">Join</button>
-        </Link>
-      </div>
+      </form>
     </div>
   );
 }

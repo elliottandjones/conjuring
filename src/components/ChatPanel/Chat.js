@@ -1,71 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
-import { CTX } from '../../Store';
-// import queryString from "query-string";
-// import io from "socket.io-client";
+import React, { useState, 
+  //useEffect
+} from "react";
 
 import MessageList from "./Messages/MessageList";
 import Sidebar from "./Sidebar/Sidebar";
 import ChatHeader from "./ChatHeader/ChatHeader";
 import MessageInput from "./MessageInput/MessageInput";
-// import { rollAttack, rollDamage, getTotalDamage } from './Roll';
 import "./Chat.css";
-import {CTX} from '../../Store';
-// let socket;
 
-const Chat = (props) => {
-	const [name, setName] = useState("");
-	const [room, setRoom] = useState("");
-	const [users, setUsers] = useState("");
+const Chat = ({ messages, room, name, users, sendMessage, sendRollMessage, joinRoom }) => {
 	const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
-  const [chatState, updateState] = useContext(CTX);
-	// const ENDPOINT = "https://project-chat-application.herokuapp.com/";
-	const ENDPOINT = "http://localhost:5061";
+	// const ENDPOINT = "https://whispering-brook-74854.herokuapp.com/"
 
-	useEffect(() => {
-		// const { name, room } = queryString.parse(location.search);
-
-		// socket = io(ENDPOINT);
-
-		setRoom(room);
-		setName(name);
-
-		socket.emit("join", { name, room }, error => {
-			if (error) {
-				alert(error);
-			}
-		});
-	}, []);
-	// }, [ENDPOINT, location.search]);
-
-	useEffect(() => {
-		socket.on("message", message => {
-			setMessages([...messages, message]);
-		});
-
-		socket.on("roomData", ({ users }) => {
-			setUsers(users);
-		});
-
-		return () => {
-			socket.emit("disconnect");
-
-			socket.off();
-		};
-	}, [messages]);
-
-	const sendMessage = e => {
-		e.preventDefault();
-
-    // if (action) {
-		// 	socket.emit("sendRollMessage",  displayAction);
-		// }
-
-		if (message) {
-			socket.emit("sendMessage", message, () => setMessage(""));
-    }
-    
-	};
 
 	return (
 		<div id="panel-wrapper" className="outerContainer">
@@ -77,8 +23,8 @@ const Chat = (props) => {
 						<MessageList messages={messages} name={name} />
 					</div>
 					<div id="chat-in">
-					  <MessageInput message={message} setMessage={setMessage} sendMessage={sendMessage} />
-          </div>
+						<MessageInput message={message} setMessage={setMessage} sendMessage={sendMessage} />
+					</div>
 				</div>
 			</div>
 		</div>
@@ -86,3 +32,48 @@ const Chat = (props) => {
 };
 
 export default Chat;
+
+	// useEffect(() => {
+	// 	const { name, room } = queryString.parse(location.search);
+
+	// 	socket = io(ENDPOINT);
+
+	// 	setRoom(room);
+	// 	setName(name);
+
+	// 	socket.emit("join", { name, room }, error => {
+	// 		if (error) {
+	// 			alert(error);
+	// 		}
+	// 	});
+	// }, []);
+	// }, [ENDPOINT, location.search]);
+
+	// useEffect(() => {
+	// 	socket.on("message", message => {
+	// 		setMessages([...messages, message]);
+	// 	});
+
+	// 	socket.on("roomData", ({ users }) => {
+	// 		setUsers(users);
+	// 	});
+
+	// 	return () => {
+	// 		socket.emit("disconnect");
+
+	// 		socket.off();
+	// 	};
+	// }, [messages, ENDPOINT]);
+
+	// const sendMessage = e => {
+	// 	e.preventDefault();
+
+	//   // if (action) {
+	// 	// 	socket.emit("sendRollMessage",  displayAction);
+	// 	// }
+
+	// 	if (message) {
+	// 		socket.emit("sendMessage", message, () => setMessage(""));
+	//   }
+
+	// };

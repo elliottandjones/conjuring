@@ -1,27 +1,22 @@
 import React from "react";
-import { CTX } from "../../Store";
-import { rollAttack } from '../../Roll';
+import useChat from "../../hooks/useChat";
+import { rollAttack } from '../ChatPanel/Messages/Roll';
 
 // action.attack_bonus, action.damage_bonus, action.damage_dice
 
 // const CreatureAction = ({action, creatureName, displayAction, isExpanded}) => {
-const CreatureAction = ({action, creatureName, isExpanded}) => {
-  const socket = React.useContext(CTX);
+const CreatureAction = ({action, creatureName, isExpanded, chatOpen, onOpenChatPanel}) => {
+  const {name, room, sendRollMessage} = useChat();
 
-  const sendRollMessage = (e, action, creatureName) => {
-    e.preventDefault();
-
-    if(!socket) {
-      console.log("SOCKET VALUE from CTX: ERROR!!!");
-      console.log('ATTACK ROLL: ' + rollAttack() + ' + ' + action.attack_bonus);
-      alert(rollAttack());
+  const handleClick = (e) => {
+    console.log('ATTACK ROLL: ' + rollAttack() + ' + ' + action.attack_bonus);
+    
+    if ((room === "" || name === "") && !chatOpen) {
+      onOpenChatPanel(e);
+      alert("ATTACK ROLL: " + rollAttack() + " + " + action.attack_bonus);
       alert("To not have to see these alerts everytime you click a monster action, join a chat room. No email or any other personal info required.");
     } else {
-      console.log(socket.id);
-      if (action) {
-        socket.emit("sendRollMessage", { creatureName, action });
-      }
-      
+      sendRollMessage({ creatureName, action });
     }
   };
 
@@ -30,8 +25,7 @@ const CreatureAction = ({action, creatureName, isExpanded}) => {
 		<p>
 			<button 
         className="action-btn"
-        onClick={(e) => sendRollMessage(e, action, creatureName)}
-        // onClick={(e) => displayAction(e, action, creatureName)}
+        onClick={(e) => handleClick(e)}
         tabIndex={!isExpanded ? -1 : 0}
       >
 				<b><i>{action.name}.</i></b>

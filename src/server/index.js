@@ -33,19 +33,19 @@ io.on('connect', (socket) => {
 
   socket.on('sendMessage', (message, callback) => {
     const user = getUser(socket.id);
-
-    io.to(user.room).emit('message', { user: user.name, text: message, isAction:false });
+    console.log("sendMessage called!");
+    io.to(user.room).emit('message', { user: user.name, text: message, isAction:false, time: getTheTime() });
 
     callback();
   });
 
   socket.on('sendRollMessage', ({creature, action}, callback) => {
     const user = getUser(socket.id);
-
-    io.to(user.room).emit('message', { user: user.name, text: {creature, action}, isAction:true });
+    console.log("SendRollMessage called!");
+    io.to(user.room).emit('message', { user: user.name, text: {creature, action}, isAction:true, time: getTheTime() });
 
     callback();
-  })
+  });
 
   socket.on('disconnect', () => {
     const user = removeUser(socket.id);
@@ -54,7 +54,12 @@ io.on('connect', (socket) => {
       io.to(user.room).emit('message', { user: 'Innkeeper', text: `${user.name} has left the Material Plane. Probably.` });
       io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room)});
     }
-  })
+  });
+
+  function getTheTime(date) {
+  	return `${date.getHours()}:${("0" + date.getMinutes()).slice(-2)}`;
+  }
+  
 });
 
 server.listen(port, () => console.log(`Server has started on *: ${port}`));
