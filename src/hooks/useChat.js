@@ -40,7 +40,7 @@ const useChat = () => {
 
     return () => {
       socketRef.current.disconnect();
-      // socketRef.current.off();
+      socketRef.current.off();
     };
   }, []);
 
