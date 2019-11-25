@@ -16,7 +16,7 @@ export default function LoginForm({handleSubmit}) {
           type="text"
           name="name"
           placeholder="Name"
-          autoComplete={true}
+          autoComplete={"true"}
           required
           value={name}
           onChange={e => setName(e.target.value)}
@@ -27,7 +27,7 @@ export default function LoginForm({handleSubmit}) {
           type="text"
           name="room"
           placeholder="Room"
-          autoComplete={true}
+          autoComplete={"true"}
           required
           value={room}
           onChange={e => setRoom(e.target.value)}

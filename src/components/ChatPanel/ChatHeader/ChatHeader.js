@@ -8,7 +8,7 @@ const ChatHeader = ({ room }) => (
       <h3>{room}</h3>
     </div>
     <div className="rightInnerContainer">
-      <a href="/">&close;</a>
+      <a href="/" style={{color: "white"}}>&close;</a>
     </div>
   </div>
 );
