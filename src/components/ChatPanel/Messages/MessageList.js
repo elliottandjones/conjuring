@@ -8,7 +8,7 @@ import RollMessageItem from './RollMessageItem';
 const MessageList = ({ messages, name, isAction }) => (
 	<ScrollToBottom className="messages">
 		{messages.map((message, i) => (
-			<div key={i}>
+			<div key={`message_item_${i}`}>
         {
           !isAction ?
 				    <MessageItem message={message} name={name} />

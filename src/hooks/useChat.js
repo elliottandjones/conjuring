@@ -8,7 +8,7 @@ const useChat = () => {
 	const [messages, setMessages] = useState([]);
   const socketRef = useRef();
   // let socketUrl = "https://whispering-brook-74854.herokuapp.com/";
-  
+  // let socketUrl = "http://localhost:5061";
 
   useEffect(() => {
     socketRef.current = socketIOClient("https://whispering-brook-74854.herokuapp.com/");
@@ -42,7 +42,7 @@ const useChat = () => {
       socketRef.current.disconnect();
       socketRef.current.off();
     };
-  }, []);
+  },[]);
 
   const sendMessage = ({ message }) => {
     socketRef.current.emit("sendMessage", { message });

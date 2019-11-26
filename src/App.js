@@ -11,11 +11,12 @@ import SpellList from './components/SpellList/SpellList';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
 import ChatPanel from './components/ChatPanel/ChatPanel';
+// import ChatPanel from './components/ChatPanel/ChatContainer';
+import Store from './Store';
 
 import './App.css';
 
 
-// const socketUrl = "http://localhost:5061";
 const initialTypeValues = {
   aberration: false,
   beast: false,
@@ -117,12 +118,6 @@ class App extends React.Component {
 
     // this.initSocket();
   }
-  
-  // initSocket = () => {
-  //   const socket = io(socketUrl);
-  //   socket.on('connect', () => console.log("Connected!"));
-  //   this.setState({socket});
-  // }
 
   onOpenChatPanel = (e) => {
     e.preventDefault();
@@ -331,6 +326,7 @@ class App extends React.Component {
     
     return (
       <div className="App">
+      <Store>
         <div className="top-bar">
           <div className="bar-container">
             <div className="app-title pl1 ma1" title="a Reference App for Dungeons & Dragons (5e SRD)">
@@ -382,6 +378,7 @@ class App extends React.Component {
               : (chatOpen && <ChatPanel />))
         }
         <CreatureList creatures={filteredCreatures} chatOpen={chatOpen} onOpenChatPanel={this.onOpenChatPanel} />
+      </Store>
       </div>
     );
   }

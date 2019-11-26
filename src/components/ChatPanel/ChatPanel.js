@@ -1,18 +1,18 @@
 import React from "react";
 import Chat from "./Chat";
 import LoginForm from "./LoginForm/LoginForm";
-import useChat from "../../hooks/useChat";
-
+// import useChat from "../../hooks/useChat";
+import { CTX } from '../../Store';
 
 const ChatPanel = () => {
-  const { messages, room, name, users, sendMessage, sendRollMessage, joinRoom } = useChat();
+  const context = React.useContext(CTX);
   const [proceed, setProceed] = React.useState(false);
   
   
   const handleSubmit = (e, username, room) => {
     e.preventDefault();
-
-    joinRoom(username, room)
+    
+    context.joinRoom(username, room);
     setProceed(true);
   };
 
@@ -23,12 +23,12 @@ const ChatPanel = () => {
           <LoginForm handleSubmit={handleSubmit} />
           : (
               <Chat
-                name={name}
-                room={room}
-                users={users}
-                messages={messages}
-                sendMessage={sendMessage}
-                sendRollMessage={sendRollMessage}
+                name={context.name}
+                room={context.room}
+                users={context.users}
+                messages={context.messages}
+                sendMessage={context.sendMessage}
+                sendRollMessage={context.sendRollMessage}
                 />
           )
       }
