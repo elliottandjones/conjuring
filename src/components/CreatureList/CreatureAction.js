@@ -18,7 +18,7 @@ const CreatureAction = ({action, creatureName, isExpanded, chatOpen, onOpenChatP
       alert("ATTACK ROLL: " + rollAttack() + " + " + action.attack_bonus);
       alert("To not have to see these alerts everytime you click a monster action, join a chat room. No email or any other personal info required.");
     } else {
-      context.sendRollMessage({ creatureName, action });
+      return context.sendRollMessage({ creatureName, action });
     }
   };
 

@@ -1,18 +1,19 @@
 import React from "react";
 import './MessageItem.css';
 
-const MessageItem = ({ message: { text, user }, name, time }) => {
+// const MessageItem = ({  name, message }) => {
+const MessageItem = (props) => {
 	let isSentByCurrentUser = false;
-  
-	const trimmedName = name.trim().toLowerCase();
+  const { username, text, createdAt } = props.message;
+	const trimmedName = props.name.trim().toLowerCase();
 
-	if (user === trimmedName) {
+	if (username === trimmedName) {
 		isSentByCurrentUser = true;
 	}
 
 	return (
 		<div className={`message-container color-white ${isSentByCurrentUser ? "justify-end" : "justify-start"}`}>
-			<p className={`sent-text ${isSentByCurrentUser ? "pr2" : "pl2"}`}>{isSentByCurrentUser ? trimmedName : user} at {time}</p>
+			<p className={`sent-text ${isSentByCurrentUser ? "pr2" : "pl2"}`}>{isSentByCurrentUser ? trimmedName : username} at {createdAt}</p>
 			<div className={`message-box ${isSentByCurrentUser ? 'you':'others'}`}>
 				<p className="message-text">{text}</p>
 			</div>

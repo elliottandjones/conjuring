@@ -6,13 +6,14 @@ import { CTX } from '../../Store';
 
 const ChatPanel = () => {
   const context = React.useContext(CTX);
+	const [text, setText] = React.useState("");
   const [proceed, setProceed] = React.useState(false);
   
   
-  const handleSubmit = (e, username, room) => {
+  const handleSubmit = (e, name, room) => {
     e.preventDefault();
-    
-    context.joinRoom(username, room);
+    console.log(context);
+    context.joinRoom({name, room});
     setProceed(true);
   };
 
@@ -23,7 +24,9 @@ const ChatPanel = () => {
           <LoginForm handleSubmit={handleSubmit} />
           : (
               <Chat
-                name={context.name}
+                text={text}
+                setText={setText}
+                username={context.username}
                 room={context.room}
                 users={context.users}
                 messages={context.messages}

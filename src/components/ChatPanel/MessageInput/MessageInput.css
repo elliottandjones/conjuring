@@ -1,0 +1,11 @@
+.form {
+	widows: 100%;
+	background-color: var(--slatep);
+	color: white;
+	border: 2px inset var(--verdantlite);
+}
+.send {
+	background-color: var(--slatep);
+	color: white;
+	border: 2px inset var(--roarange);
+}

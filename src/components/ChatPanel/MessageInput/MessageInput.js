@@ -2,17 +2,24 @@ import React from "react";
 
 import "./MessageInput.css";
 
-const MessageInput = ({ setMessage, sendMessage, message }) => (
-  <form className="form">
+const MessageInput = ({ setText, sendMessage, text }) => (
+  <form 
+    onSubmit={(e) => {
+      e.preventDefault();
+      sendMessage({text});
+      setText("");
+    }} 
+    className="form"
+  >
     <input
       className="message-input"
       type="text"
       placeholder="Type a message..."
-      value={message}
-      onChange={({ target: { value } }) => setMessage(value)}
-      onKeyPress={e => (e.key === "Enter" ? sendMessage(e) : null)}
+      value={text}
+      onChange={({ target: { value } }) => setText(value)}
+      onKeyPress={e => (e.key === "Enter" ? sendMessage({text}) : null)}
       />
-    <button className="send" onClick={e => sendMessage(e)}>
+    <button className="send" type="submit">
       Send
     </button>
   </form>

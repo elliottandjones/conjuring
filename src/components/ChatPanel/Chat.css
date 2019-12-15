@@ -44,3 +44,6 @@
 	overflow: auto;
 	flex: auto;
 }
+li {
+	list-style-type: none;
+}

@@ -4,11 +4,13 @@ import './ChatHeader.css';
 
 const ChatHeader = ({ room }) => (
   <div className="chat-header">
-    <div className="leftInnerContainer">
+    {/* <div className="leftInnerContainer"> */}
       <h3>{room}</h3>
-    </div>
+    {/* </div> */}
     <div className="rightInnerContainer">
-      <a href="/" style={{color: "white"}}>&close;</a>
+      <a href="/" className="close-chat">
+      &times;
+      </a>
     </div>
   </div>
 );

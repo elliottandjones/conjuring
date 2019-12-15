@@ -4,6 +4,8 @@ import "./Sidebar.css";
 
 const Sidebar = ({ users }) => (
 	<div id="sidebar">
+    online
+    <hr />
 		{users ? (
 			<ul className="name-list">
 				{users.map(({ name }) => (
@@ -11,9 +13,9 @@ const Sidebar = ({ users }) => (
 						<p>{name}</p>
 					</li>
 				))}
-				<li className="name-list-item-count">
-					Users present: <span>{users.length}</span>
-				</li>
+				{/* <li className="user-count">
+					Users: <span>{users.length}</span>
+				</li> */}
 			</ul>
 		) : null}
 	</div>

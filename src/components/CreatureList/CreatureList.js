@@ -1,7 +1,7 @@
 import React from 'react';
 import CreatureItem from './CreatureItem';
 
-const CreatureList = ({creatures, chatOpen, onOpenChanelPanel}) => {
+const CreatureList = ({creatures, chatOpen, onOpenChatPanel}) => {
   return (
     <div className="creature-list">
       {
@@ -11,7 +11,7 @@ const CreatureList = ({creatures, chatOpen, onOpenChanelPanel}) => {
               key={creatures[i].index} 
               creature={creatures[i]} 
               chatOpen={chatOpen} 
-              onOpenChanelPanel={onOpenChanelPanel}
+              onOpenChatPanel={onOpenChatPanel}
               />
           );
         })

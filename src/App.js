@@ -4,10 +4,11 @@ import 'firebase/auth';
 import 'firebase/database';
 import { DB_CONFIG } from './config';
 
+import Loader from './components/Loader/Loader';
 import CreatureList from './components/CreatureList/CreatureList';
+import SpellList from './components/SpellList/SpellList';
 import SearchBox from './components/SearchBox/SearchBox';
 import Select from './components/Select/Select';
-import SpellList from './components/SpellList/SpellList';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
 import ChatPanel from './components/ChatPanel/ChatPanel';
@@ -40,6 +41,7 @@ class App extends React.Component {
     this.creaturesDB = this.app.database().ref().child('creatures');
     this.spellsDB = this.app.database().ref().child('spells');
     this.state = {
+      loading: true,
 			creatures: [],
 			spells: [],
 			searchfield: "",
@@ -109,10 +111,15 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.creaturesDB.on('value', snapshot => {
-      this.setState({ creatures: snapshot.val() });
+    this.creaturesDB.on('value', (snapshot) => {
+      this.setState({ creatures: snapshot.val() }, () => {
+        this.setState({loading:false}, () => {
+          console.log(this.state.loading);
+        });
+      });
     });
-    this.spellsDB.on('value', snapshot => {
+    // .then(() => this.setState({loading:false}));
+    this.spellsDB.on('value', (snapshot) => {
       this.setState({ spells: snapshot.val() });
     });
 
@@ -325,8 +332,8 @@ class App extends React.Component {
     }
     
     return (
-      <div className="App">
       <Store>
+      <div className="App">
         <div className="top-bar">
           <div className="bar-container">
             <div className="app-title pl1 ma1" title="a Reference App for Dungeons & Dragons (5e SRD)">
@@ -377,9 +384,13 @@ class App extends React.Component {
             : (spellFilter ? <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
               : (chatOpen && <ChatPanel />))
         }
-        <CreatureList creatures={filteredCreatures} chatOpen={chatOpen} onOpenChatPanel={this.onOpenChatPanel} />
-      </Store>
+        {
+          this.state.loading ?
+            <Loader />
+            : <CreatureList creatures={filteredCreatures} chatOpen={chatOpen} onOpenChatPanel={this.onOpenChatPanel} />
+        }
       </div>
+      </Store>
     );
   }
 }

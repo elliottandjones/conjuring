@@ -3,7 +3,7 @@ const conjureChatMessage = (name, text) => {
 		name,
     text,
     isAction: false,
-		createdAt: getTheTime(new Date().now())
+		createdAt: getTheTime()
 	};
 };
 
@@ -13,11 +13,12 @@ const conjureRollMessage = (name, creatureName, action) => {
     creatureName,
     action,
     isAction: true,
-		createdAt: getTheTime(new Date().now())
+		createdAt: getTheTime()
 	};
 };
 
-function getTheTime(date) {
+function getTheTime() {
+  let date = new Date(Date.now());
   console.log(`${date.getHours()}:${("0" + date.getMinutes()).slice(-2)}`);
   return `${date.getHours()}:${("0" + date.getMinutes()).slice(-2)}`;
 }

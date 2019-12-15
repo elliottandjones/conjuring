@@ -3,7 +3,7 @@ import './MessageItem.css';
 import { rollAttack, rollDamage, getTotalDamage } from "./Roll";
 
 // const MessageItem = ({ message: { text, user }, name }) => {
-const RollMessageItem = ({message: {text: {creatureName, action}, user}, name, time}) => {
+const RollMessageItem = ({message: {user="inkeeper", text: {creatureName, action}}, name, time}) => {
   let isSentByCurrentUser = false;
   let isCrit = false;
 
@@ -12,7 +12,12 @@ const RollMessageItem = ({message: {text: {creatureName, action}, user}, name, t
 	if (user === trimmedName) {
 		isSentByCurrentUser = true;
   }
-  
+  //die face-1  html code:  &#9856;
+  //die face-2  html code:  &#9857;
+  //die face-3  html code:  &#9858;
+  //die face-4  html code:  &#9859;
+  //die face-5  html code:  &#9860;
+  //die face-6  html code:  &#9861;
   const getAttackRoll = () => {
     let d20 = rollAttack();
     let bonus = action.attack_bonus;
