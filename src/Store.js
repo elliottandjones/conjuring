@@ -1,5 +1,6 @@
 import React from "react";
 import socketIOClient from 'socket.io-client';
+// import useSocket from 'use-socket.io-client';
 import { useDidMount } from '@withvoid/melting-pot';
 
 export const CTX = React.createContext();
@@ -7,13 +8,14 @@ export const CTX = React.createContext();
 // const io = socketIOClient()
 
 const Store = (props) => {
-  const [username, setName] = React.useState("");
+  const [username, setUsername] = React.useState("");
 	const [room, setRoom] = React.useState("");
 	const [users, setUsers] = React.useState("");
 	const [messages, setMessages] = React.useState([]);
   
 	// const [socket] = React.useSocket("https://whispering-brook-74854.herokuapp.com/");
   const [socket] = React.useState(socketIOClient("http://localhost:5061"));
+  // const [socket] = useSocket("http://localhost:5061");
   
   useDidMount(() => {
     socket.on('message', ({username, text}) => {
@@ -30,7 +32,7 @@ const Store = (props) => {
 		});
 		socket.on("joinRoom", ({ username, room }) => {
       console.log(`socket.on("joinRoom"), from CLIENT`)
-			setName(username);
+			setUsername(username);
 			setRoom(room);
 		});
 		socket.on("roomData", ({ users }) => {
@@ -52,8 +54,8 @@ const Store = (props) => {
       console.log(`MESSAGE SENT, from CLIENT: ${username}: ${text}`);
     });
 	};
-	const sendRollMessage = ({username, creatureName, action }) => {
-		socket.emit("sendRollMessage", {username, creatureName, action }, error => {
+	const sendRollMessage = ({ username, creatureName, action }) => {
+		socket.emit("sendRollMessage", { username, creatureName, action }, error => {
       if (error) {
         return console.log("ERROR from CLIENT: ", error)
       }

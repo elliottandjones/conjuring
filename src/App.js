@@ -12,8 +12,8 @@ import Select from './components/Select/Select';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
 import ChatPanel from './components/ChatPanel/ChatPanel';
+// import Store from './Store';
 // import ChatPanel from './components/ChatPanel/ChatContainer';
-import Store from './Store';
 
 import './App.css';
 
@@ -110,19 +110,33 @@ class App extends React.Component {
     this.onTypeChange = this.onTypeChange.bind(this);
   }
 
-  componentDidMount() {
-    this.creaturesDB.on('value', (snapshot) => {
-      this.setState({ creatures: snapshot.val() }, () => {
-        this.setState({loading:false}, () => {
-          console.log(this.state.loading);
-        });
-      });
-    });
-    // .then(() => this.setState({loading:false}));
-    this.spellsDB.on('value', (snapshot) => {
-      this.setState({ spells: snapshot.val() });
-    });
+  // Firebase data is retrieved by attaching an 
+  // * asynchronous listener to a firebase.database.Reference. 
+  // The listener is triggered once for the initial state of 
+  // the data and again anytime the data changes.
 
+  // componentDidMount() {
+  //   this.spellsDB.once('value', snapshot => this.setState({ spells: snapshot.val() }));
+
+  //   this.creaturesDB.once('value', snapshot => this.setState({ creatures: snapshot.val() }))
+  //     .then(() => this.setState({ loading:false }))
+  //     .catch(err => {throw new Error('High level error'+err.message)})
+  //     .catch(err => console.log(err));
+  //   // this.initSocket();
+  // }
+  async componentDidMount() {
+    const s = await this.spellsDB.once('value', snapshot => this.setState({spells: snapshot.val()}));
+
+    const c = await this.creaturesDB.once('value', snapshot => this.setState({creatures: snapshot.val()}));
+
+    if(s & c) {
+      this.setState({ loading:false })
+    } else {
+      console.log('ERROR in componentDidMount async/await')
+    }
+      // .then(() => this.setState({ loading:false }))
+      // .catch(err => {throw new Error('High level error'+err.message)})
+      // .catch(err => console.log(err));
     // this.initSocket();
   }
 
@@ -332,7 +346,6 @@ class App extends React.Component {
     }
     
     return (
-      <Store>
       <div className="App">
         <div className="top-bar">
           <div className="bar-container">
@@ -390,7 +403,6 @@ class App extends React.Component {
             : <CreatureList creatures={filteredCreatures} chatOpen={chatOpen} onOpenChatPanel={this.onOpenChatPanel} />
         }
       </div>
-      </Store>
     );
   }
 }

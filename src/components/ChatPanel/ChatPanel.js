@@ -1,7 +1,6 @@
 import React from "react";
 import Chat from "./Chat";
 import LoginForm from "./LoginForm/LoginForm";
-// import useChat from "../../hooks/useChat";
 import { CTX } from '../../Store';
 
 const ChatPanel = () => {

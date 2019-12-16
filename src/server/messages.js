@@ -1,4 +1,4 @@
-const conjureChatMessage = (name, text) => {
+const conjureChatMessage = (name="test-name", text="test text") => {
 	return {
 		name,
     text,
@@ -7,7 +7,7 @@ const conjureChatMessage = (name, text) => {
 	};
 };
 
-const conjureRollMessage = (name, creatureName, action) => {
+const conjureRollMessage = (name="test-name-roll", creatureName="Dwayne", action={}) => {
 	return {
 		name,
     creatureName,
@@ -19,7 +19,7 @@ const conjureRollMessage = (name, creatureName, action) => {
 
 function getTheTime() {
   let date = new Date(Date.now());
-  console.log(`${date.getHours()}:${("0" + date.getMinutes()).slice(-2)}`);
+  // console.log(`${date.getHours()}:${("0" + date.getMinutes()).slice(-2)}`);
   return `${date.getHours()}:${("0" + date.getMinutes()).slice(-2)}`;
 }
 

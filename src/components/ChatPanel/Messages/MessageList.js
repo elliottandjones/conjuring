@@ -8,12 +8,12 @@ import RollMessageItem from './RollMessageItem';
 const MessageList = ({ messages, username }) => (
 	<ScrollToBottom className="messages">
     <ul style={{ listStyleType: 'none' }}>
-      {messages.map((message, i) => (
-        <li key={`message_item_${i}`}>
+      {messages.map((message, index) => (
+        <li key={`message_item_${index}`}>
           {
             !message.isAction ?
-              <MessageItem message={message} name={username} />
-              : <RollMessageItem message={message} name={username} />
+              <MessageItem username={username} message={message} />
+              : <RollMessageItem username={username} message={message} />
           }
         </li>
 		  ))}
