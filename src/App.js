@@ -11,12 +11,11 @@ import SearchBox from './components/SearchBox/SearchBox';
 import Select from './components/Select/Select';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
-import ChatPanel from './components/ChatPanel/ChatPanel';
+// import ChatPanel from './components/ChatPanel/ChatPanel';
 // import Store from './Store';
-// import ChatPanel from './components/ChatPanel/ChatContainer';
+import ChatPanel from './components/ChatPanel/ChatContainer/ChatContainer';
 
 import './App.css';
-
 
 const initialTypeValues = {
   aberration: false,
@@ -115,30 +114,16 @@ class App extends React.Component {
   // The listener is triggered once for the initial state of 
   // the data and again anytime the data changes.
 
-  // componentDidMount() {
-  //   this.spellsDB.once('value', snapshot => this.setState({ spells: snapshot.val() }));
+  componentDidMount() {
+    this.spellsDB.once('value', snapshot => this.setState({ spells: snapshot.val() }));
 
-  //   this.creaturesDB.once('value', snapshot => this.setState({ creatures: snapshot.val() }))
-  //     .then(() => this.setState({ loading:false }))
-  //     .catch(err => {throw new Error('High level error'+err.message)})
-  //     .catch(err => console.log(err));
-  //   // this.initSocket();
-  // }
-  async componentDidMount() {
-    const s = await this.spellsDB.once('value', snapshot => this.setState({spells: snapshot.val()}));
-
-    const c = await this.creaturesDB.once('value', snapshot => this.setState({creatures: snapshot.val()}));
-
-    if(s & c) {
-      this.setState({ loading:false })
-    } else {
-      console.log('ERROR in componentDidMount async/await')
-    }
-      // .then(() => this.setState({ loading:false }))
-      // .catch(err => {throw new Error('High level error'+err.message)})
-      // .catch(err => console.log(err));
+    this.creaturesDB.once('value', snapshot => this.setState({ creatures: snapshot.val() }))
+      .then(() => this.setState({ loading:false }))
+      .catch(err => {throw new Error('High level error'+err.message)})
+      .catch(err => console.log(err));
     // this.initSocket();
   }
+  
 
   onOpenChatPanel = (e) => {
     e.preventDefault();

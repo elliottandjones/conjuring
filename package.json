@@ -15,8 +15,10 @@
 		"react-router-dom": "^5.1.2",
 		"react-scripts": "^3.3.0",
 		"react-scroll-to-bottom": "^1.3.2",
+		"react-use-localstorage": "^3.4.1",
 		"socket.io": "^2.3.0",
 		"tachyons": "^4.11.1",
+		"use-clippy": "^1.0.4",
 		"use-immer": "^0.3.5",
 		"use-socket.io-client": "^1.0.4"
 	},
