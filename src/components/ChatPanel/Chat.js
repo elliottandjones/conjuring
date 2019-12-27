@@ -7,22 +7,24 @@ import MessageInput from "./MessageInput/MessageInput";
 
 import "./Chat.css";
 
-const Chat = ({ text, setText, messages, room, username, users, sendMessage }) => (
-	<div id="panel-wrapper" className="outerContainer">
-		<div id="panel" className="container">
-			<Sidebar users={users} />
-			<div id="chat">
-				<div id="chat-out">
-				  <ChatHeader room={room} />
-					<MessageList messages={messages} username={username} />
-				</div>
-				<div id="chat-in">
-					<MessageInput text={text} setText={setText} sendMessage={sendMessage} />
-				</div>
-			</div>
-		</div>
-	</div>
-);
+const Chat = ({ text, setText, messages, room, username, users, sendMessage }) => {
+  return (
+    <div id="panel-wrapper" className="outerContainer">
+      <div id="panel" className="container">
+        <Sidebar users={users} />
+        <div id="chat">
+          <div id="chat-out">
+            <ChatHeader room={room} />
+            <MessageList messages={messages} username={username} />
+          </div>
+          <div id="chat-in">
+            <MessageInput text={text} setText={setText} sendMessage={sendMessage} />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+};
 
 export default Chat;
 

@@ -1,0 +1,44 @@
+.login-wrapper {
+	justify-content: center;
+	text-align: center;
+	height: auto;
+	align-items: center;
+	display: grid;
+	grid-row: 3 / -1;
+	grid-column: 1 / span 5;
+	margin: 0 9px;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.login {
+	width: 80%;
+}
+
+.form-header {
+	padding-bottom: 15px;
+}
+
+.input-login {
+	width: 100%;
+	padding: 15px 20px;
+}
+
+.button {
+	/* ! new */
+	height: auto;
+	max-height: 50px;
+	color: var(--lightish) !important;
+	text-shadow: 0 0 5px var(--roarangelite);
+	background: var(--slatep) !important;
+	border: 2px solid var(--belite);
+	display: inline-block;
+	align-content: center;
+	justify-content: center;
+	width: 50%;
+	margin: 3px 3px;
+	padding: 8px 0;
+	cursor: pointer;
+	vertical-align: middle;
+}

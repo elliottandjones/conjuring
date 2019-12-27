@@ -92,8 +92,8 @@ export default function CreatureItem({creature, chatOpen, onOpenChatPanel}) {
                 return (
                   <CreatureAction 
                     key={`action_${i}`} 
-                    action={action} 
                     creatureName={creature.name} 
+                    action={action}
                     isExpanded={isExpanded} 
                     chatOpen={chatOpen}
                     onOpenChatPanel={onOpenChatPanel}
@@ -110,8 +110,8 @@ export default function CreatureItem({creature, chatOpen, onOpenChatPanel}) {
                   return (
                     <CreatureAction 
                       key={`legendary_${i}`} 
-                      action={action} 
                       creatureName={creature.name} 
+                      action={action}
                       isExpanded={isExpanded} 
                       chatOpen={chatOpen}
                       onOpenChatPanel={onOpenChatPanel}

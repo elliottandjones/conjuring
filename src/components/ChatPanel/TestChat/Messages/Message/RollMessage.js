@@ -1,9 +1,8 @@
 import React from 'react';
-import './MessageItem.css';
 import { rollAttack, rollDamage, getTotalDamage } from "./Roll";
 
 // const MessageItem = ({ message: { text, user }, name }) => {
-const RollMessageItem = ({message: {user="inkeeper", text: {creatureName, action}}, name, time}) => {
+const RollMessageItem = ({user, message: {text: {creatureName, action}}, name, time}) => {
   let isSentByCurrentUser = false;
   let isCrit = false;
 
@@ -37,16 +36,16 @@ const RollMessageItem = ({message: {user="inkeeper", text: {creatureName, action
 
 	return (
 		<div className={`message-container color-white ${isSentByCurrentUser ? "justify-end" : "justify-start"}`}>
-			<p className={`sent-text ${isSentByCurrentUser ? "pr2" : "pl2"}`}>{isSentByCurrentUser ? trimmedName : user} at {time}</p>
-			<div className={`message-box ${isSentByCurrentUser ? "you" : "others"}`}>
-				<p className="message-text">{creatureName}</p>
-				<p className="message-text">
+			<p className={`sentText ${isSentByCurrentUser ? "pr2" : "pl2"}`}>{isSentByCurrentUser ? trimmedName : user} at {time}</p>
+			<div className={`messageBox ${isSentByCurrentUser ? "you" : "others"}`}>
+				<p className="messageText">{creatureName}</p>
+				<p className="messageText">
 					<span>{action.name}</span>: {action.desc}
 				</p>
 				{action.attack_bonus && action.damage_bonus && action.damage_dice ? (
 					<React.Fragment>
-						<p className={`message-text ${isCrit && "ba"}`}>Attack: {isCrit ? getAttackRoll + " Critical Hit!" : getAttackRoll}</p>
-						<p className={`message-text ${isCrit && "ba"}`}>Damage: {getDamageRoll}</p>
+						<p className={`messageText ${isCrit && "ba"}`}>Attack: {isCrit ? getAttackRoll + " Critical Hit!" : getAttackRoll}</p>
+						<p className={`messageText ${isCrit && "ba"}`}>Damage: {getDamageRoll}</p>
 					</React.Fragment>
 				) : (
 					<p style={{ fontSize: "0.8em" }}>

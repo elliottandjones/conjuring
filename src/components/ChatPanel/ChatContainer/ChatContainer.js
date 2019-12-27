@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import useLocalStorage from 'react-use-localstorage';
 import useSocket from 'use-socket.io-client';
 import { useImmer } from 'use-immer';
 import { useOnlineStatus, useWindowSize } from '@withvoid/melting-pot';
 import useClippy from 'use-clippy';
 
-import './Chat.css';
+import '../Chat.css';
 
 const Messages = props => { 
   const [ clipboard, setClipboard ] = useClippy();
@@ -14,9 +14,9 @@ const Messages = props => {
 		m[0] !== "" ? (
 			<li key={`messages_${m[0]}_${index}`}>
 				<strong>{m[0]}</strong> :
-				<a
+				<button
 					onClick={(event) => {
-            event.preventDefault()
+            event.preventDefault();
 						setClipboard(`${m[1]}`);
 					}}
 					href="#"
@@ -24,7 +24,7 @@ const Messages = props => {
 					<i style={{ float: "right", color: "black" }} className=" material-icons">
 						content_copy
 					</i>
-				</a>{" "}
+				</button>{" "}
 				<div className="innermsg">{m[1]}</div>
 			</li>
 		) : <li key={`messages_${m[0]}_${index}`} className="update">{m[1]}</li>
@@ -46,7 +46,7 @@ export default () => {
   const { online } = useOnlineStatus();
   const { width } = useWindowSize();
 
-  useEffect(()=>{
+  React.useEffect(()=>{
     socket.connect();
 
     if(id){
@@ -86,14 +86,17 @@ export default () => {
     })
   },0);
 
-  const handleClippy = () => {
-
-  }
+  // const addToInput = () => {
+  //   const input = document.getElementById('m');
+  //   if(input.value.trim() !== '') {
+  //     input.value = clipboard;
+  //   }
+  // }
 
   const handleSubmit = e => {
     e.preventDefault();
-    const name = document.querySelector('#name').value.trim();
-    const room_value = document.querySelector('#room').value.trim();
+    const name = document.getElementById('name').value.trim();
+    const room_value = document.getElementById('room').value.trim();
     console.log(name);
     if (!name) {
       return alert("Name can't be empty");
@@ -105,7 +108,7 @@ export default () => {
 
   const handleSend = e => {
     e.preventDefault();
-    const input = document.querySelector('#m');
+    const input = document.getElementById('m');
     if(input.value.trim() !== ''){
       socket.emit('chat message',input.value,room);
       input.value = '';
@@ -123,7 +126,7 @@ export default () => {
   return id !== '' ? (
     <section style={{display:'flex',flexDirection:'row'}} >
       <ul id="messages"><Messages data={messages} /></ul>
-      <ul id="online"> <a onClick={()=>logOut()} href='#'><div style={{float:'right'}}>❌</div></a> {online ? '❤️ You are Online' : '💛 You are Offline'} <hr/><Online data={onlineList} /> </ul>
+      <ul id="online"> <button onClick={()=>logOut()} href='#'><div style={{float:'right'}}>❌</div></button> {online ? 'You are Online' : 'You are Offline'} <hr/><Online data={onlineList} /> </ul>
       <div id="sendform">
         <form onSubmit={e => handleSend(e)} style={{display: 'flex'}}>
             <input id="m" />

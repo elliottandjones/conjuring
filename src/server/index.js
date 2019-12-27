@@ -1,28 +1,29 @@
-const path = require("path");
+// const path = require("path");
 const http = require("http");
 const express = require("express");
-// const cors = require("cors");
+const cors = require("cors");
 const socketio = require("socket.io");
+const router = require('./router');
+
 const { conjureChatMessage, conjureRollMessage } = require("./messages");
 const { addUser, removeUser, getUser, getUsersInRoom } = require("./users");
 
-// https://whispering-brook-74854.herokuapp.com/
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 const port = process.env.PORT || 5061;
+// https://whispering-brook-74854.herokuapp.com/
 
-const publicDirectoryPath = path.join(__dirname, "../../public");
-app.use(express.static(publicDirectoryPath));
-
-
+app.use(cors());
+app.options('*', cors());
+app.use(router);
 
 io.on("connection", (socket) => {
   console.log("New WebSocket connection: " + socket.id);
   
-  socket.on("join", (options, callback) => {
+  socket.on("join", ({name, room}, callback) => {
     console.log("socket.on('join'), from SERVER");
-    const { error, user } = addUser({ id: socket.id, ...options });
+    const { error, user } = addUser({ id: socket.id, name, room});
 
     if(error) return callback(error);
 
@@ -38,18 +39,18 @@ io.on("connection", (socket) => {
     callback();
   });
 
-  socket.on("sendMessage", (message, callback) => {
+  socket.on("sendMessage", (text, callback) => {
     const user = getUser(socket.id);
-    io.to(user.room).emit("message", conjureChatMessage(user.name, message));
+    io.to(user.room).emit("message", conjureChatMessage(user.name, text));
     
     console.log("sendMessage fired, from SERVER");
-    console.log(conjureChatMessage(user.name, message));
+    console.log(conjureChatMessage(user.name, text));
     callback();
   });
 
-  socket.on("sendRollMessage", (rollData, callback) => {
+  socket.on("sendRollMessage", ({creatureName, action}, callback) => {
     const user = getUser(socket.id);
-    io.to(user.room).emit("message", conjureRollMessage(user.name, rollData.creatureName, rollData.action));
+    io.to(user.room).emit("message", conjureRollMessage(user.name, creatureName, action));
     
     console.log("SendRollMessage fired, from SERVER");
     callback();

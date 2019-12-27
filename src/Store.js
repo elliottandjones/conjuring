@@ -1,7 +1,7 @@
 import React from "react";
 import socketIOClient from 'socket.io-client';
 // import useSocket from 'use-socket.io-client';
-import { useDidMount } from '@withvoid/melting-pot';
+// import { useDidMount } from '@withvoid/melting-pot';
 
 export const CTX = React.createContext();
 
@@ -15,25 +15,28 @@ const Store = (props) => {
   
 	// const [socket] = React.useSocket("https://whispering-brook-74854.herokuapp.com/");
   const [socket] = React.useState(socketIOClient("http://localhost:5061"));
-  // const [socket] = useSocket("http://localhost:5061");
   
-  useDidMount(() => {
-    socket.on('message', ({username, text}) => {
-      console.log(`socket.on(message), from CLIENT: ${username}: ${text}`);
-      setMessages(messages => [...messages, [username, text] ]);
+// args = [ name, text ]
+
+  React.useEffect(() => {
+    socket.on("joinRoom", ({ username, room }) => {
+      console.log(`socket.on("joinRoom"), from CLIENT`)
+      setUsername(username);
+      setRoom(room);
     });
-    socket.on("sendMessage", ({ username, text }) => {
-      console.log(`socket.on("onSendMessage"), from CLIENT: ${username}: ${text}`);
-			setMessages(messages => [...messages, [username, text]]);
+    // socket.on('message', (...args) => {
+    //   let text = args[0];
+    //   console.log(`socket.on(message), from CLIENT(text): ${text}`);
+    //   setMessages(messages => [...messages, text ]);
+    // });
+    socket.on('sendMessage', (...args) => {
+      let text = args[0];
+      console.log(`socket.on('sendMessage'), from CLIENT(text): ${text}`);
+      setMessages(messages => [...messages, text ]);
 		});
 		socket.on("sendRollMessage", ({ username, creatureName, action}) => {
-      console.log(`socket.on("onSendRollMessage"), from CLIENT: ${creatureName}:`, action);
+      console.log(`socket.on("onSendRollMessage"), from CLIENT: ${creatureName}: ${action}`);
 			setMessages(messages => [...messages, [username, creatureName, action]]);
-		});
-		socket.on("joinRoom", ({ username, room }) => {
-      console.log(`socket.on("joinRoom"), from CLIENT`)
-			setUsername(username);
-			setRoom(room);
 		});
 		socket.on("roomData", ({ users }) => {
       console.log("socket.on(roomData), from CLIENT")
@@ -44,14 +47,14 @@ const Store = (props) => {
       socket.disconnect();
       socket.off();
 		};
-  }, []);
+  }, [socket]);
 
-  const sendMessage = ({ username, text }) => {
-		socket.emit("sendMessage", { username, text }, error => {
+  const sendMessage = (text) => {
+		socket.emit("sendMessage", text, error => {
       if (error) {
         return console.log("ERROR from CLIENT: ", error)
       }
-      console.log(`MESSAGE SENT, from CLIENT: ${username}: ${text}`);
+      console.log(`MESSAGE SENT, from CLIENT,(text): ${text}`);
     });
 	};
 	const sendRollMessage = ({ username, creatureName, action }) => {

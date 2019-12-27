@@ -1,24 +1,24 @@
 import React from "react";
 // import useChat from "../../hooks/useChat";
-import { rollAttack } from '../ChatPanel/Messages/Roll';
-import {CTX} from '../../Store';
+import { rollAttack } from '../ChatPanel/TestChat/Messages/Message/Roll';
+import {CTX} from '../../TestStore';
 
 // action.attack_bonus, action.damage_bonus, action.damage_dice
 
-// const CreatureAction = ({action, creatureName, displayAction, isExpanded}) => {
-const CreatureAction = ({action, creatureName, isExpanded, chatOpen, onOpenChatPanel}) => {
+// const CreatureAction = ({action, creatureName, displayAction, isExpanded, chatOpen, onOpenChatPanel}) => {
+const CreatureAction = (props) => {
   // const {name, room, sendRollMessage} = useChat();
-  const context = React.useContext(CTX);
+  const [sendRollMessage] = React.useContext(CTX);
   const handleClick = (e) => {
-    e.preventDefault();
-    console.log('ATTACK ROLL: ' + rollAttack() + ' + ' + action.attack_bonus);
+    let att = rollAttack();
+    console.log('ATTACK ROLL: ' + att + ' + ' + props.action.attack_bonus + ' = ' + (att + props.action.attack_bonus));
     
-    if ((context.room === "" || context.name === "") && !chatOpen) {
-      onOpenChatPanel(e);
-      alert("ATTACK ROLL: " + rollAttack() + " + " + action.attack_bonus);
-      alert("To not have to see these alerts everytime you click a monster action, join a chat room. No email or any other personal info required.");
+    if (!props.chatOpen) {
+      props.onOpenChatPanel(e);
+      // alert("ATTACK ROLL: " + rollAttack() + " + " + action.attack_bonus);
+      // alert("To not have to see these alerts everytime you click a monster action, join a chat room. No email or any other personal info required.");
     } else {
-      return context.sendRollMessage({ creatureName, action });
+      sendRollMessage(e, props.creatureName, props.action );
     }
   };
 
@@ -28,11 +28,11 @@ const CreatureAction = ({action, creatureName, isExpanded, chatOpen, onOpenChatP
 			<button 
         className="action-btn"
         onClick={(e) => handleClick(e)}
-        tabIndex={!isExpanded ? -1 : 0}
+        tabIndex={!props.isExpanded ? -1 : 0}
       >
-				<b><i>{action.name}.</i></b>
+				<b><i>{props.action.name}.</i></b>
 			</button>
-			{action.desc}
+			{props.action.desc}
 		</p>
 	);
 };

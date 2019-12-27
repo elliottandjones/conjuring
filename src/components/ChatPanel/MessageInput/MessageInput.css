@@ -8,4 +8,9 @@
 	background-color: var(--slatep);
 	color: white;
 	border: 2px inset var(--roarange);
+	justify-content: right;
+	display: flex;
+}
+.message-input {
+	width: 100%;
 }

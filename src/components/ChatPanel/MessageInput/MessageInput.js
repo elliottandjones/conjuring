@@ -6,7 +6,7 @@ const MessageInput = ({ setText, sendMessage, text }) => (
   <form 
     onSubmit={(e) => {
       e.preventDefault();
-      sendMessage({text});
+      sendMessage(text);
       setText("");
     }} 
     className="form"

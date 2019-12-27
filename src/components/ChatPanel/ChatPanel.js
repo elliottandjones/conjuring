@@ -12,7 +12,7 @@ const ChatPanel = () => {
   const handleSubmit = (e, name, room) => {
     e.preventDefault();
     console.log(context);
-    context.joinRoom({name, room});
+    context.joinRoom(name, room);
     setProceed(true);
   };
 

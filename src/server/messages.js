@@ -1,19 +1,19 @@
-const conjureChatMessage = (name="test-name", text="test text") => {
+const conjureChatMessage = (username, text) => {
 	return {
-		name,
+		username,
     text,
-    isAction: false,
-		createdAt: getTheTime()
+		createdAt: getTheTime(),
+    isAction: false
 	};
 };
 
-const conjureRollMessage = (name="test-name-roll", creatureName="Dwayne", action={}) => {
+const conjureRollMessage = (username, creatureName, action) => {
 	return {
-		name,
+		username,
     creatureName,
     action,
-    isAction: true,
-		createdAt: getTheTime()
+		createdAt: getTheTime(),
+    isAction: true
 	};
 };
 
