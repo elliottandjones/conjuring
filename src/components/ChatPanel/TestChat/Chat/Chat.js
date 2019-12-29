@@ -18,9 +18,9 @@ const Chat = ({ location }) => {
   const [users, setUsers] = useState('');
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  const [action, creatureName, sendRollMessage, clearRollState] = useContext(CTX);
+  const {action, creatureName, clearRollState} = useContext(CTX);
   // const ENDPOINT = 'https://project-chat-application.herokuapp.com/';
-  const ENDPOINT = 'http://localhost:5061';
+  const ENDPOINT = 'http://localhost:5016';
 
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
@@ -44,8 +44,7 @@ const Chat = ({ location }) => {
 
     socket.on('roomData', ({ users }) => {
       setUsers(users);
-    })
-    if(creatureName && action)
+    });
 
     return () => {
       socket.emit('disconnect');

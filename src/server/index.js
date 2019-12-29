@@ -10,13 +10,13 @@ const { addUser, removeUser, getUser, getUsersInRoom } = require("./users");
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);
-const port = process.env.PORT || 5061;
-// https://whispering-brook-74854.herokuapp.com/
-
 app.use(cors());
 app.options('*', cors());
 app.use(router);
+const io = socketio(server);
+const port = process.env.PORT || 5016;
+// https://whispering-brook-74854.herokuapp.com/
+
 
 io.on("connection", (socket) => {
   console.log("New WebSocket connection: " + socket.id);

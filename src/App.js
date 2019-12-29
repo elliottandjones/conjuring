@@ -119,7 +119,7 @@ class App extends React.Component {
     this.spellsDB.once('value', snapshot => this.setState({ spells: snapshot.val() }));
 
     this.creaturesDB.once('value', snapshot => this.setState({ creatures: snapshot.val() }))
-      .then(() => this.setState({ loading:false }))
+      .then(() => this.setState({ loading: false }))
       .catch(err => {throw new Error('High level error'+err.message)})
       .catch(err => console.log(err));
   }

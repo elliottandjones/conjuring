@@ -14,7 +14,7 @@ const Messages = ({ messages, name }) => (
         {
           !message.isAction ?
             <Message message={message} name={name}/>
-            : <RollMessage message={message} naame={name}/>
+            : <RollMessage message={message} name={name}/>
         }
       </div>
     ))}

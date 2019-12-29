@@ -8,7 +8,8 @@ import {CTX} from '../../TestStore';
 // const CreatureAction = ({action, creatureName, displayAction, isExpanded, chatOpen, onOpenChatPanel}) => {
 const CreatureAction = (props) => {
   // const {name, room, sendRollMessage} = useChat();
-  const [sendRollMessage] = React.useContext(CTX);
+  const {sendRollMessage} = React.useContext(CTX);
+  
   const handleClick = (e) => {
     let att = rollAttack();
     console.log('ATTACK ROLL: ' + att + ' + ' + props.action.attack_bonus + ' = ' + (att + props.action.attack_bonus));

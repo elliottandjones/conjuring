@@ -4,7 +4,6 @@
 	"private": true,
 	"author": "Elliott Jones",
 	"dependencies": {
-		"@withvoid/melting-pot": "^1.6.0",
 		"cors": "^2.8.5",
 		"eslint-utils": "1.4.2",
 		"express": "^4.17.1",

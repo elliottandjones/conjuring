@@ -5,8 +5,8 @@
 	grid-column: 1 / span 5;
 	margin: 0 9px;
 	width: 100%;
-	overflow-y: auto;
-	overflow-x: hidden;
+	/* overflow-y: auto;
+	overflow-x: hidden; */
 }
 
 /* panel component */
@@ -14,8 +14,8 @@
 	grid-template-columns: 1fr 3fr;
 	display: grid;
 	width: 100%;
-	overflow-y: auto;
-	overflow-x: hidden;
+	/* overflow-y: auto;
+	overflow-x: hidden; */
 	gap: 3px;
 }
 
@@ -34,6 +34,8 @@
 
 #chat-out {
 	border: 2px inset var(--belite);
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 #chat-in {

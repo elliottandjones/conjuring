@@ -10,24 +10,28 @@ export default function SignIn() {
   return (
     <div className="login-wrapper">
       <h1 className="form-header">Join</h1>
-      <div>
-        <input 
-          placeholder="Name" 
-          className="input-login" 
-          type="text" 
-          onChange={(event) => setName(event.target.value)} 
-          autoComplete={'true'}
+      <label htmlFor="name">Name
+        <input
+          required
+          name="name"
+          autoComplete={"true"}
+          placeholder="Name"
+          className="input-login"
+          type="text"
+          onChange={(e) => setName(e.target.value)}
           />
-      </div>
-      <div>
-        <input 
-          placeholder="Room" 
-          className="input-login" 
-          type="text" 
-          onChange={(event) => setRoom(event.target.value)} 
-          autoComplete={'true'}
+      </label>
+      <label htmlFor="room">Room
+        <input
+          required
+          name="room"
+          autoComplete={"true"}
+          placeholder="Room"
+          className="input-login"
+          type="text"
+          onChange={(e) => setRoom(e.target.value)}
           />
-      </div>
+      </label>
       <Link onClick={e => (!name || !room) ? e.preventDefault() : null} to={`/chat?name=${name}&room=${room}`}>
         <button className={'button'} type="submit">Sign In</button>
       </Link>

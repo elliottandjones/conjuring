@@ -1,8 +1,10 @@
 import React from 'react';
 import { rollAttack, rollDamage, getTotalDamage } from "./Roll";
 
+import './Message.css';
+
 // const MessageItem = ({ message: { text, user }, name }) => {
-const RollMessageItem = ({user, message: {text: {creatureName, action}}, name, time}) => {
+const RollMessage = ({user, message: {creatureName, action}, name, createdAt}) => {
   let isSentByCurrentUser = false;
   let isCrit = false;
 
@@ -35,8 +37,8 @@ const RollMessageItem = ({user, message: {text: {creatureName, action}}, name, t
   };
 
 	return (
-		<div className={`message-container color-white ${isSentByCurrentUser ? "justify-end" : "justify-start"}`}>
-			<p className={`sentText ${isSentByCurrentUser ? "pr2" : "pl2"}`}>{isSentByCurrentUser ? trimmedName : user} at {time}</p>
+		<div className={`messageContainer colorWhite ${isSentByCurrentUser ? "justifyEnd" : "justifyStart"}`}>
+			<p className={`sentText ${isSentByCurrentUser ? "pr2" : "pl2"}`}>{isSentByCurrentUser ? trimmedName : user} at {createdAt}</p>
 			<div className={`messageBox ${isSentByCurrentUser ? "you" : "others"}`}>
 				<p className="messageText">{creatureName}</p>
 				<p className="messageText">
@@ -44,8 +46,8 @@ const RollMessageItem = ({user, message: {text: {creatureName, action}}, name, t
 				</p>
 				{action.attack_bonus && action.damage_bonus && action.damage_dice ? (
 					<React.Fragment>
-						<p className={`messageText ${isCrit && "ba"}`}>Attack: {isCrit ? getAttackRoll + " Critical Hit!" : getAttackRoll}</p>
-						<p className={`messageText ${isCrit && "ba"}`}>Damage: {getDamageRoll}</p>
+						<p className={`messageText ${isCrit && "ba"}`}>Attack: {isCrit ? getAttackRoll() + " Critical Hit!" : getAttackRoll()}</p>
+						<p className={`messageText ${isCrit && "ba"}`}>Damage: {getDamageRoll()}</p>
 					</React.Fragment>
 				) : (
 					<p style={{ fontSize: "0.8em" }}>
@@ -57,4 +59,4 @@ const RollMessageItem = ({user, message: {text: {creatureName, action}}, name, t
 	);
 };
 
-export default RollMessageItem;
+export default RollMessage;
