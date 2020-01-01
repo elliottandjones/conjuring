@@ -1,6 +1,6 @@
 import React from "react";
 // import useChat from "../../hooks/useChat";
-import { rollAttack } from '../ChatPanel/TestChat/Messages/Message/Roll';
+import { rollAttack } from '../ChatPanel/TestChat/Messages/RollMessage/roll';
 import {CTX} from '../../TestStore';
 
 // action.attack_bonus, action.damage_bonus, action.damage_dice

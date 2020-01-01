@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 import './Join.css';
 
-export default function SignIn() {
+const Join = () => {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
-
+  
   return (
     <div className="login-wrapper">
       <h1 className="form-header">Join</h1>
@@ -38,3 +38,5 @@ export default function SignIn() {
     </div>
   );
 }
+
+export default Join;
