@@ -3,26 +3,38 @@ export const rollAttack = () => {
 };
 
 export const rollDamage = (damageDice, damageBonus, isCrit) => {
-	const results = [];
-	const dd = damageDice.split("d");
+  const results = [];
+  if (!damageDice && damageBonus) {
+    const dmg = damageBonus;
+    if (isCrit){
+      dmg *= 2;
+    }
+    results.push(dmg);
+    return results;
+  }
+  const dd = damageDice.split("d");
+  console.log(dd);
   let count = parseInt(dd[0]);
   const sides = parseInt(dd[1]);
-
+  console.log("count: "+count+", typeof: "+ typeof count);
+  console.log("sides: "+sides+", typeof: "+ typeof sides);
+  console.log("damageBonus: "+damageBonus+", typeof: "+ typeof damageBonus);
   if (isCrit){
     count *= 2;
   }
-	for (let i = 0; i < count; i++) {
-		results.push(Math.floor(Math.random() * sides + 1));
+  for (let i = 0; i < count; i++) {
+    results.push(Math.floor(Math.random() * sides + 1));
   }
-	results.push(damageBonus);
-	console.log(results);
-	console.log(typeof results);
+  results.push(damageBonus);
+  console.log(typeof results)
+	console.log("results: "+results);
 	return results; // array of numbers
 };
 
 export const getTotalDamage = (array) => {
 	// const reducer = (accumulator, currentValue) => accumulator + currentValue;
-  // console.log(array.reduce(reducer));
-	return array.reduce((accumulator, currentValue) => accumulator + currentValue); // number
+  const total = array.reduce((accumulator, currentValue) => accumulator + currentValue); // number 
+  console.log("Total: ", total);
+	return total;
 };
 

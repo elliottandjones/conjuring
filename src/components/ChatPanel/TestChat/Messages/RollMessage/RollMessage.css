@@ -1,18 +1,15 @@
 .messageBox {
 	background: var(--slatep);
-	/* border-radius: 20px; */
 	padding: 5px 20px;
 	color: white;
 	display: inline-block;
-	max-width: 80%;
+	max-width: 90%;
 }
 .you {
 	border: 1px var(--crimberrybold) dashed;
-	border-radius: 20%;
 }
 .others {
 	border: 1px var(--verdant) dotted;
-	border-radius: 20%;
 }
 .messageText {
 	width: 100%;
@@ -41,14 +38,6 @@
 	letter-spacing: 0.3px;
 }
 
-.pl-10 {
-	padding-left: 10px;
-}
-
-.pr-10 {
-	padding-right: 10px;
-}
-
 .justifyStart {
 	justify-content: flex-start;
 }
@@ -63,12 +52,4 @@
 
 .colorDark {
 	color: #353535;
-}
-
-.backgroundBlue {
-	background: #2979ff;
-}
-
-.backgroundLight {
-	background: #f3f3f3;
 }

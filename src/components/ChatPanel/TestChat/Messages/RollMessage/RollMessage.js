@@ -6,31 +6,45 @@ import './RollMessage.css';
 
 // const MessageItem = ({ message: { text, user }, name }) => {
 const RollMessage = ({user, message: {creatureName, action}, name, createdAt}) => {
+  const [isCrit, setIsCrit] = React.useState(false);
+  const [attackRoll, setAttackRoll] = React.useState();
+  const [damageRoll, setDamageRoll] = React.useState();
 
+  
   let isSentByCurrentUser = false;
-  let isCrit = false;
-
+  // let isCrit = false;
+  
 	const trimmedName = name.trim().toLowerCase();
-
+  
 	if (user === trimmedName) {
-		isSentByCurrentUser = true;
+    isSentByCurrentUser = true;
   }
+  React.useEffect(() => {
+    setAttackRoll(getAttackRoll());
+    setDamageRoll(getDamageRoll());
+    // return () => {
+    // };
+  }, []);
   
   const getAttackRoll = () => {
-    let d20 = rollAttack();
-    console.log(d20);
-    console.log(typeof d20);
-    let bonus = action.attack_bonus;
-    console.log(bonus);
-    console.log(typeof bonus);
+    const d20 = rollAttack();
+    console.log("d20: ", d20);
+    console.log("d20 TYPE: ", typeof d20);
+    const bonus = action.attack_bonus;
+    console.log("bonus: ", bonus);
+    console.log("bonus TYPE: ", typeof bonus);
     if(d20 === 20) {
-      isCrit = true;
+      setIsCrit(true);
     }
-    return `${d20} ${bonus >= 0 && "+"} ${bonus} = ${d20 + bonus}`;
+    console.log(`${d20} ${bonus >= 0 && "+"} ${bonus} = ${d20 + bonus}`);
+    return [d20, bonus]; // array of numbers
   }
 
   const getDamageRoll = () => {
     const damageArray = rollDamage(action.damage_dice, action.damage_bonus, isCrit);
+    if(damageArray.length === 1) {
+      return damageArray[0].toString();
+    }
     console.log(damageArray);
     let damageString = damageArray[0].toString();
     for(var i of damageArray) {
@@ -39,12 +53,12 @@ const RollMessage = ({user, message: {creatureName, action}, name, createdAt}) =
     }
     damageString += ` = ${getTotalDamage(damageArray)}`;
     console.log(damageString);
-    // console.log(typeof damageString);
+    console.log("damagestring TYPE: ",typeof damageString);
     return damageString;
   };
 
-  const thisAttackRoll = getAttackRoll();
-  const thisDamageRoll = getDamageRoll();
+  // const thisAttackRoll = getAttackRoll();
+  // const thisDamageRoll = getDamageRoll();
 
 	return (
 		<div className={`messageContainer colorWhite ${isSentByCurrentUser ? "justifyEnd" : "justifyStart"}`}>
@@ -54,10 +68,10 @@ const RollMessage = ({user, message: {creatureName, action}, name, createdAt}) =
 				<p className="messageText">
 					<b>{action.name}</b>: {action.desc}
 				</p>
-				{action.attack_bonus && action.damage_bonus && action.damage_dice ? (
+				{action.attack_bonus && action.damage_bonus ? (
 					<React.Fragment>
-						<p className={`messageText ${isCrit && "BA"}`}>Attack: {isCrit ? thisAttackRoll + " Critical Hit!" : thisAttackRoll}</p>
-						<p className={`messageText ${isCrit && "BA"}`}>Damage: {thisDamageRoll}</p>
+						<p className={`messageText ${isCrit && "BA"}`}>Attack: {isCrit ? attackRoll + " Critical Hit!" : attackRoll}</p>
+						<p className={`messageText ${isCrit && "BA"}`}>Damage: {damageRoll}</p>
 					</React.Fragment>
 				) : (
 					<p style={{ fontSize: "0.8em" }}>
