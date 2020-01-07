@@ -11,10 +11,7 @@ import SearchBox from './components/SearchBox/SearchBox';
 import Select from './components/Select/Select';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import RadioButtons from './components/RadioButtons/RadioButtons';
-import ChatPanel from './components/ChatPanel/TestPanel';
-// import ChatPanel from './components/ChatPanel/ChatPanel';
-// import {CTX} from './TestStore';
-// import ChatPanel from './components/ChatPanel/ChatContainer/ChatContainer';
+import ChatPanel from './components/ChatPanel/ChatPanel';
 
 import './App.css';
 

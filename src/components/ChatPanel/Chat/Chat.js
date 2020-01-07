@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import queryString from 'query-string';
 import io from "socket.io-client";
+import ScrollToBottom from 'react-scroll-to-bottom';
 
-import Messages from '../Messages/Messages';
-import InfoBar from '../InfoBar/InfoBar';
+import MessageList from '../MessageList/MessageList';
+import ChatHeader from '../ChatHeader/ChatHeader';
 import Input from '../Input/Input';
 import Sidebar from '../Sidebar/Sidebar';
-import { CTX } from '../../../../TestStore';
+import { CTX } from '../../../../Store';
 
 import './Chat.css';
 
@@ -32,7 +33,7 @@ const Chat = ({ location }) => {
 
     socket.emit('join', { name, room }, (error) => {
       if(error) {
-        alert(error);
+        console.log(error);
       }
     });
   }, [ENDPOINT, location.search]);
@@ -43,7 +44,9 @@ const Chat = ({ location }) => {
     });
 
     socket.on('roomData', ({ users }) => {
+      console.log(users);
       setUsers(users);
+
     });
 
     return () => {
@@ -63,15 +66,16 @@ const Chat = ({ location }) => {
   if(creatureName && action) {
     socket.emit('sendRollMessage', {creatureName, action}, () => clearRollState());
   }
-
   return (
     <div id="panel-wrapper">
       <div id="panel">
           <Sidebar users={users}/>
           <div id="chat">
-            <InfoBar room={room} />
+            <ChatHeader room={room} />
             <div id="chat-out">
-              <Messages messages={messages} name={name} />
+              <ScrollToBottom mode="bottom">
+                <MessageList messages={messages} name={name} />
+              </ScrollToBottom>
             </div>
             <div id="chat-in">
               <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />

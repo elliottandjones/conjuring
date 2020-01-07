@@ -11,15 +11,16 @@ const RollMessage = ({user, message: {creatureName, action}, name, createdAt}) =
   const [damageRoll, setDamageRoll] = React.useState();
 
   
-  let isSentByCurrentUser = false;
+  let isCurrentUser = false;
   // let isCrit = false;
   
 	const trimmedName = name.trim().toLowerCase();
   
 	if (user === trimmedName) {
-    isSentByCurrentUser = true;
+    isCurrentUser = true;
   }
   React.useEffect(() => {
+    console.log(`createdAt: ${createdAt}, user: ${user}, name: ${name}`);
     setAttackRoll(getAttackRoll());
     setDamageRoll(getDamageRoll());
     // return () => {
@@ -45,14 +46,15 @@ const RollMessage = ({user, message: {creatureName, action}, name, createdAt}) =
     if(damageArray.length === 1) {
       return damageArray[0].toString();
     }
+    let damageString = '';
     console.log(damageArray);
-    let damageString = damageArray[0].toString();
-    for(var i of damageArray) {
+    for(let i = 0; i < damageArray.length;i++) {
       // console.log(i);
-      damageString += ` + ${i}`;
+      damageString += ` + ${damageArray[i]}`;
     }
     damageString += ` = ${getTotalDamage(damageArray)}`;
     console.log(damageString);
+    console.log(damageArray);
     console.log("damagestring TYPE: ",typeof damageString);
     return damageString;
   };
@@ -61,10 +63,10 @@ const RollMessage = ({user, message: {creatureName, action}, name, createdAt}) =
   // const thisDamageRoll = getDamageRoll();
 
 	return (
-		<div className={`messageContainer colorWhite ${isSentByCurrentUser ? "justifyEnd" : "justifyStart"}`}>
-			<p className={`sentText ${isSentByCurrentUser ? "pr2" : "pl2"}`}>{isSentByCurrentUser ? trimmedName : user} at {createdAt}</p>
-			<div className={`messageBox ${isSentByCurrentUser ? "you" : "others"}`}>
-				<p className="messageText">{creatureName}</p>
+		<div className={`messageContainer colorWhite ${isCurrentUser ? "justifyEnd" : "justifyStart"}`}>
+			<p className={`sentText ${isCurrentUser ? "pr3" : "pl3"}`}>{isCurrentUser ? trimmedName : user} at {createdAt}</p>
+			<div className={`messageBox ${isCurrentUser ? "you" : "others"}`}>
+				<h4 className="messageText">{creatureName}</h4>
 				<p className="messageText">
 					<b>{action.name}</b>: {action.desc}
 				</p>

@@ -25,12 +25,12 @@
 	background: var(--slatep);
 	border: 2px ridge var(--belite);
 }
-
+/* 
 #chat-in,
 #chat-out {
 	text-align: left;
 	margin: 1em;
-}
+} */
 
 #chat-out {
 	border: 2px inset var(--belite);

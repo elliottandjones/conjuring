@@ -17,7 +17,8 @@ const io = socketio(server);
 const port = process.env.PORT || 5016;
 // https://whispering-brook-74854.herokuapp.com/
 
-
+let buggySendRollMessage = 0;
+let buggySendMessage = 0;
 io.on("connection", (socket) => {
   console.log("New WebSocket connection: " + socket.id);
   
@@ -43,8 +44,8 @@ io.on("connection", (socket) => {
     const user = getUser(socket.id);
     io.to(user.room).emit("message", conjureChatMessage(user.name, text));
     
-    console.log("sendMessage fired, from SERVER");
-    console.log(conjureChatMessage(user.name, text));
+    console.log("sendMessage fired, from SERVER: ", conjureChatMessage(user.name, text));
+    console.log(buggySendMessage+1); // expect +1 every message
     callback();
   });
 
@@ -52,7 +53,8 @@ io.on("connection", (socket) => {
     const user = getUser(socket.id);
     io.to(user.room).emit("message", conjureRollMessage(user.name, creatureName, action));
     
-    console.log("SendRollMessage fired, from SERVER");
+    console.log("SendRollMessage fired, from SERVER: ", conjureRollMessage(user.name, creatureName, action));
+    console.log(buggySendRollMessage+1); //! expect +2 every roll if bug is coming from server
     callback();
   });
 

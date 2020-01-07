@@ -5,7 +5,7 @@ export const rollAttack = () => {
 export const rollDamage = (damageDice, damageBonus, isCrit) => {
   const results = [];
   if (!damageDice && damageBonus) {
-    const dmg = damageBonus;
+    let dmg = damageBonus;
     if (isCrit){
       dmg *= 2;
     }
@@ -27,14 +27,14 @@ export const rollDamage = (damageDice, damageBonus, isCrit) => {
   }
   results.push(damageBonus);
   console.log(typeof results)
-	console.log("results: "+results);
+	console.log("results: "+results,results.lenth);
 	return results; // array of numbers
 };
 
 export const getTotalDamage = (array) => {
-	// const reducer = (accumulator, currentValue) => accumulator + currentValue;
-  const total = array.reduce((accumulator, currentValue) => accumulator + currentValue); // number 
-  console.log("Total: ", total);
-	return total;
+	const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  const total = array.reduce(reducer); // number 
+  console.log("Total: "+total+", damageArray: "+array);
+	return total.toString(); // string
 };
 

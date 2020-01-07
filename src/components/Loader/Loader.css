@@ -1,30 +1,50 @@
 .container {
 	width: 100%;
-	margin: 0 auto;
-	position: relative;
+	/* margin: 50% 50%; */
+	display: flex;
 	text-align: center;
 	align-items: center;
+	justify-content: center;
+	vertical-align: middle;
 }
-#loader {
+.loader {
 	width: 100%;
 	height: 100%;
-	vertical-align: middle;
-	display: flex;
-	justify-content: center;
+	display: block;
+	justify-content: space-around;
 }
-#loader span {
-	font-size: 4em;
+.loader span {
+	font-size: 3em;
 }
-#loader span:nth-child(1) {
+/* loader 1 */
+#loader-1 span:nth-child(1) {
 	animation: changeopacity 0.8s ease-in-out infinite;
 }
-
-#loader span:nth-child(2) {
+#loader-1 span:nth-child(2) {
 	animation: changeopacity 0.8s ease-in-out 0.266666667s infinite;
 }
-
-#loader span:nth-child(3) {
+#loader-1 span:nth-child(3) {
 	animation: changeopacity 0.8s ease-in-out 0.533333334s infinite;
+}
+/* loader 2 */
+#loader-2 span:nth-child(1) {
+	animation: changeopacity 0.8s ease-in-out 0.088888889s infinite;
+}
+#loader-2 span:nth-child(2) {
+	animation: changeopacity 0.8s ease-in-out 0.355555556s infinite;
+}
+#loader-2 span:nth-child(3) {
+	animation: changeopacity 0.8s ease-in-out 0.622222223s infinite;
+}
+/* loader 3 */
+#loader-3 span:nth-child(1) {
+	animation: changeopacity 0.8s ease-in-out 0.177777778s infinite;
+}
+#loader-3 span:nth-child(2) {
+	animation: changeopacity 0.8s ease-in-out 0.444444445s infinite;
+}
+#loader-3 span:nth-child(3) {
+	animation: changeopacity 0.8s ease-in-out 0.711111112s infinite;
 }
 
 @keyframes changeopacity {
