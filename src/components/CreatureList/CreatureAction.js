@@ -1,28 +1,21 @@
 import React from "react";
-// import useChat from "../../hooks/useChat";
-import { rollAttack } from '../ChatPanel/Chat/Messages/RollMessage/roll';
-import {CTX} from '../../Store';
-
-// action.attack_bonus, action.damage_bonus, action.damage_dice
+import { CTX } from '../../Store';
 
 // const CreatureAction = ({action, creatureName, displayAction, isExpanded, chatOpen, onOpenChatPanel}) => {
 const CreatureAction = (props) => {
-  // const {name, room, sendRollMessage} = useChat();
-  const {sendRollMessage} = React.useContext(CTX);
+  const {sendRoll} = React.useContext(CTX);
   
   const handleClick = (e) => {
-    let att = rollAttack();
-    console.log('ATTACK ROLL: ' + att + ' + ' + props.action.attack_bonus + ' = ' + (att + props.action.attack_bonus));
-    
+		let att = Math.floor(Math.random() * 20 + 1);
     if (!props.chatOpen) {
       props.onOpenChatPanel(e);
-      // alert("ATTACK ROLL: " + rollAttack() + " + " + action.attack_bonus);
-      // alert("To not have to see these alerts everytime you click a monster action, join a chat room. No email or any other personal info required.");
+      console.log('ATTACK ROLL: ' + att + ' + ' + props.action.attack_bonus + ' = ' + (att + props.action.attack_bonus));
+      alert("To avoid seeing this alert everytime you click a monster action, join a chat room. No personal info required. I'll be adding default user/room functionality in the future. Right now, you see, I must rest.");
     } else {
-      sendRollMessage(e, props.creatureName, props.action );
+      sendRoll(e, props.creatureName, props.action);
+      // clearRollState();
     }
   };
-
 	
   return (
 		<p>

@@ -3,7 +3,7 @@ import React from "react";
 import './Loader.css';
 
 const Loader = () => (
-	<div className="container">
+	<div className="loader-container">
 		<div className="loader" id="loader-1">
 			<span>.</span>
 			<span>.</span>

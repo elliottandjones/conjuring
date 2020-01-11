@@ -1,50 +1,43 @@
-.messageBox {
+.message-container {
+	display: flex;
+	/* justify-content: flex-end; */
+	padding: 0 5%;
+	margin-top: 3px;
+}
+.justify-start {
+	justify-content: flex-start;
+}
+.justify-end {
+	justify-content: flex-end;
+}
+.message-box {
 	background: var(--slatep);
 	padding: 5px 20px;
 	color: white;
 	display: inline-block;
-	max-width: 80%;
+	max-width: 70%;
 }
-.you {
-	border: 1px var(--crimberrybold) dashed;
-}
-.others {
-	border: 1px var(--verdant) dotted;
-}
-.messageText {
+.message-text {
 	width: 100%;
 	letter-spacing: 0;
 	float: left;
 	font-size: 1.1em;
 	word-wrap: break-word;
+	color: white;
 }
-
-.messageText img {
-	vertical-align: middle;
-}
-
-.messageContainer {
-	display: flex;
-	justify-content: flex-end;
-	padding: 0 5%;
-	margin-top: 3px;
-}
-
-.sentText {
+.sender-name {
+	font-family: Helvetica;
 	display: flex;
 	align-items: center;
-	font-family: Helvetica;
 	letter-spacing: 0.3px;
 }
-
-.justifyStart {
-	justify-content: flex-start;
+.you {
+	border: 2px var(--crimberrybold) dashed;
 }
-
-.justifyEnd {
-	justify-content: flex-end;
+.others {
+	border: 2px var(--verdant) dotted;
 }
-
-.colorWhite {
-	color: white;
+.time {
+	font-size: 0.8em;
+	opacity: 0.7;
 }

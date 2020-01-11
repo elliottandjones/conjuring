@@ -1,27 +1,26 @@
-#sidebar {
-	grid-column: 1 / span 1;
-	grid-auto-rows: 80vmin 20vmin;
+aside.sidebar {
+	grid-area: sidebar;
 	width: 100%;
 	background: var(--slatep);
 	border: 2px ridge var(--belite);
 	color: var(--lightish);
-	text-shadow: 0 0 5px var(--roarangelite);
+	text-shadow: 0 0 3px var(--roarangelite);
 	text-align: center;
 }
-.name-list-item,
-.user-count {
-	list-style-type: none !important;
-	display: flex;
-	align-items: center;
+aside > span {
+	text-transform: uppercase;
 }
-.name-list-item {
-	grid-row-start: auto;
+.name-list {
+	margin-right: 6px;
+	list-style-type: decimal-leading-zero;
+	display: list-item;
 }
-.user-count {
-	grid-row-end: auto;
+.name-list-item > h4.your-name {
+	text-shadow: 0 0 3px var(--roarangelite);
 }
 hr {
 	border: 2px outset var(--belite);
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
 /* @media (min-width: 320px) and (max-width: 1200px) {
 	#sidebar {

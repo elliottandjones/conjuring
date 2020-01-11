@@ -1,31 +1,30 @@
+import { useDidMount } from '@withvoid/melting-pot';
 import React from 'react';
-
-import { rollAttack, rollDamage, getTotalDamage } from "./roll";
-
-import './RollMessage.css';
+import './Message.css';
+import { getTotalDamage, rollAttack, rollDamage } from "./roll";
 
 // const MessageItem = ({ message: { text, user }, name }) => {
-const RollMessage = ({user, message: {creatureName, action}, name, createdAt}) => {
+const RollMessage = ({message: {name, creatureName, action, createdAt}, clientName}) => {
   const [isCrit, setIsCrit] = React.useState(false);
-  const [attackRoll, setAttackRoll] = React.useState();
-  const [damageRoll, setDamageRoll] = React.useState();
+  const [attackRoll, setAttackRoll] = React.useState([]);
+  const [damageRoll, setDamageRoll] = React.useState('');
 
   
   let isCurrentUser = false;
   // let isCrit = false;
   
-	const trimmedName = name.trim().toLowerCase();
+	const trimmedClientName = clientName.trim();
   
-	if (user === trimmedName) {
+	if (name === trimmedClientName) {
     isCurrentUser = true;
   }
-  React.useEffect(() => {
-    console.log(`createdAt: ${createdAt}, user: ${user}, name: ${name}`);
+  useDidMount(() => {
+    console.log(`createdAt: ${createdAt}, user: ${name}, clientName: ${clientName}`);
     setAttackRoll(getAttackRoll());
     setDamageRoll(getDamageRoll());
     // return () => {
     // };
-  }, []);
+  });
   
   const getAttackRoll = () => {
     const d20 = rollAttack();
@@ -64,16 +63,19 @@ const RollMessage = ({user, message: {creatureName, action}, name, createdAt}) =
 
 	return (
 		<div className={`messageContainer colorWhite ${isCurrentUser ? "justifyEnd" : "justifyStart"}`}>
-			<p className={`sentText ${isCurrentUser ? "pr3" : "pl3"}`}>{isCurrentUser ? trimmedName : user} at {createdAt}</p>
-			<div className={`messageBox ${isCurrentUser ? "you" : "others"}`}>
-				<h4 className="messageText">{creatureName}</h4>
-				<p className="messageText">
+			<p className={`sent-text ${isCurrentUser ? "pr3" : "pl3"}`}>{isCurrentUser ? trimmedClientName : name} at {createdAt}</p>
+			<div className={`message-box ${isCurrentUser ? "you" : "others"}`}>
+				<h4 className="message-text">{creatureName}</h4>
+				<p className="message-text">
 					<b>{action.name}</b>: {action.desc}
 				</p>
 				{action.attack_bonus && action.damage_bonus ? (
 					<React.Fragment>
-						<p className={`messageText ${isCrit && "BA"}`}>Attack: {isCrit ? attackRoll + " Critical Hit!" : attackRoll}</p>
-						<p className={`messageText ${isCrit && "BA"}`}>Damage: {damageRoll}</p>
+						<p className="message-text">
+							Attack: <span className={`${isCrit && "ba"}`}>{attackRoll[0]}</span> + {attackRoll[1]} = <strong>{attackRoll[0] + attackRoll[1]}</strong>
+							{isCrit && <em>Critical Hit! Yaaaaaas!</em>}
+						</p>
+						<p className={`message-text ${isCrit && "ba"}`}>Damage: {damageRoll}</p>
 					</React.Fragment>
 				) : (
 					<p style={{ fontSize: "0.8em" }}>

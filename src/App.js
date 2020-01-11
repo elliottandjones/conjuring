@@ -1,19 +1,19 @@
-import React from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
-import { DB_CONFIG } from './config';
-
-import Loader from './components/Loader/Loader';
+import React from 'react';
+import './App.css';
+import ChatPanel from './components/ChatPanel/ChatPanel';
+import Checkboxes from './components/Checkboxes/Checkboxes';
 import CreatureList from './components/CreatureList/CreatureList';
-import SpellList from './components/SpellList/SpellList';
+import Loader from './components/Loader/Loader';
+import RadioButtons from './components/RadioButtons/RadioButtons';
 import SearchBox from './components/SearchBox/SearchBox';
 import Select from './components/Select/Select';
-import Checkboxes from './components/Checkboxes/Checkboxes';
-import RadioButtons from './components/RadioButtons/RadioButtons';
-import ChatPanel from './components/ChatPanel/ChatPanel';
+import SpellList from './components/SpellList/SpellList';
+import { DB_CONFIG } from './config';
 
-import './App.css';
+
 
 const initialTypeValues = {
   aberration: false,
@@ -100,9 +100,7 @@ class App extends React.Component {
 			speedLegend: "Speed",
 			sizeLegend: "Size",
       typePicked: true,
-      chatOpen: false,
-      connected: false,
-      // socket: null
+      chatOpen: false
 		};
     this.onTypeChange = this.onTypeChange.bind(this);
   }
@@ -186,31 +184,6 @@ class App extends React.Component {
   onSizeSelect = (event) => {
     this.setState({ sizeValue: event.target.value });
   }
-  // onActionTaken = (event) => {
-  //   event.preventDefault();
-  //   this.setState({ action: event.target.value });
-  // }
-  // displayAction = (event, action, creatureName) => {
-  //   event.preventDefault();
-  //   // const socket = React.useContext(CTX);
-  //   // console.log(socket.id);
-    
-  //   if (action && creatureName) {
-      
-  //     // socket.emit('sendRollMessage', {action, creatureName}, name)
-  //     // this.displayInChat(action, creatureName);
-  //     // alert(`NAME: ${creatureName}, ACTION.NAME: ${action.name}, ACTION.DESC: ${action.desc}`);
-  //     console.log('NAME: ', creatureName);
-  //     console.log('ACTION.NAME: ', action.name);
-  //     console.log('ACTION.DESC: ', action.desc);
-  //     return [creatureName, action];
-  //   }
-  // }
-
-  // displayInChat = (action, creatureName) => {
-
-  // }
-
   filterBySpell = (critters, spell) => {
     if (spell.particular_creatures) {
       critters = critters.filter(creature => {
@@ -241,7 +214,6 @@ class App extends React.Component {
     }
     return critters;
   }
-
   formatCR = (str) => {
     if (str && !str.includes('/')) {
       return parseInt(str);
@@ -255,7 +227,7 @@ class App extends React.Component {
       creatures, spells, spellFilter, spellObject, spellSelected, searchfield,
       crOptions, speedOptions, sizeOptions,
       typeValues, crValue, speedValue, sizeValue,
-      speedLegend, sizeLegend, chatOpen, 
+      speedLegend, sizeLegend, chatOpen, loading
       // socket
     } = this.state;
 
@@ -338,7 +310,7 @@ class App extends React.Component {
                 </span> <a href="https://github.com/Elliohknow/conjuring" id="source-link">source</a>
               </h1>
             </div>
-            <SearchBox searchfield={searchfield} searchChange={this.onSearchChange} />
+            <SearchBox onSearchChange={this.onSearchChange} />
           </div>
         </div>
         <div className="tabs mb1 mt1">
@@ -380,7 +352,7 @@ class App extends React.Component {
               : (chatOpen && <ChatPanel />))
         }
         {
-          this.state.loading ?
+          loading ?
             <Loader />
             : <CreatureList creatures={filteredCreatures} chatOpen={chatOpen} onOpenChatPanel={this.onOpenChatPanel} />
         }

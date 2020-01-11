@@ -5,19 +5,20 @@ export const CTX = React.createContext()
 const Store = (props) => {
   const [creatureName, setCreatureName] = React.useState('');
   const [action, setAction] = React.useState(null);
-  
-  const sendRollMessage = (e, cName, cAction) => {
+  const [proceed, setProceed] = React.useState(false);
+
+  const sendRoll = (e, cName, cAction) => {
     e.preventDefault();
-    setCreatureName(cName)
+    setCreatureName(cName);
     setAction(cAction);
+    setProceed(true);
   }
   const clearRollState = () => {
-    setCreatureName('');
-    setAction(null);
+    setProceed(false);
   }
   
   return (
-    <CTX.Provider value={{ creatureName, action, sendRollMessage, clearRollState }}>
+    <CTX.Provider value={{ proceed, creatureName, action, sendRoll, clearRollState }}>
       {props.children}
     </CTX.Provider>
   );

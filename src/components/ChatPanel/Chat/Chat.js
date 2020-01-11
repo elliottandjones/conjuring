@@ -1,15 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
 import queryString from 'query-string';
-import io from "socket.io-client";
+import React, { useContext, useEffect, useState } from "react";
 import ScrollToBottom from 'react-scroll-to-bottom';
-
-import MessageList from '../MessageList/MessageList';
-import ChatHeader from '../ChatHeader/ChatHeader';
-import Input from '../Input/Input';
-import Sidebar from '../Sidebar/Sidebar';
-import { CTX } from '../../../../Store';
-
+import io from "socket.io-client";
+import { CTX } from '../../../Store';
 import './Chat.css';
+import ChatHeader from './ChatHeader/ChatHeader';
+import Input from './Input/Input';
+import MessageList from './MessageList/MessageList';
+import Sidebar from './Sidebar/Sidebar';
 
 let socket;
 
@@ -19,7 +17,7 @@ const Chat = ({ location }) => {
   const [users, setUsers] = useState('');
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  const {action, creatureName, clearRollState} = useContext(CTX);
+  const {proceed, action, creatureName, clearRollState} = useContext(CTX);
   // const ENDPOINT = 'https://project-chat-application.herokuapp.com/';
   const ENDPOINT = 'http://localhost:5016';
 
@@ -46,7 +44,6 @@ const Chat = ({ location }) => {
     socket.on('roomData', ({ users }) => {
       console.log(users);
       setUsers(users);
-
     });
 
     return () => {
@@ -55,32 +52,37 @@ const Chat = ({ location }) => {
       socket.off();
     }
   }, [messages])
+  
+  useEffect(() => {
+    console.log("[from Chat.js] proceed: ", proceed);
+    if(proceed) {
+      socket.emit('sendRollMessage', {creatureName, action}, () => clearRollState());
+    }
+    
+  }, [proceed, creatureName, action, clearRollState]);
 
   const sendMessage = (e) => {
     e.preventDefault();
     if(message) {
       socket.emit('sendMessage', message, () => setMessage(''));
     }
-  }
-
-  if(creatureName && action) {
-    socket.emit('sendRollMessage', {creatureName, action}, () => clearRollState());
-  }
+	}
+	
   return (
-    <div id="panel-wrapper">
-      <div id="panel">
-          <Sidebar users={users}/>
-          <div id="chat">
-            <ChatHeader room={room} />
-            <div id="chat-out">
-              <ScrollToBottom mode="bottom">
-                <MessageList messages={messages} name={name} />
-              </ScrollToBottom>
-            </div>
-            <div id="chat-in">
-              <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
-            </div>
-          </div>
+    <div className="panel-wrapper">
+      <div className="panel">
+				{/* <div className="chat"> */}
+				<ChatHeader room={room} className="header"/>
+				<Sidebar users={users} clientName={name} className="sidebar"/>
+				<div className="chat-out" className="output">
+					<ScrollToBottom mode="bottom">
+						<MessageList messages={messages} clientName={name} />
+					</ScrollToBottom>
+				</div>
+				<div className="chat-in">
+					<Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
+				</div>
+				{/* </div> */}
       </div>
     </div>
   );

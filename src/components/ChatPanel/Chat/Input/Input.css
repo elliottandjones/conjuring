@@ -1,28 +1,57 @@
-.form {
-	display: flex;
+.chat-input-form {
+	display: inline-flex;
 }
 
-.input {
+.chat-input {
+	background: var(--slateg);
+	color: white;
+	caret-color: var(--verdantlite);
 	border: none;
 	border-radius: 0;
 	padding: 5%;
 	width: 80%;
 	font-size: 1.2em;
+	opacity: 0.8;
 }
-
+form.chat-input-form > .input {
+	grid-area: input;
+}
+.chat-input:focus,
+.chat-input:active,
 input:focus,
 textarea:focus,
-select:focus {
+.chat-input:hover,
+input:hover,
+textarea:hover {
+	border-color: var(--crimberrybold);
+	border-width: 3px;
 	outline: none;
+	outline-style: none;
+	box-shadow: 0 0 10px var(--dorchid) inset;
+	-webkit-box-shadow: 0 0 10px var(--dorchid) inset;
+	-moz-box-shadow: 0 0 10px var(--dorchid) inset;
+	cursor: auto;
+	opacity: 1;
 }
-
-.sendButton {
-	color: #fff !important;
-	text-transform: uppercase;
+.send-message-button {
+	color: #fff;
+	text-transform: capitalize;
 	text-decoration: none;
 	background: var(--slateb);
-	padding: 20px;
-	display: inline-block;
+	padding: 15px;
+	display: inline-flex;
 	border: none;
 	width: 20%;
+	opacity: 0.8;
+}
+input + button.send-btn {
+	grid-area: send-btn;
+}
+.send-message-button:hover,
+.send-message-button:focus,
+.send-message-button:active {
+	color: var(--goldlite);
+	text-shadow: 0 0 16px var(--roarange);
+	font-weight: 500;
+	opacity: 1;
 }

@@ -1,34 +1,36 @@
 import React from 'react';
-
 import './Message.css';
 
-import ReactEmoji from 'react-emoji';
 
-const Message = ({ message: { user, text }, name }) => {
+const Message = ({ message: { name, text, createdAt }, clientName }) => {
   let isCurrentUser = false;
 
-  const trimmedName = name.trim().toLowerCase();
+	const trimmedClientName = clientName.trim(); //.toLowerCase();
 
-  if(user === trimmedName) {
+  if(name === trimmedClientName) {
     isCurrentUser = true;
   }
 
   return (
     isCurrentUser
       ? (
-        <div className="messageContainer justifyEnd">
-          <p className="sentText colorWhite pr2">{trimmedName}</p>
-          <div className="messageBox">
-            <p className="messageText colorWhite">{ReactEmoji.emojify(text)}</p>
+        <div className="message-container justify-end">
+					<div className="pr2" style={{display: 'inline-block'}}>
+						<i className="sender-name">{trimmedClientName}</i>
+						<span className="time">{createdAt}</span>
+					</div>
+          <div className="message-box you">
+            <p className="message-text">{text}</p>
           </div>
         </div>
         )
         : (
-          <div className="messageContainer justifyStart">
-            <div className="messageBox">
-              <p className="messageText">{ReactEmoji.emojify(text)}</p>
+          <div className="message-container justify-start">
+            <div className="message-box others">
+              <p className="message-text">{text}</p>
             </div>
-            <p className="sentText colorWhite pl2">{user}</p>
+            <i className="sender-name pl2">{name}</i>
+            <p className="time">{createdAt}</p>
           </div>
         )
   );

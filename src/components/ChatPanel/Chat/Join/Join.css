@@ -9,36 +9,53 @@
 	margin: 0 9px;
 	width: 100%;
 	overflow-y: auto;
-	overflow-x: hidden;
+}
+section.login {
+	display: flex;
+	vertical-align: middle;
+	justify-content: space-around;
+	width: 100%;
 }
 
-.login {
-	width: 80%;
+.login-form {
+	width: 100%;
+	display: block;
+}
+.login-form > label {
+	display: block;
+	text-align: left;
+	padding-bottom: 3px;
 }
 
 .form-header {
-	padding-bottom: 15px;
+	padding-bottom: 10px;
 }
 
 .input-login {
 	width: 100%;
-	padding: 15px 20px;
+	padding: 15px 10px;
+	margin-bottom: 2em;
 }
 
-.button {
+#join-room {
+	display: block;
+	align-content: flex-end;
+	justify-content: right;
+	float: right;
+}
+
+.send-message-button {
 	/* ! new */
+	width: auto;
 	height: auto;
+	max-width: 80px;
 	max-height: 50px;
 	color: var(--lightish) !important;
 	text-shadow: 0 0 5px var(--roarangelite);
 	background: var(--slatep) !important;
 	border: 2px solid var(--belite);
-	display: inline-block;
-	align-content: center;
-	justify-content: center;
-	width: 50%;
+	justify-content: right;
 	margin: 3px 3px;
-	padding: 8px 0;
+	padding: 8px;
 	cursor: pointer;
-	vertical-align: middle;
 }
