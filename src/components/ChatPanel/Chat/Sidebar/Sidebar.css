@@ -1,26 +1,25 @@
 aside.sidebar {
 	grid-area: sidebar;
 	width: 100%;
-	background: var(--slatep);
-	border: 2px ridge var(--belite);
+	background: var(--slateb);
+	border-top: 2px inset var(--belite);
+	border-right: 2px inset var(--belite);
 	color: var(--lightish);
-	text-shadow: 0 0 3px var(--roarangelite);
 	text-align: center;
 }
-aside > span {
+aside > p {
 	text-transform: uppercase;
 }
 .name-list {
-	margin-right: 6px;
-	list-style-type: decimal-leading-zero;
+	list-style-type: none;
 	display: list-item;
 }
 .name-list-item > h4.your-name {
-	text-shadow: 0 0 3px var(--roarangelite);
+	/* font-style: normal; */
+	font-weight: 400;
 }
 hr {
-	border: 2px outset var(--belite);
-	box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+	border: 1px inset rgba(128, 128, 128, 0.425);
 }
 /* @media (min-width: 320px) and (max-width: 1200px) {
 	#sidebar {

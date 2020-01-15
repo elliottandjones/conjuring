@@ -1,5 +1,7 @@
 .chat-input-form {
 	display: inline-flex;
+	width: 100%;
+	grid-area: input;
 }
 
 .chat-input {
@@ -8,14 +10,14 @@
 	caret-color: var(--verdantlite);
 	border: none;
 	border-radius: 0;
-	padding: 5%;
-	width: 80%;
+	padding: 4%;
+	width: 100%;
 	font-size: 1.2em;
 	opacity: 0.8;
 }
-form.chat-input-form > .input {
+/* input.input {
 	grid-area: input;
-}
+} */
 .chat-input:focus,
 .chat-input:active,
 input:focus,
@@ -23,8 +25,7 @@ textarea:focus,
 .chat-input:hover,
 input:hover,
 textarea:hover {
-	border-color: var(--crimberrybold);
-	border-width: 3px;
+	border: 1px solid var(--verdant);
 	outline: none;
 	outline-style: none;
 	box-shadow: 0 0 10px var(--dorchid) inset;
@@ -33,7 +34,10 @@ textarea:hover {
 	cursor: auto;
 	opacity: 1;
 }
+
+/* form.chat-input-form > input + button */
 .send-message-button {
+	grid-area: send-btn;
 	color: #fff;
 	text-transform: capitalize;
 	text-decoration: none;
@@ -41,17 +45,21 @@ textarea:hover {
 	padding: 15px;
 	display: inline-flex;
 	border: none;
-	width: 20%;
-	opacity: 0.8;
+	opacity: 0.9;
 }
-input + button.send-btn {
-	grid-area: send-btn;
+button.send-btn:disabled {
+	opacity: 0.7;
+	cursor: auto;
 }
-.send-message-button:hover,
-.send-message-button:focus,
-.send-message-button:active {
+button.send-btn:enabled:hover,
+button.send-btn:enabled:focus,
+button.send-btn:enabled:active {
+	cursor: pointer;
 	color: var(--goldlite);
 	text-shadow: 0 0 16px var(--roarange);
 	font-weight: 500;
 	opacity: 1;
+	box-shadow: 0 0 10px var(--dorchid) inset;
+	-webkit-box-shadow: 0 0 10px var(--dorchid) inset;
+	-moz-box-shadow: 0 0 10px var(--dorchid) inset;
 }

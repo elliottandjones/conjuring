@@ -4,9 +4,9 @@ import './Input.css';
 const Input = ({ setMessage, sendMessage, message }) => {
 
 	return (
-		<form className="chat-input-form" onSubmit={e => sendMessage(e)}>
+		<form className="chat-input-form input" onSubmit={e => sendMessage(e)}>
 			<input
-				className="input chat-input"
+				className="chat-input"
 				required
 				type="text"
 				placeholder="Type a message..."
@@ -15,10 +15,10 @@ const Input = ({ setMessage, sendMessage, message }) => {
 				onKeyPress={event => event.key === 'Enter' ? sendMessage(event) : null}
 			/>
 			<button
-				className="send-btn send-message-button"
+				className="send-message-button send-btn"
 				type="submit"
-				disabled={!message || (message.trim() === "") ? true : false}
-			>Send
+				disabled={!message ? true : false}
+				>Send
 			</button>
 		</form>
 	)

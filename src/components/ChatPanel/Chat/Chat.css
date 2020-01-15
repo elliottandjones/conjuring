@@ -5,12 +5,14 @@
 	grid-column: 1 / span 5;
 	margin: 0 9px;
 	width: 100%;
-	overflow: hidden;
+	overflow: auto;
 }
 
 /* panel component */
 .panel {
 	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: 40px repeat(6, 1fr) 50px;
 	grid-template-areas:
 		"header  header header header header header"
 		"sidebar output output output output output"
@@ -19,34 +21,21 @@
 		"sidebar output output output output output"
 		"sidebar output output output output output"
 		"sidebar output output output output output"
-		"sidebar output output output output output"
-		"sidebar input  input  input  input  send-btn"
-		"sidebar input  input  input  input  send-btn";
+		"sidebar input  input  input  input  input";
 	width: 100%;
 	gap: 5px;
 	background: var(--slatep);
-	border: 1px ridge var(--belite);
+	margin-bottom: 18px;
 }
 
-/* .chat {
-	grid-column: 2 / -1;
-	grid-row: span 1 / -1;
-	width: 100%;
-	background: var(--slatep);
-	border: 1px ridge var(--belite);
-} */
 .chat-out {
-	border: 2px inset var(--belite);
 	overflow-y: scroll;
 	width: 100%;
 	grid-area: output;
 	display: flex;
 	vertical-align: middle;
 }
-.chat-in {
-	grid-area: input;
-	vertical-align: bottom;
-}
+
 .messages {
 	padding: 5% 0;
 	overflow: auto;

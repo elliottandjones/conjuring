@@ -313,7 +313,7 @@ class App extends React.Component {
             <SearchBox onSearchChange={this.onSearchChange} />
           </div>
         </div>
-        <div className="tabs mb1 mt1">
+        <div className="tabs ml1">
           <button
             className={`tab ${(spellFilter || chatOpen) && 'o-50'}`}
             onClick={(e) => {this.onFilterByAttribute(e); this.onSpellSelect({});}} 

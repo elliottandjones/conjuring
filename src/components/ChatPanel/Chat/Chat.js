@@ -1,6 +1,6 @@
 import queryString from 'query-string';
 import React, { useContext, useEffect, useState } from "react";
-import ScrollToBottom from 'react-scroll-to-bottom';
+// import ScrollToBottom from 'react-scroll-to-bottom';
 import io from "socket.io-client";
 import { CTX } from '../../../Store';
 import './Chat.css';
@@ -71,18 +71,12 @@ const Chat = ({ location }) => {
   return (
     <div className="panel-wrapper">
       <div className="panel">
-				{/* <div className="chat"> */}
 				<ChatHeader room={room} className="header"/>
 				<Sidebar users={users} clientName={name} className="sidebar"/>
-				<div className="chat-out" className="output">
-					<ScrollToBottom mode="bottom">
-						<MessageList messages={messages} clientName={name} />
-					</ScrollToBottom>
+				<div className="chat-out output">
+					<MessageList messages={messages} clientName={name} />
 				</div>
-				<div className="chat-in">
-					<Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
-				</div>
-				{/* </div> */}
+				<Input message={message} setMessage={setMessage} sendMessage={sendMessage} className="input" />
       </div>
     </div>
   );

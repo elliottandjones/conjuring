@@ -14,9 +14,9 @@ const Message = ({ message: { name, text, createdAt }, clientName }) => {
   return (
     isCurrentUser
       ? (
-        <div className="message-container justify-end">
-					<div className="pr2" style={{display: 'inline-block'}}>
-						<i className="sender-name">{trimmedClientName}</i>
+        <div className="message-container justify-end mt1 pl2 pr2">
+					<div className="pa2 mt2" style={{display: 'inline-block'}}>
+						<i className="sender-name mb2">{trimmedClientName}</i>
 						<span className="time">{createdAt}</span>
 					</div>
           <div className="message-box you">
@@ -25,12 +25,14 @@ const Message = ({ message: { name, text, createdAt }, clientName }) => {
         </div>
         )
         : (
-          <div className="message-container justify-start">
+          <div className="message-container justify-start mt1 pl2 pr2">
             <div className="message-box others">
               <p className="message-text">{text}</p>
             </div>
-            <i className="sender-name pl2">{name}</i>
-            <p className="time">{createdAt}</p>
+            <div className="pa2 mt2" style={{display: 'inline-block'}}>
+							<i className="sender-name mb2">{name}</i>
+							<span className="time">{createdAt}</span>
+						</div>
           </div>
         )
   );

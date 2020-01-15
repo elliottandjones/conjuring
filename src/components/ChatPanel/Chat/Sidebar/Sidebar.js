@@ -3,14 +3,14 @@ import "./Sidebar.css";
 
 export default function Sidebar({ users, clientName }) {
 	return (
-		<aside className="sidebar">
-			<span className="ma1 pt2 pb2">users</span>
+		<aside className="sidebar pa1">
+			<p className="ma1">users</p>
 			<hr />
 			{users ? (
 				<ul className="name-list">
 					{users.map(({ name }) => (
 						<li key={`activeUser_${name}`} className="name-list-item">
-							<h4 className={`${name === clientName.trim() && "your-name"}`}>{name}</h4>
+							<p className={`${name === clientName.trim() && "your-name"}`}>{name}</p>
 						</li>
 					))}
 				</ul>

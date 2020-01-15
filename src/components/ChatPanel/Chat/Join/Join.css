@@ -24,17 +24,22 @@ section.login {
 .login-form > label {
 	display: block;
 	text-align: left;
-	padding-bottom: 3px;
+	padding-bottom: 8px;
+	margin: 4px 0px;
+	color: var(--belite);
+	text-shadow: 0 0 2px var(--roarangelite);
 }
 
 .form-header {
 	padding-bottom: 10px;
 }
-
 .input-login {
 	width: 100%;
 	padding: 15px 10px;
 	margin-bottom: 2em;
+	color: var(--belite);
+	background-color: var(--dorchidfull);
+	border: 2px inset var(--belite);
 }
 
 #join-room {
@@ -43,19 +48,24 @@ section.login {
 	justify-content: right;
 	float: right;
 }
-
-.send-message-button {
+button.login-button {
 	/* ! new */
 	width: auto;
 	height: auto;
 	max-width: 80px;
 	max-height: 50px;
-	color: var(--lightish) !important;
-	text-shadow: 0 0 5px var(--roarangelite);
-	background: var(--slatep) !important;
-	border: 2px solid var(--belite);
-	justify-content: right;
+	color: var(--belite);
+	background: var(--dorchidfull) !important;
+	border: 2px outset var(--belite);
 	margin: 3px 3px;
 	padding: 8px;
 	cursor: pointer;
+	text-transform: uppercase;
+}
+
+button.login-button:hover,
+button.login-button:focus,
+button.login-button:active {
+	text-shadow: 0 0 5px var(--roarangelite);
+	background-color: var(--dorchidfull);
 }

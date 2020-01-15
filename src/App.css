@@ -8,7 +8,8 @@
 	--slateg: rgba(0, 15, 15, 0.731);
 	--slateglite: rgba(2, 41, 41, 0.731);
 	--slategfull: rgba(0, 15, 15, 1);
-	--slateb: rgba(9, 33, 70, 0.575);
+	--slateb: rgba(7, 22, 46, 0.603);
+	--slatebfullish: rgba(9, 38, 63, 0.836);
 	--roarange: rgb(255, 115, 0);
 	--roarangelite: rgb(255, 183, 89);
 	--roarangedim: rgba(255, 183, 89, 0.5);
@@ -184,13 +185,13 @@ label {
 .tabs {
 	grid-row: 2 / span 1;
 	grid-column: 1 / span 5;
-	margin: 4px;
 	width: 100%;
 	max-height: 58px;
 	vertical-align: middle;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	gap: 5px;
+	column-gap: 5px;
+	row-gap: 0;
 }
 
 div.tabs button {

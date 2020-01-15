@@ -1,8 +1,7 @@
 .message-container {
+	line-height: 0.8em;
 	display: flex;
-	/* justify-content: flex-end; */
-	padding: 0 5%;
-	margin-top: 3px;
+	justify-content: flex-end;
 }
 .justify-start {
 	justify-content: flex-start;
@@ -12,7 +11,7 @@
 }
 .message-box {
 	background: var(--slatep);
-	padding: 5px 20px;
+	padding: 5px 10px;
 	color: white;
 	display: inline-block;
 	max-width: 70%;
@@ -26,13 +25,14 @@
 	color: white;
 }
 .sender-name {
-	font-family: Helvetica;
+	/* font-family: Helvetica; */
 	display: flex;
 	align-items: center;
-	letter-spacing: 0.3px;
+	letter-spacing: 1px;
 }
 .you {
-	border: 2px var(--crimberrybold) dashed;
+	background: radial-gradient(var(--slatep), var(--dorchid));
+	border-radius: 6px;
 }
 .others {
 	border: 2px var(--verdant) dotted;
