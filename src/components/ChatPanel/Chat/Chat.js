@@ -73,9 +73,7 @@ const Chat = ({ location }) => {
       <div className="panel">
 				<ChatHeader room={room} className="header"/>
 				<Sidebar users={users} clientName={name} className="sidebar"/>
-				<div className="chat-out output">
-					<MessageList messages={messages} clientName={name} />
-				</div>
+				<MessageList messages={messages} clientName={name} className="output"/>
 				<Input message={message} setMessage={setMessage} sendMessage={sendMessage} className="input" />
       </div>
     </div>

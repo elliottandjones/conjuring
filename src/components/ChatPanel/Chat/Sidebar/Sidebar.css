@@ -2,24 +2,25 @@ aside.sidebar {
 	grid-area: sidebar;
 	width: 100%;
 	background: var(--slateb);
-	border-top: 2px inset var(--belite);
-	border-right: 2px inset var(--belite);
+	/* border-top: 2px inset var(--belite); */
+	border: 1px ridge var(--belite);
 	color: var(--lightish);
 	text-align: center;
 }
 aside > p {
 	text-transform: uppercase;
 }
-.name-list {
+ul.name-list {
 	list-style-type: none;
 	display: list-item;
+	padding-left: 0 !important;
 }
-.name-list-item > h4.your-name {
+.name-list-item > p.your-name {
 	/* font-style: normal; */
 	font-weight: 400;
 }
 hr {
-	border: 1px inset rgba(128, 128, 128, 0.425);
+	border: 1px inset rgba(128, 128, 128, 0.527);
 }
 /* @media (min-width: 320px) and (max-width: 1200px) {
 	#sidebar {

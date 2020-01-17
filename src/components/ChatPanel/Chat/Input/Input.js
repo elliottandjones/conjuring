@@ -17,7 +17,7 @@ const Input = ({ setMessage, sendMessage, message }) => {
 			<button
 				className="send-message-button send-btn"
 				type="submit"
-				disabled={!message ? true : false}
+				disabled={!(message.trim()) ? true : false}
 				>Send
 			</button>
 		</form>

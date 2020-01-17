@@ -1,27 +1,19 @@
 import React from 'react';
-// import ScrollToBottom from 'react-scroll-to-bottom';
 import Message from './Message/Message';
 import RollMessage from './Message/RollMessage';
 import './MessageList.css';
 
-
-const MessageList = ({ messages, clientName }) => {
-  
-  React.useEffect(() => {
-    if(messages[0]) {
-    console.log("[last message] isAction: ", messages[messages.length - 1].isAction);
-    console.log("[last message] clientName: ", clientName);
-    console.log("[last message] createdAt: ", messages[messages.length - 1].creeatedAt);
-    console.log("[last message] message.name: ", messages[messages.length - 1].name);
-    } else {
-      console.log("messages is empty");
-    }
-  }, [messages, clientName]);
-
+export default function MessageList({ messages, clientName }) {
+	// const rectRef = React.useRef();
+	// React.useEffect(() => {
+	// 	console.log("document.getElementById('m').getBoundingClientRect()", document.getElementById('m').getBoundingClientRect());
+	// 	console.log("rectRef.current.clientHeight", rectRef.current.clientHeight);
+	// }, []);
+	// element.offsetBottom = element.offsetTop + element.offsetHeight
   return (
-    <div id="messages" className="messages">
+    <div className="messages" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
       {messages.map((message, index) => (
-        <div key={`message_${index}`} className="">
+        <div key={`message_${index}`}>
           {
             message ?
               (!message.isAction ?
@@ -33,8 +25,4 @@ const MessageList = ({ messages, clientName }) => {
       ))}
     </div>
   );
-};
-
-export default MessageList;
-      // <ScrollToBottom mode="bottom">
-      // </ScrollToBottom>
+}

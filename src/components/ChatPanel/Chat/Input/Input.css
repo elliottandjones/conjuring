@@ -13,7 +13,11 @@
 	padding: 4%;
 	width: 100%;
 	font-size: 1.2em;
-	opacity: 0.8;
+	border: 2px ridge var(--verdant);
+	transition: all 0.2s ease-in-out 0s;
+	-webkit-transition: all 0.2s ease-in-out 0s;
+	-moz-transition: all 0.2s ease-in-out 0s;
+	-o-transition: all 0.2s ease-in-out 0s;
 }
 /* input.input {
 	grid-area: input;
@@ -25,12 +29,11 @@ textarea:focus,
 .chat-input:hover,
 input:hover,
 textarea:hover {
-	border: 1px solid var(--verdant);
 	outline: none;
 	outline-style: none;
-	box-shadow: 0 0 10px var(--dorchid) inset;
-	-webkit-box-shadow: 0 0 10px var(--dorchid) inset;
-	-moz-box-shadow: 0 0 10px var(--dorchid) inset;
+	box-shadow: 0 0 10px 0 var(--dorchid) inset;
+	-webkit-box-shadow: 0 0 10px 0 var(--dorchid) inset;
+	-moz-box-shadow: 0 0 10px 0 var(--dorchid) inset;
 	cursor: auto;
 	opacity: 1;
 }
@@ -44,11 +47,11 @@ textarea:hover {
 	background: var(--slateb);
 	padding: 15px;
 	display: inline-flex;
-	border: none;
+	border: 1px ridge var(--belite);
 	opacity: 0.9;
 }
 button.send-btn:disabled {
-	opacity: 0.7;
+	opacity: 0.9;
 	cursor: auto;
 }
 button.send-btn:enabled:hover,
@@ -59,7 +62,7 @@ button.send-btn:enabled:active {
 	text-shadow: 0 0 16px var(--roarange);
 	font-weight: 500;
 	opacity: 1;
-	box-shadow: 0 0 10px var(--dorchid) inset;
-	-webkit-box-shadow: 0 0 10px var(--dorchid) inset;
-	-moz-box-shadow: 0 0 10px var(--dorchid) inset;
+	box-shadow: 0 0 10px 0 var(--dorchid) inset;
+	-webkit-box-shadow: 0 0 10px 0 var(--dorchid) inset;
+	-moz-box-shadow: 0 0 10px 0 var(--dorchid) inset;
 }

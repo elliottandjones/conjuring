@@ -21,10 +21,10 @@
 	},
 	"scripts": {
 		"start": "concurrently \"npm run server\" \"npm run client\"",
-		"startdev": "concurrently \"npm run dev\" \"npm run client\"",
+		"dev": "concurrently \"npm run serve\" \"npm run client\"",
 		"client": "react-scripts start",
 		"server": "node src/server/index.js",
-		"dev": "nodemon src/server/index.js",
+		"serve": "nodemon src/server/index.js",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",

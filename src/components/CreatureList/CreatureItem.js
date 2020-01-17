@@ -1,10 +1,10 @@
-import React, { useRef } from 'react';
-import CreatureAction from './CreatureAction';
+import React from 'react';
 import { useToggleHeight } from '../../hooks/useToggle';
+import CreatureAction from './CreatureAction';
 import './CreatureItem.css';
 
 export default function CreatureItem({creature, chatOpen, onOpenChatPanel}) {
-  const heightRef = useRef(null);
+  const heightRef = React.useRef(null);
   const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef]);
 
   const whatSkills = (creature) => {

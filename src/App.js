@@ -108,7 +108,7 @@ class App extends React.Component {
   // Firebase data is retrieved by attaching an 
   // * asynchronous listener to a firebase.database.Reference. 
   // The listener is triggered once for the initial state of 
-  // the data and again anytime the data changes.
+  // the data (with .once()) and again (with .on() only) anytime the data changes.
 
   componentDidMount() {
     this.spellsDB.once('value', snapshot => this.setState({ spells: snapshot.val() }));

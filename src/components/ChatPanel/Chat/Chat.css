@@ -5,7 +5,8 @@
 	grid-column: 1 / span 5;
 	margin: 0 9px;
 	width: 100%;
-	overflow: auto;
+	/* max-height: 78vh !important; */
+	overflow: hidden;
 }
 
 /* panel component */
@@ -25,19 +26,13 @@
 	width: 100%;
 	gap: 5px;
 	background: var(--slatep);
-	margin-bottom: 18px;
+	margin-bottom: 10px;
+	overflow: hidden;
 }
 
-.chat-out {
-	overflow-y: scroll;
-	width: 100%;
+/* .chat-out {
 	grid-area: output;
+	width: 100%;
 	display: flex;
-	vertical-align: middle;
-}
-
-.messages {
-	padding: 5% 0;
-	overflow: auto;
-	flex: auto;
-}
+	overflow-y: auto;
+} */

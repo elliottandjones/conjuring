@@ -9,7 +9,7 @@ export default function ChatHeader({ room }) {
 				<h4>{room}</h4>
 			</div>
 			<div className="right-wrapper">
-				<Link to="/join" title="leave this chatroom">
+				<Link to="/" title="leave this chatroom">
 					&times;
 				</Link>
 			</div>

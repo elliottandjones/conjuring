@@ -5,10 +5,12 @@
 	justify-content: space-between;
 	background: var(--slateb);
 	border: medium;
-	border-radius: 6px 6px 0 0;
-	/* ! height: 50px; */
+	border-radius: 4px 4px 0 0;
 	width: 100%;
-	border-bottom: 1px solid var(--belite);
+	/* -webkit-box-shadow: 0px 0px 8px 0px var(--belite);
+	-moz-box-shadow: 0px 0px 8px 0px var(--belite);
+	box-shadow: 0px 0px 8px 0px var(--belite); */
+	border: 1px ridge var(--belite);
 }
 .left-wrapper {
 	flex: 0.5;
@@ -30,5 +32,5 @@
 	text-decoration-line: none;
 }
 .right-wrapper a:hover {
-	text-shadow: 0 0 20px var(--roarange);
+	text-shadow: 0 0 15px var(--belite);
 }
