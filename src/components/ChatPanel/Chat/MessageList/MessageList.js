@@ -4,12 +4,13 @@ import RollMessage from './Message/RollMessage';
 import './MessageList.css';
 
 export default function MessageList({ messages, clientName }) {
-	// const rectRef = React.useRef();
-	// React.useEffect(() => {
-	// 	console.log("document.getElementById('m').getBoundingClientRect()", document.getElementById('m').getBoundingClientRect());
-	// 	console.log("rectRef.current.clientHeight", rectRef.current.clientHeight);
-	// }, []);
+	const bottomRef = React.useRef(null);
+	const scrollToBottom = () => {
+		bottomRef.current.scrollIntoView({behavior: "smooth"});
+	};
+	React.useEffect(scrollToBottom, [messages]);
 	// element.offsetBottom = element.offsetTop + element.offsetHeight
+
   return (
     <div className="messages" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
       {messages.map((message, index) => (
@@ -23,6 +24,7 @@ export default function MessageList({ messages, clientName }) {
           }
         </div>
       ))}
+			<div ref={bottomRef} className="bottom" id="bottom"/>
     </div>
   );
 }

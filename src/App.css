@@ -22,6 +22,7 @@
 	--ba: #bada55bb;
 	--verdant: rgb(2, 206, 172);
 	--verdantdim: rgba(2, 206, 172, 0.342);
+	--verdantdark: rgb(0, 104, 86);
 	--verdantlite: #82f5e2;
 }
 
@@ -158,7 +159,7 @@ label {
 ::-webkit-scrollbar-thumb {
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-	background: rgba(220, 208, 255, 0.287);
+	background: rgba(220, 208, 255, 0.404);
 }
 ::-webkit-scrollbar-thumb:hover,
 ::-webkit-scrollbar-thumb:active {

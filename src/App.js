@@ -13,8 +13,6 @@ import Select from './components/Select/Select';
 import SpellList from './components/SpellList/SpellList';
 import { DB_CONFIG } from './config';
 
-
-
 const initialTypeValues = {
   aberration: false,
   beast: false,
