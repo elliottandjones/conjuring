@@ -1,13 +1,9 @@
-// import { useDidMount } from '@withvoid/melting-pot';
 import React from 'react';
 import './Message.css';
 import { getTotalDamage, rollAttack, rollDamage } from "./roll";
 
 const RollMessage = ({message: {name, creatureName, action, createdAt}, clientName}) => {
 	const [rolls, setRolls] = React.useState({att:0, dmg:[], isCrit:false});
-	// const [attackRoll, setAttackRoll] = React.useState([]);
-	// const [damageRoll, setDamageRoll] = React.useState([]);
-	// const [isCrit, setIsCrit] = React.useState(false);
   const isCurrentUser = name === clientName.trim() ? true : false;
 	
 	const getRolls = () => {
@@ -21,37 +17,10 @@ const RollMessage = ({message: {name, creatureName, action, createdAt}, clientNa
 		console.log("{att, dmg, isCrit}: ",{att: att, dmg: dmg, isCrit: isCrit})
 		return { att: att, dmg: dmg, isCrit: isCrit }; // { number, array, boolean } 
 	}
-  // useDidMount(() => {
-	// 	getRolls();
-	// });
-		// setAttackRoll(getAttackRoll());
-		// setTimeout(() => {
-		// 	setDamageRoll(getDamageRoll());
-		// }, 1000);
+	
 	React.useEffect(() => {
 		setRolls(getRolls());
 	}, []);
-	
-  // const getAttackRoll = () => {
-	//   const d20 = rollAttack();
-	//   if(d20 === 20 || d20 === '20') {
-	// 		setIsCrit(true);
-	//   }
-	// 	// console.log(`${d20} ${action.attack_bonus >= 0 && "+"} ${action.attack_bonus} = ${d20 + action.attack_bonus}`);
-	//   return [d20, action.attack_bonus]; // array of numbers
-	// }
-	// const getDamageRoll = () => {
-	// 	if (action.damage_dice) {
-	// 		const damageArray = rollDamage(action.damage_dice, action.damage_bonus);
-	// 	}
-	//   console.log(damageArray);
-	//   return damageArray;
-	// };
-					
-	// const thisAttackRoll = getAttackRoll();
-	// const thisDamageRoll = getDamageRoll();
-					
-	
 
 	return (
 		<div className={`message-container mt1 pl2 pr2 ${isCurrentUser ? "justify-end" : "justify-start"}`}>
@@ -75,7 +44,7 @@ const RollMessage = ({message: {name, creatureName, action, createdAt}, clientNa
 								Attack: <span title="attack roll (1d20)">{rolls.att}</span> + <span title="attack bonus">{action.attack_bonus}</span> = <strong title="Total attack">{rolls.att + action.attack_bonus}</strong> {rolls.isCrit && <em>Critical Hit! Yaaaaaas!</em>}
 							</p>
 							<p className={`message-text ${rolls.isCrit && "ba"}`}>
-							Damage: {rolls.dmg.map((value, index) => (index === rolls.dmg.length - 1 ? <span title="damage bonus">{value}</span> : <span title={`${action.damage_dice}`}>{value} + </span>))} = <strong title="total damage">{getTotalDamage(rolls.dmg)}</strong>
+							Damage: {rolls.dmg.map((value, index) => (index === rolls.dmg.length - 1 ? <span title="damage bonus">{value >= 0 ? value: `(${value})`}</span> : <span title={`${action.damage_dice}`}>{value} + </span>))} = <strong title="total damage">{getTotalDamage(rolls.dmg)}</strong>
 							</p>
 						</React.Fragment>
 				}

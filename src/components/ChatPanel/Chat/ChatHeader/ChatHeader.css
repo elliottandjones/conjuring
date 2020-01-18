@@ -5,7 +5,8 @@
 	justify-content: space-between;
 	background: var(--slateb);
 	border: medium;
-	border-radius: 4px 4px 0 0;
+	min-height: 40px;
+	border-radius: 4px;
 	width: 100%;
 	/* -webkit-box-shadow: 0px 0px 8px 0px var(--belite);
 	-moz-box-shadow: 0px 0px 8px 0px var(--belite);
@@ -16,7 +17,7 @@
 	flex: 0.5;
 	display: flex;
 	align-items: center;
-	margin-left: 2em;
+	margin-left: 2%;
 	color: white;
 	text-transform: uppercase;
 }
@@ -24,7 +25,7 @@
 	display: flex;
 	flex: 0.5;
 	justify-content: flex-end;
-	margin-right: 5%;
+	margin-right: 2%;
 	font-size: 2em;
 }
 .right-wrapper a {

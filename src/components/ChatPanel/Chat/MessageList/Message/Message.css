@@ -1,7 +1,6 @@
 .message-container {
 	display: flex;
 	justify-content: flex-end;
-	font-size: 13px;
 	text-shadow: 2px 2px 7px rgba(0, 0, 0, 1);
 }
 .justify-start {
@@ -43,7 +42,8 @@
 		linear-gradient(200deg, rgba(206, 206, 206, 0.09) 0%, rgba(206, 206, 206, 0.09) 58%, rgba(6, 6, 6, 0.09) 58%, rgba(6, 6, 6, 0.09) 100%),
 		linear-gradient(304deg, rgba(162, 162, 162, 0.07) 0%, rgba(162, 162, 162, 0.07) 27%, rgba(24, 24, 24, 0.07) 27%, rgba(24, 24, 24, 0.07) 100%),
 		linear-gradient(186deg, rgba(166, 166, 166, 0.04) 0%, rgba(166, 166, 166, 0.04) 5%, rgba(210, 210, 210, 0.04) 5%, rgba(210, 210, 210, 0.04) 100%),
-		linear-gradient(119deg, var(--slateglite), var(--verdantdark), var(--dorchiddim));
+		linear-gradient(119deg, var(--slatebfullish), var(--dorchiddim), var(--crimberry));
+	/* linear-gradient(119deg, var(--slateglite), var(--verdantdark), var(--dorchiddim)); */
 }
 .others {
 	/* background-image: radial-gradient(var(--dorchiddim), var(--slatep)); */
@@ -103,7 +103,8 @@
 			rgba(199, 199, 199, 0.04) 75%,
 			rgba(199, 199, 199, 0.04) 100%
 		),
-		linear-gradient(119deg, var(--slatep), var(--roarange), var(--dorchiddim));
+		linear-gradient(119deg, var(--slateglite), var(--verdantdark), var(--dorchiddim));
+	/* linear-gradient(119deg, var(--slatep), var(--dorchiddim), var(--crimberryfull)); */
 }
 .meta-msg {
 	display: inline-block;
@@ -111,7 +112,7 @@
 	line-height: 10px;
 }
 span.time {
-	font-size: 10px !important;
+	font-size: 11px !important;
 	word-spacing: 0;
 	letter-spacing: 0;
 	word-break: keep-all;

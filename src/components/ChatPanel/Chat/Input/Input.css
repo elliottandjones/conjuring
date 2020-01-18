@@ -5,12 +5,12 @@
 }
 
 .chat-input {
-	background: var(--slateg);
+	background: var(--slateb);
 	color: white;
 	caret-color: var(--verdantlite);
 	border: none;
 	border-radius: 0;
-	padding: 4%;
+	padding: 2%;
 	width: 100%;
 	font-size: 1.2em;
 	border: 2px ridge var(--verdant);
@@ -42,16 +42,17 @@ textarea:hover {
 .send-message-button {
 	grid-area: send-btn;
 	color: #fff;
-	text-transform: capitalize;
+	text-transform: uppercase;
 	text-decoration: none;
 	background: var(--slateb);
-	padding: 15px;
+	padding: 15px 25px;
+	min-width: max-content;
 	display: inline-flex;
 	border: 1px ridge var(--belite);
 	opacity: 0.9;
 }
 button.send-btn:disabled {
-	opacity: 0.9;
+	opacity: 0.8;
 	cursor: auto;
 }
 button.send-btn:enabled:hover,

@@ -9,7 +9,6 @@ const ChatPanel = () => {
   return (
     <Router>
       <Route path="/" exact component={Join} />
-      {/* <Route path="/" exact component={Join} /> */}
       <Route path="/chat" component={Chat} />
     </Router>
   );

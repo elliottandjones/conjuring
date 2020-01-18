@@ -1,7 +1,7 @@
 aside.sidebar {
 	grid-area: sidebar;
 	width: 100%;
-	background: var(--slateb);
+	background: var(--slatep);
 	/* border-top: 2px inset var(--belite); */
 	border: 1px ridge var(--belite);
 	color: var(--lightish);

@@ -12,17 +12,22 @@
 /* panel component */
 .panel {
 	display: grid;
-	grid-template-columns: repeat(6, 1fr);
-	grid-template-rows: 40px repeat(6, 1fr) 50px;
+	grid-template-columns: repeat(7, 1fr);
+	grid-template-rows: repeat(13, 1fr);
 	grid-template-areas:
-		"header  header header header header header"
-		"sidebar output output output output output"
-		"sidebar output output output output output"
-		"sidebar output output output output output"
-		"sidebar output output output output output"
-		"sidebar output output output output output"
-		"sidebar output output output output output"
-		"sidebar input  input  input  input  input";
+		"header  header header header header header header"
+		"sidebar output output output output output output"
+		"sidebar output output output output output output"
+		"sidebar output output output output output output"
+		"sidebar output output output output output output"
+		"sidebar output output output output output output"
+		"sidebar output output output output output output"
+		"sidebar output output output output output output"
+		"sidebar output output output output output output"
+		"sidebar output output output output output output"
+		"sidebar output output output output output output"
+		"sidebar output output output output output output"
+		"sidebar input  input  input  input  input input";
 	width: 100%;
 	gap: 5px;
 	background: var(--slatep);
