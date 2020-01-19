@@ -8,10 +8,10 @@ export default function Join() {
   const [room, setRoom] = useState('');
   
   return (
-    <div className="login-wrapper">
+		<div className="login-wrapper">
 			<section className="login">
 				<form className="login-form" onSubmit={e => e.preventDefault()}>
-					<h1 className="form-header">Make/Join a Chat Room</h1>
+					<h1 className="form-header">Join a Chat Room</h1>
 					<label htmlFor="nickname">Nickname</label>
 					<input
 						required
@@ -44,6 +44,9 @@ export default function Join() {
 					</Link>
 				</form>
 			</section>
-    </div>
+			<footer id="join-footer">
+				&copy; 2019 <a href="http://elliottandjones.com/">Elliott Jones</a>
+			</footer>
+		</div>
   );
 }

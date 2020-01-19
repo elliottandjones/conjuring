@@ -9,12 +9,11 @@ const RollMessage = ({message: {name, creatureName, action, createdAt}, clientNa
 	const getRolls = () => {
 		let isCrit = false;
 		const att = rollAttack();
-		console.log("att: ", att)
 		if(att === 20 || att === '20') {
 			isCrit = true;
 		}
 		const dmg = rollDamage(action.damage_dice, action.damage_bonus, isCrit);
-		console.log("{att, dmg, isCrit}: ",{att: att, dmg: dmg, isCrit: isCrit})
+		// console.log("{att, dmg, isCrit}: ",{att: att, dmg: dmg, isCrit: isCrit})
 		return { att: att, dmg: dmg, isCrit: isCrit }; // { number, array, boolean } 
 	}
 	
@@ -33,9 +32,7 @@ const RollMessage = ({message: {name, creatureName, action, createdAt}, clientNa
 			}
 			<div className={`message-box ${isCurrentUser ? "you" : "others"}`}>
 				<p className="message-text"><b>{creatureName}</b></p>
-				<p className="message-text">
-					<b>{action.name}</b>: {action.desc}
-				</p>
+				<p className="message-text"><b>{action.name}</b>: {action.desc}</p>
 				{
 					!action.damage_bonus && !action.damage_dice ?
 						<p><b>This action has no associated attack/damage rolls. ¯\_(ツ)_/¯</b></p>
@@ -44,7 +41,7 @@ const RollMessage = ({message: {name, creatureName, action, createdAt}, clientNa
 								Attack: <span title="attack roll (1d20)">{rolls.att}</span> + <span title="attack bonus">{action.attack_bonus}</span> = <strong title="Total attack">{rolls.att + action.attack_bonus}</strong> {rolls.isCrit && <em>Critical Hit! Yaaaaaas!</em>}
 							</p>
 							<p className={`message-text ${rolls.isCrit && "ba"}`}>
-							Damage: {rolls.dmg.map((value, index) => (index === rolls.dmg.length - 1 ? <span title="damage bonus">{value >= 0 ? value: `(${value})`}</span> : <span title={`${action.damage_dice}`}>{value} + </span>))} = <strong title="total damage">{getTotalDamage(rolls.dmg)}</strong>
+							Damage: {rolls.dmg.map((value, index) => (index === rolls.dmg.length - 1 ? <span key={`dmg_bonus_${index}`} title="damage bonus">{value >= 0 ? value: `(${value})`}</span> : <span key={`dmg_dice_${index}`} title={`${action.damage_dice}`}>{value} + </span>))} = <strong title="total damage">{getTotalDamage(rolls.dmg)}</strong>
 							</p>
 						</React.Fragment>
 				}

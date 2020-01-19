@@ -7,7 +7,7 @@
 #search {
 	background-color: var(--slateb);
 	border: 3px inset var(--verdantlite);
-	padding: 5px 2px 2px 3px;
+	padding: 5px 2px 2px 5px;
 	line-height: 1.7em;
 	font-size: 1.3em;
 	width: 96%;

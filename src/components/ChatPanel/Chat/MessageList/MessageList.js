@@ -6,7 +6,7 @@ import './MessageList.css';
 export default function MessageList({ messages, clientName }) {
 	const bottomRef = React.useRef(null);
 	const scrollToBottom = () => {
-		bottomRef.current.scrollIntoView({behavior: "smooth"});
+		bottomRef.current.scrollIntoView();
 	};
 	React.useEffect(scrollToBottom, [messages]);
 	// element.offsetBottom = element.offsetTop + element.offsetHeight

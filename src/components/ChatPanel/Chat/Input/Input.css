@@ -13,7 +13,7 @@
 	padding: 2%;
 	width: 100%;
 	font-size: 1.2em;
-	border: 2px ridge var(--verdant);
+	border: 3px inset var(--verdantlite);
 	transition: all 0.2s ease-in-out 0s;
 	-webkit-transition: all 0.2s ease-in-out 0s;
 	-moz-transition: all 0.2s ease-in-out 0s;
@@ -31,9 +31,9 @@ input:hover,
 textarea:hover {
 	outline: none;
 	outline-style: none;
-	box-shadow: 0 0 10px 0 var(--dorchid) inset;
-	-webkit-box-shadow: 0 0 10px 0 var(--dorchid) inset;
-	-moz-box-shadow: 0 0 10px 0 var(--dorchid) inset;
+	box-shadow: 0 0 15px 0 var(--dorchid) inset;
+	-webkit-box-shadow: 0 0 15px 0 var(--dorchid) inset;
+	-moz-box-shadow: 0 0 15px 0 var(--dorchid) inset;
 	cursor: auto;
 	opacity: 1;
 }
@@ -48,13 +48,18 @@ textarea:hover {
 	padding: 15px 25px;
 	min-width: max-content;
 	display: inline-flex;
-	border: 1px ridge var(--belite);
+	border: 2px outset var(--belite);
 	opacity: 0.9;
+	margin-left: 5px;
 }
 button.send-btn:disabled {
 	opacity: 0.8;
 	cursor: auto;
 }
+button.send-btn:enabled:active {
+	border-style: inset;
+}
+
 button.send-btn:enabled:hover,
 button.send-btn:enabled:focus,
 button.send-btn:enabled:active {
@@ -63,7 +68,7 @@ button.send-btn:enabled:active {
 	text-shadow: 0 0 16px var(--roarange);
 	font-weight: 500;
 	opacity: 1;
-	box-shadow: 0 0 10px 0 var(--dorchid) inset;
-	-webkit-box-shadow: 0 0 10px 0 var(--dorchid) inset;
-	-moz-box-shadow: 0 0 10px 0 var(--dorchid) inset;
+	box-shadow: 0 0 15px 0 var(--dorchid) inset;
+	-webkit-box-shadow: 0 0 15px 0 var(--dorchid) inset;
+	-moz-box-shadow: 0 0 15px 0 var(--dorchid) inset;
 }

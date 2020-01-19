@@ -1,9 +1,9 @@
 aside.sidebar {
 	grid-area: sidebar;
 	width: 100%;
-	background: var(--slatep);
+	background: var(--slateb);
 	/* border-top: 2px inset var(--belite); */
-	border: 1px ridge var(--belite);
+	border: 2px outset var(--belite);
 	color: var(--lightish);
 	text-align: center;
 }

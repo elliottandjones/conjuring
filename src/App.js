@@ -303,9 +303,11 @@ class App extends React.Component {
           <div className="bar-container">
             <div className="app-title pl1 ma1" title="a Reference App for Dungeons & Dragons (5e SRD)">
               <h1 className="mt1 mb1" style={{ fontSize: '2.2em' }}>
-                <span id="app-title-span" style={{ whiteSpace: 'none' }}>
-                  Conju<img className="icon" alt="icon" src="/favicon.ico" />ing
-                </span> <a href="https://github.com/Elliohknow/conjuring" id="source-link">source</a>
+								<a id="homepage" href="/" title="link to home page" style={{textDecoration: "none"}}>
+                	<span id="app-title-span" style={{ whiteSpace: 'none' }}>
+										Conju<img className="icon" alt="icon" src="/favicon.ico" />ing
+									</span>
+								</a> <a href="https://github.com/Elliohknow/conjuring" title="github repo for this web app" id="source-link">source</a>
               </h1>
             </div>
             <SearchBox onSearchChange={this.onSearchChange} />

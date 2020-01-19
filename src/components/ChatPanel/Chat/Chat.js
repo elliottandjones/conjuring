@@ -42,7 +42,7 @@ const Chat = ({ location }) => {
     });
 
     socket.on('roomData', ({ users }) => {
-      console.log(users);
+      // console.log(users);
       setUsers(users);
     });
 
@@ -54,7 +54,7 @@ const Chat = ({ location }) => {
   }, [messages])
   
   useEffect(() => {
-    console.log("[from Chat.js] proceed: ", proceed);
+    // console.log("[from Chat.js] proceed: ", proceed);
     if(proceed) {
       socket.emit('sendRollMessage', {creatureName, action}, () => clearRollState());
     }
