@@ -18,9 +18,9 @@ const Chat = ({ location }) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const {proceed, action, creatureName, clearRollState} = useContext(CTX);
-  // const ENDPOINT = 'https://project-chat-application.herokuapp.com/';
-  const ENDPOINT = 'http://localhost:5016';
-
+  // const ENDPOINT = 'http://localhost:5016';
+	const ENDPOINT = 'https://whispering-brook-74854.herokuapp.com/';
+	
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
 
