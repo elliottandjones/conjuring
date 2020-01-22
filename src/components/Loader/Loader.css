@@ -1,0 +1,76 @@
+/* .loader-container {
+	width: 100%;
+	height: 100%;
+	margin: 50% 50%;
+	display: flex;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	vertical-align: middle;
+} */
+.loader {
+	width: 100%;
+	height: 25%;
+	/* max-height: 33%; */
+	/* height: 100%; */
+	grid-row: span 1;
+	display: flex;
+	vertical-align: middle;
+	justify-content: space-evenly;
+	margin-top: 15px;
+}
+.loader span {
+	font-size: 6em;
+}
+/* loader 1 */
+#loader-1 span:nth-child(1) {
+	/* animation: changeopacity 0.8s ease-in-out infinite; */
+	animation: changeopacity 1.65s ease-in-out 0.08889s infinite;
+}
+#loader-1 span:nth-child(2) {
+	/* animation: changeopacity 0.8s ease-in-out 0.088888889s infinite; */
+	animation: changeopacity 1.65s ease-in-out 0.17778s infinite;
+}
+#loader-1 span:nth-child(3) {
+	/* animation: changeopacity 0.8s ease-in-out 0.177777778s infinite; */
+	animation: changeopacity 1.65s ease-in-out 0.35556s infinite;
+}
+/* loader 2 */
+#loader-2 span:nth-child(1) {
+	/* animation: changeopacity 0.8s ease-in-out 0.622222223s infinite; */
+	animation: changeopacity 1.65s ease-in-out 1.24446s infinite;
+}
+#loader-2 span:nth-child(2) {
+	/* animation: changeopacity 0.8s ease-in-out 0.711111112s infinite; */
+	/* animation: changeopacityreverse 0.8s ease-in-out 0.4s infinite; */
+	animation: changeopacity 1.65s ease-in-out 1.42224s infinite;
+	/* animation: none; */
+}
+#loader-2 span:nth-child(3) {
+	/* animation: changeopacity 0.8s ease-in-out 0.266666667s infinite; */
+	animation: changeopacity 1.65s ease-in-out 0.53334s infinite;
+}
+/* loader 3 */
+#loader-3 span:nth-child(1) {
+	/* animation: changeopacity 0.8s ease-in-out 0.533333334s infinite; */
+	animation: changeopacity 1.65s ease-in-out 1.06668s infinite;
+}
+#loader-3 span:nth-child(2) {
+	/* animation: changeopacity 0.8s ease-in-out 0.444444445s infinite; */
+	animation: changeopacity 1.65s ease-in-out 0.8889s infinite;
+}
+#loader-3 span:nth-child(3) {
+	/* animation: changeopacity 0.8s ease-in-out 0.355555556s infinite; */
+	animation: changeopacity 1.65s ease-in-out 0.71112s infinite;
+}
+
+@keyframes changeopacity {
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	60% {
+		opacity: 0;
+	}
+}

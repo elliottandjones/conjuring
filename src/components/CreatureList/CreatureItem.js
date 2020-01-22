@@ -1,10 +1,10 @@
-import React, { useRef } from 'react';
-import CreatureAction from './CreatureAction';
+import React from 'react';
 import { useToggleHeight } from '../../hooks/useToggle';
+import CreatureAction from './CreatureAction';
 import './CreatureItem.css';
 
-export default function CreatureItem({creature, displayAction}) {
-  const heightRef = useRef(null);
+export default function CreatureItem({creature, chatOpen, onOpenChatPanel}) {
+  const heightRef = React.useRef(null);
   const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef]);
 
   const whatSkills = (creature) => {
@@ -89,7 +89,16 @@ export default function CreatureItem({creature, displayAction}) {
           {
             creature.actions ? 
               creature.actions.map((action, i) => {
-                return <CreatureAction key={`action_${i}`} action={action} name={creature.name} displayAction={displayAction} isExpanded={isExpanded} />;
+                return (
+                  <CreatureAction 
+                    key={`action_${i}`} 
+                    creatureName={creature.name} 
+                    action={action}
+                    isExpanded={isExpanded} 
+                    chatOpen={chatOpen}
+                    onOpenChatPanel={onOpenChatPanel}
+                    />
+                );
               }) : <p> None, apparently. ¯\_(ツ)_/¯</p>
           }
           {
@@ -98,7 +107,16 @@ export default function CreatureItem({creature, displayAction}) {
                 <p className="pactions" style={{textAlign: "center"}}>Legendary Actions</p>
                 <div className="from-center"><i>.</i></div>
                 {creature.legendary_actions.map((action, i) => {
-                  return <CreatureAction key={`legendary_${i}`} action={action} name={creature.name} displayAction={displayAction} isExpanded={isExpanded} />;
+                  return (
+                    <CreatureAction 
+                      key={`legendary_${i}`} 
+                      creatureName={creature.name} 
+                      action={action}
+                      isExpanded={isExpanded} 
+                      chatOpen={chatOpen}
+                      onOpenChatPanel={onOpenChatPanel}
+                      />
+                  );
                 })}
               </React.Fragment>
           }

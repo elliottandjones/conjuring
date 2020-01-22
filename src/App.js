@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import CreatureList from './components/CreatureList/CreatureList';
-import SearchBox from './components/SearchBox/SearchBox';
-import Select from './components/Select/Select';
-import SpellList from './components/SpellList/SpellList';
-import Checkboxes from './components/Checkboxes/Checkboxes';
-import RadioButtons from './components/RadioButtons/RadioButtons';
-import ChatPanel from './components/ChatPanel/ChatPanel';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
-import { DB_CONFIG } from './config';
+import React from 'react';
 import './App.css';
+import ChatPanel from './components/ChatPanel/ChatPanel';
+import Checkboxes from './components/Checkboxes/Checkboxes';
+import CreatureList from './components/CreatureList/CreatureList';
+import Loader from './components/Loader/Loader';
+import RadioButtons from './components/RadioButtons/RadioButtons';
+import SearchBox from './components/SearchBox/SearchBox';
+import Select from './components/Select/Select';
+import SpellList from './components/SpellList/SpellList';
+import { DB_CONFIG } from './config';
 
 const initialTypeValues = {
   aberration: false,
@@ -28,13 +29,14 @@ const initialTypeValues = {
   plant: false,
   undead: false
 };
-class App extends Component {
+class App extends React.Component {
   constructor() {
     super();
     this.app = firebase.initializeApp(DB_CONFIG);
     this.creaturesDB = this.app.database().ref().child('creatures');
     this.spellsDB = this.app.database().ref().child('spells');
     this.state = {
+      loading: true,
 			creatures: [],
 			spells: [],
 			searchfield: "",
@@ -96,52 +98,26 @@ class App extends Component {
 			speedLegend: "Speed",
 			sizeLegend: "Size",
       typePicked: true,
-      chatOpen: false,
-      connected: false,
-      room: '',
-      player: '',
-      action: {},
-			response: "",
-			post: "",
-			responseToPost: ""
+      chatOpen: false
 		};
     this.onTypeChange = this.onTypeChange.bind(this);
   }
 
+  // Firebase data is retrieved by attaching an 
+  // * asynchronous listener to a firebase.database.Reference. 
+  // The listener is triggered once for the initial state of 
+  // the data (with .once()) and again (with .on() only) anytime the data changes.
+
   componentDidMount() {
-    this.creaturesDB.on('value', snapshot => {
-      this.setState({ creatures: snapshot.val() });
-    });
-    this.spellsDB.on('value', snapshot => {
-      this.setState({ spells: snapshot.val() });
-    });
+    this.spellsDB.once('value', snapshot => this.setState({ spells: snapshot.val() }));
+
+    this.creaturesDB.once('value', snapshot => this.setState({ creatures: snapshot.val() }))
+      .then(() => this.setState({ loading: false }))
+      .catch(err => {throw new Error('High level error'+err.message)})
+      .catch(err => console.log(err));
   }
-  //Below should be added to componentDidMount
-    // this.callApi()
-    //   .then(res => this.setState({ response: res.express }))
-    //   .catch(err => console.log(err));
-  // callApi = async () => {
-  //   const response = await fetch('/api/hello');
-  //   const body = await response.json();
-  //   if (response.status !== 200) throw Error(body.message);
-    
-  //   return body;
-  // };
   
-  // handleSubmit = async e => {
-  //   e.preventDefault();
-  //   const response = await fetch('/api/world', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ post: this.state.post }),
-  //   });
-  //   const body = await response.text();
-    
-  //   this.setState({ responseToPost: body });
-  // };
-  
+
   onOpenChatPanel = (e) => {
     e.preventDefault();
     if (!this.state.chatOpen) {
@@ -149,12 +125,6 @@ class App extends Component {
     }
     if (this.state.spellFilter) {
       this.setState({ spellFilter: false });
-    }
-    if (!this.state.connected) {
-      this.setState({
-        room: 'local tavern',
-        player: 'you'
-      });
     }
   }
   onFilterByAttribute = (e) => {
@@ -168,9 +138,6 @@ class App extends Component {
   }
   onFilterBySpell = (e) => {
     e.preventDefault();
-    console.log("crValue: ", this.state.crValue);
-		console.log("sizeValue: ", this.state.sizeValue);
-		console.log("speedValue: ", this.state.speedValue);
     if (!this.state.spellFilter) {
       this.setState({ spellFilter: true });
     }
@@ -215,24 +182,6 @@ class App extends Component {
   onSizeSelect = (event) => {
     this.setState({ sizeValue: event.target.value });
   }
-  onActionTaken = (event) => {
-    event.preventDefault();
-    this.setState({ action: event.target.value });
-  }
-  displayAction = (event, action, creatureName) => {
-    event.preventDefault();
-    this.setState({chatOpen: true});
-    if (action) {
-      
-      // eslint-disable-next-line
-      console.log('NAME: ', creatureName);
-      // eslint-disable-next-line
-      console.log('ACTION.NAME: ', action.name);
-      // eslint-disable-next-line
-      console.log('ACTION.DESC: ', action.desc);
-    }
-  }
-
   filterBySpell = (critters, spell) => {
     if (spell.particular_creatures) {
       critters = critters.filter(creature => {
@@ -263,7 +212,6 @@ class App extends Component {
     }
     return critters;
   }
-
   formatCR = (str) => {
     if (str && !str.includes('/')) {
       return parseInt(str);
@@ -277,7 +225,8 @@ class App extends Component {
       creatures, spells, spellFilter, spellObject, spellSelected, searchfield,
       crOptions, speedOptions, sizeOptions,
       typeValues, crValue, speedValue, sizeValue,
-      speedLegend, sizeLegend, room, player, action, chatOpen
+      speedLegend, sizeLegend, chatOpen, loading
+      // socket
     } = this.state;
 
     // filter by name
@@ -313,7 +262,7 @@ class App extends Component {
     * (1) an input of type='radio' isn't given a value explicitly or from props
     * && 
     * (2) event.target.checked=true 
-    ? This will be the case when the 'All' option is checked, which is the default case
+    * This will be the case when the 'All' option is checked, which is the default case
     */
     if (speedValue && speedValue !== 'on') {
       speedValue.toLowerCase().includes('no')
@@ -347,22 +296,24 @@ class App extends Component {
     if (spellSelected) {
       filteredCreatures = this.filterBySpell(filteredCreatures, spellObject);
     }
-
+    
     return (
       <div className="App">
         <div className="top-bar">
           <div className="bar-container">
             <div className="app-title pl1 ma1" title="a Reference App for Dungeons & Dragons (5e SRD)">
               <h1 className="mt1 mb1" style={{ fontSize: '2.2em' }}>
-                <span id="app-title-span" style={{ whiteSpace: 'none' }}>
-                  Conju<img className="icon" alt="icon" src="/favicon.ico" />ing
-                </span> <a href="https://github.com/Elliohknow/conjuring" id="source-link">source</a>
+								<a id="homepage" href="/" title="link to home page" style={{textDecoration: "none"}}>
+                	<span id="app-title-span" style={{ whiteSpace: 'none' }}>
+										Conju<img className="icon" alt="icon" src="/favicon.ico" />ing
+									</span>
+								</a> <a href="https://github.com/Elliohknow/conjuring" title="github repo for this web app" id="source-link">source</a>
               </h1>
             </div>
-            <SearchBox searchfield={searchfield} searchChange={this.onSearchChange} />
+            <SearchBox onSearchChange={this.onSearchChange} />
           </div>
         </div>
-        <div className="tabs mb1 mt1">
+        <div className="tabs ml1">
           <button
             className={`tab ${(spellFilter || chatOpen) && 'o-50'}`}
             onClick={(e) => {this.onFilterByAttribute(e); this.onSpellSelect({});}} 
@@ -379,7 +330,7 @@ class App extends Component {
             className={`tab ${(spellFilter || !chatOpen) && 'o-50'}`}
             onClick={(e) => {this.onOpenChatPanel(e);}}
             tabIndex="0"
-          ><span>Chat Panel</span>
+          ><span>Party Chat</span>
           </button>
         </div>
         {
@@ -398,9 +349,13 @@ class App extends Component {
               </div>
             </div>
             : (spellFilter ? <SpellList spells={spells} onSpellSelect={this.onSpellSelect} /> 
-              : (chatOpen && <ChatPanel room={room} player={player} displayAction={this.displayAction} action={action} />))
+              : (chatOpen && <ChatPanel />))
         }
-        <CreatureList creatures={filteredCreatures} displayAction={this.displayAction} />
+        {
+          loading ?
+            <Loader />
+            : <CreatureList creatures={filteredCreatures} chatOpen={chatOpen} onOpenChatPanel={this.onOpenChatPanel} />
+        }
       </div>
     );
   }

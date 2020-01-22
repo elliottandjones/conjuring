@@ -1,7 +1,7 @@
 import React from "react";
 import "./SearchBox.css";
 
-const SearchBox = ({ searchfield, searchChange }) => {
+const SearchBox = ({ onSearchChange }) => {
 // const SearchBox = ({ searchfield, searchChange }) => {
   return (
     <div className="search-box">
@@ -10,7 +10,7 @@ const SearchBox = ({ searchfield, searchChange }) => {
         className="inp-hvr mt2 mr2 derk"
         type="search"
         placeholder="search by name"
-        onChange={searchChange}
+        onChange={onSearchChange}
         autoComplete="off"
         autoFocus
       />

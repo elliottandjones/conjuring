@@ -6,6 +6,7 @@
 .pnp.js
 
 # misc things to ignore
+.vscode
 functions/node_modules
 /functions/node_modules
 thehaters
@@ -25,6 +26,7 @@ src/config.js
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local
