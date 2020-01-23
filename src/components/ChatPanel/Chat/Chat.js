@@ -1,6 +1,5 @@
 import queryString from 'query-string';
 import React, { useContext, useEffect, useState } from "react";
-// import ScrollToBottom from 'react-scroll-to-bottom';
 import io from "socket.io-client";
 import { CTX } from '../../../Store';
 import './Chat.css';
