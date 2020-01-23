@@ -1,8 +1,8 @@
-export const rollAttack = () => {
+const rollAttack = () => {
 	return Math.floor(Math.random() * 20 + 1); // number
 };
 
-export const rollDamage = (damageDice, damageBonus = 0, isCrit) => {
+const rollDamage = (damageDice, damageBonus = 0, isCrit) => {
   const results = [];
   if (!damageDice) {
 		if (isCrit) {
@@ -25,9 +25,7 @@ export const rollDamage = (damageDice, damageBonus = 0, isCrit) => {
 	return results; // array of numbers with length of at least 2
 };
 
-export const getTotalDamage = (array) => {
-	let total = 0;
-	array.map(el => total += el);
-	return total; // number
+module.exports = {
+	rollAttack,
+	rollDamage
 };
-
