@@ -4,7 +4,10 @@ D&D 5e SRD (and personal homebrew) reference and real-time chat room web app for
 
 Built with React.js (and react hooks), Node.js, Socket.io, Firebase, Wizards of the Coast's wonderful game, and love.
 
-todos: improving mobile experience in portrait mode, improve accessibility 
+Special thanks to [DeepOwl](https://github.com/DeepOwl) and based in part on their [summoning](https://github.com/DeepOwl/summoning) project. 
 
-Based in part on [DeepOwl](https://github.com/DeepOwl)'s [summoning](https://github.com/DeepOwl/summoning) project 
+## Todo: 
+
+improve mobile experience in portrait mode, accessibility enhancements 
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
