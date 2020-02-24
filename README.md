@@ -4,12 +4,6 @@ D&D 5e SRD (and personal homebrew) reference and real-time chat room web applica
 
 Built with React.js (updated to use the hooks and context APIs), CSS Grid, Node.js, Socket.io, Firebase Realtime Database, Wizards of the Coast's wonderful tabletop RPG - Dungeons & Dragons (5th edition), and a whole lot of love.
 
-Special thanks to [DeepOwl](https://github.com/DeepOwl) and based in part on their [summoning](https://github.com/DeepOwl/summoning) project. 
-
-## Todos/future things: 
-
--improve mobile experience when in portrait mode 
--accessibility enhancements
--build feature that creates instances of conjured creatures with their own individual trackable stats
+Special thanks to [DeepOwl](https://github.com/DeepOwl) and based in part on their [summoning](https://github.com/DeepOwl/summoning) project.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
