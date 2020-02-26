@@ -1,12 +1,10 @@
 {
 	"name": "conjurin-app-react",
-	"version": "1.0.0",
+	"version": "2.0.1",
 	"private": true,
 	"author": "Elliott Jones",
 	"dependencies": {
-		"cors": "^2.8.5",
 		"eslint-utils": "1.4.2",
-		"express": "^4.17.1",
 		"firebase": "^5.7.0",
 		"query-string": "^6.9.0",
 		"react": "^16.9.0",
