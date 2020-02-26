@@ -4,7 +4,9 @@
 	"private": true,
 	"author": "Elliott Jones",
 	"dependencies": {
+		"cors": "^2.8.5",
 		"eslint-utils": "1.4.2",
+		"express": "^4.17.1",
 		"firebase": "^5.7.0",
 		"query-string": "^6.9.0",
 		"react": "^16.9.0",
