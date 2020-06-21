@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const CTX = React.createContext()
+export const CTX = React.createContext();
 
 const Store = (props) => {
   const [creatureName, setCreatureName] = React.useState('');
@@ -12,16 +12,12 @@ const Store = (props) => {
     setCreatureName(cName);
     setAction(cAction);
     setProceed(true);
-  }
+  };
   const clearRollState = () => {
     setProceed(false);
-  }
-  
-  return (
-    <CTX.Provider value={{ proceed, creatureName, action, sendRoll, clearRollState }}>
-      {props.children}
-    </CTX.Provider>
-  );
-}
+  };
+
+  return <CTX.Provider value={{ proceed, creatureName, action, sendRoll, clearRollState }}>{props.children}</CTX.Provider>;
+};
 
 export default Store;

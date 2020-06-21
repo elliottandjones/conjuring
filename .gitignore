@@ -6,6 +6,7 @@
 .pnp.js
 
 # misc things to ignore
+.history
 .vscode
 functions/node_modules
 /functions/node_modules
@@ -23,7 +24,6 @@ src/config.js
 
 # production
 /build
-
 # misc
 .DS_Store
 .env
