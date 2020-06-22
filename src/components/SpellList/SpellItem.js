@@ -5,7 +5,7 @@ import './SpellItem.css';
 const SpellItem = ({ spell, onSpellSelect }) => {
   const heightRef = useRef(null);
   const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef]);
-  const [isApplied, toggleApply] = useToggle(false);
+  const [isToggled, toggle] = useToggle(false);
 
   const formatLevel = (level) => {
     if (level === 1) {
@@ -18,16 +18,23 @@ const SpellItem = ({ spell, onSpellSelect }) => {
       return 'th';
     }
   };
+  // const selectThisSpell = () => {
+  //   if (isToggled === false) {
+  //     onSpellSelect(spell);
+  //   } else {
+  //     onSpellSelect({});
+  //   }
+  // };
 
   const currentHeight = isExpanded ? height : 0;
-  const buttonText = isApplied ? 'Deselect this Spell' : 'Select this Spell';
+  const buttonText = isToggled ? 'Deselect this Spell' : 'Select this Spell';
   const lvl = formatLevel(spell.level);
 
   return (
     <div className={`pa1 ma1 spell-item ${isExpanded ? 'inset spell-ex' : 'outset'}`}>
       <div className={`mt1 mb1 derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => toggleExpand(e)}>
         <span className="name">
-          {spell.name} {spell.is_homebrew && <i> (Homebrew) </i>}
+          {spell.name} {spell?.is_homebrew && '(Homebrew)'}
         </span>
       </div>
       <div
@@ -69,21 +76,12 @@ const SpellItem = ({ spell, onSpellSelect }) => {
           <hr />
           <p className="o-80">Classes: {spell.classes}</p>
           <button
-            className={`filter-toggle select ${isApplied ? 'dn' : 'db '}`}
+            className={`filter-toggle db ${isToggled ? 'selected' : 'unselected'}`}
             type="submit"
             onClick={(e) => {
-              toggleApply(e);
-              onSpellSelect(spell);
-            }}
-          >
-            {buttonText}
-          </button>
-          <button
-            className={`filter-toggle deselect ${isApplied ? 'db' : 'dn'}`}
-            type="submit"
-            onClick={(e) => {
-              toggleApply(e);
-              onSpellSelect({});
+              // filter against toggleState before updating the ui
+              isToggled === false ? onSpellSelect(spell) : onSpellSelect({});
+              toggle(e);
             }}
           >
             {buttonText}

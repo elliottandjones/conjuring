@@ -49,6 +49,12 @@
   background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 h1 {
   padding-left: 8px;
   text-shadow: -1px -1px 14px var(--dorchid);
@@ -149,30 +155,6 @@ label {
   text-align: left;
 }
 
-/* scrollbar stuff */
-::-webkit-scrollbar {
-  width: 9px;
-  opacity: 0.5;
-}
-
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
-::-webkit-scrollbar-thumb {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-  background: rgba(220, 208, 255, 0.836);
-}
-::-webkit-scrollbar-thumb:hover,
-::-webkit-scrollbar-thumb:active {
-  background: rgba(220, 208, 255, 0.904);
-}
-::-webkit-scrollbar-thumb:window-inactive,
-::-webkit-scrollbar-thumb:-moz-window-inactive {
-  background: transparent;
-}
 /* Creature Item list */
 .creature-list {
   grid-column: 6 / -1;
@@ -180,7 +162,8 @@ label {
   padding-right: 3px;
   padding-left: 5px;
   overflow-y: scroll;
-  width: 100%;
+  width: 98%;
+  overflow-x: hidden;
 }
 .loader-container {
   grid-column: 6 / -1;
@@ -315,7 +298,7 @@ legend {
   grid-column: 1 / span 5;
   margin: 5px;
   width: 100%;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
 }
 
@@ -510,6 +493,30 @@ footer#join-footer {
 .pl2 {
   padding-left: 0.5rem;
 }
+/* scrollbar stuff */
+/* ::-webkit-scrollbar {
+  width: 9px;
+  opacity: 0.5;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  background: rgba(220, 208, 255, 0.836);
+}
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  background: rgba(220, 208, 255, 0.904);
+}
+::-webkit-scrollbar-thumb:window-inactive,
+::-webkit-scrollbar-thumb:-moz-window-inactive {
+  background: transparent;
+} */
 /* .tooltip {
   position: relative;
   display: inline-block;

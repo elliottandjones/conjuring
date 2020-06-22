@@ -1,26 +1,23 @@
 import { useState } from 'react';
 
-const useToggleHeight = initialValues => {
-	const [toggleValue, setValue] = useState(initialValues[0]);
-	const [componentHeight, setHeight] = useState(0);
-	const toggler = e => {
-		e.preventDefault();
-		setValue(!toggleValue);
-		setHeight(initialValues[1].current.clientHeight);
-	};
-	return [toggleValue, componentHeight, toggler];
-};
-
-const useToggle = initialValue => {
-  const [value, setValue] = useState(initialValue);
-  const toggler = e => {
+export const useToggleHeight = (initialState) => {
+  const [toggleState, setToggleState] = useState(initialState[0]);
+  const [heightState, setHeightState] = useState(0);
+  const toggle = (e) => {
     e.preventDefault();
-    setValue(!value);
+    setToggleState(!toggleState);
+    setHeightState(initialState[1].current.clientHeight);
   };
-  return [value, toggler];
+  return [toggleState, heightState, toggle];
 };
 
-export {
-  useToggle,
-  useToggleHeight
+export const useToggle = (initialState = false) => {
+  const [state, setState] = useState(initialState);
+  const toggle = (e) => {
+    e.preventDefault();
+    setState(!state);
+  };
+  return [state, toggle];
 };
+
+// export { useToggle, useToggleHeight };
