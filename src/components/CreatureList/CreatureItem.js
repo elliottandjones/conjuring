@@ -73,7 +73,7 @@ export default function CreatureItem({ creature, chatOpen, onOpenChatPanel }) {
     return mod >= 0 ? ` (+${mod})` : ` (${mod})`
   }
 
-  const currentHeight = isExpanded ? height : 0
+  let currentHeight = isExpanded ? height : 0
 
   return (
     <div className={`ma1 pa1 creature-item ${isExpanded ? 'inset creature-ex' : 'outset'}`}>
