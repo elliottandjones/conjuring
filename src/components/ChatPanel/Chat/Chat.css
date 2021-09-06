@@ -1,38 +1,38 @@
 /* panel */
 .panel-wrapper {
-	display: grid;
-	grid-row: 3 / -1;
-	grid-column: 1 / span 5;
-	margin: 0 9px;
-	width: 100%;
-	/* max-height: 78vh !important; */
-	overflow: hidden;
+  display: grid;
+  grid-row: 3 / -1;
+  grid-column: 1 / span 5;
+  margin: 0 9px;
+  width: 100%;
+  /* max-height: 78vh !important; */
+  overflow: hidden;
 }
 
 /* panel component */
 .panel {
-	display: grid;
-	grid-template-columns: repeat(7, 1fr);
-	grid-template-rows: repeat(13, 1fr);
-	grid-template-areas:
-		"header  header header header header header header"
-		"sidebar output output output output output output"
-		"sidebar output output output output output output"
-		"sidebar output output output output output output"
-		"sidebar output output output output output output"
-		"sidebar output output output output output output"
-		"sidebar output output output output output output"
-		"sidebar output output output output output output"
-		"sidebar output output output output output output"
-		"sidebar output output output output output output"
-		"sidebar output output output output output output"
-		"sidebar output output output output output output"
-		"sidebar input  input  input  input  input input";
-	width: 100%;
-	gap: 5px;
-	background: var(--slatep);
-	margin-bottom: 10px;
-	overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(13, 1fr);
+  grid-template-areas:
+    'header  header header header header header header'
+    'sidebar output output output output output output'
+    'sidebar output output output output output output'
+    'sidebar output output output output output output'
+    'sidebar output output output output output output'
+    'sidebar output output output output output output'
+    'sidebar output output output output output output'
+    'sidebar output output output output output output'
+    'sidebar output output output output output output'
+    'sidebar output output output output output output'
+    'sidebar output output output output output output'
+    'sidebar output output output output output output'
+    'sidebar input  input  input  input  input input';
+  width: 100%;
+  gap: 5px;
+  background: var(--slatep);
+  margin-bottom: 10px;
+  overflow: hidden;
 }
 
 /* .chat-out {

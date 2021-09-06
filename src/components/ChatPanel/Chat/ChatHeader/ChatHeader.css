@@ -1,36 +1,36 @@
 .chat-header {
-	grid-area: header;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	background: var(--slateb);
-	border: medium;
-	min-height: 40px;
-	width: 100%;
-	/* -webkit-box-shadow: 0px 0px 8px 0px var(--belite);
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--slateb);
+  border: medium;
+  min-height: 40px;
+  width: 100%;
+  /* -webkit-box-shadow: 0px 0px 8px 0px var(--belite);
 	-moz-box-shadow: 0px 0px 8px 0px var(--belite);
 	box-shadow: 0px 0px 8px 0px var(--belite); */
-	border: 2px outset var(--belite);
+  border: 2px outset var(--belite);
 }
 .left-wrapper {
-	flex: 0.5;
-	display: flex;
-	align-items: center;
-	margin-left: 2%;
-	color: white;
-	text-transform: uppercase;
+  flex: 0.5;
+  display: flex;
+  align-items: center;
+  margin-left: 2%;
+  color: white;
+  text-transform: uppercase;
 }
 .right-wrapper {
-	display: flex;
-	flex: 0.5;
-	justify-content: flex-end;
-	margin-right: 2%;
-	font-size: 2em;
+  display: flex;
+  flex: 0.5;
+  justify-content: flex-end;
+  margin-right: 2%;
+  font-size: 2em;
 }
 .right-wrapper a {
-	color: white;
-	text-decoration-line: none;
+  color: white;
+  text-decoration-line: none;
 }
 .right-wrapper a:hover {
-	text-shadow: 0 0 15px var(--belite);
+  text-shadow: 0 0 15px var(--belite);
 }

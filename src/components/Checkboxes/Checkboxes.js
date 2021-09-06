@@ -1,5 +1,5 @@
-import React from "react";
-import CheckboxItem from "./CheckboxItem";
+import React from 'react'
+import CheckboxItem from './CheckboxItem'
 
 const Checkboxes = ({ onChange, options, className }) => {
   return (
@@ -7,16 +7,11 @@ const Checkboxes = ({ onChange, options, className }) => {
       <fieldset>
         <legend>Type</legend>
         {Object.entries(options).map(([key, value]) => (
-          <CheckboxItem
-            key={key}
-            id={key}
-            name={key}
-            onChange={onChange}
-          />
+          <CheckboxItem key={key} id={key} name={key} onChange={onChange} />
         ))}
       </fieldset>
     </div>
-  );
-};
+  )
+}
 
-export default Checkboxes;
+export default Checkboxes

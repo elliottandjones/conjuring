@@ -1,11 +1,11 @@
 .messages {
-	grid-area: output;
-	padding: 3% 1%;
-	overflow-y: auto;
-	overflow-x: hidden;
-	flex: auto;
-	vertical-align: middle;
-	width: 100%;
-	border: 2px inset var(--belite);
-	background: var(--slateb);
+  grid-area: output;
+  padding: 3% 1%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: auto;
+  vertical-align: middle;
+  width: 100%;
+  border: 2px inset var(--belite);
+  background: var(--slateb);
 }

@@ -1,0 +1,12 @@
+node_modules
+haters
+thehaters
+theHaters
+.next
+yarn.lock
+package-lock.json
+public
+dist
+build
+.vscode
+.firebase

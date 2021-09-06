@@ -1,23 +1,23 @@
-import React, { useRef } from 'react';
-import { useToggle, useToggleHeight } from '../../hooks/useToggle';
-import './SpellItem.css';
+import React, { useRef } from 'react'
+import { useToggle, useToggleHeight } from '../../hooks/useToggle'
+import './SpellItem.css'
 
 const SpellItem = ({ spell, onSpellSelect }) => {
-  const heightRef = useRef(null);
-  const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef]);
-  const [isToggled, toggle] = useToggle(false);
+  const heightRef = useRef(null)
+  const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef])
+  const [isToggled, toggle] = useToggle(false)
 
-  const formatLevel = (level) => {
+  const formatLevel = level => {
     if (level === 1) {
-      return 'st';
+      return 'st'
     } else if (level === 2) {
-      return 'nd';
+      return 'nd'
     } else if (level === 3) {
-      return 'rd';
+      return 'rd'
     } else {
-      return 'th';
+      return 'th'
     }
-  };
+  }
   // const selectThisSpell = () => {
   //   if (isToggled === false) {
   //     onSpellSelect(spell);
@@ -26,13 +26,16 @@ const SpellItem = ({ spell, onSpellSelect }) => {
   //   }
   // };
 
-  const currentHeight = isExpanded ? height : 0;
-  const buttonText = isToggled ? 'Deselect this Spell' : 'Select this Spell';
-  const lvl = formatLevel(spell.level);
+  const currentHeight = isExpanded ? height : 0
+  const buttonText = isToggled ? 'Deselect this Spell' : 'Select this Spell'
+  const lvl = formatLevel(spell.level)
 
   return (
     <div className={`pa1 ma1 spell-item ${isExpanded ? 'inset spell-ex' : 'outset'}`}>
-      <div className={`mt1 mb1 derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => toggleExpand(e)}>
+      <div
+        className={`mt1 mb1 derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`}
+        onClick={e => toggleExpand(e)}
+      >
         <span className="name">
           {spell.name} {spell?.is_homebrew && '(Homebrew)'}
         </span>
@@ -58,13 +61,16 @@ const SpellItem = ({ spell, onSpellSelect }) => {
             <b>Range:</b> {spell.range}
           </p>
           <p>
-            <b>Components:</b> {spell.components} {spell.components.slice(-1) === 'M' && <span> ({spell.material}) </span>}
+            <b>Components:</b> {spell.components}{' '}
+            {spell.components.slice(-1) === 'M' && <span> ({spell.material}) </span>}
           </p>
           <p>
             <b>Duration:</b> {spell.concentration && <span>Concentration, </span>} {spell.duration}
           </p>
           <hr />
-          {spell.description.map((para) => (para.startsWith('-') ? <li key={para}>{para.slice(1)}</li> : <p key={para}>{para}</p>))}
+          {spell.description.map(para =>
+            para.startsWith('-') ? <li key={para}>{para.slice(1)}</li> : <p key={para}>{para}</p>
+          )}
           {spell.higher_level && (
             <p>
               <b>
@@ -78,10 +84,10 @@ const SpellItem = ({ spell, onSpellSelect }) => {
           <button
             className={`filter-toggle db ${isToggled ? 'selected' : 'unselected'}`}
             type="submit"
-            onClick={(e) => {
+            onClick={e => {
               // filter against toggleState before updating the ui
-              isToggled === false ? onSpellSelect(spell) : onSpellSelect({});
-              toggle(e);
+              isToggled === false ? onSpellSelect(spell) : onSpellSelect({})
+              toggle(e)
             }}
           >
             {buttonText}
@@ -89,7 +95,7 @@ const SpellItem = ({ spell, onSpellSelect }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SpellItem;
+export default SpellItem

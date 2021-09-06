@@ -1,72 +1,72 @@
 .login-wrapper {
-	justify-content: center;
-	text-align: center;
-	height: auto;
-	align-items: center;
-	display: grid;
-	grid-row: 3 / -1;
-	grid-column: 1 / span 5;
-	margin: 0 9px;
-	width: 100%;
-	overflow-y: auto;
+  justify-content: center;
+  text-align: center;
+  height: auto;
+  align-items: center;
+  display: grid;
+  grid-row: 3 / -1;
+  grid-column: 1 / span 5;
+  margin: 0 9px;
+  width: 100%;
+  overflow-y: auto;
 }
 section.login {
-	display: flex;
-	vertical-align: middle;
-	justify-content: space-around;
-	width: 100%;
+  display: flex;
+  vertical-align: middle;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .login-form {
-	width: 100%;
-	display: block;
+  width: 100%;
+  display: block;
 }
 .login-form > label {
-	display: block;
-	text-align: left;
-	padding-bottom: 8px;
-	margin: 4px 0px;
-	color: var(--belite);
-	text-shadow: 0 0 2px var(--roarangelite);
+  display: block;
+  text-align: left;
+  padding-bottom: 8px;
+  margin: 4px 0px;
+  color: var(--belite);
+  text-shadow: 0 0 2px var(--roarangelite);
 }
 
 .form-header {
-	padding-bottom: 10px;
-	margin-bottom: 15%;
+  padding-bottom: 10px;
+  margin-bottom: 15%;
 }
 .input-login {
-	width: 100%;
-	padding: 15px 10px;
-	margin-bottom: 2em;
-	color: var(--belite);
-	background-color: var(--dorchidfull);
-	border: 2px inset var(--belite);
+  width: 100%;
+  padding: 15px 10px;
+  margin-bottom: 2em;
+  color: var(--belite);
+  background-color: var(--dorchidfull);
+  border: 2px inset var(--belite);
 }
 
 #join-room {
-	display: block;
-	align-content: flex-end;
-	justify-content: right;
-	float: right;
+  display: block;
+  align-content: flex-end;
+  justify-content: right;
+  float: right;
 }
 button.login-button {
-	/* ! new */
-	width: auto;
-	height: auto;
-	max-width: 80px;
-	max-height: 50px;
-	color: var(--belite);
-	background: var(--dorchidfull) !important;
-	border: 2px outset var(--belite);
-	margin: 3px 3px;
-	padding: 8px;
-	cursor: pointer;
-	text-transform: uppercase;
+  /* ! new */
+  width: auto;
+  height: auto;
+  max-width: 80px;
+  max-height: 50px;
+  color: var(--belite);
+  background: var(--dorchidfull) !important;
+  border: 2px outset var(--belite);
+  margin: 3px 3px;
+  padding: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
 }
 
 button.login-button:hover,
 button.login-button:focus,
 button.login-button:active {
-	text-shadow: 0 0 5px var(--roarangelite);
-	background-color: var(--dorchidfull);
+  text-shadow: 0 0 5px var(--roarangelite);
+  background-color: var(--dorchidfull);
 }

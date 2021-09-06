@@ -1,8 +1,8 @@
-import React from "react";
-import "./SearchBox.css";
+import React from 'react'
+import './SearchBox.css'
 
 const SearchBox = ({ onSearchChange }) => {
-// const SearchBox = ({ searchfield, searchChange }) => {
+  // const SearchBox = ({ searchfield, searchChange }) => {
   return (
     <div className="search-box">
       <input
@@ -18,7 +18,7 @@ const SearchBox = ({ onSearchChange }) => {
         search for monsters by name
       </label>
     </div>
-  );
-};
+  )
+}
 
-export default SearchBox;
+export default SearchBox

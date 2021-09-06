@@ -1,5 +1,5 @@
-import React from "react";
-import "./Checkbox.css";
+import React from 'react'
+import './Checkbox.css'
 
 const CheckboxItem = ({ name, onChange, id }) => {
   return (
@@ -12,9 +12,11 @@ const CheckboxItem = ({ name, onChange, id }) => {
         defaultChecked={false}
         onChange={onChange}
       />
-      <label htmlFor={id} className="checkbox-label">{name}</label>
+      <label htmlFor={id} className="checkbox-label">
+        {name}
+      </label>
     </div>
-  );
-};
+  )
+}
 
-export default CheckboxItem;
+export default CheckboxItem
