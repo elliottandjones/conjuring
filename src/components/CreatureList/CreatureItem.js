@@ -9,60 +9,26 @@ export default function CreatureItem({ creature, chatOpen, onOpenChatPanel }) {
 
   const whatSkills = creature => {
     let skills = ''
-    if (creature.acrobatics) {
-      skills += `Perception +${creature.acrobatics} `
-    }
-    if (creature.animal_handling) {
-      skills += `Animael Handling +${creature.animal_handling} `
-    }
-    if (creature.arcana) {
-      skills += `Arcana +${creature.arcana} `
-    }
-    if (creature.athletics) {
-      skills += `Athletics +${creature.athletics} `
-    }
-    if (creature.deception) {
-      skills += `Deception +${creature.deception} `
-    }
-    if (creature.history) {
-      skills += `History +${creature.history} `
-    }
-    if (creature.insight) {
-      skills += `Insight +${creature.insight} `
-    }
-    if (creature.intimidation) {
-      skills += `Intimidation +${creature.intimidation} `
-    }
-    if (creature.investigation) {
-      skills += `Investigation +${creature.investigation} `
-    }
-    if (creature.medicine) {
-      skills += `Medicine +${creature.medicine} `
-    }
-    if (creature.nature) {
-      skills += `Nature +${creature.nature} `
-    }
-    if (creature.perception) {
-      skills += `Perception +${creature.perception} `
-    }
-    if (creature.performance) {
-      skills += `Performance +${creature.performance} `
-    }
-    if (creature.persuasion) {
-      skills += `Persuasion +${creature.persuasion} `
-    }
-    if (creature.religion) {
-      skills += `Religion +${creature.religion} `
-    }
-    if (creature.sleight_of_hand) {
-      skills += `Sleight of Hand +${creature.sleight_of_hand} `
-    }
-    if (creature.stealth) {
-      skills += `Stealth +${creature.stealth} `
-    }
-    if (creature.survival) {
-      skills += `Survival +${creature.survival} `
-    }
+    
+    if (creature.acrobatics) skills += `Perception +${creature.acrobatics} `
+    if (creature.animal_handling) skills += `Animael Handling +${creature.animal_handling} `
+    if (creature.arcana) skills += `Arcana +${creature.arcana} `
+    if (creature.athletics) skills += `Athletics +${creature.athletics} `
+    if (creature.deception) skills += `Deception +${creature.deception} `
+    if (creature.history) skills += `History +${creature.history} `
+    if (creature.insight) skills += `Insight +${creature.insight} `
+    if (creature.intimidation) skills += `Intimidation +${creature.intimidation} `
+    if (creature.investigation) skills += `Investigation +${creature.investigation} `
+    if (creature.medicine) skills += `Medicine +${creature.medicine} `
+    if (creature.nature) skills += `Nature +${creature.nature} `
+    if (creature.perception) skills += `Perception +${creature.perception} `
+    if (creature.performance) skills += `Performance +${creature.performance} `
+    if (creature.persuasion) skills += `Persuasion +${creature.persuasion} `
+    if (creature.religion) skills += `Religion +${creature.religion} `
+    if (creature.sleight_of_hand) skills += `Sleight of Hand +${creature.sleight_of_hand} `
+    if (creature.stealth) skills += `Stealth +${creature.stealth} `
+    if (creature.survival) skills += `Survival +${creature.survival} `
+
     return skills
   }
 

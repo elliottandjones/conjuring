@@ -1,0 +1,20 @@
+.drawer-container {
+  width: 16vw;
+  position: fixed;
+  bottom: 0;
+  right: 9vw;
+  z-index: 44;
+}
+
+.drawer-container .drawer-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+div.dice-list {
+  display: flex;
+  flex-direction: row-reverse;
+}
