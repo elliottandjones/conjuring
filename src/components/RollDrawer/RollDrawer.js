@@ -10,43 +10,48 @@ import './RollDrawer.css'
 
 const RollDrawer = () => {
   const heightRef = React.useRef(null)
-  const [isOpen, height, toggleExpand] = useToggleHeight([false, heightRef])
+  const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef])
 
-  let currentHeight = isOpen ? height : 0
+  const postResult = e => {
+    e.preventDefault()
+    console.log('submitted')
+  }
+
+  let currentHeight = isExpanded ? height : 0
 
   return (
-    <section className="drawer-container">
+    <div className="drawer-container">
       <div className="drawer-header">
         <button className="drawer-btn" onClick={e => toggleExpand(e)}>
-          {!isOpen ? '&#11165;' : '&#11167;'}
-          {!isOpen ? '&#11161;' : '&#11163;'}
-          {!isOpen ? '&#11161;' : '&times;'}
+          open/close
         </button>
       </div>
       <div
         className="drawer-body-container"
         style={{ height: currentHeight }}
-        aria-expanded={isOpen}
-        aria-hidden={!isOpen}
+        aria-expanded={isExpanded}
+        aria-hidden={!isExpanded}
       >
-        <div className="drawer-body" ref={heightRef} aria-expanded={isOpen} aria-hidden={!isOpen}>
+        <div className="drawer-body" ref={heightRef} aria-expanded={isExpanded} aria-hidden={!isExpanded}>
           <div className="results-container"></div>
           <div className="input-container">
             <div className="dice-list">
               <DiceList />
             </div>
+            <form onSubmit={e => postResult(e)}></form>
             <input type="text" />
+            <button className="submit-roll"></button>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
 
 const Dice = ({ dice, size, title }) => {
   return (
     <button title={title}>
-      <img src={dice} height={size} width={size} alt={`image of a${title === 'd8' && 'n'} ${title[1]}-sided dice`} />
+      <img src={dice} height={size} width={size} alt={`a${title === 'd8' && 'n'} ${title[1]}-sided dice`} />
     </button>
   )
 }
