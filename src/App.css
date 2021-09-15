@@ -109,7 +109,7 @@ label {
 .ba {
   color: var(--BA);
 }
-
+/* Site Borders */
 .hotem {
   border: 2px solid var(--crimberry);
 }
@@ -131,7 +131,10 @@ label {
   text-shadow: 0 0 16px var(--roarange);
   font-weight: 500;
 }
-
+button:hover,button:focus {
+  text-decoration: underline solid;
+  /* border: none; */
+}
 /* top app/nav/action bar */
 .top-bar {
   grid-column: 1 / -1;
@@ -198,7 +201,9 @@ div.tabs button {
   color: var(--lightish);
   text-shadow: 0 0 5px var(--roarangelite);
   background: var(--slatep);
-  border: 2px solid var(--belite);
+  /* border: 2px solid var(--belite); */
+  border: none;
+  /* border-radius: 5px; */
   display: inline-flex;
   align-content: center;
   justify-content: center;
@@ -218,6 +223,7 @@ button.tab:hover {
   -webkit-box-shadow: 0px 0px 10px 0px var(--belite);
   -moz-box-shadow: 0px 0px 10px 0px var(--belite);
   box-shadow: 0px 0px 10px 0px var(--belite);
+  text-decoration: underline solid;
 }
 
 button.tab:focus {
@@ -225,6 +231,7 @@ button.tab:focus {
   -webkit-box-shadow: 0px 0px 10px 0px var(--belite);
   -moz-box-shadow: 0px 0px 10px 0px var(--belite);
   box-shadow: 0px 0px 10px 0px var(--belite);
+  text-decoration: underline solid;
 }
 
 /* filters-wrapper */

@@ -1,7 +1,7 @@
 .drawer-container {
   position: fixed;
   display: grid;
-  bottom: 6vh;
+  bottom: 0;
   right: 2rem;
   z-index: 44;
   background-color: rgba(0, 0, 0, 0.9);
@@ -10,24 +10,26 @@
   -webkit-transition: all 0.2s ease-out 0s;
   -moz-transition: all 0.2s ease-out 0s;
   -o-transition: all 0.2s ease-out 0s;
-  /* padding: 1rem; */
-  /* border: 3px solid var(--verdant); */
-  /* right: 75px; */
 }
 
-/* .drawer-container .drawer-container-open {
-  bottom: 
+/* .drawer-container .drawer-container-open .drawer-btn  {
+  position:absolute;
+  height:auto;
+  top: 6vh;
+
 } */
 
 .drawer-container button {
   font-size: 1rem;
-  padding: 0.4rem;
+  /* padding: 0.4rem; */
   cursor: pointer;
+  color: var(--lightish);
+  text-shadow: 0 0 5px var(--roarange);
 }
 
 .drawer-container .drawer-header {
   height: auto;
-  /* width: 100%; */
+  width: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -36,7 +38,7 @@
 .drawer-container .drawer-header .drawer-btn {
   width: 100%;
   font-size: 1rem;
-  /* padding: 0.4rem; */
+  padding: 0.4rem 0.4rem 0 0.4rem;
   display: flex;
   justify-content: space-between;
   border: none;
@@ -45,25 +47,30 @@
   /* cursor: ponter; */
   /* border: 5px solid var(--roarange); */
 }
-.drawer-container .drawer-header .drawer-btn.closed {
-  text-align: right;
-  width: 100%;
-  justify-content: flex-end;
-}
 .drawer-container .drawer-header .drawer-btn.opened {
   width: 100%;
   background-color: rgba(17, 17, 17, 0.8);
   color: var(--belite);
 }
-.arrowhead {
+.drawer-container .drawer-btn.closed {
+  text-align: right;
+  justify-content: flex-end;
+  position: absolute;
+  top: -6vh;
+
+  height: auto;
+  /* background-color: transparent; */
+  border: none;
   background-color: rgba(17, 17, 17, 0.8);
   color: var(--belite);
   padding: 0.4rem;
 }
+/* .arrowhead {
+} */
 
-.drawer-body-container {
+/* .drawer-body-container {
   font-size: 1rem;
-}
+} */
 
 .results-container {
   padding: 0.4rem;
@@ -76,12 +83,13 @@
   gap: 5px;
 }
 .inputs-subcontainer {
+  background-color: rgba(0, 0, 0, 0.9);
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.drawer-input {
+.inputs-subcontainer .drawer-input {
   background-color: #000;
   box-shadow: 0 0 10px var(--dorchid) inset;
   -webkit-box-shadow: 0 0 10px var(--dorchid) inset;
@@ -93,13 +101,20 @@
 
 .dice-list {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-direction: row;
+  margin: 0.2rem;
 }
 
 .dice-btn {
-  color: rgba(31, 31, 31, 0.8);
-  background-color: var(--belite);
+  color: var(--crimberry);
+  /* color: rgba(20, 20, 20, 0.8); */
+  background-color: var(--goldlite);
+  border: none;
+  border-radius: 5px;
+  padding-top:0.2rem;
+  padding-left:0.2rem;
+  padding-right:0.2rem;
   /* cursor: pointer; */
 }
 

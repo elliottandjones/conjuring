@@ -31,20 +31,20 @@ const RollDrawer = () => {
   let currentHeight = isExpanded ? height : 0
 
   return (
-    <div className={`drawer-container ${!isExpanded && 'drawer-container-open'}`}>
-      <div className="drawer-header">
-        {!isExpanded ? (
-          <button className="drawer-btn closed" onClick={e => toggleExpand(e)}>
-            <span className="sr-only">.</span>
-            <span className="arrowhead">⮝</span>
-          </button>
-        ) : (
+    <div className="drawer-container">
+      {!isExpanded ? (
+        <button className="drawer-btn closed groww" onClick={e => toggleExpand(e)}>
+          {/* <span className="sr-only">.</span> */}
+          <span className="arrowhead">⮝</span>
+        </button>
+      ) : (
+        <div className="drawer-header">
           <button className="drawer-btn opened" onClick={e => toggleExpand(e)}>
             <span className="">Dice Roller</span>
             <span className="arrowhead">⮟</span>
           </button>
-        )}
-      </div>
+        </div>
+      )}
       <div
         className="drawer-body-container"
         style={{ height: currentHeight }}
@@ -65,7 +65,7 @@ const RollDrawer = () => {
               </div>
               <div className="inputs-subcontainer">
                 <input className="drawer-input" type="text" value={value} onChange={e => setValue(e.target.value)} />
-                <button className="submit-btn">roll</button>
+                <button className="submit-btn groww">roll</button>
               </div>
             </form>
           </div>
@@ -77,7 +77,7 @@ const RollDrawer = () => {
 
 const Dice = ({ dice, size, title, onClick }) => {
   return (
-    <button title={title} className="dice-btn" onClick={e => onClick(e, title)}>
+    <button title={title} className="dice-btn groww" onClick={e => onClick(e, title)}>
       <img src={dice} height={size} width={size} alt={`a${title === 'd8' && 'n'} ${title[1]}-sided dice`} />
     </button>
   )
