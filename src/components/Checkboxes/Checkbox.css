@@ -15,10 +15,11 @@
   text-align: center;
   padding: 9px;
   cursor: pointer;
-  margin: 4px 0;
-  border: 1px solid var(--belite);
-  /* border: 2px solid transparent; */
-  /* border-radius: 25%; */
+  margin: 2px 0;
+  /* border: none; */
+  /* border: 2px solid var(--belite); */
+  border: 2px solid transparent;
+  /* border-radius: 0.5rem; */
   -moz-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
   -webkit-transition: all 0.2s ease-out;
@@ -26,9 +27,10 @@
   opacity: 0.5;
 }
 .checkbox-label:hover {
-  -webkit-box-shadow: 0px 0px 8px 0px var(--roarange);
-  -moz-box-shadow: 0px 0px 8px 0px var(--roarange);
-  box-shadow: 0px 0px 8px 0px var(--roarange);
+  border: 2px solid var(--belite);
+  -webkit-box-shadow: 0px 0px 15px 0px var(--roarange);
+  -moz-box-shadow: 0px 0px 15px 0px var(--roarange);
+  box-shadow: 0px 0px 15px 0px var(--roarange);
 }
 .checkbox-label:before,
 .checkbox-label:after {
@@ -49,6 +51,10 @@
 }
 .checkbox-input:checked + .checkbox-label {
   font-weight: 700;
+  border: 2px solid var(--belite);
+  -webkit-box-shadow: 0px 0px 15px 0px var(--roarange);
+  -moz-box-shadow: 0px 0px 15px 0px var(--roarange);
+  box-shadow: 0px 0px 15px 0px var(--roarange);
 }
 .checkbox-input:checked + .checkbox-label:before {
   opacity: 1;

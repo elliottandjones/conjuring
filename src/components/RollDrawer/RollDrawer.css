@@ -4,12 +4,14 @@
   bottom: 0;
   right: 2rem;
   z-index: 44;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: var(--dorchidfull);
   color: var(--belite);
-  transition: all 0.2s ease-out 0s;
-  -webkit-transition: all 0.2s ease-out 0s;
-  -moz-transition: all 0.2s ease-out 0s;
-  -o-transition: all 0.2s ease-out 0s;
+  border: var(--belite) 2px outset;
+  transition: all 0.29s ease 0s;
+  -webkit-transition: all 0.29s ease 0s;
+  -moz-transition: all 0.29s ease 0s;
+  -o-transition: all 0.29s ease 0s;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0);
 }
 
 /* .drawer-container .drawer-container-open .drawer-btn  {
@@ -49,7 +51,7 @@
 }
 .drawer-container .drawer-header .drawer-btn.opened {
   width: 100%;
-  background-color: rgba(17, 17, 17, 0.8);
+  background-color: var(--dorchidfull);
   color: var(--belite);
 }
 .drawer-container .drawer-btn.closed {
@@ -57,16 +59,29 @@
   justify-content: flex-end;
   position: absolute;
   top: -6vh;
-
+  border: var(--belite) 2px outset;
   height: auto;
   /* background-color: transparent; */
-  border: none;
-  background-color: rgba(17, 17, 17, 0.8);
+  /* border: none; */
+  background-color: var(--dorchidfull);
   color: var(--belite);
   padding: 0.4rem;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0);
+
 }
-/* .arrowhead {
-} */
+
+.drawer-container .drawer-btn.closed:hover {
+  transition: all 0.29s ease 0s;
+  -webkit-transition: all 0.29s ease 0s;
+  -moz-transition: all 0.29s ease 0s;
+  -o-transition: all 0.29s ease 0s;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0);
+  transform: scale(1.2);
+}
+
+.drawer-btn span.arrowhead {
+  text-decoration: none;
+}
 
 /* .drawer-body-container {
   font-size: 1rem;

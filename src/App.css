@@ -132,7 +132,8 @@ label {
   font-weight: 500;
 }
 button:hover,button:focus {
-  text-decoration: underline solid;
+  cursor: pointer;
+  /* text-decoration: underline solid; */
   /* border: none; */
 }
 /* top app/nav/action bar */
@@ -201,9 +202,9 @@ div.tabs button {
   color: var(--lightish);
   text-shadow: 0 0 5px var(--roarangelite);
   background: var(--slatep);
-  /* border: 2px solid var(--belite); */
-  border: none;
-  /* border-radius: 5px; */
+  border: 2px solid var(--belite);
+  /* border: none; */
+  /* border-radius: 0.3rem; */
   display: inline-flex;
   align-content: center;
   justify-content: center;
@@ -273,6 +274,7 @@ button.tab:focus {
   background: var(--slatep);
   border: var(--belite) 2px ridge;
   padding: 8px 12px;
+  margin: 0.5rem;
 }
 
 legend {
@@ -311,25 +313,13 @@ legend {
   overflow-x: hidden;
 }
 
-.inset {
+/* .inset {
   border-style: inset;
 }
 
 .outset {
   border-style: outset;
-}
-
-.creature-item:hover {
-  border-color: var(--crimberrybold);
-  -webkit-box-shadow: 0px 0px 10px 0px var(--crimberrybold);
-  -moz-box-shadow: 0px 0px 10px 0px var(--crimberrybold);
-  box-shadow: 0px 0px 10px 0px var(--crimberrybold);
-}
-
-.creature-ex {
-  border-color: var(--crimberrybold);
-  border-width: 3px;
-}
+} */
 
 .item-body p,
 .item-body li {
@@ -427,7 +417,7 @@ footer#join-footer {
   border: 0;
 }
 
-@media screen and (max-width: 600px) {
+@media only screen and (max-width: 770px) {
   /* necessary for mobile devices */
   .filters-wrapper {
     display: grid;

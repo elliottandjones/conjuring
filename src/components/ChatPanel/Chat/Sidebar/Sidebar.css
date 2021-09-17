@@ -3,7 +3,8 @@ aside.sidebar {
   width: 100%;
   background: var(--slateb);
   /* border-top: 2px inset var(--belite); */
-  border: 2px outset var(--belite);
+  /* border: 2px outset var(--belite); */
+  border: none;
   color: var(--lightish);
   text-align: center;
 }

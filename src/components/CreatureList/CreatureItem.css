@@ -68,20 +68,46 @@ i.to-left:after {
   margin-top: 15px;
 }
 
+div.creature-item.creature-ex {
+  border: var(--crimberrybold) 3px outset;
+  -webkit-box-shadow: 0px 0px 15px 0px var(--crimberrybold);
+  -moz-box-shadow: 0px 0px 15px 0px var(--crimberrybold);
+  box-shadow: 0px 0px 15px 0px var(--crimberrybold);
+  border-radius: 0;
+}
+.creature-item.creature-ex:hover .name-expanded .name,
+.creature-item:hover .name-initial .name {
+  text-decoration-line: underline;
+  text-decoration-color: var(--goldlite);
+  text-decoration-style: solid;
+}
 .creature-item {
   background: var(--slateg);
-  width: 97%;
+  width: 96%;
   text-align: left;
+  margin: 0.5rem;
   border: 2px outset var(--verdant);
-  transition: all 0.2s ease 0s;
-  -webkit-transition: all 0.2s ease 0s;
-  -moz-transition: all 0.2s ease 0s;
-  -o-transition: all 0.2s ease 0s;
+  /* border: none; */
+  /* border-radius: 0.5rem; */
+  -webkit-box-shadow: 0px 0px 5px 0px var(--verdantlite);
+  -moz-box-shadow: 0px 0px 5px 0px var(--verdantlite);
+  box-shadow: 0px 0px 5px 0px var(--verdantlite);
+  transition: all 0.29s ease-in-out 0s;
+  -webkit-transition: all 0.29s ease-in-out 0s;
+  -moz-transition: all 0.29s ease-in-out 0s;
+  -o-transition: all 0.29s ease-in-out 0s;
+}
+.creature-item:hover {
+  border-color: var(--crimberrybold);
+  border-style: outset;
+  /* border-radius: 0; */
+  -webkit-box-shadow: 0px 0px 15px 0px var(--crimberrybold);
+  -moz-box-shadow: 0px 0px 15px 0px var(--crimberrybold);
+  box-shadow: 0px 0px 15px 0px var(--crimberrybold);
 }
 
 .ccard {
   background-color: var(--slateg);
-  border: 2px solid var(--crimberryfull);
 }
 
 .ccard p {
@@ -109,10 +135,10 @@ button.action-btn {
   font-size: 14px;
   border: 2px solid transparent;
   outline: invert;
-  transition: all 0.2s ease 0s;
-  -webkit-transition: all 0.2s ease 0s;
-  -moz-transition: all 0.2s ease 0s;
-  -o-transition: all 0.2s ease 0s;
+  transition: all 0.29s ease-in-out 0s;
+  -webkit-transition: all 0.29s ease-in-out 0s;
+  -moz-transition: all 0.29s ease-in-out 0s;
+  -o-transition: all 0.29s ease-in-out 0s;
 }
 
 button.action-btn:hover {

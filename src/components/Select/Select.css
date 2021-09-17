@@ -5,10 +5,11 @@
   background-color: var(--slateb);
   margin-bottom: 5px;
   padding-left: 5px;
-  font-size: 1.1em;
+  font-size: 1.3rem;
   align-items: center;
-  border: 1px solid var(--belite);
   cursor: pointer;
+  border: none;
+  /* border: 1px solid var(--belite); */
 }
 .select-input:hover,
 .select-input:focus {
