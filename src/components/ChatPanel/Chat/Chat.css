@@ -29,9 +29,9 @@
     'sidebar output output output output output output'
     'sidebar input  input  input  input  input input';
   width: 100%;
-  gap: 5px;
+  gap: 1rem;
   background: var(--slatep);
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
   overflow: hidden;
 }
 
