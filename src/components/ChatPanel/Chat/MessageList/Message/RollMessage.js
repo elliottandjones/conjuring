@@ -5,25 +5,11 @@ const RollMessage = ({ message: { name, creatureName, action, rolls, createdAt }
   // const [rolls, setRolls] = React.useState({att:0, dmg:[], isCrit:false});
   const isCurrentUser = name === clientName.trim() ? true : false
 
-  // const getRolls = () => {
-  // 	let isCrit = false;
-  // 	const att = rollAttack();
-  // 	if(att === 20 || att === '20') {
-  // 		isCrit = true;
-  // 	}
-  // 	const dmg = rollDamage(action.damage_dice, action.damage_bonus, isCrit);
-  // 	// console.log("{att, dmg, isCrit}: ",{att: att, dmg: dmg, isCrit: isCrit})
-  // 	return { att: att, dmg: dmg, isCrit: isCrit }; // { number, array, boolean }
-  // }
   const getTotalDamage = array => {
     let total = 0
     array.map(el => (total += el))
     return total // number
   }
-
-  // React.useEffect(() => {
-  // 	setRolls(getRolls());
-  // }, []);
 
   return (
     <div className={`message-container mt1 pl2 pr2 ${isCurrentUser ? 'justify-end' : 'justify-start'}`}>
@@ -50,7 +36,7 @@ const RollMessage = ({ message: { name, creatureName, action, rolls, createdAt }
               Attack: <span title="attack roll (1d20)">{rolls.att}</span> +{' '}
               <span title="attack bonus">{action.attack_bonus}</span> ={' '}
               <strong title="Total attack">{rolls.att + action.attack_bonus}</strong>{' '}
-              {rolls.isCrit && <em>Critical Hit! Yaaaaaas!</em>}
+              {rolls.isCrit && <em>Critical Hit!</em>}
             </p>
             <p className={`message-text ${rolls.isCrit && 'ba'}`}>
               Damage:{' '}

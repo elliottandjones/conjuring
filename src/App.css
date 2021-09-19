@@ -274,7 +274,7 @@ button.tab:focus {
   background: var(--slatep);
   border: var(--belite) 2px ridge;
   padding: 8px 12px;
-  margin: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 legend {

@@ -12,6 +12,7 @@
   font-size: 1.3em;
   width: 96%;
   caret-color: var(--verdantlite);
+  /* caret-shape: block; */
 }
 #search:hover {
   border-color: var(--roarangelite);
