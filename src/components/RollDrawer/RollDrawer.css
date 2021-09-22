@@ -12,17 +12,39 @@
   -o-transition: all 0.29s ease 0s;
   box-shadow: 0 0 15px rgba(0, 0, 0);
 }
+.drawer-container-unopened {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  right: 2rem;
+  z-index: 54;
+  background-color: var(--dorchidfull);
+  color: var(--belite);
+  transition: all 0.29s ease 0s;
+  -webkit-transition: all 0.29s ease 0s;
+  -moz-transition: all 0.29s ease 0s;
+  -o-transition: all 0.29s ease 0s;
+  box-shadow: 0 0 20px rgba(0, 0, 0);
+  border-top: var(--belite) 2px outset;
+  border-right: var(--belite) 2px outset;
+  border-bottom: none;
+  border-left: var(--belite) 2px outset;
+}
+
 .drawer-container.expanded {
-  border: var(--belite) 2px outset;
+  border-top: var(--belite) 2px outset;
+  border-right: var(--belite) 2px outset;
+  border-bottom: none;
+  border-left: var(--belite) 2px outset;
   box-shadow: 0 0 20px rgba(0, 0, 0);
 }
 
-/* .drawer-container .drawer-container-open .drawer-btn  {
-  position:absolute;
-  height:auto;
-  top: 6vh;
-
-} */
+.drawer-container .drawer-btn  {
+  background: linear-gradient(180deg, var(--dorchidlitefuller), var(--dorchidlitefull));
+}
+.drawer-container .drawer-btn:hover  {
+  background: linear-gradient(180deg, var(--dorchidlitefullest), var(--dorchidlitefuller));
+}
 
 .drawer-container button {
   font-size: 1rem;
@@ -33,6 +55,7 @@
 }
 
 .drawer-container .drawer-header {
+  background: linear-gradient(180deg, var(--dorchidlitefull), var(--dorchidfull));
   height: auto;
   width: 100%;
   position: absolute;
@@ -57,6 +80,7 @@
   background-color: var(--dorchidfull);
   color: var(--belite);
 }
+
 .drawer-container .drawer-btn.closed {
   text-align: right;
   justify-content: flex-end;
@@ -79,7 +103,7 @@
   -moz-transition: all 0.29s ease 0s;
   -o-transition: all 0.29s ease 0s;
   box-shadow: 0 0 20px rgba(0, 0, 0);
-  transform: scale(1.2);
+  /* transform: scale(1.2); */
 }
 
 .drawer-btn span.arrowhead {
@@ -92,7 +116,7 @@
 
 .results-container {
   padding: 0.4rem;
-  height:calc(35vh + 0.4rem);
+  height: calc(35vh + 0.4rem);
 }
 
 .input-container div,

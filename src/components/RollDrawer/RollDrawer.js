@@ -39,7 +39,7 @@ const RollDrawer = () => {
   return (
     <div className={`drawer-container ${isExpanded && 'expanded'}`}>
       {!isExpanded ? (
-        <button className="drawer-btn closed groww" onClick={e => toggleExpand(e)}>
+        <button className="drawer-btn closed" onClick={e => toggleExpand(e)}>
           {/* <span className="sr-only">.</span> */}
           <span className="arrowhead">⮝</span>
         </button>
