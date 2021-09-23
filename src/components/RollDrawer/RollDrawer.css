@@ -13,10 +13,16 @@
   box-shadow: 0 0 15px rgba(0, 0, 0);
 }
 .drawer-container-unopened {
+  border-top: var(--belite) 2px outset;
+  border-right: var(--belite) 2px outset;
+  border-bottom: none !important;
+  border-left: var(--belite) 2px outset;
+}
+.drawer-container-unopened .drawer-btn{
   display: block;
   position: fixed;
   bottom: 0;
-  right: 2rem;
+  right: 4rem;
   z-index: 54;
   background-color: var(--dorchidfull);
   color: var(--belite);
@@ -25,10 +31,10 @@
   -moz-transition: all 0.29s ease 0s;
   -o-transition: all 0.29s ease 0s;
   box-shadow: 0 0 20px rgba(0, 0, 0);
-  border-top: var(--belite) 2px outset;
-  border-right: var(--belite) 2px outset;
-  border-bottom: none;
-  border-left: var(--belite) 2px outset;
+  border-bottom: none !important;
+}
+.drawer-container-unopened.no-display {
+  display:none;
 }
 
 .drawer-container.expanded {

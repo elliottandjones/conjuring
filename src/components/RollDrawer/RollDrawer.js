@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { useToggleHeight } from '../../hooks/useToggle'
 import d10 from './dice-assets/d10.svg'
 import d12 from './dice-assets/d12.svg'
@@ -13,10 +13,10 @@ import './RollDrawer.css'
 // let socket
 
 const RollDrawer = () => {
-  const heightRef = React.useRef(null)
+  const heightRef = useRef(null)
   const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef])
-  const [value, setValue] = React.useState('')
-  const [results, setResults] = React.useState([])
+  const [value, setValue] = useState('')
+  const [results, setResults] = useState([])
   // const ENDPOINT = 'http://lovalhost:5016'
 
   const handleDiceClick = (e, title) => {
@@ -38,19 +38,21 @@ const RollDrawer = () => {
 
   return (
     <div className={`drawer-container ${isExpanded && 'expanded'}`}>
-      {!isExpanded ? (
+      {/* {!isExpanded ? ( */}
+      <div className={`drawer-container-unopened ${isExpanded && 'no-display'}`}>
         <button className="drawer-btn closed" onClick={e => toggleExpand(e)}>
           {/* <span className="sr-only">.</span> */}
           <span className="arrowhead">⮝</span>
         </button>
-      ) : (
-        <div className="drawer-header">
-          <button className="drawer-btn opened" onClick={e => toggleExpand(e)}>
-            <span className="">Dice Roller</span>
-            <span className="arrowhead">⮟</span>
-          </button>
-        </div>
-      )}
+      </div>
+      {/* ) : ( */}
+      <div className="drawer-header">
+        <button className="drawer-btn opened" onClick={e => toggleExpand(e)}>
+          <span className="">Dice Roller</span>
+          <span className="arrowhead">⮟</span>
+        </button>
+      </div>
+      {/* )} */}
       <div
         className="drawer-body-container"
         style={{ height: currentHeight }}
