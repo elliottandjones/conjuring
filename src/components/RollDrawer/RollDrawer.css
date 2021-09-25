@@ -22,7 +22,7 @@
   display: block;
   position: fixed;
   bottom: 0;
-  right: 4rem;
+  right: 3rem;
   z-index: 54;
   background-color: var(--dorchidfull);
   color: var(--belite);

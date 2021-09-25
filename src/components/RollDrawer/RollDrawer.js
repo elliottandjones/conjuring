@@ -38,21 +38,17 @@ const RollDrawer = () => {
 
   return (
     <div className={`drawer-container ${isExpanded && 'expanded'}`}>
-      {/* {!isExpanded ? ( */}
       <div className={`drawer-container-unopened ${isExpanded && 'no-display'}`}>
         <button className="drawer-btn closed" onClick={e => toggleExpand(e)}>
-          {/* <span className="sr-only">.</span> */}
           <span className="arrowhead">⮝</span>
         </button>
       </div>
-      {/* ) : ( */}
       <div className="drawer-header">
         <button className="drawer-btn opened" onClick={e => toggleExpand(e)}>
           <span className="">Dice Roller</span>
           <span className="arrowhead">⮟</span>
         </button>
       </div>
-      {/* )} */}
       <div
         className="drawer-body-container"
         style={{ height: currentHeight }}
