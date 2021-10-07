@@ -34,11 +34,11 @@
     'Helvetica Neue', sans-serif;
   margin: auto;
   box-sizing: border-box;
-  line-height: 1em;
-  word-spacing: 1px;
-  letter-spacing: 1px;
-  font-weight: 400;
-  font-size: 14px;
+  /* line-height: 1.6em; */
+  /* word-spacing: 1px; */
+  /* letter-spacing: 1px; */
+  font-weight: normal;
+  font-size: 16px;
   height: 100vh;
   display: grid;
   gap: 14px;

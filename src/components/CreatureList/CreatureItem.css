@@ -127,37 +127,23 @@ div.creature-item.creature-ex {
 }
 
 button.action-btn {
-  margin-right: 3px;
+  /* margin-right: 3px; */
   cursor: pointer;
   background: inherit;
-  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-    sans-serif !important;
-  font-size: 14px;
-  border: 2px solid transparent;
-  outline: invert;
-  transition: all 0.29s ease-in-out 0s;
+  /* font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+    sans-serif !important; */
+  font-size: 1.1em;
+  /* border: 2px solid transparent; */
+  border: none;
+  /* transition: all 0.29s ease-in-out 0s;
   -webkit-transition: all 0.29s ease-in-out 0s;
   -moz-transition: all 0.29s ease-in-out 0s;
-  -o-transition: all 0.29s ease-in-out 0s;
+  -o-transition: all 0.29s ease-in-out 0s; */
+  /* text-decoration: underline solid var(--belite); */
 }
 
-button.action-btn:hover {
-  -webkit-box-shadow: 0px 0px 5px 0px var(--belite);
-  -moz-box-shadow: 0px 0px 5px 0px var(--belite);
-  box-shadow: 0px 0px 5px 0px var(--belite);
-  border-left: solid 2px var(--belite);
-  background-color: var(--slateglite);
-  transform: scaleZ(1.5);
-}
-
+button.action-btn:hover,
 button.action-btn:focus {
-  -webkit-box-shadow: 0px 0px 5px 0px var(--belite);
-  -moz-box-shadow: 0px 0px 5px 0px var(--belite);
-  box-shadow: 0px 0px 5px 0px var(--belite);
-  border-left: solid 2px var(--belite);
-  background-color: var(--slateglite);
+  text-decoration: underline solid var(--belite);
 }
 
-button.action-btn:active {
-  background-color: var(--slateg);
-}

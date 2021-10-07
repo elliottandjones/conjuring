@@ -12,12 +12,9 @@
   -o-transition: all 0.29s ease 0s;
   box-shadow: 0 0 15px rgba(0, 0, 0);
 }
-.drawer-container-unopened {
-  border-top: var(--belite) 2px outset;
-  border-right: var(--belite) 2px outset;
-  border-bottom: none !important;
-  border-left: var(--belite) 2px outset;
-}
+/* .drawer-container-unopened {
+  
+} */
 .drawer-container-unopened .drawer-btn{
   display: block;
   position: fixed;
@@ -32,6 +29,9 @@
   -o-transition: all 0.29s ease 0s;
   box-shadow: 0 0 20px rgba(0, 0, 0);
   border-bottom: none !important;
+  border-top: var(--belite) 2px outset;
+  border-right: var(--belite) 2px outset;
+  border-left: var(--belite) 2px outset;
 }
 .drawer-container-unopened.no-display {
   display:none;
@@ -114,6 +114,7 @@
 
 .drawer-btn span.arrowhead {
   text-decoration: none;
+  font-size:1em;
 }
 
 /* .drawer-body-container {

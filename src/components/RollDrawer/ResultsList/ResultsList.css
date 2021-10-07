@@ -1,4 +1,4 @@
-.res {
+.result {
   border-radius: 4px;
   background: linear-gradient(
       92deg,
@@ -58,7 +58,7 @@
     linear-gradient(119deg, var(--slateglite), var(--verdantdark), var(--dorchiddim));
 }
 
-.roll-res {
+.roll-result {
   border-radius: 4px;
   background: linear-gradient(
       56deg,

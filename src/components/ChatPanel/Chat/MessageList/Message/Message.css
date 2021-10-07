@@ -12,7 +12,8 @@
 .message-box {
   background: var(--slatep);
   padding: 5px;
-  color: white;
+  /* color: white; */
+  color: var(--lightish);
   display: inline-block;
   vertical-align: middle;
   max-width: 70%;
@@ -21,10 +22,11 @@
   width: 100%;
   float: left;
   word-wrap: break-word;
-  color: white;
+  /* color: white; */
+  color: var(--lightish);
   vertical-align: middle;
-  margin-block-start: 0.5em;
-  margin-block-end: 0.5em;
+  margin-block-start: 0.5rem;
+  margin-block-end: 0.5rem;
 }
 .sender-name {
   display: flex;
@@ -162,11 +164,15 @@
 }
 .meta-msg {
   display: inline-block;
-  font-weight: 300;
-  line-height: 10px;
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: var(--belite);
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  /* line-height: 10px; */
 }
 span.time {
-  font-size: 11px !important;
+  font-size: 0.9rem;
   word-spacing: 0;
   letter-spacing: 0;
   word-break: keep-all;

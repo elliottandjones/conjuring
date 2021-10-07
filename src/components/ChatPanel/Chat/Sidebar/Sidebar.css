@@ -1,24 +1,28 @@
 aside.sidebar {
   grid-area: sidebar;
   width: 100%;
+  /* border-right: 1px solid var(--lightish); */
   background: var(--slateb);
   /* border-top: 2px inset var(--belite); */
   /* border: 2px outset var(--belite); */
   border: none;
-  color: var(--lightish);
-  text-align: center;
+  color: var(--goldlite);
+  text-shadow: 0 0 16px var(--roarange);
+  /* text-align: center; */
 }
 aside > p {
   text-transform: uppercase;
 }
 ul.name-list {
-  list-style-type: none;
-  display: list-item;
-  padding-left: 0 !important;
+  list-style-type: decimal;
+  /* list-style-position: outside; */
+  /* display: list-item; */
+  /* padding-left: 0 !important; */
+  padding-left: 1rem;
 }
 .name-list-item > p.your-name {
-  /* font-style: normal; */
-  font-weight: 400;
+  font-style: normal;
+  font-weight: bold;
 }
 hr {
   border: 1px inset rgba(128, 128, 128, 0.527);

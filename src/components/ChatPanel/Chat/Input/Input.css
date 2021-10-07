@@ -12,7 +12,7 @@
   border-radius: 0;
   padding: 2%;
   width: 100%;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   border: 3px inset var(--verdantlite);
   transition: all 0.2s ease-in-out 0s;
   -webkit-transition: all 0.2s ease-in-out 0s;
@@ -51,6 +51,7 @@ textarea:hover {
   border: 2px outset var(--belite);
   opacity: 0.9;
   margin-left: 5px;
+  align-items:center;
 }
 button.send-btn:disabled {
   opacity: 0.8;
