@@ -1,5 +1,8 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
+// import { useSessionStorage } from '../../hooks/useSessionStorage'
 import { useToggleHeight } from '../../hooks/useToggle'
+import { calculateRoll } from '../../utils'
 import d10 from './dice-assets/d10.svg'
 import d12 from './dice-assets/d12.svg'
 import d20 from './dice-assets/d20.svg'
@@ -14,9 +17,13 @@ import './RollDrawer.css'
 
 const RollDrawer = () => {
   const heightRef = useRef(null)
+  const inputRef = useRef(null)
   const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef])
   const [value, setValue] = useState('')
   const [results, setResults] = useState([])
+  const [currentIndex, setCurrentIndex] = useState(null)
+  const [rollerHistory1, setRollerHistory1] = useLocalStorage('rolls1', [])
+  // const [rollerHistory2, setRollerHistory2] = useSessionStorage('rolls2', [])
   // const ENDPOINT = 'http://lovalhost:5016'
 
   const handleDiceClick = (e, title) => {
@@ -27,12 +34,49 @@ const RollDrawer = () => {
       setValue(prev => prev + ` + ${title}`)
     }
   }
+  const setInputValue = () => {
+    setValue(rollerHistory1[currentIndex])
+  }
+  const handleCurrentIndex = val => {
+    if (rollerHistory1?.length <= 0) {
+      console.log('no rollerHistory yet')
+      return
+    }
+    if (currentIndex === null && val > 0) {
+      setCurrentIndex(0)
+      setInputValue()
+      return
+    }
+    if (currentIndex === null && val < 0) {
+      return
+    }
+    if (currentIndex + val < 0) {
+      setCurrentIndex(null)
+      clearInputValue()
+      return
+    }
+
+    setCurrentIndex(prev => prev + val)
+    console.log(currentIndex)
+    setInputValue()
+  }
 
   const postResult = e => {
     e.preventDefault()
     console.log('value: ', value)
-    setResults([...results, value])
+    setRollerHistory1(prev => [value, ...prev])
+    // setRollerHistory2(prev => [value, ...prev])
+    setResults([...results, calculateRoll(value)])
+    clearInputValue()
   }
+
+  const clearInputValue = () => {
+    setValue('')
+  }
+
+  useEffect(() => {
+    if (isExpanded) inputRef.current.focus()
+  }, [isExpanded])
 
   let currentHeight = isExpanded ? height : 0
 
@@ -70,8 +114,25 @@ const RollDrawer = () => {
             </div>
             <form onSubmit={e => postResult(e)}>
               <div className="inputs-subcontainer">
-                <input className="drawer-input" type="text" value={value} onChange={e => setValue(e.target.value)} />
-                <button className="submit-btn groww">roll</button>
+                <input
+                  ref={inputRef}
+                  className="drawer-input"
+                  type="text"
+                  value={value}
+                  onChange={e => setValue(e.target.value)}
+                  onKeyDown={event =>
+                    event.key === 'Enter'
+                      ? postResult(event)
+                      : event.key === 'ArrowUp'
+                      ? handleCurrentIndex(1)
+                      : event.key === 'ArrowDown'
+                      ? handleCurrentIndex(-1)
+                      : null
+                  }
+                />
+                <button className="submit-btn groww" type="submit">
+                  roll
+                </button>
               </div>
             </form>
           </div>

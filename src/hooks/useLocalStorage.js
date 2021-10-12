@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export const useLocalStorage = (key, initialValue) => {
   // pass initial state function to useState so logic is only executed once
-  const [storedValue, setStoredValue] = useState(() => {
+  const [value, setStoredValue] = useState(() => {
     try {
-      let item = window.localStorage.getItem(key)
+      let item = localStorage.getItem(key)
       return item ? JSON.parse(item) : initialValue
     } catch (error) {
       console.log(error)
@@ -13,19 +13,22 @@ export const useLocalStorage = (key, initialValue) => {
   })
   // return a wrapped version of useState's setter fuction that
   // persists the new value to localStorage
-  const setValue = value => {
+  const setValue = storedValue => {
     try {
-      // allow value be a function so we have same API as useState
-      const valueToStore = value instanceof Function ? value(storedValue) : value
+      // allow storedValue to be a function so we have same API as useState
+      const valueToStore = storedValue instanceof Function ? storedValue(value) : storedValue
       // save that state, baby
       setStoredValue(valueToStore)
-      // save to loval storage
-      window.localStorage.setItem(key, JSON.stringify(valueToStore))
     } catch (error) {
       // TODO: actually handle this error
-      console.log(error)
+      console.error(error)
     }
   }
 
-  return [storedValue, setValue]
+  useEffect(() => {
+    // save to local storage when value changes
+    localStorage.setItem(key, JSON.stringify(value))
+  }, [key, value])
+
+  return [value, setValue]
 }

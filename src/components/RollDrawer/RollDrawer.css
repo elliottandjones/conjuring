@@ -114,16 +114,28 @@
 
 .drawer-btn span.arrowhead {
   text-decoration: none;
-  font-size:1em;
+  font-size: 1em;
 }
 
-/* .drawer-body-container {
-  font-size: 1rem;
-} */
+.drawer-body {
+  padding: 0.2rem;
+}
 
 .results-container {
-  padding: 0.4rem;
+  /* padding: 0.4rem; */
+  /* height: calc(35vh + 0.4rem); */
+  margin-top: 2rem;
   height: calc(35vh + 0.4rem);
+  
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* flex-basis: content; */
+  display:flex;
+  flex-direction: column-reverse;
+  vertical-align: middle;
+  width: 100%;
+  /* border: 2px inset var(--belite); */
+  /* background: var(--slateb); */
 }
 
 .input-container div,

@@ -496,7 +496,7 @@ footer#join-footer {
   padding-left: 0.5rem;
 }
 /* scrollbar stuff */
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 9px;
   opacity: 0.5;
 }
@@ -518,7 +518,7 @@ footer#join-footer {
 ::-webkit-scrollbar-thumb:window-inactive,
 ::-webkit-scrollbar-thumb:-moz-window-inactive {
   background: transparent;
-} */
+}
 /* .tooltip {
   position: relative;
   display: inline-block;

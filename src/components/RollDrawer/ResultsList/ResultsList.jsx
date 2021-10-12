@@ -9,10 +9,14 @@ const ResultsList = ({ results }) => {
   useEffect(scrollToBottom, [results])
 
   return (
-    <div className="results" style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
+    <div className="results">
       {results.map((result, index) => (
         <div key={`result_${index}`}>
-          {result ? !result.isAction ? <div className="result"></div> : <div className="roll-result"></div> : null}
+          {result ? (
+            <div className="result">
+              {index + 1}: {result}
+            </div>
+          ) : null}
         </div>
       ))}
       <div ref={bottomRef} className="bottom" id="bottom" />
