@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useLocalStorage } from '../../hooks/useLocalStorage'
-// import { useSessionStorage } from '../../hooks/useSessionStorage'
+import React from 'react'
+// import { useLocalStorage } from '../../hooks/useLocalStorage'
+import { useSessionStorage } from '../../hooks/useSessionStorage'
 import { useToggleHeight } from '../../hooks/useToggle'
 import { calculateRoll } from '../../utils'
 import d10 from './dice-assets/d10.svg'
@@ -16,14 +16,14 @@ import './RollDrawer.css'
 // let socket
 
 const RollDrawer = () => {
-  const heightRef = useRef(null)
-  const inputRef = useRef(null)
+  const heightRef = React.useRef(null)
+  const inputRef = React.useRef(null)
   const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef])
-  const [value, setValue] = useState('')
-  const [results, setResults] = useState([])
-  const [currentIndex, setCurrentIndex] = useState(null)
-  const [rollerHistory1, setRollerHistory1] = useLocalStorage('rolls1', [])
-  // const [rollerHistory2, setRollerHistory2] = useSessionStorage('rolls2', [])
+  const [value, setValue] = React.useState('')
+  const [results, setResults] = React.useState([])
+  const [currentIndex, setCurrentIndex] = React.useState(null)
+  // const [rollerHistory1, setRollerHistory1] = useLocalStorage('rolls1', [])
+  const [rollerHistory, setRollerHistory] = useSessionStorage('rolls', [])
   // const ENDPOINT = 'http://lovalhost:5016'
 
   const handleDiceClick = (e, title) => {
@@ -31,14 +31,14 @@ const RollDrawer = () => {
     if (!value.trim()) {
       setValue(title)
     } else {
-      setValue(prev => prev + ` + ${title}`)
+      setValue((prev) => prev + ` + ${title}`)
     }
   }
   const setInputValue = () => {
-    setValue(rollerHistory1[currentIndex])
+    setValue(rollerHistory[currentIndex])
   }
-  const handleCurrentIndex = val => {
-    if (rollerHistory1?.length <= 0) {
+  const handleCurrentIndex = (val) => {
+    if (rollerHistory?.length <= 0) {
       console.log('no rollerHistory yet')
       return
     }
@@ -56,15 +56,16 @@ const RollDrawer = () => {
       return
     }
 
-    setCurrentIndex(prev => prev + val)
+    setCurrentIndex((prev) => prev + val)
     console.log(currentIndex)
     setInputValue()
   }
 
-  const postResult = e => {
+  const postResult = (e) => {
     e.preventDefault()
     console.log('value: ', value)
-    setRollerHistory1(prev => [value, ...prev])
+    console.log('rollerHistory: ', rollerHistory)
+    setRollerHistory((prev) => [value, ...prev])
     // setRollerHistory2(prev => [value, ...prev])
     setResults([...results, calculateRoll(value)])
     clearInputValue()
@@ -74,21 +75,22 @@ const RollDrawer = () => {
     setValue('')
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isExpanded) inputRef.current.focus()
   }, [isExpanded])
 
+  // let currentHeight = React.useMemo(() => (isExpanded ? height : 0), [height])
   let currentHeight = isExpanded ? height : 0
 
   return (
     <div className={`drawer-container ${isExpanded && 'expanded'}`}>
       <div className={`drawer-container-unopened ${isExpanded && 'no-display'}`}>
-        <button className="drawer-btn closed" onClick={e => toggleExpand(e)}>
+        <button className="drawer-btn closed" onClick={(e) => toggleExpand(e)}>
           <span className="arrowhead">⮝</span>
         </button>
       </div>
       <div className="drawer-header">
-        <button className="drawer-btn opened" onClick={e => toggleExpand(e)}>
+        <button className="drawer-btn opened" onClick={(e) => toggleExpand(e)}>
           <span className="">Dice Roller</span>
           <span className="arrowhead">⮟</span>
         </button>
@@ -112,15 +114,15 @@ const RollDrawer = () => {
               <Dice dice={d12} size={24} title={'1d12'} onClick={handleDiceClick} />
               <Dice dice={d20} size={24} title={'1d20'} onClick={handleDiceClick} />
             </div>
-            <form onSubmit={e => postResult(e)}>
+            <form onSubmit={(e) => postResult(e)}>
               <div className="inputs-subcontainer">
                 <input
                   ref={inputRef}
                   className="drawer-input"
                   type="text"
                   value={value}
-                  onChange={e => setValue(e.target.value)}
-                  onKeyDown={event =>
+                  onChange={(e) => setValue(e.target.value)}
+                  onKeyDown={(event) =>
                     event.key === 'Enter'
                       ? postResult(event)
                       : event.key === 'ArrowUp'
@@ -144,8 +146,8 @@ const RollDrawer = () => {
 
 const Dice = ({ dice, size, title, onClick }) => {
   return (
-    <button title={title} className="dice-btn groww" onClick={e => onClick(e, title)}>
-      <img src={dice} height={size} width={size} alt={`a${title === '1d8' && 'n'} ${title[2]}-sided dice`} />
+    <button title={title} className="dice-btn groww" onClick={(e) => onClick(e, title)}>
+      <img src={dice} height={size} width={size} alt={`a${title === '1d8' && 'n'} 8-sided dice`} />
     </button>
   )
 }

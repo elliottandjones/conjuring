@@ -1,12 +1,16 @@
-import React, { useEffect, useRef } from 'react'
+import * as React from 'react'
 import './ResultsList.css'
 
-const ResultsList = ({ results }) => {
-  const bottomRef = useRef(null)
+interface Props {
+  results: string[];
+}
+
+const ResultsList = ({ results }: Props) => {
+  const bottomRef: React.MutableRefObject<any> = React.useRef(null)
   const scrollToBottom = () => {
     bottomRef.current.scrollIntoView()
   }
-  useEffect(scrollToBottom, [results])
+  React.useEffect(scrollToBottom, [results])
 
   return (
     <div className="results">
