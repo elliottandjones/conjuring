@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { Fragment, useRef } from 'react'
 import { useToggleHeight } from '../../hooks/useToggle'
 import CreatureAction from './CreatureAction'
 import './CreatureItem.css'
 
 export default function CreatureItem({ creature, chatOpen, onOpenChatPanel }) {
-  const heightRef = React.useRef(null)
+  const heightRef = useRef(null)
   const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef])
 
-  const whatSkills = creature => {
+  const whatSkills = (creature) => {
     let skills = ''
-    
+
     if (creature.acrobatics) skills += `Perception +${creature.acrobatics} `
     if (creature.animal_handling) skills += `Animael Handling +${creature.animal_handling} `
     if (creature.arcana) skills += `Arcana +${creature.arcana} `
@@ -32,7 +32,7 @@ export default function CreatureItem({ creature, chatOpen, onOpenChatPanel }) {
     return skills
   }
 
-  const calculateModifier = score => {
+  const calculateModifier = (score) => {
     let mod = score - 10
     if (mod % 2 !== 0) mod -= 1
     mod /= 2
@@ -43,7 +43,7 @@ export default function CreatureItem({ creature, chatOpen, onOpenChatPanel }) {
 
   return (
     <div className={`ma1 pa1 creature-item ${isExpanded ? 'inset creature-ex' : 'outset'}`}>
-      <div className={`derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={e => toggleExpand(e)}>
+      <div className={`derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`} onClick={(e) => toggleExpand(e)}>
         <span className="name">{creature.name}</span> <span style={isExpanded ? { display: 'none' } : {}}> - </span>
         <span>{creature.challenge_rating}</span>
         {(creature.subtype === 'devil' || creature.subtype === 'demon') && (
@@ -165,7 +165,7 @@ export default function CreatureItem({ creature, chatOpen, onOpenChatPanel }) {
             <b>Challenge</b> {creature.challenge_rating}
           </p>
           {creature.special_abilities && (
-            <React.Fragment>
+            <Fragment>
               <i className="to-right mt1 mb1"></i>
               {creature.special_abilities.map((item, i) => (
                 <p key={`special_${i}`}>
@@ -175,7 +175,7 @@ export default function CreatureItem({ creature, chatOpen, onOpenChatPanel }) {
                   {item.desc}
                 </p>
               ))}
-            </React.Fragment>
+            </Fragment>
           )}
           <p className="pactions">Actions</p>
           <i className="to-right mt1 mb1"></i>
@@ -196,7 +196,7 @@ export default function CreatureItem({ creature, chatOpen, onOpenChatPanel }) {
             <p> None, apparently. ¯\_(ツ)_/¯</p>
           )}
           {creature.legendary_actions && (
-            <React.Fragment>
+            <Fragment>
               <p className="pactions" style={{ textAlign: 'center' }}>
                 Legendary Actions
               </p>
@@ -215,7 +215,7 @@ export default function CreatureItem({ creature, chatOpen, onOpenChatPanel }) {
                   />
                 )
               })}
-            </React.Fragment>
+            </Fragment>
           )}
         </div>
       </div>

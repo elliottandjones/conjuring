@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { CTX } from '../../Store'
 
 // const CreatureAction = ({action, creatureName, displayAction, isExpanded, chatOpen, onOpenChatPanel}) => {
-const CreatureAction = props => {
-  const { sendRoll } = React.useContext(CTX)
+const CreatureAction = (props) => {
+  const { sendRoll } = useContext(CTX)
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     let att = Math.floor(Math.random() * 20 + 1)
     if (!props.chatOpen) {
       props.onOpenChatPanel(e)
@@ -20,7 +20,7 @@ const CreatureAction = props => {
 
   return (
     <p>
-      <button className="action-btn" onClick={e => handleClick(e)} tabIndex={!props.isExpanded ? -1 : 0}>
+      <button className="action-btn" onClick={(e) => handleClick(e)} tabIndex={!props.isExpanded ? -1 : 0}>
         <b>
           <i>{props.action.name}.</i>
         </b>

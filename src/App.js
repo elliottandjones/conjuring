@@ -110,22 +110,22 @@ class App extends React.Component {
   // the data (with .once()) and again (with .on() only) anytime the data changes.
 
   componentDidMount() {
-    this.spellsDB.once('value', snapshot => this.setState({ spells: snapshot.val() }))
-
     this.creaturesDB
-      .once('value', snapshot => this.setState({ creatures: snapshot.val() }))
+      .once('value', (snapshot) => this.setState({ creatures: snapshot.val() }))
       .then(() => this.setState({ loading: false }))
-      .catch(err => {
+      .catch((err) => {
         throw new Error('High level error' + err.message)
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err))
+
+    this.spellsDB.once('value', (snapshot) => this.setState({ spells: snapshot.val() }))
   }
 
   // onOpenDiceRoller = (e) => {
   //   e.preventDefault();
   //   if (!this.state.chatOpen) {}
   // }
-  onOpenChatPanel = e => {
+  onOpenChatPanel = (e) => {
     e.preventDefault()
     if (!this.state.chatOpen) {
       this.setState({ chatOpen: true })
@@ -134,7 +134,7 @@ class App extends React.Component {
       this.setState({ spellFilter: false })
     }
   }
-  onFilterByAttribute = e => {
+  onFilterByAttribute = (e) => {
     e.preventDefault()
     if (this.state.spellFilter) {
       this.setState({ spellFilter: false })
@@ -143,7 +143,7 @@ class App extends React.Component {
       this.setState({ chatOpen: false })
     }
   }
-  onFilterBySpell = e => {
+  onFilterBySpell = (e) => {
     e.preventDefault()
     if (!this.state.spellFilter) {
       this.setState({ spellFilter: true })
@@ -151,7 +151,7 @@ class App extends React.Component {
     if (this.state.chatOpen) {
       this.setState({ chatOpen: false })
     }
-    if (Object.values(this.state.typeValues).some(i => i === true)) {
+    if (Object.values(this.state.typeValues).some((i) => i === true)) {
       this.setState({ typeValues: initialTypeValues })
     }
     if (this.state.crValue) {
@@ -164,7 +164,7 @@ class App extends React.Component {
       this.setState({ speedValue: '' })
     }
   }
-  onTypeChange = event => {
+  onTypeChange = (event) => {
     this.setState({
       typeValues: {
         ...this.state.typeValues,
@@ -173,39 +173,39 @@ class App extends React.Component {
     })
   }
 
-  onSearchChange = event => {
+  onSearchChange = (event) => {
     this.setState({ searchfield: event.target.value })
   }
-  onSpellSelect = spell => {
+  onSpellSelect = (spell) => {
     spell.name ? this.setState({ spellSelected: true }) : this.setState({ spellSelected: false })
     this.setState({ spellObject: spell })
   }
-  onCRSelect = event => {
+  onCRSelect = (event) => {
     this.setState({ crValue: event.target.value })
   }
-  onSpeedSelect = event => {
+  onSpeedSelect = (event) => {
     this.setState({ speedValue: event.target.value })
   }
-  onSizeSelect = event => {
+  onSizeSelect = (event) => {
     this.setState({ sizeValue: event.target.value })
   }
   filterBySpell = (critters, spell) => {
     if (spell.particular_creatures) {
-      critters = critters.filter(creature => {
+      critters = critters.filter((creature) => {
         return spell.particular_creatures.indexOf(creature.name) > -1
       })
     } else {
       if (spell.creature_types[0] === 'demon' || spell.creature_types[0] === 'devil') {
-        critters = critters.filter(creature => {
+        critters = critters.filter((creature) => {
           return creature.subtype.includes(spell.creature_types[0])
         })
       } else {
-        critters = critters.filter(creature => {
+        critters = critters.filter((creature) => {
           return spell.creature_types.indexOf(creature.type) > -1
         })
       }
       if (spell.name !== 'Polymorph' && spell.name !== 'Awaken') {
-        critters = critters.filter(creature => {
+        critters = critters.filter((creature) => {
           return (
             this.formatCR(creature.challenge_rating) >= this.formatCR(spell.creature_crs[0]) &&
             this.formatCR(creature.challenge_rating) <= this.formatCR(spell.creature_crs[1])
@@ -213,7 +213,7 @@ class App extends React.Component {
         })
       }
       if (spell.creature_sizes) {
-        critters = critters.filter(creature => {
+        critters = critters.filter((creature) => {
           return (
             creature.size.toLowerCase() === spell.creature_sizes[0].toLowerCase() ||
             creature.size.toLowerCase() === spell.creature_sizes[1].toLowerCase()
@@ -223,7 +223,7 @@ class App extends React.Component {
     }
     return critters
   }
-  formatCR = str => {
+  formatCR = (str) => {
     if (str && !str.includes('/')) {
       return parseInt(str)
     }
@@ -254,28 +254,28 @@ class App extends React.Component {
     } = this.state
 
     // filter by name
-    let filteredCreatures = creatures.filter(creature => {
+    let filteredCreatures = creatures.filter((creature) => {
       return creature.name.toLowerCase().includes(searchfield.toLowerCase())
     })
     // filter by types
-    if (Object.values(typeValues).some(i => i === true)) {
+    if (Object.values(typeValues).some((i) => i === true)) {
       let typePicks = []
       let typeArr = []
       typePicks = Object.entries(typeValues).filter(([key, value]) => {
         return value === true
       })
-      let picks = typePicks.map(types => types[0])
+      let picks = typePicks.map((types) => types[0])
       if (picks && picks.length > 1) {
         // eslint-disable-next-line
         for (let pick of picks) {
           let tempArr = []
-          tempArr = filteredCreatures.filter(creature => {
+          tempArr = filteredCreatures.filter((creature) => {
             return creature.type.toLowerCase() === pick
           })
           typeArr = typeArr.concat(tempArr)
         }
       } else {
-        typeArr = filteredCreatures.filter(creature => {
+        typeArr = filteredCreatures.filter((creature) => {
           return creature.type.toLowerCase() === picks[0]
         })
       }
@@ -291,25 +291,25 @@ class App extends React.Component {
     if (speedValue && speedValue !== 'on') {
       speedValue.toLowerCase().includes('no')
         ? speedValue.toLowerCase().includes('swim')
-          ? (filteredCreatures = filteredCreatures.filter(creature => {
+          ? (filteredCreatures = filteredCreatures.filter((creature) => {
               return !creature.speed.toLowerCase().includes('swim') && !creature.speed.toLowerCase().includes('fly')
             }))
-          : (filteredCreatures = filteredCreatures.filter(creature => {
+          : (filteredCreatures = filteredCreatures.filter((creature) => {
               return !creature.speed.toLowerCase().includes('fly')
             }))
-        : (filteredCreatures = filteredCreatures.filter(creature => {
+        : (filteredCreatures = filteredCreatures.filter((creature) => {
             return creature.speed.toLowerCase().includes(speedValue.toLowerCase())
           }))
     }
     // filter by size, see previous comment for explanation of testing againt 'on'
     if (sizeValue && sizeValue !== 'on') {
-      filteredCreatures = filteredCreatures.filter(creature => {
+      filteredCreatures = filteredCreatures.filter((creature) => {
         return creature.size.toLowerCase() === sizeValue.toLowerCase()
       })
     }
     // filter by challenge rating
     if (crValue && crValue !== 'CR' && crValue !== 'Any CR') {
-      filteredCreatures = filteredCreatures.filter(creature => {
+      filteredCreatures = filteredCreatures.filter((creature) => {
         return creature.challenge_rating === crValue
       })
     }
@@ -342,7 +342,7 @@ class App extends React.Component {
         <div className="tabs ml1">
           <button
             className={`tab ${(spellFilter || chatOpen) && 'o-50'}`}
-            onClick={e => {
+            onClick={(e) => {
               this.onFilterByAttribute(e)
               this.onSpellSelect({})
             }}
@@ -352,7 +352,7 @@ class App extends React.Component {
           </button>
           <button
             className={`tab ${(!spellFilter || chatOpen) && 'o-50'}`}
-            onClick={e => {
+            onClick={(e) => {
               this.onFilterBySpell(e)
             }}
             tabIndex="0"
@@ -361,7 +361,7 @@ class App extends React.Component {
           </button>
           <button
             className={`tab ${(spellFilter || !chatOpen) && 'o-50'}`}
-            onClick={e => {
+            onClick={(e) => {
               this.onOpenChatPanel(e)
             }}
             tabIndex="0"

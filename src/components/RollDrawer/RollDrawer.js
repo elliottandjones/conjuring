@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 // import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useSessionStorage } from '../../hooks/useSessionStorage'
 import { useToggleHeight } from '../../hooks/useToggle'
@@ -16,14 +16,14 @@ import './RollDrawer.css'
 // let socket
 
 const RollDrawer = () => {
-  const heightRef = React.useRef(null)
-  const inputRef = React.useRef(null)
+  const heightRef = useRef(null)
+  const inputRef = useRef(null)
   const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef])
-  const [value, setValue] = React.useState('')
-  const [results, setResults] = React.useState([])
-  const [currentIndex, setCurrentIndex] = React.useState(null)
-  // const [rollerHistory1, setRollerHistory1] = useLocalStorage('rolls1', [])
+  const [value, setValue] = useState('')
+  const [results, setResults] = useState([])
+  const [currentIndex, setCurrentIndex] = useState(null)
   const [rollerHistory, setRollerHistory] = useSessionStorage('rolls', [])
+  // const [rollerHistory1, setRollerHistory1] = useLocalStorage('rolls1', [])
   // const ENDPOINT = 'http://lovalhost:5016'
 
   const handleDiceClick = (e, title) => {
@@ -33,6 +33,9 @@ const RollDrawer = () => {
     } else {
       setValue((prev) => prev + ` + ${title}`)
     }
+  }
+  const handleChange = (e) => {
+    setValue(e.target.value)
   }
   const setInputValue = () => {
     setValue(rollerHistory[currentIndex])
@@ -67,7 +70,7 @@ const RollDrawer = () => {
     console.log('rollerHistory: ', rollerHistory)
     setRollerHistory((prev) => [value, ...prev])
     // setRollerHistory2(prev => [value, ...prev])
-    setResults([...results, calculateRoll(value)])
+    setResults((prev) => [...prev, calculateRoll(value)])
     clearInputValue()
   }
 
@@ -75,11 +78,11 @@ const RollDrawer = () => {
     setValue('')
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isExpanded) inputRef.current.focus()
   }, [isExpanded])
 
-  // let currentHeight = React.useMemo(() => (isExpanded ? height : 0), [height])
+  // let currentHeight = useMemo(() => (isExpanded ? height : 0), [height])
   let currentHeight = isExpanded ? height : 0
 
   return (
@@ -121,7 +124,7 @@ const RollDrawer = () => {
                   className="drawer-input"
                   type="text"
                   value={value}
-                  onChange={(e) => setValue(e.target.value)}
+                  onChange={handleChange}
                   onKeyDown={(event) =>
                     event.key === 'Enter'
                       ? postResult(event)

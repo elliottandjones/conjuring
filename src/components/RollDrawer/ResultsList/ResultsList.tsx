@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect, useRef } from 'react'
 import './ResultsList.css'
 
 interface Props {
@@ -6,11 +6,11 @@ interface Props {
 }
 
 const ResultsList = ({ results }: Props) => {
-  const bottomRef: React.MutableRefObject<any> = React.useRef(null)
+  const bottomRef: React.MutableRefObject<any> = useRef(null)
   const scrollToBottom = () => {
     bottomRef.current.scrollIntoView()
   }
-  React.useEffect(scrollToBottom, [results])
+  useEffect(scrollToBottom, [results])
 
   return (
     <div className="results">

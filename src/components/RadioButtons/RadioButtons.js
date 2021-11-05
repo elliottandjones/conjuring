@@ -18,7 +18,7 @@ const RadioButtons = ({ onChange, options, text, className }) => {
         <label htmlFor={text} className="radio-label">
           Any
         </label>
-        {options.map(item => (
+        {options.map((item) => (
           <RadioButtonItem key={item.value} value={item.value} name={item.name} onChange={onChange} id={item.value} />
         ))}
       </fieldset>

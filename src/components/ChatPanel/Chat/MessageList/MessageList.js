@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Message from './Message/Message'
 import RollMessage from './Message/RollMessage'
 import './MessageList.css'
 
 export default function MessageList({ messages, clientName }) {
-  const bottomRef = React.useRef(null)
+  const bottomRef = useRef(null)
   const scrollToBottom = () => {
     bottomRef.current.scrollIntoView()
   }
-  React.useEffect(scrollToBottom, [messages])
+  useEffect(scrollToBottom, [messages])
   // element.offsetBottom = element.offsetTop + element.offsetHeight
 
   return (

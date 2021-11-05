@@ -7,7 +7,7 @@ const SpellItem = ({ spell, onSpellSelect }) => {
   const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef])
   const [isToggled, toggle] = useToggle(false)
 
-  const formatLevel = level => {
+  const formatLevel = (level) => {
     if (level === 1) {
       return 'st'
     } else if (level === 2) {
@@ -34,7 +34,7 @@ const SpellItem = ({ spell, onSpellSelect }) => {
     <div className={`pa1 ma1 spell-item ${isExpanded ? 'inset spell-ex' : 'outset'}`}>
       <div
         className={`mt1 mb1 derk ${isExpanded ? 'name-expanded' : 'name-initial tc'}`}
-        onClick={e => toggleExpand(e)}
+        onClick={(e) => toggleExpand(e)}
       >
         <span className="name">
           {spell.name} {spell?.is_homebrew && '(Homebrew)'}
@@ -68,7 +68,7 @@ const SpellItem = ({ spell, onSpellSelect }) => {
             <b>Duration:</b> {spell.concentration && <span>Concentration, </span>} {spell.duration}
           </p>
           <hr />
-          {spell.description.map(para =>
+          {spell.description.map((para) =>
             para.startsWith('-') ? <li key={para}>{para.slice(1)}</li> : <p key={para}>{para}</p>
           )}
           {spell.higher_level && (
@@ -84,7 +84,7 @@ const SpellItem = ({ spell, onSpellSelect }) => {
           <button
             className={`filter-toggle db ${isToggled ? 'selected' : 'unselected'}`}
             type="submit"
-            onClick={e => {
+            onClick={(e) => {
               // filter against toggleState before updating the ui
               isToggled === false ? onSpellSelect(spell) : onSpellSelect({})
               toggle(e)

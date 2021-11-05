@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { createContext, useState } from 'react'
 
-export const CTX = React.createContext()
+export const CTX = createContext()
 
-const Store = props => {
-  const [creatureName, setCreatureName] = React.useState('')
-  const [action, setAction] = React.useState(null)
-  const [proceed, setProceed] = React.useState(false)
+const Store = (props) => {
+  const [creatureName, setCreatureName] = useState('')
+  const [action, setAction] = useState(null)
+  const [proceed, setProceed] = useState(false)
 
   const sendRoll = (e, cName, cAction) => {
     e.preventDefault()

@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import './Message.css'
 
 const RollMessage = ({ message: { name, creatureName, action, rolls, createdAt }, clientName }) => {
   // const [rolls, setRolls] = React.useState({att:0, dmg:[], isCrit:false});
   const isCurrentUser = name === clientName.trim() ? true : false
 
-  const getTotalDamage = array => {
+  const getTotalDamage = (array) => {
     let total = 0
-    array.map(el => (total += el))
+    array.map((el) => (total += el))
     return total // number
   }
 
@@ -31,7 +31,7 @@ const RollMessage = ({ message: { name, creatureName, action, rolls, createdAt }
             <b>This action has no associated attack/damage rolls. ¯\_(ツ)_/¯</b>
           </p>
         ) : (
-          <React.Fragment>
+          <Fragment>
             <p className={`message-text ${rolls.isCrit && 'ba'}`}>
               Attack: <span title="attack roll (1d20)">{rolls.att}</span> +{' '}
               <span title="attack bonus">{action.attack_bonus}</span> ={' '}
@@ -53,7 +53,7 @@ const RollMessage = ({ message: { name, creatureName, action, rolls, createdAt }
               )}{' '}
               = <strong title="total damage">{getTotalDamage(rolls.dmg)}</strong>
             </p>
-          </React.Fragment>
+          </Fragment>
         )}
       </div>
       {!isCurrentUser ? (
