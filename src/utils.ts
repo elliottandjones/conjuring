@@ -41,5 +41,5 @@ export const calculateRoll = (value: string) => {
     rollSum += rolls[j]
   }
 
-  return { rollSum, rolls }
+  return { rolls: rolls.toString(), rollSum: rollSum.toString() }
 }

@@ -2,10 +2,15 @@ import React, { useEffect, useRef } from 'react'
 import './ResultsList.css'
 
 interface Props {
-  results: string[];
+  results: ResultProps[];
+}
+interface ResultProps {
+  rollSum: string;
+  rolls: string[];
 }
 
-const ResultsList = ({ results }: Props) => {
+const ResultsList = ({results}: Props) => {
+  // const { rollSum, rolls } = props
   const bottomRef: React.MutableRefObject<any> = useRef(null)
   const scrollToBottom = () => {
     bottomRef.current.scrollIntoView()
@@ -16,11 +21,14 @@ const ResultsList = ({ results }: Props) => {
     <div className="results">
       {results.map((result, index) => (
         <div key={`result_${index}`}>
-          {result ? (
+          {result && (
             <div className="result">
-              {index + 1}: {result}
+              {index + 1}: {
+                result?.rolls?.map((roll,idx) => {
+                  return <span key={`roll_${idx}`}>[{roll}]{' '}</span>
+                })} = {result.rollSum}
             </div>
-          ) : null}
+          )}
         </div>
       ))}
       <div ref={bottomRef} className="bottom" id="bottom" />

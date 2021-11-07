@@ -20,6 +20,7 @@ const RollDrawer = () => {
   const inputRef = useRef(null)
   const [isExpanded, height, toggleExpand] = useToggleHeight([false, heightRef])
   const [value, setValue] = useState('')
+  const [result, setResult] = useState()
   const [results, setResults] = useState([])
   const [currentIndex, setCurrentIndex] = useState(null)
   const [rollerHistory, setRollerHistory] = useSessionStorage('rolls', [])
@@ -66,12 +67,20 @@ const RollDrawer = () => {
 
   const postResult = (e) => {
     e.preventDefault()
+    if (!value.trim()) {
+      setResult({ rolls: ['[0]'], rollSum: '0' })
+      setResults((prev) => [...prev, result])
+      inputRef.current.focus()
+      return
+    }
     console.log('value: ', value)
     console.log('rollerHistory: ', rollerHistory)
     setRollerHistory((prev) => [value, ...prev])
     // setRollerHistory2(prev => [value, ...prev])
-    setResults((prev) => [...prev, calculateRoll(value)])
+    setResult(calculateRoll(value))
+    setResults((prev) => [...prev, result])
     clearInputValue()
+    inputRef.current.focus()
   }
 
   const clearInputValue = () => {
@@ -121,6 +130,7 @@ const RollDrawer = () => {
               <div className="inputs-subcontainer">
                 <input
                   ref={inputRef}
+                  placeholder="e.g. 1d20 + 1d4"
                   className="drawer-input"
                   type="text"
                   value={value}

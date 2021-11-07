@@ -110,16 +110,29 @@ class App extends React.Component {
   // the data (with .once()) and again (with .on() only) anytime the data changes.
 
   componentDidMount() {
-    this.creaturesDB
-      .once('value', (snapshot) => this.setState({ creatures: snapshot.val() }))
-      .then(() => this.setState({ loading: false }))
-      .catch((err) => {
-        throw new Error('High level error' + err.message)
-      })
-      .catch((err) => console.log(err))
-
+    try {
+      let localCreatureData = localStorage.getItem('creatures')
+      if (localCreatureData) {
+        this.setState({ creatures: JSON.parse(localCreatureData) })
+        this.setState({ loading: false })
+      } else {
+        this.creaturesDB
+          .once('value', (snapshot) => {
+            this.setState({ creatures: snapshot.val() })
+            localStorage.setItem('creatures', JSON.stringify(snapshot.val()))
+          })
+          .then(() => this.setState({ loading: false }))
+          .catch((err) => {
+            throw new Error('High level error' + err.message)
+          })
+          .catch((err) => console.log(err))
+      }
+    } catch(error) {
+      console.log(error)
+    }
     this.spellsDB.once('value', (snapshot) => this.setState({ spells: snapshot.val() }))
   }
+  
 
   // onOpenDiceRoller = (e) => {
   //   e.preventDefault();
