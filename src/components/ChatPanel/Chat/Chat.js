@@ -17,8 +17,8 @@ const Chat = ({ location }) => {
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
   const { proceed, action, creatureName, clearRollState } = useContext(CTX)
-  const ENDPOINT = 'http://localhost:5016'
-  // const ENDPOINT = 'https://whispering-brook-74854.herokuapp.com/'
+  // const ENDPOINT = 'http://localhost:5016'
+  const ENDPOINT = 'https://whispering-brook-74854.herokuapp.com/'
 
   useEffect(() => {
     const { name, room } = queryString.parse(location.search)
@@ -28,7 +28,7 @@ const Chat = ({ location }) => {
     setRoom(room)
     setName(name)
 
-    socket.emit('join', { name, room }, error => {
+    socket.emit('join', { name, room }, (error) => {
       if (error) {
         console.log(error)
       }
@@ -36,7 +36,7 @@ const Chat = ({ location }) => {
   }, [ENDPOINT, location.search])
 
   useEffect(() => {
-    socket.on('message', message => {
+    socket.on('message', (message) => {
       setMessages([...messages, message])
     })
 
@@ -59,7 +59,7 @@ const Chat = ({ location }) => {
     }
   }, [proceed, creatureName, action, clearRollState])
 
-  const sendMessage = e => {
+  const sendMessage = (e) => {
     e.preventDefault()
     if (message) {
       socket.emit('sendMessage', message, () => setMessage(''))
