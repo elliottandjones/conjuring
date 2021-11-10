@@ -1,6 +1,6 @@
 aside.sidebar {
   grid-area: sidebar;
-  width: 100%;
+  width: 90%;
   /* border-right: 1px solid var(--lightish); */
   background: var(--slateb);
   /* border-top: 2px inset var(--belite); */
@@ -9,6 +9,9 @@ aside.sidebar {
   color: var(--goldlite);
   text-shadow: 0 0 16px var(--roarange);
   /* text-align: center; */
+  margin-left: 1rem;
+  /* padding-left: 0.3rem; */
+
 }
 aside > p {
   text-transform: uppercase;
@@ -18,7 +21,7 @@ ul.name-list {
   /* list-style-position: outside; */
   /* display: list-item; */
   /* padding-left: 0 !important; */
-  padding-left: 1rem;
+  /* padding-left: 2rem; */
 }
 .name-list-item > p.your-name {
   font-style: normal;
