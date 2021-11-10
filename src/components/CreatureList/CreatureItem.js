@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from 'react'
+import React, { useRef } from 'react'
 import { useToggleHeight } from '../../hooks/useToggle'
 import CreatureAction from './CreatureAction'
 import './CreatureItem.css'
@@ -165,7 +165,7 @@ export default function CreatureItem({ creature, chatOpen, onOpenChatPanel }) {
             <b>Challenge</b> {creature.challenge_rating}
           </p>
           {creature.special_abilities && (
-            <Fragment>
+            <React.Fragment>
               <i className="to-right mt1 mb1"></i>
               {creature.special_abilities.map((item, i) => (
                 <p key={`special_${i}`}>
@@ -175,7 +175,7 @@ export default function CreatureItem({ creature, chatOpen, onOpenChatPanel }) {
                   {item.desc}
                 </p>
               ))}
-            </Fragment>
+            </React.Fragment>
           )}
           <p className="pactions">Actions</p>
           <i className="to-right mt1 mb1"></i>
@@ -196,7 +196,7 @@ export default function CreatureItem({ creature, chatOpen, onOpenChatPanel }) {
             <p> None, apparently. ¯\_(ツ)_/¯</p>
           )}
           {creature.legendary_actions && (
-            <Fragment>
+            <React.Fragment>
               <p className="pactions" style={{ textAlign: 'center' }}>
                 Legendary Actions
               </p>
@@ -215,7 +215,7 @@ export default function CreatureItem({ creature, chatOpen, onOpenChatPanel }) {
                   />
                 )
               })}
-            </Fragment>
+            </React.Fragment>
           )}
         </div>
       </div>

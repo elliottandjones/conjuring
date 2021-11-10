@@ -1,4 +1,3 @@
-import React from 'react'
 import CreatureItem from './CreatureItem'
 
 export default function CreatureList({ creatures, chatOpen, onOpenChatPanel }) {

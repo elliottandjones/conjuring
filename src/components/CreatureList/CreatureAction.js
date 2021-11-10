@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { CTX } from '../../Store'
 
 // const CreatureAction = ({action, creatureName, displayAction, isExpanded, chatOpen, onOpenChatPanel}) => {
@@ -11,7 +11,7 @@ const CreatureAction = (props) => {
       props.onOpenChatPanel(e)
       console.log('ATTACK ROLL: ' + att + ' + ' + props.action.attack_bonus + ' = ' + (att + props.action.attack_bonus))
       alert(
-        "To avoid seeing this alert everytime you click a monster action, join a chat room. No personal info required. I'll be adding default user/room functionality in the future. But right now, you see, I must rest."
+        'To avoid seeing this alert everytime you click a monster action, join a chat room. No personal info required. Just let the rest of your party know the name of your room so they can join it.'
       )
     } else {
       sendRoll(e, props.creatureName, props.action)

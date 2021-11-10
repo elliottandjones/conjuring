@@ -1,12 +1,9 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import Result from './Result/Result'
 import './ResultsList.css'
 
 interface Props {
-  results: ResultProps[];
-}
-interface ResultProps {
-  rollSum: string;
-  rolls: string[];
+  results: any[];
 }
 
 const ResultsList = ({results}: Props) => {
@@ -22,12 +19,7 @@ const ResultsList = ({results}: Props) => {
       {results.map((result, index) => (
         <div key={`result_${index}`}>
           {result && (
-            <div className="result">
-              {index + 1}: {
-                result?.rolls?.map((roll,idx) => {
-                  return <span key={`roll_${idx}`}>[{roll}]{' '}</span>
-                })} = {result.rollSum}
-            </div>
+            <Result result={result} index={index} />
           )}
         </div>
       ))}

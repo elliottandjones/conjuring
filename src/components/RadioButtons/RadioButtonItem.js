@@ -1,4 +1,3 @@
-import React from 'react'
 import './RadioButton.css'
 
 const RadioButtonItem = ({ value, name, onChange, id }) => {

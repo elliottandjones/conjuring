@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-// import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useSessionStorage } from '../../hooks/useSessionStorage'
 import { useToggleHeight } from '../../hooks/useToggle'
-import { calculateRoll } from '../../utils'
 import d10 from './dice-assets/d10.svg'
 import d12 from './dice-assets/d12.svg'
 import d20 from './dice-assets/d20.svg'
@@ -10,10 +8,7 @@ import d4 from './dice-assets/d4.svg'
 import d6 from './dice-assets/d6.svg'
 import d8 from './dice-assets/d8.svg'
 import ResultsList from './ResultsList/ResultsList'
-// import io from 'socket.io-client'
 import './RollDrawer.css'
-
-// let socket
 
 const RollDrawer = () => {
   const heightRef = useRef(null)
@@ -22,14 +17,12 @@ const RollDrawer = () => {
   const [value, setValue] = useState('')
   const [result, setResult] = useState()
   const [results, setResults] = useState([])
-  const [currentIndex, setCurrentIndex] = useState(null)
+  const [currentIndex, setCurrentIndex] = useState(-1)
   const [rollerHistory, setRollerHistory] = useSessionStorage('rolls', [])
-  // const [rollerHistory1, setRollerHistory1] = useLocalStorage('rolls1', [])
-  // const ENDPOINT = 'http://lovalhost:5016'
 
   const handleDiceClick = (e, title) => {
     e.preventDefault()
-    if (!value.trim()) {
+    if (!value) {
       setValue(title)
     } else {
       setValue((prev) => prev + ` + ${title}`)
@@ -38,27 +31,25 @@ const RollDrawer = () => {
   const handleChange = (e) => {
     setValue(e.target.value)
   }
-  const setInputValue = () => {
-    setValue(rollerHistory[currentIndex])
-  }
+
   const handleCurrentIndex = (val) => {
-    if (rollerHistory?.length <= 0) {
+    if (typeof rollerHistory !== 'undefined' || rollerHistory?.length === 0) {
       console.log('no rollerHistory yet')
       return
     }
-    if (currentIndex === null && val > 0) {
-      setCurrentIndex(0)
+    if (currentIndex >= -1 && val > 0) {
+      setCurrentIndex(currentIndex + val)
       setInputValue()
       return
     }
-    if (currentIndex === null && val < 0) {
+    if (currentIndex === -1 && val < 0) {
       return
     }
-    if (currentIndex + val < 0) {
-      setCurrentIndex(null)
-      clearInputValue()
-      return
-    }
+    // if (currentIndex + val < 0) {
+    //   setCurrentIndex(-1)
+    //   clearInputValue()
+    //   return
+    // }
 
     setCurrentIndex((prev) => prev + val)
     console.log(currentIndex)
@@ -67,7 +58,7 @@ const RollDrawer = () => {
 
   const postResult = (e) => {
     e.preventDefault()
-    if (!value.trim()) {
+    if (!value) {
       setResult({ rolls: ['[0]'], rollSum: '0' })
       setResults((prev) => [...prev, result])
       inputRef.current.focus()
@@ -77,12 +68,15 @@ const RollDrawer = () => {
     console.log('rollerHistory: ', rollerHistory)
     setRollerHistory((prev) => [value, ...prev])
     // setRollerHistory2(prev => [value, ...prev])
-    setResult(calculateRoll(value))
+    // setResult(calculateRoll(value))
+    setResult({ rolls: '15', rollSum: '30' })
     setResults((prev) => [...prev, result])
     clearInputValue()
     inputRef.current.focus()
   }
-
+  const setInputValue = () => {
+    setValue(rollerHistory[currentIndex].toString())
+  }
   const clearInputValue = () => {
     setValue('')
   }
@@ -133,8 +127,8 @@ const RollDrawer = () => {
                   placeholder="e.g. 1d20 + 1d4"
                   className="drawer-input"
                   type="text"
-                  value={value}
-                  onChange={handleChange}
+                  // value={value}
+                  onChange={(e) => handleChange(e)}
                   onKeyDown={(event) =>
                     event.key === 'Enter'
                       ? postResult(event)
