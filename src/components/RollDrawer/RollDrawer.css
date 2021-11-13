@@ -1,0 +1,189 @@
+.drawer-container {
+  position: fixed;
+  display: grid;
+  bottom: 0;
+  right: 2rem;
+  z-index: 44;
+  background-color: var(--dorchidfull);
+  color: var(--belite);
+  transition: all 0.29s ease 0s;
+  -webkit-transition: all 0.29s ease 0s;
+  -moz-transition: all 0.29s ease 0s;
+  -o-transition: all 0.29s ease 0s;
+  box-shadow: 0 0 15px rgba(0, 0, 0);
+}
+/* .drawer-container-unopened {
+  
+} */
+.drawer-container-unopened .drawer-btn{
+  display: block;
+  position: fixed;
+  bottom: 0;
+  right: 3rem;
+  z-index: 54;
+  background-color: var(--dorchidfull);
+  color: var(--belite);
+  transition: all 0.29s ease 0s;
+  -webkit-transition: all 0.29s ease 0s;
+  -moz-transition: all 0.29s ease 0s;
+  -o-transition: all 0.29s ease 0s;
+  box-shadow: 0 0 20px rgba(0, 0, 0);
+  border-bottom: none !important;
+  border-top: var(--belite) 2px outset;
+  border-right: var(--belite) 2px outset;
+  border-left: var(--belite) 2px outset;
+}
+.drawer-container-unopened.no-display {
+  display:none;
+}
+
+.drawer-container.expanded {
+  border-top: var(--belite) 2px outset;
+  border-right: var(--belite) 2px outset;
+  border-bottom: none;
+  border-left: var(--belite) 2px outset;
+  box-shadow: 0 0 20px rgba(0, 0, 0);
+}
+
+.drawer-container .drawer-btn  {
+  background: linear-gradient(180deg, var(--dorchidlitefuller), var(--dorchidlitefull));
+}
+.drawer-container .drawer-btn:hover  {
+  background: linear-gradient(180deg, var(--dorchidlitefullest), var(--dorchidlitefuller));
+}
+
+.drawer-container button {
+  font-size: 1rem;
+  /* padding: 0.4rem; */
+  cursor: pointer;
+  color: var(--lightish);
+  text-shadow: 0 0 5px var(--roarange);
+}
+
+.drawer-container .drawer-header {
+  background: linear-gradient(180deg, var(--dorchidlitefull), var(--dorchidfull));
+  height: auto;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.drawer-container .drawer-header .drawer-btn {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.4rem 0.4rem 0 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  border: none;
+  background-color: transparent;
+  /* color: var(--belite); */
+  /* cursor: ponter; */
+  /* border: 5px solid var(--roarange); */
+}
+.drawer-container .drawer-header .drawer-btn.opened {
+  width: 100%;
+  background-color: var(--dorchidfull);
+  color: var(--belite);
+}
+
+.drawer-container .drawer-btn.closed {
+  text-align: right;
+  justify-content: flex-end;
+  position: absolute;
+  top: -6vh;
+  border: var(--belite) 2px outset;
+  height: auto;
+  /* background-color: transparent; */
+  /* border: none; */
+  background-color: var(--dorchidfull);
+  color: var(--belite);
+  padding: 0.4rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0);
+
+}
+
+.drawer-container .drawer-btn.closed:hover {
+  transition: all 0.29s ease 0s;
+  -webkit-transition: all 0.29s ease 0s;
+  -moz-transition: all 0.29s ease 0s;
+  -o-transition: all 0.29s ease 0s;
+  box-shadow: 0 0 20px rgba(0, 0, 0);
+  /* transform: scale(1.2); */
+}
+
+.drawer-btn span.arrowhead {
+  text-decoration: none;
+  font-size: 1em;
+}
+
+.drawer-body {
+  padding: 0.2rem;
+}
+
+.results-container {
+  /* padding: 0.4rem; */
+  /* height: calc(35vh + 0.4rem); */
+  margin-top: 2rem;
+  height: calc(35vh + 0.4rem);
+  
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* flex-basis: content; */
+  display:flex;
+  flex-direction: column-reverse;
+  vertical-align: middle;
+  width: 100%;
+  /* border: 2px inset var(--belite); */
+  /* background: var(--slateb); */
+}
+
+.input-container div,
+.input-container input, 
+.input-container button {
+  gap: 5px;
+}
+.inputs-subcontainer {
+  background-color: rgba(0, 0, 0, 0.9);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputs-subcontainer .drawer-input {
+  background-color: #000;
+  box-shadow: 0 0 10px var(--dorchid) inset;
+  -webkit-box-shadow: 0 0 10px var(--dorchid) inset;
+  -moz-box-shadow: 0 0 10px var(--dorchid) inset;
+  color: var(--belite);
+  font-size: 1rem;
+  padding: 0.2rem 0;
+}
+
+.dice-list {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin: 0.2rem;
+}
+
+.dice-btn {
+  color: var(--crimberry);
+  /* color: rgba(20, 20, 20, 0.8); */
+  background-color: var(--goldlite);
+  border: none;
+  border-radius: 5px;
+  padding-top:0.2rem;
+  padding-left:0.2rem;
+  padding-right:0.2rem;
+  /* cursor: pointer; */
+}
+
+.submit-btn {
+  display: inline;
+  width: 100%;
+  border: none;
+  background: var(--crimberry);
+  color: var(--belite);
+  /* cursor: pointer; */
+}

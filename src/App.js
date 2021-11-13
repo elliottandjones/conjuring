@@ -8,7 +8,7 @@ import Checkboxes from './components/Checkboxes/Checkboxes'
 import CreatureList from './components/CreatureList/CreatureList'
 import Loader from './components/Loader/Loader'
 import RadioButtons from './components/RadioButtons/RadioButtons'
-// import RollDrawer from './components/RollDrawer/RollDrawer'
+import RollDrawer from './components/RollDrawer/RollDrawer'
 import SearchBox from './components/SearchBox/SearchBox'
 import Select from './components/Select/Select'
 import SpellList from './components/SpellList/SpellList'
@@ -127,12 +127,11 @@ class App extends React.Component {
           })
           .catch((err) => console.log(err))
       }
-    } catch(error) {
+    } catch (error) {
       console.log(error)
     }
     this.spellsDB.once('value', (snapshot) => this.setState({ spells: snapshot.val() }))
   }
-  
 
   // onOpenDiceRoller = (e) => {
   //   e.preventDefault();
@@ -409,7 +408,7 @@ class App extends React.Component {
         ) : (
           <CreatureList creatures={filteredCreatures} chatOpen={chatOpen} onOpenChatPanel={this.onOpenChatPanel} />
         )}
-        {/* <RollDrawer /> */}
+        <RollDrawer />
       </div>
     )
   }
